@@ -136,7 +136,9 @@ export function Activity() {
 							<OptionCode
 								key={index}
 							>
-								<Text>
+								<Text
+									style={{ color: option.hexadecimal_color }}
+								>
 									{ 
 										option.type === 'js_function' 
 										? `${option.name}()` 
