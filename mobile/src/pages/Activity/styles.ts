@@ -6,7 +6,6 @@ export const Container = styled.View`
     background-color: ${({ theme }) => theme.colors.background};
 `;
 
-
 export const ProgressBar = styled.View`
     height: 80px;
     justify-content: center;
@@ -61,6 +60,10 @@ export const Code = styled.View`
     padding: 8px;
     margin-bottom: 16px;
 `
+export const OptionEditorCode = styled.TouchableOpacity`
+    margin: 2px;
+    border-radius: 8px;
+`
 
 export const Options = styled.View`
     flex-direction: row;
@@ -68,8 +71,8 @@ export const Options = styled.View`
     justify-content: center;
 `
 
-export const OptionCode = styled.View`
-    min-width: 120px;
+export const OptionCode = styled.TouchableOpacity`
+    min-width: 140px;
     padding: 8px;
     margin: 4px;
     background-color: #1D2326;

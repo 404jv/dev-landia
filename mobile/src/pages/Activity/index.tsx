@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { StyleSheet, View, ScrollView } from 'react-native';
@@ -14,19 +14,126 @@ import {
 	Bash,
 	Code,
 	OptionCode,
-	Options
+	Options,
+	OptionEditorCode
 } from './styles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import theme from '../../Global/styles/theme';
+interface IOption {
+	name: string;
+	type: string;
+	hexadecimal_color: string;
+	created_at: Date;
+}
 
 export function Activity() {
+	const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
+
 	const activity = {
 		id: String(new Date().getTime()),
 		title: 'atividade',
 		description: 'Nesse desafio você vai desenhar a bandeira da França com alguns comandos.',
 		type: 'block',
-		default_code: '',
-		answer: 'DrawBlueBox',
+		default_code: [
+			{
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "newLine",
+				type: "js_function",
+				hexadecimal_color: "#169E96",
+				created_at: new Date()
+			},
+		],
+		answer: [
+      {
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "newLine",
+				type: "js_function",
+				hexadecimal_color: "#169E96",
+				created_at: new Date()
+			},
+      {
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "newLine",
+				type: "js_function",
+				hexadecimal_color: "#169E96",
+				created_at: new Date()
+			},
+      {
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "newLine",
+				type: "js_function",
+				hexadecimal_color: "#169E96",
+				created_at: new Date()
+			},
+    ],
 		is_needed_tests: false,
 		created_at: new Date(),
 		tips: [
@@ -62,6 +169,40 @@ export function Activity() {
 			},
 		]
 	}
+
+  function handleAddCodeToEditor(index: number) {
+		const option = activity.options[index];
+
+		setCodeEditor(oldState => [...oldState, option]);
+	}
+
+	function handleDeleteCodeFromEditor(index: number) {
+		setCodeEditor(codeEditor.filter((code, i) => i !== index));
+	}
+
+  function handleCheckAnswer() {
+    const userAnswer = codeEditor;
+
+    if (userAnswer.length !== activity.answer.length) {
+      console.log('👎 Usuário errou!');
+
+      return;
+    }
+
+    userAnswer.forEach((line, index) => {
+      if (line.name !== activity.answer[index].name) {
+        console.log('👎 Usuário errou!');
+
+        return;
+      };
+    });
+
+    console.log('🎉 Usuário acertou!');
+  }
+
+	useEffect(() => {
+		setCodeEditor(activity.default_code);
+	}, []);
 
 	return (
 		<Container>
@@ -117,17 +258,21 @@ export function Activity() {
 				<SectionStyles>
 					<Title>Seu código</Title>
 					<Code>
-						{activity.options.map((option, index) => (
-							<Text 
-								style={{ color: option.hexadecimal_color }} 
+						{codeEditor.map((code, index) => (
+							<OptionEditorCode
 								key={index}
+								onPress={() => handleDeleteCodeFromEditor(index)}
 							>
-								{ 
-									option.type === 'js_function' 
-									? `${option.name}()` 
-									: option.name
-								}
-							</Text>
+								<Text 
+									style={{ color: code.hexadecimal_color }} 
+								>
+									{ 
+										code.type === 'js_function' 
+										? `${code.name}()` 
+										: code.name
+									}
+								</Text>
+							</OptionEditorCode>
 						))}
 					</Code>
 
@@ -135,6 +280,7 @@ export function Activity() {
 						{activity.options.map((option, index) => (
 							<OptionCode
 								key={index}
+								onPress={() => handleAddCodeToEditor(index)}
 							>
 								<Text
 									style={{ color: option.hexadecimal_color }}
@@ -149,6 +295,11 @@ export function Activity() {
 						))}
 					</Options>
 				</SectionStyles>
+        
+        <TouchableOpacity onPress={handleCheckAnswer}>
+          <Text>Compilar</Text>
+        </TouchableOpacity>
+
 			</ScrollView>
 		</Container>
 	)
@@ -193,7 +344,7 @@ const styles = StyleSheet.create({
 		borderBottomRightRadius: 8,
 	},
 	arrow: {
-		marginTop: 4,
+		marginTop: 8,
 		marginLeft: 4,
 		color: '#008000',
 		fontSize: 24,
