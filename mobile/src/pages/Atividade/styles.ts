@@ -7,17 +7,18 @@ export const Container = styled.View`
 `;
 
 
-export const Progresso = styled.View`
+export const ProgressBar = styled.View`
     height: 80px;
     justify-content: center;
 `;
 
-export const TextMenor = styled.Text`
-    line-height: 25px;
-    font-size: 15px;
+export const Text = styled.Text`
+    line-height: 19px;
+    font-size: 16px;
     color: #fff;
     font-family: ${({ theme }) => theme.fonts.regular};
 `;
+
 export const DrawBlueBox = styled.Text`
     color: #0055A4;
 `;
@@ -31,11 +32,14 @@ export const NewLine = styled.Text`
 `;
 
 export const SectionStyles = styled.View`
-    margin: 15px;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 32px;
 `;
 
 export const Title = styled.Text`
     font-size: 32px;
+    margin-bottom: 8px;
     color: #36B1BF;
     font-family: ${({ theme }) => theme.fonts.regular};
 `;
@@ -43,10 +47,33 @@ export const Title = styled.Text`
 export const Description = styled.View`
     background-color: #1D2326;
     border-radius: 10px;
-    margin-top: 15px;
     padding: 15px;
 `;
 
 export const Bash = styled.View`
-    margin: 15px;
+
 `;
+
+export const Code = styled.View`
+    background-color: #1D2326;
+    min-height: 120px;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 16px;
+`
+
+export const Options = styled.View`
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+`
+
+export const OptionCode = styled.View`
+    min-width: 120px;
+    padding: 8px;
+    margin: 4px;
+    background-color: #1D2326;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+`
