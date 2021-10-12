@@ -13,7 +13,7 @@ import theme from './src/Global/styles/theme';
 
 import { StatusBar } from 'react-native';
 
-import { Atividade } from './src/pages/Atividade/index';
+import { Activity } from './src/pages/Activity/index';
 
 export default function App() {
 
@@ -31,7 +31,7 @@ export default function App() {
 
     <ThemeProvider theme={theme}>
       <StatusBar  barStyle={'light-content'} backgroundColor="#22282B"/>
-      <Atividade />
+      <Activity />
     </ThemeProvider>
   
   );

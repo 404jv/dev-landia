@@ -19,7 +19,7 @@ import {
 
 import theme from '../../Global/styles/theme';
 
-export function Atividade() {
+export function Activity() {
 	const activity = {
 		id: String(new Date().getTime()),
 		title: 'atividade',
