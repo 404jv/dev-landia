@@ -6,10 +6,28 @@ export const Container = styled.View`
     background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const ProgressBar = styled.View`
-    height: 80px;
+export const Menu = styled.View`
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
+    margin: 8px;
 `;
+
+
+export const ProgressMenuBar = styled.View`
+    width: 80%;
+    height: 20;
+    border-radius: 32;
+    background-color: #2F3437;
+`;
+
+export const AnimatedProgressMenuBar = styled.View`
+    width: 40;
+    height: 20;
+    border-radius: 32;
+    background-color: #45A7AD;
+`;
+
 
 export const Text = styled.Text`
     line-height: 19px;

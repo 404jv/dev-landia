@@ -9,7 +9,7 @@ import {
 	Title,
 	SectionStyles,
 	Container,
-	ProgressBar,
+	Menu,
 	Text,
 	Bash,
 	Code,
@@ -21,7 +21,9 @@ import {
 	CompileIconButton,
 	SeeAnswerButton,
 	SeeAnswerIconButton,
+	ProgressMenuBar,
 } from './styles';
+import Animated from 'react-native-reanimated';
 
 interface IOption {
 	name: string;
@@ -31,6 +33,7 @@ interface IOption {
 }
 
 export function Activity() {
+	const [progress, SetProgress] = useState(new Animated.Value(0));
 	const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
 
 	const activity = {
@@ -208,6 +211,28 @@ export function Activity() {
 		setCodeEditor(activity.answer);
 	}
 
+	const progressAnimated = progress.interpolate({
+		inputRange: [0, 5],
+		outputRange: ['0%', '100%']
+	});
+
+	function handleStatusBar() {
+		return (
+			<ProgressMenuBar>
+				<Animated.View style={
+					{
+						width: 40,
+						height: 20,
+						borderRadius: 32,
+						backgroundColor: '#45A7AD'
+					}
+				}>
+
+				</Animated.View>
+			</ProgressMenuBar>
+		);
+	}
+
 	useEffect(() => {
 		setCodeEditor(activity.default_code);
 	}, []);
@@ -215,9 +240,10 @@ export function Activity() {
 	return (
 		<Container>
 			<ScrollView>
-				<ProgressBar>
+				<Menu>
 					<MaterialIcons name="close" size={50} color="#2F3437" />
-				</ProgressBar>
+					{ handleStatusBar() }
+				</Menu>
 
 				<SectionStyles>
 					<Title>Bora Codar!</Title>
