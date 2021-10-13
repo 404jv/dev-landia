@@ -80,3 +80,43 @@ export const OptionCode = styled.TouchableOpacity`
     align-items: center;
     justify-content: center;
 `
+
+export const SectionMenu = styled.View`
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: 32px;
+    flex-direction: row;
+    justify-content: flex-end;
+`;
+
+export const CompileButton = styled.TouchableOpacity`
+    margin: 8px;
+    border-radius: 50px;
+    text-align: center;
+    align-items: center;
+`;
+
+export const CompileIconButton = styled.View`
+    width: 64px;
+    height: 64px;
+    background-color: #45A7AD;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const SeeAnswerButton = styled.TouchableOpacity`
+    margin: 8px;
+    border-radius: 50px;
+    text-align: center;
+    align-items: center;
+`;
+
+export const SeeAnswerIconButton = styled.View`
+    width: 64px;
+    height: 64px;
+    background-color: #AD455E;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+`;

@@ -15,9 +15,13 @@ import {
 	Code,
 	OptionCode,
 	Options,
-	OptionEditorCode
+	OptionEditorCode,
+	SectionMenu,
+	CompileButton,
+	CompileIconButton,
+	SeeAnswerButton,
+	SeeAnswerIconButton,
 } from './styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface IOption {
 	name: string;
@@ -200,6 +204,10 @@ export function Activity() {
     console.log('🎉 Usuário acertou!');
   }
 
+	function handleShowAnswer() {
+		setCodeEditor(activity.answer);
+	}
+
 	useEffect(() => {
 		setCodeEditor(activity.default_code);
 	}, []);
@@ -295,10 +303,24 @@ export function Activity() {
 						))}
 					</Options>
 				</SectionStyles>
-        
-        <TouchableOpacity onPress={handleCheckAnswer}>
-          <Text>Compilar</Text>
-        </TouchableOpacity>
+								
+				<SectionMenu>
+				<SeeAnswerButton onPress={handleShowAnswer}>
+						<SeeAnswerIconButton>
+							<MaterialIcons name="remove-red-eye" size={32} color="#fff" />
+						</SeeAnswerIconButton>
+
+						<Text>Solução</Text>
+					</SeeAnswerButton>
+
+					<CompileButton onPress={handleCheckAnswer}>
+						<CompileIconButton>
+							<MaterialIcons name="play-arrow" size={41} color="#fff" />
+						</CompileIconButton>
+
+						<Text>Compilar</Text>
+					</CompileButton>
+				</SectionMenu>
 
 			</ScrollView>
 		</Container>
