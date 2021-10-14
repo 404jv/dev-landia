@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Easing } from 'react-native';
 
 
 import {
@@ -23,7 +23,8 @@ import {
 	SeeAnswerIconButton,
 	ProgressMenuBar,
 } from './styles';
-import Animated from 'react-native-reanimated';
+
+import Animated, { EasingNode } from 'react-native-reanimated';
 
 interface IOption {
 	name: string;
@@ -35,6 +36,7 @@ interface IOption {
 export function Activity() {
 	const [progress, SetProgress] = useState(new Animated.Value(0));
 	const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
+	let [indexActivity, setIndexActivity] = useState(0);
 
 	const activity = {
 		id: String(new Date().getTime()),
@@ -177,8 +179,18 @@ export function Activity() {
 		]
 	}
 
+	const activities = [
+		activity,
+		activity,
+		activity,
+		activity,
+		activity,
+	];
+
+	const [currentActivity, setCurrentActivity] = useState(activities[0]);
+
   function handleAddCodeToEditor(index: number) {
-		const option = activity.options[index];
+		const option = currentActivity.options[index];
 
 		setCodeEditor(oldState => [...oldState, option]);
 	}
@@ -190,43 +202,60 @@ export function Activity() {
   function handleCheckAnswer() {
     const userAnswer = codeEditor;
 
-    if (userAnswer.length !== activity.answer.length) {
+    if (userAnswer.length !== currentActivity.answer.length) {
       console.log('👎 Usuário errou!');
 
       return;
     }
 
     userAnswer.forEach((line, index) => {
-      if (line.name !== activity.answer[index].name) {
+      if (line.name !== currentActivity.answer[index].name) {
         console.log('👎 Usuário errou!');
 
         return;
       };
     });
 
+
+		setIndexActivity(++indexActivity);
+		
+		console.log(indexActivity);
+		setCurrentActivity(activities[indexActivity]);
+
+		Animated.timing(progress, {
+			toValue: indexActivity,
+			duration: 500,
+			easing: EasingNode.linear
+		}).start();
+
+
     console.log('🎉 Usuário acertou!');
   }
 
 	function handleShowAnswer() {
-		setCodeEditor(activity.answer);
+		setCodeEditor(currentActivity.answer);
 	}
 
-	const progressAnimated = progress.interpolate({
-		inputRange: [0, 5],
-		outputRange: ['0%', '100%']
-	});
+		const progressAnimated = progress.interpolate({
+			inputRange: [0, activities.length],
+			outputRange: [0, 342]
+		});
 
 	function handleStatusBar() {
 		return (
-			<ProgressMenuBar>
-				<Animated.View style={
+			<ProgressMenuBar
+				style={{ borderRadius: 32 }}
+			>
+				<Animated.View style={[
 					{
-						width: 40,
 						height: 20,
 						borderRadius: 32,
 						backgroundColor: '#45A7AD'
+					},
+					{
+						width: progressAnimated,
 					}
-				}>
+				]}>
 
 				</Animated.View>
 			</ProgressMenuBar>
@@ -234,7 +263,15 @@ export function Activity() {
 	}
 
 	useEffect(() => {
-		setCodeEditor(activity.default_code);
+		setCodeEditor(currentActivity.default_code);
+
+		
+		Animated.timing(progress, {
+			toValue: 0,
+			duration: 1000,
+			easing: EasingNode.linear
+		}).start();
+
 	}, []);
 
 	return (
@@ -248,14 +285,14 @@ export function Activity() {
 				<SectionStyles>
 					<Title>Bora Codar!</Title>
 					<Description>
-						<Text>{activity.description}</Text>
+						<Text>{currentActivity.description}</Text>
 					</Description>
 				</SectionStyles>
 
 				<SectionStyles>
 					<Title>Dicas</Title>
 					<Description>
-						{activity.tips.map((tip, index) => (
+						{currentActivity.tips.map((tip, index) => (
 							<Text key={index}>{`▪︎ ${tip}`}</Text>
 						))}
 					</Description>
@@ -311,7 +348,7 @@ export function Activity() {
 					</Code>
 
 					<Options>
-						{activity.options.map((option, index) => (
+						{currentActivity.options.map((option, index) => (
 							<OptionCode
 								key={index}
 								onPress={() => handleAddCodeToEditor(index)}

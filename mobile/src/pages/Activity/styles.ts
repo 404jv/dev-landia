@@ -16,8 +16,6 @@ export const Menu = styled.View`
 
 export const ProgressMenuBar = styled.View`
     width: 80%;
-    height: 20;
-    border-radius: 32;
     background-color: #2F3437;
 `;
 
