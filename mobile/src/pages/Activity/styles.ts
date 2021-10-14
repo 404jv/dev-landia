@@ -4,20 +4,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
     flex: 1;
     background-color: ${({ theme }) => theme.colors.background};
-`;
-
-export const Menu = styled.View`
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 8px;
-`;
-
-
-export const ProgressMenuBar = styled.View`
-    width: 80%;
-    background-color: #37464F;
-`;
+`
 
 // export const AnimatedProgressMenuBar = styled.View`
 //     width: 40;
@@ -25,7 +12,6 @@ export const ProgressMenuBar = styled.View`
 //     border-radius: 32;
 //     background-color: #45A7AD;
 // `;
-
 
 export const Text = styled.Text`
     line-height: 19px;

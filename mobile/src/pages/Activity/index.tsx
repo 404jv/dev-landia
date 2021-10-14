@@ -10,7 +10,6 @@ import {
 	Title,
 	SectionStyles,
 	Container,
-	Menu,
 	Text,
 	Bash,
 	Code,
@@ -22,12 +21,9 @@ import {
 	CompileIconButton,
 	SeeAnswerButton,
 	SeeAnswerIconButton,
-	ProgressMenuBar,
 	BashContent
 } from './styles';
-
-import Animated, { EasingNode } from 'react-native-reanimated';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Menu } from '../../components/Menu';
 
 interface IOption {
 	name: string;
@@ -37,10 +33,10 @@ interface IOption {
 }
 
 export function Activity() {
-	const [progress, setProgress] = useState(new Animated.Value(0));
 	const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
 	const [compileCode, setCompileCode] = useState<IOption[]>([]);
 	let [indexActivity, setIndexActivity] = useState(0);
+	const [progressBarCount, setProgressBarCount] = useState(0);
 
 	const activity = {
 		id: String(new Date().getTime()),
@@ -192,53 +188,18 @@ export function Activity() {
 		console.log(indexActivity);
 		setCurrentActivity(activities[indexActivity]);
 
-		Animated.timing(progress, {
-			toValue: indexActivity,
-			duration: 500,
-			easing: EasingNode.linear
-		}).start();
+		setProgressBarCount(indexActivity);
 
     console.log('🎉 Usuário acertou!');
   }
 
 	function handleRestart() {
 		setIndexActivity(0);
-
-		Animated.timing(progress, {
-			toValue: 0,
-			duration: 1000,
-			easing: EasingNode.linear
-		}).start();
+		setProgressBarCount(0);
 	}
 
 	function handleShowAnswer() {
 		setCodeEditor(currentActivity.answer);
-	}
-
-	const progressAnimated = progress.interpolate({
-		inputRange: [0, activities.length],
-		outputRange: [0, 342]
-	});
-
-	function handleStatusBar() {
-		return (
-			<ProgressMenuBar
-				style={{ borderRadius: 32 }}
-			>
-				<Animated.View style={[
-					{
-						height: 20,
-						borderRadius: 32,
-						backgroundColor: '#45A7AD'
-					},
-					{
-						width: progressAnimated,
-					}
-				]}>
-
-				</Animated.View>
-			</ProgressMenuBar>
-		);
 	}
 
 	useEffect(() => {
@@ -248,13 +209,8 @@ export function Activity() {
 
 	return (
 		<Container>
-			<Menu>
-				<TouchableOpacity>
-					<MaterialIcons name="close" size={50} color="#37464F" />
-				</TouchableOpacity>
+			<Menu progressCount={progressBarCount} totalActivities={activities.length} />
 
-				{ handleStatusBar() }
-			</Menu>
 			<ScrollView>
 				<SectionStyles>
 					<Title>Bora Codar!</Title>
