@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { StyleSheet, View, ScrollView, Easing } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 
 
 import {
@@ -25,6 +25,7 @@ import {
 } from './styles';
 
 import Animated, { EasingNode } from 'react-native-reanimated';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface IOption {
 	name: string;
@@ -216,9 +217,9 @@ export function Activity() {
       };
     });
 
+		if (indexActivity >= (activities.length-1)) return handleRestart();
 
 		setIndexActivity(++indexActivity);
-		
 		console.log(indexActivity);
 		setCurrentActivity(activities[indexActivity]);
 
@@ -228,18 +229,27 @@ export function Activity() {
 			easing: EasingNode.linear
 		}).start();
 
-
     console.log('🎉 Usuário acertou!');
   }
+
+	function handleRestart() {
+		setIndexActivity(0);
+
+		Animated.timing(progress, {
+			toValue: 0,
+			duration: 1000,
+			easing: EasingNode.linear
+		}).start();
+	}
 
 	function handleShowAnswer() {
 		setCodeEditor(currentActivity.answer);
 	}
 
-		const progressAnimated = progress.interpolate({
-			inputRange: [0, activities.length],
-			outputRange: [0, 342]
-		});
+	const progressAnimated = progress.interpolate({
+		inputRange: [0, activities.length],
+		outputRange: [0, 342]
+	});
 
 	function handleStatusBar() {
 		return (
@@ -264,23 +274,18 @@ export function Activity() {
 
 	useEffect(() => {
 		setCodeEditor(currentActivity.default_code);
-
-		
-		Animated.timing(progress, {
-			toValue: 0,
-			duration: 1000,
-			easing: EasingNode.linear
-		}).start();
-
 	}, []);
 
 	return (
 		<Container>
 			<ScrollView>
-				<Menu>
-					<MaterialIcons name="close" size={50} color="#2F3437" />
-					{ handleStatusBar() }
-				</Menu>
+					<Menu>
+						<TouchableOpacity>
+							<MaterialIcons name="close" size={50} color="#37464F" />
+						</TouchableOpacity>
+
+						{ handleStatusBar() }
+					</Menu>
 
 				<SectionStyles>
 					<Title>Bora Codar!</Title>

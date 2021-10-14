@@ -16,15 +16,15 @@ export const Menu = styled.View`
 
 export const ProgressMenuBar = styled.View`
     width: 80%;
-    background-color: #2F3437;
+    background-color: #37464F;
 `;
 
-export const AnimatedProgressMenuBar = styled.View`
-    width: 40;
-    height: 20;
-    border-radius: 32;
-    background-color: #45A7AD;
-`;
+// export const AnimatedProgressMenuBar = styled.View`
+//     width: 40;
+//     height: 20;
+//     border-radius: 32;
+//     background-color: #45A7AD;
+// `;
 
 
 export const Text = styled.Text`
