@@ -69,6 +69,12 @@ export const Bash = styled.View`
 
 `;
 
+export const BashContent = styled.View`
+    flex-direction: row;
+    margin-left: 16px;
+    flex-wrap: wrap;
+`;
+
 export const Code = styled.View`
     background-color: #1D2326;
     min-height: 120px;
@@ -97,7 +103,7 @@ export const OptionCode = styled.TouchableOpacity`
     justify-content: center;
 `
 
-export const SectionMenu = styled.View`
+export const SectionButtons = styled.View`
     margin-left: 12px;
     margin-right: 12px;
     margin-bottom: 32px;

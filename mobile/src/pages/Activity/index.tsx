@@ -3,6 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { StyleSheet, View, ScrollView } from 'react-native';
 
+import { Command } from '../../components/Command';
 
 import {
 	Description,
@@ -16,12 +17,13 @@ import {
 	OptionCode,
 	Options,
 	OptionEditorCode,
-	SectionMenu,
+	SectionButtons,
 	CompileButton,
 	CompileIconButton,
 	SeeAnswerButton,
 	SeeAnswerIconButton,
 	ProgressMenuBar,
+	BashContent
 } from './styles';
 
 import Animated, { EasingNode } from 'react-native-reanimated';
@@ -35,8 +37,9 @@ interface IOption {
 }
 
 export function Activity() {
-	const [progress, SetProgress] = useState(new Animated.Value(0));
+	const [progress, setProgress] = useState(new Animated.Value(0));
 	const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
+	const [compileCode, setCompileCode] = useState<IOption[]>([]);
 	let [indexActivity, setIndexActivity] = useState(0);
 
 	const activity = {
@@ -52,23 +55,17 @@ export function Activity() {
 				created_at: new Date()
 			},
 			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			},
-			{
 				name: "drawWhiteBox",
 				type: "js_function",
 				hexadecimal_color: "#FFFFFF",
 				created_at: new Date()
 			},
 			{
-				name: "newLine",
+				name: "drawRedBox",
 				type: "js_function",
-				hexadecimal_color: "#169E96",
+				hexadecimal_color: "#EF4135",
 				created_at: new Date()
-			},
+			}
 		],
 		answer: [
       {
@@ -78,15 +75,15 @@ export function Activity() {
 				created_at: new Date()
 			},
 			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			},
-			{
 				name: "drawWhiteBox",
 				type: "js_function",
 				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
 				created_at: new Date()
 			},
 			{
@@ -95,34 +92,16 @@ export function Activity() {
 				hexadecimal_color: "#169E96",
 				created_at: new Date()
 			},
-      {
+			{
 				name: "drawBlueBox",
 				type: "js_function",
 				hexadecimal_color: "#0055A4",
 				created_at: new Date()
 			},
 			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			},
-			{
 				name: "drawWhiteBox",
 				type: "js_function",
 				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
-			},
-			{
-				name: "newLine",
-				type: "js_function",
-				hexadecimal_color: "#169E96",
-				created_at: new Date()
-			},
-      {
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
 				created_at: new Date()
 			},
 			{
@@ -130,19 +109,7 @@ export function Activity() {
 				type: "js_function",
 				hexadecimal_color: "#EF4135",
 				created_at: new Date()
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
-			},
-			{
-				name: "newLine",
-				type: "js_function",
-				hexadecimal_color: "#169E96",
-				created_at: new Date()
-			},
+			}
     ],
 		is_needed_tests: false,
 		created_at: new Date(),
@@ -160,15 +127,15 @@ export function Activity() {
 				created_at: new Date()
 			},
 			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			},
-			{
 				name: "drawWhiteBox",
 				type: "js_function",
 				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
 				created_at: new Date()
 			},
 			{
@@ -203,6 +170,8 @@ export function Activity() {
   function handleCheckAnswer() {
     const userAnswer = codeEditor;
 
+		setCompileCode(userAnswer);
+
     if (userAnswer.length !== currentActivity.answer.length) {
       console.log('👎 Usuário errou!');
 
@@ -210,7 +179,7 @@ export function Activity() {
     }
 
     userAnswer.forEach((line, index) => {
-      if (line.name !== currentActivity.answer[index].name) {
+      if (line.name !== codeEditor[index].name) {
         console.log('👎 Usuário errou!');
 
         return;
@@ -274,19 +243,19 @@ export function Activity() {
 
 	useEffect(() => {
 		setCodeEditor(currentActivity.default_code);
+		setCompileCode(currentActivity.default_code);
 	}, []);
 
 	return (
 		<Container>
+			<Menu>
+				<TouchableOpacity>
+					<MaterialIcons name="close" size={50} color="#37464F" />
+				</TouchableOpacity>
+
+				{ handleStatusBar() }
+			</Menu>
 			<ScrollView>
-					<Menu>
-						<TouchableOpacity>
-							<MaterialIcons name="close" size={50} color="#37464F" />
-						</TouchableOpacity>
-
-						{ handleStatusBar() }
-					</Menu>
-
 				<SectionStyles>
 					<Title>Bora Codar!</Title>
 					<Description>
@@ -313,6 +282,12 @@ export function Activity() {
 						</View>
 						<View style={styles.bottom}>
 							<Text style={styles.arrow}> {'>'} </Text>
+
+							<BashContent>
+								{currentActivity.answer.map((line, index) => (
+									<Command key={index} commandName={line.name} />
+								))}
+							</BashContent>
 						</View>
 					</Bash>
 				</SectionStyles>
@@ -327,6 +302,12 @@ export function Activity() {
 						</View>
 						<View style={[styles.bottom]}>
 							<Text style={styles.arrow}> {'>'} </Text>
+
+							<BashContent>
+								{compileCode.map((line, index) => (
+									<Command key={index} commandName={line.name} />
+								))}
+							</BashContent>
 						</View>
 					</Bash>
 				</SectionStyles>
@@ -372,8 +353,8 @@ export function Activity() {
 					</Options>
 				</SectionStyles>
 								
-				<SectionMenu>
-				<SeeAnswerButton onPress={handleShowAnswer}>
+				<SectionButtons>
+					<SeeAnswerButton onPress={handleShowAnswer}>
 						<SeeAnswerIconButton>
 							<MaterialIcons name="remove-red-eye" size={32} color="#fff" />
 						</SeeAnswerIconButton>
@@ -388,7 +369,7 @@ export function Activity() {
 
 						<Text>Compilar</Text>
 					</CompileButton>
-				</SectionMenu>
+				</SectionButtons>
 
 			</ScrollView>
 		</Container>
