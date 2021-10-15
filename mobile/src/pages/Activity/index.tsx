@@ -11,7 +11,6 @@ import {
 	SectionStyles,
 	Container,
 	Text,
-	Bash,
 	Editor,
 	OptionCode,
 	OptionsContainer,
@@ -21,10 +20,10 @@ import {
 	CompileIconButton,
 	SeeAnswerButton,
 	SeeAnswerIconButton,
-	BashContent
 } from './styles';
 import { Menu } from '../../components/Menu';
 import { Section } from '../../components/Section';
+import { Bash } from '../../components/Bash';
 
 interface IOption {
 	name: string;
@@ -228,42 +227,12 @@ export function Activity() {
 
 				<SectionStyles>
 					<Title>Objetivo do código</Title>
-					<Bash>
-						<View style={styles.Top}>
-							<View style={styles.red} />
-							<View style={styles.yellow} />
-							<View style={styles.green} />
-						</View>
-						<View style={styles.bottom}>
-							<Text style={styles.arrow}> {'>'} </Text>
-
-							<BashContent>
-								{currentActivity.answer.map((line, index) => (
-									<Command key={index} commandName={line.name} />
-								))}
-							</BashContent>
-						</View>
-					</Bash>
+					<Bash options={currentActivity.answer}/>
 				</SectionStyles>
 
 				<SectionStyles>
 					<Title>Resultado atual</Title>
-					<Bash>
-						<View style={styles.Top}>
-							<View style={styles.red} />
-							<View style={styles.yellow} />
-							<View style={styles.green} />
-						</View>
-						<View style={[styles.bottom]}>
-							<Text style={styles.arrow}> {'>'} </Text>
-
-							<BashContent>
-								{compileCode.map((line, index) => (
-									<Command key={index} commandName={line.name} />
-								))}
-							</BashContent>
-						</View>
-					</Bash>
+					<Bash options={compileCode}/>
 				</SectionStyles>
 
 				<SectionStyles>

@@ -33,16 +33,6 @@ export const Description = styled.View`
     padding: 15px;
 `;
 
-export const Bash = styled.View`
-
-`;
-
-export const BashContent = styled.View`
-    flex-direction: row;
-    margin-left: 16px;
-    flex-wrap: wrap;
-`;
-
 export const Editor = styled.View`
     background-color: ${({ theme }) => theme.colors.secondary};
     min-height: 120px;
