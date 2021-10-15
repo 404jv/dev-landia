@@ -24,7 +24,7 @@ import {
 	BashContent
 } from './styles';
 import { Menu } from '../../components/Menu';
-import theme from '../../Global/styles/theme';
+import { Section } from '../../components/Section';
 
 interface IOption {
 	name: string;
@@ -213,12 +213,9 @@ export function Activity() {
 			<Menu progressCount={progressBarCount} totalActivities={activities.length} />
 
 			<ScrollView>
-				<SectionStyles>
-					<Title>Bora Codar!</Title>
-					<Description>
-						<Text>{currentActivity.description}</Text>
-					</Description>
-				</SectionStyles>
+				<Section title="Bora Codar!">
+					<Text>{currentActivity.description}</Text>
+				</Section>
 
 				<SectionStyles>
 					<Title>Dicas</Title>

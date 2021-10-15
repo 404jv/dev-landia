@@ -1,23 +1,19 @@
-import React, { ComponentProps } from 'react';
-
-import { Text } from 'react-native';
+import React from 'react';
 
 import { SectionStyles, Title, Description } from './styles';
 
-interface SectionProps {
+type Props = {
     title: string,
-    descriptions: string[];
-}
+    children: JSX.Element,
+};
 
-export function Section({title, descriptions}:SectionProps){
+export function Section({ title, children }: Props){
 
     return(
         <SectionStyles>
             <Title>{title}</Title>
             <Description>
-                {descriptions.map(description => {
-                    <Text>{description}</Text>
-                })}
+                {children}
             </Description>
         </SectionStyles>
     )
