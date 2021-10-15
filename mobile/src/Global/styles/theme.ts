@@ -1,8 +1,9 @@
 export default {
     colors: {
-        primary: '#45A7AD',
-        secondary: '#2F3437',
-        background: '#22282B',
+        primary: '#00A2ED',
+        secondary: '#1D2326', //
+        background: '#0D1117',
+        border: '#30363D',
 
         soluction: '#AD455E',
         medal: '#844799',

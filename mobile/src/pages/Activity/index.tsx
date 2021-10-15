@@ -12,9 +12,9 @@ import {
 	Container,
 	Text,
 	Bash,
-	Code,
+	Editor,
 	OptionCode,
-	Options,
+	OptionsContainer,
 	OptionEditorCode,
 	SectionButtons,
 	CompileButton,
@@ -24,6 +24,7 @@ import {
 	BashContent
 } from './styles';
 import { Menu } from '../../components/Menu';
+import theme from '../../Global/styles/theme';
 
 interface IOption {
 	name: string;
@@ -270,7 +271,7 @@ export function Activity() {
 
 				<SectionStyles>
 					<Title>Seu código</Title>
-					<Code>
+					<Editor>
 						{codeEditor.map((code, index) => (
 							<OptionEditorCode
 								key={index}
@@ -287,9 +288,9 @@ export function Activity() {
 								</Text>
 							</OptionEditorCode>
 						))}
-					</Code>
+					</Editor>
 
-					<Options>
+					<OptionsContainer>
 						{currentActivity.options.map((option, index) => (
 							<OptionCode
 								key={index}
@@ -306,7 +307,7 @@ export function Activity() {
 								</Text>
 							</OptionCode>
 						))}
-					</Options>
+					</OptionsContainer>
 				</SectionStyles>
 								
 				<SectionButtons>
@@ -366,7 +367,7 @@ const styles = StyleSheet.create({
 	},
 	bottom: {
 		minHeight: 120,
-		backgroundColor: '#121212',
+		backgroundColor: '#000000',
 		borderBottomLeftRadius: 8,
 		borderBottomRightRadius: 8,
 	},

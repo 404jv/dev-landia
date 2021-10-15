@@ -5,6 +5,8 @@ import Animated, { EasingNode } from "react-native-reanimated";
 
 import { MenuBar, ProgressMenuBar } from "./styles";
 
+import theme from '../../Global/styles/theme';
+
 interface IMenuProps {
   totalActivities: number;
   progressCount: number;
@@ -35,7 +37,7 @@ export function Menu({ totalActivities, progressCount }: IMenuProps) {
 					{
 						height: 20,
 						borderRadius: 32,
-						backgroundColor: '#45A7AD'
+						backgroundColor: theme.colors.primary
 					},
 					{
 						width: progressAnimated,
