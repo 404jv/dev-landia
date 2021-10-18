@@ -9,10 +9,8 @@ import {
 	SectionStyles,
 	Container,
 	Text,
-	Editor,
 	OptionCode,
 	OptionsContainer,
-	OptionEditorCode,
 	SectionButtons,
 	CompileButton,
 	CompileIconButton,
@@ -22,6 +20,7 @@ import {
 import { Menu } from '../../components/Menu';
 import { Section } from '../../components/Section';
 import { Bash } from '../../components/Bash';
+import { Editor } from '../../components/Editor';
 
 interface IOption {
 	name: string;
