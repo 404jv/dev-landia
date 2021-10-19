@@ -24,9 +24,10 @@ export const Header = styled.View`
 
 export const Body = styled.View`
 	min-height: 120px;
-	background-color: #000000;
+	background-color: #000;
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
+	border: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 export const Arrow = styled.Text`

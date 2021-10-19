@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Modal, Portal, Provider } from 'react-native-paper';
+
+
 
 import { ScrollView } from 'react-native';
 
@@ -16,6 +19,15 @@ import {
 	CompileIconButton,
 	SeeAnswerButton,
 	SeeAnswerIconButton,
+	ModalContainer,
+	ModalHeader,
+	ModalIcon,
+	ModalTitle,
+	ModalContent,
+	ModalContentText,
+	ModalButton,
+	ModalButtonText,
+	
 } from './styles';
 import { Menu } from '../../components/Menu';
 import { Section } from '../../components/Section';
@@ -61,7 +73,7 @@ export function Activity() {
 			}
 		],
 		answer: [
-      {
+			{
 				name: "drawBlueBox",
 				type: "js_function",
 				hexadecimal_color: "#0055A4",
@@ -103,7 +115,7 @@ export function Activity() {
 				hexadecimal_color: "#EF4135",
 				created_at: new Date()
 			}
-    ],
+		],
 		is_needed_tests: false,
 		created_at: new Date(),
 		tips: [
@@ -150,32 +162,32 @@ export function Activity() {
 
 	const [currentActivity, setCurrentActivity] = useState(activities[0]);
 
-  function handleAddCodeToEditor(index: number) {
+	function handleAddCodeToEditor(index: number) {
 		const option = currentActivity.options[index];
 
 		setCodeEditor(oldState => [...oldState, option]);
 	}
 
-  function handleCheckAnswer() {
-    const userAnswer = codeEditor;
+	function handleCheckAnswer() {
+		const userAnswer = codeEditor;
 
 		setCompileCode(userAnswer);
 
-    if (userAnswer.length !== currentActivity.answer.length) {
-      console.log('👎 Usuário errou!');
+		if (userAnswer.length !== currentActivity.answer.length) {
+			console.log('👎 Usuário errou!');
 
-      return;
-    }
+			return;
+		}
 
-    userAnswer.forEach((line, index) => {
-      if (line.name !== codeEditor[index].name) {
-        console.log('👎 Usuário errou!');
+		userAnswer.forEach((line, index) => {
+			if (line.name !== codeEditor[index].name) {
+				console.log('👎 Usuário errou!');
 
-        return;
-      };
-    });
+				return;
+			};
+		});
 
-		if (indexActivity >= (activities.length-1)) return handleRestart();
+		if (indexActivity >= (activities.length - 1)) return handleRestart();
 
 		setIndexActivity(++indexActivity);
 		console.log(indexActivity);
@@ -183,8 +195,8 @@ export function Activity() {
 
 		setProgressBarCount(indexActivity);
 
-    console.log('🎉 Usuário acertou!');
-  }
+		console.log('🎉 Usuário acertou!');
+	}
 
 	function handleRestart() {
 		setIndexActivity(0);
@@ -193,12 +205,20 @@ export function Activity() {
 
 	function handleShowAnswer() {
 		setCodeEditor(currentActivity.answer);
+		setVisible(!Visible);
 	}
 
 	useEffect(() => {
 		setCodeEditor(currentActivity.default_code);
 		setCompileCode(currentActivity.default_code);
 	}, []);
+
+	
+	const [Visible, setVisible] = useState(false);
+	const showModal = () => setVisible(true);
+	const hideModal = () => setVisible(false);
+
+
 
 	return (
 		<Container>
@@ -220,18 +240,18 @@ export function Activity() {
 
 				<SectionStyles>
 					<Title>Objetivo do código</Title>
-					<Bash options={currentActivity.answer}/>
+					<Bash options={currentActivity.answer} />
 				</SectionStyles>
 
 				<SectionStyles>
 					<Title>Resultado atual</Title>
-					<Bash options={compileCode}/>
+					<Bash options={compileCode} />
 				</SectionStyles>
 
 				<SectionStyles>
 					<Title>Seu código</Title>
 
-					<Editor codeEditor={codeEditor}  setCodeEditor={setCodeEditor} />
+					<Editor codeEditor={codeEditor} setCodeEditor={setCodeEditor} />
 
 					<OptionsContainer>
 						{currentActivity.options.map((option, index) => (
@@ -242,19 +262,19 @@ export function Activity() {
 								<Text
 									style={{ color: option.hexadecimal_color }}
 								>
-									{ 
-										option.type === 'js_function' 
-										? `${option.name}()` 
-										: option.name
+									{
+										option.type === 'js_function'
+											? `${option.name}()`
+											: option.name
 									}
 								</Text>
 							</OptionCode>
 						))}
 					</OptionsContainer>
 				</SectionStyles>
-								
+
 				<SectionButtons>
-					<SeeAnswerButton onPress={handleShowAnswer}>
+					<SeeAnswerButton onPress={showModal}>
 						<SeeAnswerIconButton>
 							<MaterialIcons name="remove-red-eye" size={32} color="#fff" />
 						</SeeAnswerIconButton>
@@ -271,7 +291,37 @@ export function Activity() {
 					</CompileButton>
 				</SectionButtons>
 
+
+
 			</ScrollView>
+
+
+			<Provider>
+				<Portal>
+					<Modal visible={Visible} onDismiss={hideModal}>
+
+						<ModalContainer>
+							<ModalHeader>
+								<ModalIcon name="x" onPress={hideModal}/>
+								<ModalTitle>Mostrar Solução?</ModalTitle>
+							</ModalHeader>
+
+							<ModalContent>
+								<ModalContentText>
+									Clicando no botão confimar vai ser mostrado a solução correta.
+									A atividade vai para o final da fila então não esqueça de memoriza-la
+								</ModalContentText>
+							</ModalContent>
+
+							<ModalButton onPress={handleShowAnswer}>
+								<ModalButtonText>Confirmar</ModalButtonText>
+							</ModalButton>
+						</ModalContainer>
+
+					</Modal>
+				</Portal>
+			</Provider>
+
 		</Container>
 	)
 }
