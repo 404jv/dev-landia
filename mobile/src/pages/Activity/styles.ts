@@ -1,3 +1,4 @@
+import { Feather } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 
 
@@ -89,3 +90,41 @@ export const SeeAnswerIconButton = styled.View`
     justify-content: center;
     align-items: center;
 `;
+
+
+
+//Modal//
+
+export const ModalContainer = styled.View`
+    margin: 10px;
+    padding: 20px 10px;
+    background-color: #22282B;
+    border-radius: 8px;
+`;
+export const ModalHeader = styled.View`
+    flex-direction: row;
+    align-items: center;
+`;
+export const ModalIcon = styled(Feather)`
+    font-size: 40px;
+    color: #2D3235;
+`;
+export const ModalTitle = styled.Text`
+    font-size: 24px;
+    margin-left: 60px;
+    color: ${({theme}) => theme.colors.primary};
+`;
+export const ModalContent = styled.View`
+    padding: 10px;
+`;
+export const ModalContentText = styled.Text`
+    font-size: 16px;
+    color: #fff;
+`;
+export const ModalButton = styled.TouchableOpacity`
+    align-items: center;
+`;
+export const ModalButtonText = styled.Text`
+    font-size: 20px;
+    color: ${({theme}) => theme.colors.primary};
+`;  
