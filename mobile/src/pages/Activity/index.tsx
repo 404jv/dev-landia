@@ -207,6 +207,8 @@ export function Activity() {
 		setCodeEditor(currentActivity.answer);
 		setVisible(!Visible);
 	}
+	
+	console.log('');
 
 	useEffect(() => {
 		setCodeEditor(currentActivity.default_code);
