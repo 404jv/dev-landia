@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Modal, Portal, Provider } from 'react-native-paper';
 
-
-
 import { ScrollView } from 'react-native';
 
 import {
@@ -12,8 +10,6 @@ import {
 	SectionStyles,
 	Container,
 	Text,
-	OptionCode,
-	OptionsContainer,
 	SectionButtons,
 	CompileButton,
 	CompileIconButton,
@@ -161,12 +157,6 @@ export function Activity() {
 
 	const [currentActivity, setCurrentActivity] = useState(activities[0]);
 
-	function handleAddCodeToEditor(index: number) {
-		const option = currentActivity.options[index];
-
-		setCodeEditor(oldState => [...oldState, option]);
-	}
-
 	function handleCheckAnswer() {
 		const userAnswer = codeEditor;
 
@@ -247,26 +237,11 @@ export function Activity() {
 				<SectionStyles>
 					<Title>Seu código</Title>
 
-					<Editor codeEditor={codeEditor} setCodeEditor={setCodeEditor} />
-
-					<OptionsContainer>
-						{currentActivity.options.map((option, index) => (
-							<OptionCode
-								key={index}
-								onPress={() => handleAddCodeToEditor(index)}
-							>
-								<Text
-									style={{ color: option.hexadecimal_color }}
-								>
-									{
-										option.type === 'js_function'
-											? `${option.name}()`
-											: option.name
-									}
-								</Text>
-							</OptionCode>
-						))}
-					</OptionsContainer>
+					<Editor
+						options={currentActivity.options}
+						codeEditor={codeEditor}
+						setCodeEditor={setCodeEditor}
+					/>
 				</SectionStyles>
 
 				<SectionButtons>
@@ -286,11 +261,7 @@ export function Activity() {
 						<Text>Compilar</Text>
 					</CompileButton>
 				</SectionButtons>
-
-
-
 			</ScrollView>
-
 
 			<Provider>
 				<Portal>
