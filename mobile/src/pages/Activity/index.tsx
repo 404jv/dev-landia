@@ -23,11 +23,10 @@ import {
 	ModalHeader,
 	ModalIcon,
 	ModalTitle,
-	ModalContent,
 	ModalContentText,
 	ModalButton,
 	ModalButtonText,
-	
+
 } from './styles';
 import { Menu } from '../../components/Menu';
 import { Section } from '../../components/Section';
@@ -207,20 +206,15 @@ export function Activity() {
 		setCodeEditor(currentActivity.answer);
 		setVisible(!Visible);
 	}
-	
-	console.log('');
 
 	useEffect(() => {
 		setCodeEditor(currentActivity.default_code);
 		setCompileCode(currentActivity.default_code);
 	}, []);
 
-	
 	const [Visible, setVisible] = useState(false);
 	const showModal = () => setVisible(true);
 	const hideModal = () => setVisible(false);
-
-
 
 	return (
 		<Container>
@@ -304,16 +298,14 @@ export function Activity() {
 
 						<ModalContainer>
 							<ModalHeader>
-								<ModalIcon name="x" onPress={hideModal}/>
 								<ModalTitle>Mostrar Solução?</ModalTitle>
+								<ModalIcon name="x" onPress={hideModal} />
 							</ModalHeader>
 
-							<ModalContent>
-								<ModalContentText>
-									Clicando no botão confimar vai ser mostrado a solução correta.
-									A atividade vai para o final da fila então não esqueça de memoriza-la
-								</ModalContentText>
-							</ModalContent>
+							<ModalContentText>
+								Clicando no botão confimar vai ser mostrado a solução correta.
+								A atividade vai para o final da fila então não esqueça de memoriza-la
+							</ModalContentText>
 
 							<ModalButton onPress={handleShowAnswer}>
 								<ModalButtonText>Confirmar</ModalButtonText>

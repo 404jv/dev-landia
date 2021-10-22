@@ -91,19 +91,19 @@ export const SeeAnswerIconButton = styled.View`
     align-items: center;
 `;
 
-
-
 //Modal//
 
 export const ModalContainer = styled.View`
     margin: 10px;
-    padding: 20px 10px;
+    padding: 20px;
     background-color: #22282B;
     border-radius: 8px;
 `;
 export const ModalHeader = styled.View`
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
 `;
 export const ModalIcon = styled(Feather)`
     font-size: 40px;
@@ -111,20 +111,18 @@ export const ModalIcon = styled(Feather)`
 `;
 export const ModalTitle = styled.Text`
     font-size: 24px;
-    margin-left: 60px;
-    color: ${({theme}) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
 `;
-export const ModalContent = styled.View`
-    padding: 10px;
-`;
+
 export const ModalContentText = styled.Text`
     font-size: 16px;
     color: #fff;
 `;
 export const ModalButton = styled.TouchableOpacity`
     align-items: center;
+    margin-top: 8px;
 `;
 export const ModalButtonText = styled.Text`
     font-size: 20px;
-    color: ${({theme}) => theme.colors.primary};
-`;  
+    color: ${({ theme }) => theme.colors.primary};
+`;
