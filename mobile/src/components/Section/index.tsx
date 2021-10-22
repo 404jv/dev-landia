@@ -1,15 +1,16 @@
+import { ReactNode } from 'hoist-non-react-statics/node_modules/@types/react';
 import React from 'react';
 
 import { SectionStyles, Title, Description } from './styles';
 
 type Props = {
     title: string,
-    children: JSX.Element,
+    children: ReactNode,
 };
 
-export function Section({ title, children }: Props){
+export function Section({ title, children }: Props) {
 
-    return(
+    return (
         <SectionStyles>
             <Title>{title}</Title>
             <Description>
