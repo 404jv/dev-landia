@@ -13,3 +13,20 @@ export const OptionEditorCode = styled.TouchableOpacity`
   margin: 2px;
   border-radius: 8px;
 `
+
+export const OptionsContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
+export const OptionCode = styled.TouchableOpacity`
+  min-width: 140px;
+  padding: 8px;
+  margin: 4px;
+  background-color: #1D2326;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+`
