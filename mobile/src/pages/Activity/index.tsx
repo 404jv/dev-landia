@@ -22,12 +22,13 @@ import {
 	ModalContentText,
 	ModalButton,
 	ModalButtonText,
-
 } from './styles';
+
 import { Menu } from '../../components/Menu';
 import { Section } from '../../components/Section';
 import { Bash } from '../../components/Bash';
 import { Editor } from '../../components/Editor';
+import { ActivityStatusModal } from '../../components/ActivityStatusModal';
 
 interface IOption {
 	name: string;
@@ -156,6 +157,7 @@ export function Activity() {
 	];
 
 	const [currentActivity, setCurrentActivity] = useState(activities[0]);
+	const [isCurrentActivityCorrect, setIsCurrentActivityCorrect] = useState(false);
 
 	function handleCheckAnswer() {
 		const userAnswer = codeEditor;
@@ -163,28 +165,33 @@ export function Activity() {
 		setCompileCode(userAnswer);
 
 		if (userAnswer.length !== currentActivity.answer.length) {
-			console.log('👎 Usuário errou!');
-
 			return;
 		}
 
-		userAnswer.forEach((line, index) => {
-			if (line.name !== codeEditor[index].name) {
-				console.log('👎 Usuário errou!');
+		const isActivityCorrect = userAnswer.every((line, index) => {
+			if (line.name !== currentActivity.answer[index].name) {
+				return false;
+			}
 
-				return;
-			};
+			return true;
 		});
 
-		if (indexActivity >= (activities.length - 1)) return handleRestart();
+		if (!isActivityCorrect) {
+			return;
+		}
 
+		if (indexActivity >= (activities.length - 1)) {
+			return handleRestart();
+		};
+
+		setIsCurrentActivityCorrect(true);
 		setIndexActivity(++indexActivity);
-		console.log(indexActivity);
-		setCurrentActivity(activities[indexActivity]);
-
 		setProgressBarCount(indexActivity);
+	}
 
-		console.log('🎉 Usuário acertou!');
+	function handleNextActivity() {
+		setIsCurrentActivityCorrect(false);
+		setCurrentActivity(activities[indexActivity]);
 	}
 
 	function handleRestart() {
@@ -200,7 +207,7 @@ export function Activity() {
 	useEffect(() => {
 		setCodeEditor(currentActivity.default_code);
 		setCompileCode(currentActivity.default_code);
-	}, []);
+	}, [currentActivity]);
 
 	const [Visible, setVisible] = useState(false);
 	const showModal = () => setVisible(true);
@@ -287,6 +294,10 @@ export function Activity() {
 				</Portal>
 			</Provider>
 
+			<ActivityStatusModal
+				isModalVisible={isCurrentActivityCorrect}
+				handleNextActivity={handleNextActivity}
+			/>
 		</Container>
 	)
 }
