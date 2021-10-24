@@ -8,27 +8,25 @@ import { MenuBar, ProgressMenuBar } from "./styles";
 import theme from '../../Global/styles/theme';
 
 interface IMenuProps {
-  totalActivities: number;
-  progressCount: number;
+	totalActivities: number;
+	progressCount: number;
 }
 
 export function Menu({ totalActivities, progressCount }: IMenuProps) {
 	const [progress, setProgress] = useState(new Animated.Value(0));
 
-  console.log('progress: ', progressCount);
-
-  const progressAnimated = progress.interpolate({
+	const progressAnimated = progress.interpolate({
 		inputRange: [0, totalActivities],
 		outputRange: [0, 342]
 	});
 
-  Animated.timing(progress, {
-    toValue: progressCount,
-    duration: 500,
-    easing: EasingNode.linear
-  }).start();
+	Animated.timing(progress, {
+		toValue: progressCount,
+		duration: 500,
+		easing: EasingNode.linear
+	}).start();
 
-  function handleStatusBar() {
+	function handleStatusBar() {
 		return (
 			<ProgressMenuBar
 				style={{ borderRadius: 32 }}
@@ -49,13 +47,13 @@ export function Menu({ totalActivities, progressCount }: IMenuProps) {
 		);
 	}
 
-  return (
-    <MenuBar>
-      <TouchableOpacity>
-        <MaterialIcons name="close" size={50} color="#37464F" />
-      </TouchableOpacity>
+	return (
+		<MenuBar>
+			<TouchableOpacity>
+				<MaterialIcons name="close" size={50} color="#37464F" />
+			</TouchableOpacity>
 
-      { handleStatusBar() }
-    </MenuBar>
-  );
+			{handleStatusBar()}
+		</MenuBar>
+	);
 }
