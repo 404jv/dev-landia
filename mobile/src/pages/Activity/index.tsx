@@ -201,7 +201,7 @@ export function Activity() {
 
 	function handleShowAnswer() {
 		setCodeEditor(currentActivity.answer);
-		setVisible(!Visible);
+		setIsConfimedToShowAnswer(!isConfimedToShowAnswer);
 	}
 
 	useEffect(() => {
@@ -209,9 +209,9 @@ export function Activity() {
 		setCompileCode(currentActivity.default_code);
 	}, [currentActivity]);
 
-	const [Visible, setVisible] = useState(false);
-	const showModal = () => setVisible(true);
-	const hideModal = () => setVisible(false);
+	const [isConfimedToShowAnswer, setIsConfimedToShowAnswer] = useState(false);
+	const showWarningToShowAnswerModal = () => setIsConfimedToShowAnswer(true);
+	const hideWarningToShowAnswerModal = () => setIsConfimedToShowAnswer(false);
 
 	return (
 		<Container>
@@ -252,7 +252,7 @@ export function Activity() {
 				</SectionStyles>
 
 				<SectionButtons>
-					<SeeAnswerButton onPress={showModal}>
+					<SeeAnswerButton onPress={showWarningToShowAnswerModal}>
 						<SeeAnswerIconButton>
 							<MaterialIcons name="remove-red-eye" size={32} color="#fff" />
 						</SeeAnswerIconButton>
@@ -272,12 +272,14 @@ export function Activity() {
 
 			<Provider>
 				<Portal>
-					<Modal visible={Visible} onDismiss={hideModal}>
-
+					<Modal
+						visible={isConfimedToShowAnswer}
+						onDismiss={hideWarningToShowAnswerModal}
+					>
 						<ModalContainer>
 							<ModalHeader>
 								<ModalTitle>Mostrar Solução?</ModalTitle>
-								<ModalIcon name="x" onPress={hideModal} />
+								<ModalIcon name="x" onPress={hideWarningToShowAnswerModal} />
 							</ModalHeader>
 
 							<ModalContentText>
