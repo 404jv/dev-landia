@@ -17,7 +17,7 @@ export function Menu({ totalActivities, progressCount }: IMenuProps) {
 
 	const progressAnimated = progress.interpolate({
 		inputRange: [0, totalActivities],
-		outputRange: [0, 342]
+		outputRange: [0, 274]
 	});
 
 	Animated.timing(progress, {
