@@ -37,13 +37,26 @@ interface IOption {
 	created_at: Date;
 }
 
+type Activity = {
+	id: string;
+	title: string;
+	description: string;
+	type: string;
+	default_code: IOption[];
+	answer: IOption[];
+	is_needed_tests: boolean;
+	created_at: Date;
+	tips: string[];
+	options: IOption[];
+}
+
 export function Activity() {
 	const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
 	const [compileCode, setCompileCode] = useState<IOption[]>([]);
-	let [indexActivity, setIndexActivity] = useState(0);
 	const [progressBarCount, setProgressBarCount] = useState(0);
+	const [isUserAnswer, setIsUserAnswer] = useState(true);
 
-	const activity = {
+	const activity: Activity = {
 		id: String(new Date().getTime()),
 		title: 'atividade',
 		description: 'Nesse desafio você vai desenhar a bandeira da França com alguns comandos.',
@@ -148,21 +161,239 @@ export function Activity() {
 		]
 	}
 
-	const activities = [
+	const activity2: Activity = {
+		id: String(new Date().getTime()),
+		title: 'atividade',
+		description: 'Nesse desafio você vai desenhar a bandeira da França com alguns comandos. #2',
+		type: 'block',
+		default_code: [
+			{
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			}
+		],
+		answer: [
+			{
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			},
+			{
+				name: "newLine",
+				type: "js_function",
+				hexadecimal_color: "#169E96",
+				created_at: new Date()
+			},
+			{
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			}
+		],
+		is_needed_tests: false,
+		created_at: new Date(),
+		tips: [
+			"Use o drawBlueBox para desenhar a caixa azul.",
+			"Use o drawRedBox para desenhar a caixa vermelha.",
+			"Use o drawWhiteBox para desenhar a caixa branca.",
+			"Use o newLine para criar uma nova linha",
+		],
+		options: [
+			{
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			},
+			{
+				name: "newLine",
+				type: "js_function",
+				hexadecimal_color: "#169E96",
+				created_at: new Date()
+			},
+		]
+	}
+
+	const activity3: Activity = {
+		id: String(new Date().getTime()),
+		title: 'atividade',
+		description: 'Nesse desafio você vai desenhar a bandeira da França com alguns comandos. #3',
+		type: 'block',
+		default_code: [
+			{
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			}
+		],
+		answer: [
+			{
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			},
+			{
+				name: "newLine",
+				type: "js_function",
+				hexadecimal_color: "#169E96",
+				created_at: new Date()
+			},
+			{
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			}
+		],
+		is_needed_tests: false,
+		created_at: new Date(),
+		tips: [
+			"Use o drawBlueBox para desenhar a caixa azul.",
+			"Use o drawRedBox para desenhar a caixa vermelha.",
+			"Use o drawWhiteBox para desenhar a caixa branca.",
+			"Use o newLine para criar uma nova linha",
+		],
+		options: [
+			{
+				name: "drawBlueBox",
+				type: "js_function",
+				hexadecimal_color: "#0055A4",
+				created_at: new Date()
+			},
+			{
+				name: "drawWhiteBox",
+				type: "js_function",
+				hexadecimal_color: "#FFFFFF",
+				created_at: new Date()
+			},
+			{
+				name: "drawRedBox",
+				type: "js_function",
+				hexadecimal_color: "#EF4135",
+				created_at: new Date()
+			},
+			{
+				name: "newLine",
+				type: "js_function",
+				hexadecimal_color: "#169E96",
+				created_at: new Date()
+			},
+		]
+	}
+
+
+	const [activities, setActivities] = useState<Activity[]>([
+		activity,
+		activity2,
+		activity3,
 		activity,
 		activity,
-		activity,
-		activity,
-		activity,
-	];
+	]);
 
 	const [currentActivity, setCurrentActivity] = useState(activities[0]);
 	const [isCurrentActivityCorrect, setIsCurrentActivityCorrect] = useState(false);
 
 	function handleCheckAnswer() {
+		if (activities.length === 0) return;
+
 		const userAnswer = codeEditor;
 
 		setCompileCode(userAnswer);
+
+		if (!isUserAnswer) {
+			setIsCurrentActivityCorrect(true);
+			return;
+		}
 
 		if (userAnswer.length !== currentActivity.answer.length) {
 			return;
@@ -180,42 +411,43 @@ export function Activity() {
 			return;
 		}
 
-		if (indexActivity >= (activities.length - 1)) {
-			return handleRestart();
-		};
-
 		setIsCurrentActivityCorrect(true);
-		setIndexActivity(++indexActivity);
-		setProgressBarCount(indexActivity);
+		setProgressBarCount(oldState => oldState + 1);
 	}
 
 	function handleNextActivity() {
-		setIsCurrentActivityCorrect(false);
-		setCurrentActivity(activities[indexActivity]);
-	}
+		if (isUserAnswer) {
+			setActivities(activities.filter((activity, i) => i !== 0));
+		} else {
+			const wrongActivity = activities.shift();
+			activities.push(wrongActivity);
+		}
 
-	function handleRestart() {
-		setIndexActivity(0);
-		setProgressBarCount(0);
+		setCurrentActivity(activities[0]);
+		setIsCurrentActivityCorrect(false);
+		setIsUserAnswer(true);
+		setCodeEditor(currentActivity.default_code);
+		setCompileCode(currentActivity.default_code);
 	}
 
 	function handleShowAnswer() {
 		setCodeEditor(currentActivity.answer);
-		setIsConfimedToShowAnswer(!isConfimedToShowAnswer);
+		setIsUserAnswer(false);
+		setIsConfirmedToShowAnswer(false);
 	}
+
+	const [isConfirmedToShowAnswer, setIsConfirmedToShowAnswer] = useState(false);
+	const showWarningToShowAnswerModal = () => setIsConfirmedToShowAnswer(true);
+	const hideWarningToShowAnswerModal = () => setIsConfirmedToShowAnswer(false);
 
 	useEffect(() => {
 		setCodeEditor(currentActivity.default_code);
 		setCompileCode(currentActivity.default_code);
-	}, [currentActivity]);
-
-	const [isConfimedToShowAnswer, setIsConfimedToShowAnswer] = useState(false);
-	const showWarningToShowAnswerModal = () => setIsConfimedToShowAnswer(true);
-	const hideWarningToShowAnswerModal = () => setIsConfimedToShowAnswer(false);
+	}, []);
 
 	return (
 		<Container>
-			<Menu progressCount={progressBarCount} totalActivities={activities.length} />
+			<Menu progressCount={progressBarCount} totalActivities={5} />
 
 			<ScrollView>
 				<Section title="Bora Codar!">
@@ -273,7 +505,7 @@ export function Activity() {
 			<Provider>
 				<Portal>
 					<Modal
-						visible={isConfimedToShowAnswer}
+						visible={isConfirmedToShowAnswer}
 						onDismiss={hideWarningToShowAnswerModal}
 					>
 						<ModalContainer>
