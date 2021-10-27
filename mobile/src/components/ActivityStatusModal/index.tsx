@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import { Modalize } from 'react-native-modalize';
-import { ModalButton, ModalButtonText } from '../../pages/Activity/styles';
+import theme from '../../Global/styles/theme';
 
+import { ModalButton, ModalTextButton, Title } from './styles';
 
 type Props = {
   isModalVisible: boolean;
@@ -29,14 +30,20 @@ export function ActivityStatusModal({ isModalVisible, handleNextActivity }: Prop
 
   return (
     <Modalize
-      alwaysOpen={180}
+      alwaysOpen={130}
       ref={modalizeRef}
-      snapPoint={180}
+      modalStyle={{
+        backgroundColor: theme.colors.secondary,
+        borderRadius: 16,
+        padding: 20,
+      }}
     >
-      <ModalButton>
-        <ModalButtonText onPress={handleNextActivity}>
-          Next Activity
-        </ModalButtonText>
+      <Title>Ótimo código!</Title>
+
+      <ModalButton
+        onPress={handleNextActivity}
+      >
+        <ModalTextButton>Continuar</ModalTextButton>
       </ModalButton>
     </Modalize>
   );
