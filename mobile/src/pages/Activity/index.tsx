@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Modal, Portal, Provider } from 'react-native-paper';
+import { Audio } from 'expo-av';
 
 import { ScrollView } from 'react-native';
 
@@ -383,7 +384,23 @@ export function Activity() {
 	const [currentActivity, setCurrentActivity] = useState(activities[0]);
 	const [isCurrentActivityCorrect, setIsCurrentActivityCorrect] = useState(false);
 
-	function handleCheckAnswer() {
+	async function playCorrectSong() {
+		const { sound } = await Audio.Sound.createAsync(
+			require('../../assets/correctSong.mp4')
+		);
+
+		await sound.playAsync();
+	}
+
+	async function playWrongSong() {
+		const { sound } = await Audio.Sound.createAsync(
+			require('../../assets/errorSong.mp4')
+		);
+
+		await sound.playAsync();
+	}
+
+	async function handleCheckAnswer() {
 		if (activities.length === 0) return;
 
 		const userAnswer = codeEditor;
@@ -391,11 +408,13 @@ export function Activity() {
 		setCompileCode(userAnswer);
 
 		if (!isUserAnswer) {
+			await playCorrectSong();
 			setIsCurrentActivityCorrect(true);
 			return;
 		}
 
 		if (userAnswer.length !== currentActivity.answer.length) {
+			await playWrongSong();
 			return;
 		}
 
@@ -408,9 +427,11 @@ export function Activity() {
 		});
 
 		if (!isActivityCorrect) {
+			await playWrongSong();
 			return;
 		}
 
+		await playCorrectSong();
 		setIsCurrentActivityCorrect(true);
 		setProgressBarCount(oldState => oldState + 1);
 	}
