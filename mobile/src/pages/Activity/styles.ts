@@ -78,7 +78,7 @@ export const SeeAnswerIconButton = styled.View`
 export const ModalContainer = styled.View`
     margin: 10px;
     padding: 20px;
-    background-color: #22282B;
+    background-color: ${({ theme }) => theme.colors.secondary};
     border-radius: 8px;
 `;
 export const ModalHeader = styled.View`
