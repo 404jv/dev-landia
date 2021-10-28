@@ -1,8 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { OptionCode, OptionsContainer } from '../../pages/Activity/styles';
 
-import { EditorContainer, OptionEditorCode } from './styles';
+import { EditorContainer, OptionEditorCode, OptionCode, OptionsContainer } from './styles';
 
 interface IOption {
   name: string;

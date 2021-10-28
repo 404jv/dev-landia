@@ -1,8 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
 import { Command } from '../Command';
 
-import { Arrow, BashContent, Body, Circle, Header } from './styles';
+import { Arrow, BashContainer, BashContent, Body, Circle, Header } from './styles';
 
 interface IOption {
   name: string,
@@ -18,7 +17,7 @@ interface IBashProps {
 export function Bash({ options }: IBashProps) {
 
   return (
-    <View>
+    <BashContainer>
       <Header>
     	<Circle style={{ marginLeft: 16, backgroundColor: '#FF5A54' }} />
         <Circle style={{ backgroundColor: '#E5BF2F' }} />
@@ -34,6 +33,6 @@ export function Bash({ options }: IBashProps) {
           ))}
         </BashContent>
       </Body>
-    </View>
+    </BashContainer>
   )
 }

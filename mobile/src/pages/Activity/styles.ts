@@ -28,28 +28,10 @@ export const Title = styled.Text`
 `;
 
 export const Description = styled.View`
-    background-color:  ${({ theme }) => theme.colors.secondary};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: 10px;
-    padding: 15px;
+    margin-left: 8px;
+    margin-right: 8px;
+    line-height: 20px;
 `;
-
-export const OptionsContainer = styled.View`
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-`
-
-export const OptionCode = styled.TouchableOpacity`
-    min-width: 140px;
-    padding: 8px;
-    margin: 4px;
-    background-color: #1D2326;
-    border-radius: 8px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid ${({ theme }) => theme.colors.border};
-`
 
 export const SectionButtons = styled.View`
     margin-left: 12px;

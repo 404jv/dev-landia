@@ -12,6 +12,7 @@ export const EditorContainer = styled.View`
 export const OptionEditorCode = styled.TouchableOpacity`
   margin: 2px;
   border-radius: 8px;
+  min-height: 24px;
 `
 
 export const OptionsContainer = styled.View`
@@ -22,9 +23,10 @@ export const OptionsContainer = styled.View`
 
 export const OptionCode = styled.TouchableOpacity`
   min-width: 140px;
+  min-height: 44px;
   padding: 8px;
   margin: 4px;
-  background-color: #1D2326;
+  background-color: ${({ theme }) => theme.colors.secondary};
   border-radius: 8px;
   align-items: center;
   justify-content: center;

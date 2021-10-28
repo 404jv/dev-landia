@@ -15,8 +15,7 @@ export const Title = styled.Text`
 `;
 
 export const Description = styled.Text`
-    background-color:  ${({ theme }) => theme.colors.secondary};
-    border: 1px solid ${({ theme }) => theme.colors.border};
-    border-radius: 10px;
-    padding: 15px;
+    margin-right: 8px;
+    margin-left: 8px;
+    line-height: 20px;
 `;

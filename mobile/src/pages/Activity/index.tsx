@@ -414,8 +414,8 @@ export function Activity() {
 		}
 
 		await playSound('correctSong');
-		setIsCurrentActivityCorrect(true);
 		setProgressBarCount(oldState => oldState + 1);
+		setIsCurrentActivityCorrect(true);
 	}
 
 	async function handleNextActivity() {

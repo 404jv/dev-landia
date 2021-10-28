@@ -1,5 +1,10 @@
 import styled from 'styled-components/native';
 
+export const BashContainer = styled.View`
+	border-radius: 8px;
+	border: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
 export const BashContent = styled.View`
   flex-direction: row;
   margin-left: 16px;
@@ -27,7 +32,6 @@ export const Body = styled.View`
 	background-color: #000;
 	border-bottom-left-radius: 8px;
 	border-bottom-right-radius: 8px;
-	border: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 export const Arrow = styled.Text`
