@@ -112,7 +112,6 @@ export function Activity() {
 				name: "drawRedBox",
 				type: "js_function",
 				hexadecimal_color: "#EF4135",
-				created_at: new Date()
 			}
 		],
 		is_needed_tests: false,
