@@ -1,17 +1,15 @@
 import React, { ReactNode } from 'react';
-import { Text, View } from "react-native";
-import { Activity } from "../../pages/Activity";
+import { View } from "react-native";
 
 interface ICommandProps {
   commandName: string;
 }
 
-interface ICommands {
+export type ICommands = {
   drawBlueBox: () => ReactNode;
   drawRedBox: () => ReactNode;
   drawWhiteBox: () => ReactNode;
   newLine: () => ReactNode;
-  for: () => ReactNode;
 }
 
 export function Command({ commandName }: ICommandProps) {
@@ -49,13 +47,6 @@ export function Command({ commandName }: ICommandProps) {
         <View style={{
           width: 995,
         }}></View>
-      );
-    },
-    for: () => {
-      return (
-        <View>
-          <Text>For</Text>
-        </View>
       );
     }
   }

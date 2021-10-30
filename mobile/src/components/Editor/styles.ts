@@ -9,7 +9,15 @@ export const EditorContainer = styled.View`
   border: 1px solid ${({ theme }) => theme.colors.border};
 `
 
-export const OptionEditorCode = styled.TouchableOpacity`
+export const OptionEditorCodeOneLine = styled.TouchableOpacity`
+  margin: 2px;
+  border-radius: 8px;
+  min-height: 24px;
+  flex-direction: row;
+  align-items: center;
+`
+
+export const OptionEditorCodeMultiLine = styled.TouchableOpacity`
   margin: 2px;
   border-radius: 8px;
   min-height: 24px;
@@ -32,3 +40,27 @@ export const OptionCode = styled.TouchableOpacity`
   justify-content: center;
   border: 1px solid ${({ theme }) => theme.colors.border};
 `
+export const Variable = styled.TextInput`
+  font-size: 16px;
+  height: 100%;
+  color: #E5BF2F;
+  text-align: center;
+`;
+
+export const Value = styled.TextInput`
+  font-size: 16px;
+  height: 100%;
+  color: #FFFFFF;
+  text-align: center;
+`;
+
+
+export const NormalText = styled.Text`
+  font-size: 16px;
+  color: #45A7AD;
+`;
+
+export const ValueForVariable = styled.Text`
+  font-size: 16px;
+  color: #FFFFFF;
+`;

@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Text } from 'react-native';
 
-import { EditorContainer, OptionEditorCode, OptionCode, OptionsContainer } from './styles';
+import {
+  EditorContainer,
+  OptionEditorCodeOneLine,
+  OptionCode,
+  OptionsContainer,
+  NormalText,
+  ValueForVariable,
+  Variable,
+  Value
+} from './styles';
 
-interface IOption {
+export type IOption = {
   name: string;
   type: string;
   hexadecimal_color: string;
+  user_variable_name?: string;
 }
 
 interface IEditorProps {
@@ -15,7 +25,15 @@ interface IEditorProps {
   options?: IOption[];
 }
 
+type ICommands = {
+  js_function: (option: IOption, id: number) => ReactNode;
+  js_variable: (option: IOption, id: number) => ReactNode;
+}
+
 export function Editor({ codeEditor, setCodeEditor, options }: IEditorProps) {
+  const [isClickingOnVariableName, setIsClickingOnVariableName] = useState(false);
+  const [variableName, setVariableName] = useState('');
+  const [variableValue, setVariableValue] = useState('');
 
   function handleDeleteCodeFromEditor(index: number) {
     setCodeEditor(codeEditor.filter((code, i) => i !== index));
@@ -27,26 +45,87 @@ export function Editor({ codeEditor, setCodeEditor, options }: IEditorProps) {
     setCodeEditor(oldState => [...oldState, option]);
   }
 
+  function handleCreateOption() {
+
+  }
+
+  const command: ICommands = {
+    js_function: (option: IOption, id: number) => {
+      return (
+        <OptionEditorCodeOneLine
+          key={id}
+          onPress={() => handleDeleteCodeFromEditor(id)}
+        >
+          <Text
+            style={{ color: option.hexadecimal_color }}
+          >
+            {`${option.name}()`}
+          </Text>
+        </OptionEditorCodeOneLine>
+      );
+    },
+    js_variable: (option: IOption, id: number) => {
+      return (
+        <OptionEditorCodeOneLine
+          key={id}
+          onPress={() => handleDeleteCodeFromEditor(id)}
+        >
+          <NormalText>var </NormalText>
+
+          <Variable
+            keyboardAppearance="dark"
+            maxLength={8}
+            autoCorrect={false}
+            keyboardType="visible-password"
+            onFocus={() => setIsClickingOnVariableName(true)}
+            onEndEditing={() => setIsClickingOnVariableName(false)}
+            style={[
+              (!variableName || isClickingOnVariableName) && {
+                borderBottomWidth: 1,
+                borderColor: '#FFFFFF',
+                minWidth: 40,
+              }
+            ]}
+            onChangeText={setVariableName}
+          >
+            {variableName}
+          </Variable>
+
+          <NormalText> = </NormalText>
+
+          <NormalText>"</NormalText>
+          <Value
+            keyboardAppearance="dark"
+            maxLength={8}
+            autoCorrect={false}
+            keyboardType="visible-password"
+            onFocus={() => setIsClickingOnVariableName(true)}
+            onEndEditing={() => setIsClickingOnVariableName(false)}
+            style={[
+              (!variableName || isClickingOnVariableName) && {
+                borderBottomWidth: 1,
+                borderColor: '#FFFFFF',
+                minWidth: 40,
+              }
+            ]}
+            onChangeText={setVariableValue}
+          >
+            {variableValue}
+          </Value>
+          <NormalText>"</NormalText>
+        </OptionEditorCodeOneLine>
+      );
+    }
+  }
+
   return (
     <>
       <EditorContainer>
         {codeEditor.map((code, index) => (
-          <OptionEditorCode
-            key={index}
-            onPress={() => handleDeleteCodeFromEditor(index)}
-          >
-            <Text
-              style={{ color: code.hexadecimal_color }}
-            >
-              {
-                code.type === 'js_function'
-                  ? `${code.name}()`
-                  : code.name
-              }
-            </Text>
-          </OptionEditorCode>
+          command[code.type](code, index)
         ))}
       </EditorContainer>
+
       <OptionsContainer>
         {options?.map((option, index) => (
           <OptionCode

@@ -28,14 +28,8 @@ import {
 import { Menu } from '../../components/Menu';
 import { Section } from '../../components/Section';
 import { Bash } from '../../components/Bash';
-import { Editor } from '../../components/Editor';
+import { Editor, IOption } from '../../components/Editor';
 import { ActivityStatusModal } from '../../components/ActivityStatusModal';
-
-interface IOption {
-	name: string;
-	type: string;
-	hexadecimal_color: string;
-}
 
 type Activity = {
 	id: string;
@@ -61,21 +55,21 @@ export function Activity() {
 		description: 'Nesse desafio você vai desenhar a bandeira da França com alguns comandos.',
 		type: 'block',
 		default_code: [
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-			}
+			// {
+			// 	name: "drawBlueBox",
+			// 	type: "js_function",
+			// 	hexadecimal_color: "#0055A4",
+			// },
+			// {
+			// 	name: "drawWhiteBox",
+			// 	type: "js_function",
+			// 	hexadecimal_color: "#FFFFFF",
+			// },
+			// {
+			// 	name: "drawRedBox",
+			// 	type: "js_function",
+			// 	hexadecimal_color: "#EF4135",
+			// }
 		],
 		answer: [
 			{
@@ -112,7 +106,6 @@ export function Activity() {
 				name: "drawRedBox",
 				type: "js_function",
 				hexadecimal_color: "#EF4135",
-				created_at: new Date()
 			}
 		],
 		is_needed_tests: false,
@@ -145,7 +138,7 @@ export function Activity() {
 			},
 			{
 				name: "variable",
-				type: "command",
+				type: "js_variable",
 				hexadecimal_color: "#E5BF2F",
 			},
 		]
