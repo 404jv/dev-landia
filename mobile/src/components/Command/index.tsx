@@ -1,5 +1,5 @@
-import React from 'react';
-import { View } from "react-native";
+import React, { ReactNode } from 'react';
+import { Text, View } from "react-native";
 import { Activity } from "../../pages/Activity";
 
 interface ICommandProps {
@@ -7,16 +7,17 @@ interface ICommandProps {
 }
 
 interface ICommands {
-  drawBlueBox: Function;
-  drawRedBox: Function;
-  drawWhiteBox: Function;
-  newLine: Function;
+  drawBlueBox: () => ReactNode;
+  drawRedBox: () => ReactNode;
+  drawWhiteBox: () => ReactNode;
+  newLine: () => ReactNode;
+  for: () => ReactNode;
 }
 
 export function Command({ commandName }: ICommandProps) {
 
   const commands: ICommands = {
-    drawBlueBox: function()  {
+    drawBlueBox: () => {
       return (
         <View style={{
           width: 17,
@@ -25,7 +26,7 @@ export function Command({ commandName }: ICommandProps) {
         }}></View>
       );
     },
-    drawRedBox: function()  {
+    drawRedBox: () => {
       return (
         <View style={{
           width: 17,
@@ -34,7 +35,7 @@ export function Command({ commandName }: ICommandProps) {
         }}></View>
       );
     },
-    drawWhiteBox: function()  {
+    drawWhiteBox: () => {
       return (
         <View style={{
           width: 17,
@@ -43,20 +44,27 @@ export function Command({ commandName }: ICommandProps) {
         }}></View>
       );
     },
-    newLine: function()  {
+    newLine: () => {
       return (
         <View style={{
           width: 995,
         }}></View>
       );
+    },
+    for: () => {
+      return (
+        <View>
+          <Text>For</Text>
+        </View>
+      );
     }
   }
 
-  const handleCommand: Function = commands[commandName];
+  const command = commands[commandName]();
 
   return (
     <View>
-      { handleCommand ? handleCommand() : <View></View> }
+      {command ? command : <View></View>}
     </View>
   );
 }

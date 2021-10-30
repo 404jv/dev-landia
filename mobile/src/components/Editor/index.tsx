@@ -7,7 +7,6 @@ interface IOption {
   name: string;
   type: string;
   hexadecimal_color: string;
-  created_at: Date;
 }
 
 interface IEditorProps {

@@ -35,7 +35,6 @@ interface IOption {
 	name: string;
 	type: string;
 	hexadecimal_color: string;
-	created_at: Date;
 }
 
 type Activity = {
@@ -46,7 +45,6 @@ type Activity = {
 	default_code: IOption[];
 	answer: IOption[];
 	is_needed_tests: boolean;
-	created_at: Date;
 	tips: string[];
 	options: IOption[];
 }
@@ -67,19 +65,16 @@ export function Activity() {
 				name: "drawBlueBox",
 				type: "js_function",
 				hexadecimal_color: "#0055A4",
-				created_at: new Date()
 			},
 			{
 				name: "drawWhiteBox",
 				type: "js_function",
 				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
 			},
 			{
 				name: "drawRedBox",
 				type: "js_function",
 				hexadecimal_color: "#EF4135",
-				created_at: new Date()
 			}
 		],
 		answer: [
@@ -87,37 +82,31 @@ export function Activity() {
 				name: "drawBlueBox",
 				type: "js_function",
 				hexadecimal_color: "#0055A4",
-				created_at: new Date()
 			},
 			{
 				name: "drawWhiteBox",
 				type: "js_function",
 				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
 			},
 			{
 				name: "drawRedBox",
 				type: "js_function",
 				hexadecimal_color: "#EF4135",
-				created_at: new Date()
 			},
 			{
 				name: "newLine",
 				type: "js_function",
 				hexadecimal_color: "#169E96",
-				created_at: new Date()
 			},
 			{
 				name: "drawBlueBox",
 				type: "js_function",
 				hexadecimal_color: "#0055A4",
-				created_at: new Date()
 			},
 			{
 				name: "drawWhiteBox",
 				type: "js_function",
 				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
 			},
 			{
 				name: "drawRedBox",
@@ -127,7 +116,6 @@ export function Activity() {
 			}
 		],
 		is_needed_tests: false,
-		created_at: new Date(),
 		tips: [
 			"Use o drawBlueBox para desenhar a caixa azul.",
 			"Use o drawRedBox para desenhar a caixa vermelha.",
@@ -139,244 +127,34 @@ export function Activity() {
 				name: "drawBlueBox",
 				type: "js_function",
 				hexadecimal_color: "#0055A4",
-				created_at: new Date()
 			},
 			{
 				name: "drawWhiteBox",
 				type: "js_function",
 				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
 			},
 			{
 				name: "drawRedBox",
 				type: "js_function",
 				hexadecimal_color: "#EF4135",
-				created_at: new Date()
 			},
 			{
 				name: "newLine",
 				type: "js_function",
 				hexadecimal_color: "#169E96",
-				created_at: new Date()
+			},
+			{
+				name: "variable",
+				type: "command",
+				hexadecimal_color: "#E5BF2F",
 			},
 		]
 	}
-
-	const activity2: Activity = {
-		id: String(new Date().getTime()),
-		title: 'atividade',
-		description: 'Nesse desafio você vai desenhar a bandeira da França com alguns comandos. #2',
-		type: 'block',
-		default_code: [
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-				created_at: new Date()
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			}
-		],
-		answer: [
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-				created_at: new Date()
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			},
-			{
-				name: "newLine",
-				type: "js_function",
-				hexadecimal_color: "#169E96",
-				created_at: new Date()
-			},
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-				created_at: new Date()
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			}
-		],
-		is_needed_tests: false,
-		created_at: new Date(),
-		tips: [
-			"Use o drawBlueBox para desenhar a caixa azul.",
-			"Use o drawRedBox para desenhar a caixa vermelha.",
-			"Use o drawWhiteBox para desenhar a caixa branca.",
-			"Use o newLine para criar uma nova linha",
-		],
-		options: [
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-				created_at: new Date()
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			},
-			{
-				name: "newLine",
-				type: "js_function",
-				hexadecimal_color: "#169E96",
-				created_at: new Date()
-			},
-		]
-	}
-
-	const activity3: Activity = {
-		id: String(new Date().getTime()),
-		title: 'atividade',
-		description: 'Nesse desafio você vai desenhar a bandeira da França com alguns comandos. #3',
-		type: 'block',
-		default_code: [
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-				created_at: new Date()
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			}
-		],
-		answer: [
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-				created_at: new Date()
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			},
-			{
-				name: "newLine",
-				type: "js_function",
-				hexadecimal_color: "#169E96",
-				created_at: new Date()
-			},
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-				created_at: new Date()
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			}
-		],
-		is_needed_tests: false,
-		created_at: new Date(),
-		tips: [
-			"Use o drawBlueBox para desenhar a caixa azul.",
-			"Use o drawRedBox para desenhar a caixa vermelha.",
-			"Use o drawWhiteBox para desenhar a caixa branca.",
-			"Use o newLine para criar uma nova linha",
-		],
-		options: [
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-				created_at: new Date()
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-				created_at: new Date()
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-				created_at: new Date()
-			},
-			{
-				name: "newLine",
-				type: "js_function",
-				hexadecimal_color: "#169E96",
-				created_at: new Date()
-			},
-		]
-	}
-
 
 	const [activities, setActivities] = useState<Activity[]>([
 		activity,
-		activity2,
-		activity3,
+		activity,
+		activity,
 		activity,
 		activity,
 	]);

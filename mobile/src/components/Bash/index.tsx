@@ -7,7 +7,6 @@ interface IOption {
   name: string,
   type: string,
   hexadecimal_color: string,
-  created_at: Date
 }
 
 interface IBashProps {
@@ -19,7 +18,7 @@ export function Bash({ options }: IBashProps) {
   return (
     <BashContainer>
       <Header>
-    	<Circle style={{ marginLeft: 16, backgroundColor: '#FF5A54' }} />
+        <Circle style={{ marginLeft: 16, backgroundColor: '#FF5A54' }} />
         <Circle style={{ backgroundColor: '#E5BF2F' }} />
         <Circle style={{ backgroundColor: '#51C22D' }} />
       </Header>

@@ -23,16 +23,15 @@ export default function App() {
     Roboto_700Bold
   });
 
-  if(!fontsLoaded) {
-      return <AppLoading />
+  if (!fontsLoaded) {
+    return <AppLoading />
   }
 
   return (
 
     <ThemeProvider theme={theme}>
-      <StatusBar  barStyle={'light-content'} backgroundColor="#22282B"/>
+      <StatusBar barStyle={'light-content'} backgroundColor="#22282B" />
       <Activity />
     </ThemeProvider>
-  
   );
 }
