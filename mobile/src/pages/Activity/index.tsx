@@ -141,12 +141,7 @@ export function Activity() {
 				name: "newLine",
 				type: "js_function",
 				hexadecimal_color: "#169E96",
-			},
-			{
-				name: "variable",
-				type: "command",
-				hexadecimal_color: "#E5BF2F",
-			},
+			}
 		]
 	}
 
@@ -299,7 +294,7 @@ export function Activity() {
 							</ModalHeader>
 
 							<ModalContentText>
-								Clicando no botão confimar vai ser mostrado a solução correta.
+								Clicando no botão confirmar vai ser mostrado a solução correta.
 								A atividade vai para o final da fila então não esqueça de memoriza-la
 							</ModalContentText>
 
