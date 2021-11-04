@@ -14,6 +14,7 @@ import theme from './src/Global/styles/theme';
 import { StatusBar } from 'react-native';
 
 import { Activity } from './src/pages/Activity/index';
+import { ClassArticle } from './src/pages/ClassArticle';
 
 export default function App() {
 
@@ -31,7 +32,7 @@ export default function App() {
 
     <ThemeProvider theme={theme}>
       <StatusBar barStyle={'light-content'} backgroundColor="#22282B" />
-      <Activity />
+      <ClassArticle />
     </ThemeProvider>
   );
 }
