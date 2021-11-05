@@ -8,7 +8,7 @@ import { ScrollView } from 'react-native';
 import {
 	Description,
 	Title,
-	SectionStyles,
+	Section,
 	Container,
 	Text,
 	SectionButtons,
@@ -26,7 +26,6 @@ import {
 } from './styles';
 
 import { Menu } from '../../components/Menu';
-import { Section } from '../../components/Section';
 import { Bash } from '../../components/Bash';
 import { Editor } from '../../components/Editor';
 import { ActivityStatusModal } from '../../components/ActivityStatusModal';
@@ -229,30 +228,31 @@ export function Activity() {
 			<Menu progressCount={progressBarCount} totalActivities={5} />
 
 			<ScrollView>
-				<Section title="Bora Codar!">
+				<Section>
+					<Title>Bora codar</Title>
 					<Text>{currentActivity.description}</Text>
 				</Section>
 
-				<SectionStyles>
+				<Section>
 					<Title>Dicas</Title>
 					<Description>
 						{currentActivity.tips.map((tip, index) => (
 							<Text key={index}>{`▪︎ ${tip}`}</Text>
 						))}
 					</Description>
-				</SectionStyles>
+				</Section>
 
-				<SectionStyles>
+				<Section>
 					<Title>Objetivo do código</Title>
 					<Bash options={currentActivity.answer} />
-				</SectionStyles>
+				</Section>
 
-				<SectionStyles>
+				<Section>
 					<Title>Resultado atual</Title>
 					<Bash options={compileCode} />
-				</SectionStyles>
+				</Section>
 
-				<SectionStyles>
+				<Section>
 					<Title>Seu código</Title>
 
 					<Editor
@@ -260,7 +260,7 @@ export function Activity() {
 						codeEditor={codeEditor}
 						setCodeEditor={setCodeEditor}
 					/>
-				</SectionStyles>
+				</Section>
 
 				<SectionButtons>
 					<SeeAnswerButton onPress={showWarningToShowAnswerModal}>

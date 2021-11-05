@@ -14,7 +14,7 @@ export const Text = styled.Text`
     font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
-export const SectionStyles = styled.View`
+export const Section = styled.View`
     margin-left: 12px;
     margin-right: 12px;
     margin-bottom: 32px;
