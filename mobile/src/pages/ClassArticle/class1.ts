@@ -1,4 +1,7 @@
 export const class1 = `
+
+## 🕵️‍♀️ O que são?
+
 As funções têm como objetivo separar uma determinada parte do código e dar um nome para ela e sempre quando você chamar esse nome, aquela parte do código vai ser executada.
 
 ## ❓ Por que usar?

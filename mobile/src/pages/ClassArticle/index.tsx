@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import Markdown from 'react-native-markdown-display';
+import { Header } from '../../components/Header';
 import theme from '../../Global/styles/theme';
 import { class1 } from './class1';
 
@@ -9,7 +10,7 @@ import { ContainerScrollView, Content, Title } from './styles';
 export function ClassArticle() {
   return (
     <ContainerScrollView>
-      <Title>Função em C</Title>
+      <Header title="Função em C" />
       <Content>
         <Markdown style={styles}>{class1}</Markdown>
       </Content>
