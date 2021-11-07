@@ -49,7 +49,7 @@ export function Menu({ totalActivities, progressCount }: IMenuProps) {
 
 	return (
 		<MenuBar>
-			<TouchableOpacity>
+			<TouchableOpacity activeOpacity={0.7}>
 				<MaterialIcons name="close" size={50} color="#37464F" />
 			</TouchableOpacity>
 
