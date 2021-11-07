@@ -11,12 +11,14 @@ import {
 import { ThemeProvider } from 'styled-components'
 import theme from './src/Global/styles/theme';
 
-import { StatusBar } from 'react-native';
+import { StatusBar, LogBox } from 'react-native';
 
 import { Activity } from './src/pages/Activity/index';
 import { ClassArticle } from './src/pages/ClassArticle';
 
 export default function App() {
+
+  LogBox.ignoreLogs(['Warning: Failed prop type: Invalid props.style key `textDecoration` supplied to `Text`.']);
 
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
@@ -31,7 +33,7 @@ export default function App() {
   return (
 
     <ThemeProvider theme={theme}>
-      <StatusBar barStyle={'light-content'} backgroundColor="#22282B" />
+      <StatusBar barStyle={'light-content'} backgroundColor={theme.colors.background} />
       <ClassArticle />
     </ThemeProvider>
   );
