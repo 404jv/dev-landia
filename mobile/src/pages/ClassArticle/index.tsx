@@ -1,34 +1,53 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
-import Markdown from 'react-native-markdown-display';
+import { StyleSheet } from 'react-native';
+import Markdown, { ASTNode } from 'react-native-markdown-display';
 import { Header } from '../../components/Header';
 import theme from '../../Global/styles/theme';
-import { class1 } from './class1';
+import { markdownText } from './class1';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-import { ContainerScrollView, Content } from './styles';
+import { FinishButton, TextButton, ContainerScrollView, Content } from './styles';
+
+const rules = {
+  fence: (node: ASTNode) => {
+    return (
+      <SyntaxHighlighter
+        key={node.key}
+        language="javascript"
+        style={dracula}
+        highlighter={"prism"}
+      >{node.content}</SyntaxHighlighter>
+    );
+  }
+}
 
 export function ClassArticle() {
+
+  const class1 = {
+    map_id: '123456',
+    title: 'Função em C',
+    type: 'class',
+    max_level: 1,
+    markdown_text: markdownText
+  }
+
+  function handleFinishClass() {
+    console.log('🎉 Aula Finalizada!');
+  }
+
   return (
     <ContainerScrollView>
-      <Header title="Função em C" />
+      <Header title={class1.title} />
       <Content>
         <Markdown
-          rules={{
-            fence: (node) => {
-              return (
-                <SyntaxHighlighter
-                  key={node.key}
-                  language="javascript"
-                  style={dracula}
-                  highlighter={"prism"}
-                >{node.content}</SyntaxHighlighter>
-              );
-            }
-          }}
+          rules={rules}
           style={styles}
-        >{class1}</Markdown>
+        >{class1.markdown_text}</Markdown>
+
+        <FinishButton onPress={handleFinishClass} activeOpacity={0.7}>
+          <TextButton>FINALIZAR</TextButton>
+        </FinishButton>
       </Content>
     </ContainerScrollView>
   );
