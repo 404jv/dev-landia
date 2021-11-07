@@ -4,6 +4,8 @@ import Markdown from 'react-native-markdown-display';
 import { Header } from '../../components/Header';
 import theme from '../../Global/styles/theme';
 import { class1 } from './class1';
+import SyntaxHighlighter from 'react-native-syntax-highlighter';
+import { atomDark, dracula, prism } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { ContainerScrollView, Content, Title } from './styles';
 
@@ -12,7 +14,21 @@ export function ClassArticle() {
     <ContainerScrollView>
       <Header title="Função em C" />
       <Content>
-        <Markdown style={styles}>{class1}</Markdown>
+        <Markdown
+          rules={{
+            fence: (node) => {
+              return (
+                <SyntaxHighlighter
+                  key={node.key}
+                  language="javascript"
+                  style={dracula}
+                  highlighter={"prism"}
+                >{node.content}</SyntaxHighlighter>
+              );
+            }
+          }}
+          style={styles}
+        >{class1}</Markdown>
       </Content>
     </ContainerScrollView>
   );
@@ -41,12 +57,12 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     fontFamily: theme.fonts.regular,
   },
-  fence: {
-    backgroundColor: theme.colors.secondary,
-    borderColor: theme.colors.border,
-    color: '#45A7AD',
-    fontFamily: 'monospace',
-    marginBottom: 8,
-    fontSize: 12,
-  }
+  // fence: {
+  //   backgroundColor: theme.colors.secondary,
+  //   borderColor: theme.colors.border,
+  //   color: '#45A7AD',
+  //   fontFamily: 'monospace',
+  //   marginBottom: 8,
+  //   fontSize: 12,
+  // }
 });
