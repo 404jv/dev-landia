@@ -8,10 +8,3 @@ export const ContainerScrollView = styled.ScrollView`
 export const Content = styled.ScrollView`
   margin-bottom: 32px;
 `
-
-export const Title = styled.Text`
-  font-size: 32px;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.primary};
-  text-align: center;
-`;

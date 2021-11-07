@@ -5,9 +5,9 @@ import { Header } from '../../components/Header';
 import theme from '../../Global/styles/theme';
 import { class1 } from './class1';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
-import { atomDark, dracula, prism } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-import { ContainerScrollView, Content, Title } from './styles';
+import { ContainerScrollView, Content } from './styles';
 
 export function ClassArticle() {
   return (
@@ -56,13 +56,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 20,
     fontFamily: theme.fonts.regular,
-  },
-  // fence: {
-  //   backgroundColor: theme.colors.secondary,
-  //   borderColor: theme.colors.border,
-  //   color: '#45A7AD',
-  //   fontFamily: 'monospace',
-  //   marginBottom: 8,
-  //   fontSize: 12,
-  // }
+  }
 });
