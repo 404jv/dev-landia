@@ -1,7 +1,15 @@
 import React from 'react';
 import { Command } from '../Command';
 
-import { Arrow, BashContainer, BashContent, Body, Circle, Header } from './styles';
+import {
+  Arrow,
+  BashContainer,
+  BashContent,
+  BashText,
+  Body,
+  Circle,
+  Header
+} from './styles';
 
 interface IOption {
   name: string,
@@ -10,10 +18,11 @@ interface IOption {
 }
 
 interface IBashProps {
-  options: IOption[]
+  options?: IOption[]
+  text?: string
 }
 
-export function Bash({ options }: IBashProps) {
+export function Bash({ options, text }: IBashProps) {
 
   return (
     <BashContainer>
@@ -24,12 +33,14 @@ export function Bash({ options }: IBashProps) {
       </Header>
 
       <Body>
-        <Arrow> {'>'} </Arrow>
+        <Arrow> {'$'} </Arrow>
 
         <BashContent>
-          {options.map((line, index) => (
-            <Command key={index} commandName={line.name} />
-          ))}
+          {options ?
+            options.map((line, index) => (
+              <Command key={index} commandName={line.name} />
+            )) : <BashText>{text}</BashText>
+          }
         </BashContent>
       </Body>
     </BashContainer>
