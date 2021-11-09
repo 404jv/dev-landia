@@ -8,16 +8,22 @@ import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import { FinishButton, TextButton, ContainerScrollView, Content } from './styles';
+import { Bash } from '../../components/Bash';
 
 const rules = {
   fence: (node: ASTNode) => {
     return (
-      <SyntaxHighlighter
-        key={node.key}
-        language="javascript"
-        style={dracula}
-        highlighter={"prism"}
-      >{node.content}</SyntaxHighlighter>
+      node.markup !== '~~~' ?
+        <SyntaxHighlighter
+          key={node.key}
+          language="javascript"
+          style={dracula}
+          highlighter={"prism"}
+        >{node.content}</SyntaxHighlighter> :
+        <Bash
+          key={node.key}
+          text={node.content}
+        />
     );
   }
 }
