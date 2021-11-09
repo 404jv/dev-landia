@@ -1176,6 +1176,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
+"@expo-google-fonts/jetbrains-mono@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/jetbrains-mono/-/jetbrains-mono-0.2.0.tgz#199242c509cd3ff60382f020409aa8eb8016ed40"
+  integrity sha512-OxCvUFG+6ZvdnRynSi2Pla2dS2tEw+f9CTvXRC7KcO8hfv78sG2htWU+riPjF02lOEEZUqd93MRl6mYHmOewlQ==
+
 "@expo-google-fonts/roboto@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@expo-google-fonts/roboto/-/roboto-0.2.0.tgz#00c5904eaa80d90b5b7b11b86c8d4a72a28e922e"
