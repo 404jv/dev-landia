@@ -8,6 +8,11 @@ import {
   Roboto_700Bold
 } from '@expo-google-fonts/roboto';
 
+import {
+  JetBrainsMono_500Medium,
+  JetBrainsMono_400Regular,
+} from '@expo-google-fonts/jetbrains-mono';
+
 import { ThemeProvider } from 'styled-components'
 import theme from './src/Global/styles/theme';
 
@@ -23,7 +28,9 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
     Roboto_500Medium,
-    Roboto_700Bold
+    Roboto_700Bold,
+    JetBrainsMono_500Medium,
+    JetBrainsMono_400Regular
   });
 
   if (!fontsLoaded) {

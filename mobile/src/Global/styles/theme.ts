@@ -13,5 +13,7 @@ export default {
         regular: 'Roboto_400Regular',
         medium: 'Roboto_500Medium',
         bold: 'Roboto_700Bold',
+        bash_regular: 'JetBrainsMono_400Regular',
+        bash_medium: 'JetBrainsMono_500Medium',
     }
 }
