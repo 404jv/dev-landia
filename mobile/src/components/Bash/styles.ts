@@ -5,12 +5,6 @@ export const BashContainer = styled.View`
 	border: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
-export const BashContent = styled.View`
-  flex-direction: row;
-  margin-left: 16px;
-  flex-wrap: wrap;
-`;
-
 export const Circle = styled.View`
 	margin-left: 4px;
 	margin-top: 3px;
@@ -35,7 +29,21 @@ export const Body = styled.View`
 `;
 
 export const Arrow = styled.Text`
-	margin-left: 4px;
 	color: #008000;
-  font-size: 24px;
+	margin-top: 4px;
+	margin-bottom: 2px;
+  font-size: 16px;
+	font-family: ${({ theme }) => theme.fonts.bash_medium};
+`;
+
+export const BashContent = styled.View`
+  flex-direction: row;
+  margin-left: 16px;
+  flex-wrap: wrap;
+`;
+
+export const BashText = styled.Text`
+	color: #FFF;
+  font-size: 16px;
+	font-family: ${({ theme }) => theme.fonts.bash_regular};
 `;
