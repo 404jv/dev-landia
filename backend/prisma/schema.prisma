@@ -30,5 +30,21 @@ model Map {
   description String   @db.VarChar(255)
   createdAt   DateTime @default(now())
 
+  phases Phase[]
+
   @@map("maps")
+}
+
+model Phase {
+  id            String   @id
+  title         String   @db.VarChar(30)
+  type          String   @db.VarChar(255)
+  markdown_text String?  @db.Text
+  max_level     Int      @default(1)
+  createdAt     DateTime @default(now())
+
+  Map   Map?   @relation(fields: [mapId], references: [id])
+  mapId String
+
+  @@map("phases")
 }
