@@ -49,7 +49,8 @@ model Phase {
   Map   Map?   @relation(fields: [mapId], references: [id])
   mapId String
 
-  UserOnPhases UserOnPhases[]
+  UserOnPhases    UserOnPhases[]
+  PhaseOnActivity PhaseOnActivity[]
   @@map("phases")
 }
 
@@ -84,5 +85,16 @@ model Activity {
   isNeededTest Boolean  @default(false)
   createdAt    DateTime @default(now())
 
+  PhaseOnActivity PhaseOnActivity[]
   @@map("activities")
+}
+
+model PhaseOnActivity {
+  phase   Phase  @relation(fields: [phaseId], references: [id])
+  phaseId String
+  activity   Activity @relation(fields: [activityId], references: [id])
+  activityId String
+
+  @@id([phaseId, activityId])
+  @@map("phase_activity")
 }
