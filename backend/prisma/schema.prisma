@@ -22,6 +22,7 @@ model User {
   updatedAt   DateTime @updatedAt
 
   UserOnPhases UserOnPhases[]
+  UserOnMap    UserOnMap[]
   @@map("users")
 }
 
@@ -33,6 +34,7 @@ model Map {
 
   phases Phase[]
 
+  UserOnMap UserOnMap[]
   @@map("maps")
 }
 
@@ -61,4 +63,16 @@ model UserOnPhases {
 
   @@id([userId, phaseId])
   @@map("user_phase")
+}
+
+model UserOnMap {
+  isDone    Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  map       Map      @relation(fields: [mapId], references: [id])
+  mapId     String
+  createdAt DateTime @default(now())
+
+  @@id([userId, mapId])
+  @@map("user_map")
 }
