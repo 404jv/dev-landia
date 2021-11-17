@@ -86,15 +86,26 @@ model Activity {
   createdAt    DateTime @default(now())
 
   PhaseOnActivity PhaseOnActivity[]
+  Tip             Tip[]
   @@map("activities")
 }
 
 model PhaseOnActivity {
-  phase   Phase  @relation(fields: [phaseId], references: [id])
-  phaseId String
+  phase      Phase    @relation(fields: [phaseId], references: [id])
+  phaseId    String
   activity   Activity @relation(fields: [activityId], references: [id])
   activityId String
 
   @@id([phaseId, activityId])
   @@map("phase_activity")
+}
+
+model Tip {
+  id         String   @id
+  name       String
+  activity   Activity @relation(fields: [activityId], references: [id])
+  activityId String
+  createdAt  DateTime @default(now())
+
+  @@map("tips")
 }
