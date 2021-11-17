@@ -21,6 +21,7 @@ model User {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  UserOnPhases UserOnPhases[]
   @@map("users")
 }
 
@@ -46,5 +47,18 @@ model Phase {
   Map   Map?   @relation(fields: [mapId], references: [id])
   mapId String
 
+  UserOnPhases UserOnPhases[]
   @@map("phases")
+}
+
+model UserOnPhases {
+  currentLevel Int      @default(0)
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String
+  phase        Phase    @relation(fields: [phaseId], references: [id])
+  phaseId      String
+  createdAt    DateTime @default(now())
+
+  @@id([userId, phaseId])
+  @@map("user_phase")
 }
