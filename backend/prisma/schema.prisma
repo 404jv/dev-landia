@@ -88,6 +88,7 @@ model Activity {
   PhaseOnActivity PhaseOnActivity[]
   Tip             Tip[]
   Option          Option[]
+  activityAnswer  ActivityAnswer[]
   @@map("activities")
 }
 
@@ -112,13 +113,25 @@ model Tip {
 }
 
 model Option {
-  id               String   @id
+  id               String           @id
   name             String
   type             String
   hexadecimalColor String
-  activity         Activity @relation(fields: [activityId], references: [id])
+  activity         Activity         @relation(fields: [activityId], references: [id])
   activityId       String
-  createdAt        DateTime @default(now())
+  createdAt        DateTime         @default(now())
+  activityAnswer   ActivityAnswer[]
 
   @@map("options")
+}
+
+model ActivityAnswer {
+  order      Int
+  activity   Activity @relation(fields: [activityId], references: [id])
+  activityId String
+  option     Option   @relation(fields: [optionId], references: [id])
+  optionId   String
+
+  @@id([activityId, optionId])
+  @@map("activity_answer")
 }
