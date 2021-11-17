@@ -87,6 +87,7 @@ model Activity {
 
   PhaseOnActivity PhaseOnActivity[]
   Tip             Tip[]
+  Option          Option[]
   @@map("activities")
 }
 
@@ -108,4 +109,16 @@ model Tip {
   createdAt  DateTime @default(now())
 
   @@map("tips")
+}
+
+model Option {
+  id               String   @id
+  name             String
+  type             String
+  hexadecimalColor String
+  activity         Activity @relation(fields: [activityId], references: [id])
+  activityId       String
+  createdAt        DateTime @default(now())
+
+  @@map("options")
 }
