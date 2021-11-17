@@ -76,3 +76,13 @@ model UserOnMap {
   @@id([userId, mapId])
   @@map("user_map")
 }
+
+model Activity {
+  id           String   @id
+  title        String   @db.VarChar(30)
+  type         String   @db.VarChar(255)
+  isNeededTest Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  @@map("activities")
+}
