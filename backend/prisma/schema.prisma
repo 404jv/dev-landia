@@ -21,8 +21,8 @@ model User {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  UserOnPhases UserOnPhases[]
-  UserOnMap    UserOnMap[]
+  userPhases UserOnPhase[]
+  userMaps   UserOnMap[]
   @@map("users")
 }
 
@@ -34,7 +34,7 @@ model Map {
 
   phases Phase[]
 
-  UserOnMap UserOnMap[]
+  usersMap UserOnMap[]
   @@map("maps")
 }
 
@@ -49,12 +49,12 @@ model Phase {
   Map   Map?   @relation(fields: [mapId], references: [id])
   mapId String
 
-  UserOnPhases    UserOnPhases[]
-  PhaseOnActivity PhaseOnActivity[]
+  usersPhase      UserOnPhase[]
+  phaseOnActivity PhaseOnActivity[]
   @@map("phases")
 }
 
-model UserOnPhases {
+model UserOnPhase {
   currentLevel Int      @default(0)
   user         User     @relation(fields: [userId], references: [id])
   userId       String
@@ -79,16 +79,17 @@ model UserOnMap {
 }
 
 model Activity {
-  id           String   @id
-  title        String   @db.VarChar(30)
-  type         String   @db.VarChar(255)
-  isNeededTest Boolean  @default(false)
-  createdAt    DateTime @default(now())
+  id                  String                @id
+  title               String                @db.VarChar(30)
+  type                String                @db.VarChar(255)
+  isNeededTest        Boolean               @default(false)
+  createdAt           DateTime              @default(now())
+  phaseOnActivity     PhaseOnActivity[]
+  tips                Tip[]
+  options             Option[]
+  activityAnswer      ActivityAnswer[]
+  activityDefaultCode ActivityDefaultCode[]
 
-  PhaseOnActivity PhaseOnActivity[]
-  Tip             Tip[]
-  Option          Option[]
-  activityAnswer  ActivityAnswer[]
   @@map("activities")
 }
 
@@ -113,14 +114,15 @@ model Tip {
 }
 
 model Option {
-  id               String           @id
-  name             String
-  type             String
-  hexadecimalColor String
-  activity         Activity         @relation(fields: [activityId], references: [id])
-  activityId       String
-  createdAt        DateTime         @default(now())
-  activityAnswer   ActivityAnswer[]
+  id                  String                @id
+  name                String
+  type                String
+  hexadecimalColor    String
+  activity            Activity              @relation(fields: [activityId], references: [id])
+  activityId          String
+  createdAt           DateTime              @default(now())
+  activityAnswer      ActivityAnswer[]
+  activityDefaultCode ActivityDefaultCode[]
 
   @@map("options")
 }
@@ -134,4 +136,15 @@ model ActivityAnswer {
 
   @@id([activityId, optionId])
   @@map("activity_answer")
+}
+
+model ActivityDefaultCode {
+  order      Int
+  activity   Activity @relation(fields: [activityId], references: [id])
+  activityId String
+  option     Option   @relation(fields: [optionId], references: [id])
+  optionId   String
+
+  @@id([activityId, optionId])
+  @@map("activity_default_code")
 }
