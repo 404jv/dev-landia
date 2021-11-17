@@ -9,6 +9,7 @@
 - Não deve ser possível criar uma conta com o mesmo email.
 - Não deve ser possível criar uma conta com o mesmo username.
 - Não deve ser possível criar um password com menos de 8 caracteres.
+- O username não pode ter mais de 30 caracteres.
 
 ## Criação de atividades
 
@@ -41,14 +42,30 @@
 - Não deve ser possível criar uma dica para uma atividade não existente.
 - Uma dica não pode se repetir para a mesma atividade.
 
-## 
+## Criação de Fase
 
 **RF**
+- Deve ser possível criar uma fase
 
 **RN**
+- A fase deve ter apenas um mapa.
+- Se o type for activity o max_level tem que ser no mínimo 3.
+- Se o type for activity a quantidade de atividades associadas deve ser max_level * 5. Pois cada level tem 5 atividades.
+- Se o type for class o max_level deve ser 1.
+- Se o type for class o markdown_text deve ser preenchido.
 
-## 
+## Criação de mapa
 
 **RF**
+- Deve ser possível criar um mapa
 
 **RN**
+- O mapa deve ter no mínimo 1 atividade.
+
+## Listagem do mapa e atividades
+
+**RF**
+- Deve ser possível listar os mapas com as fases
+
+**RN**
+- O usuário tem que estar autenticado
