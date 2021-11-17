@@ -23,3 +23,12 @@ model User {
 
   @@map("users")
 }
+
+model Map {
+  id          String   @id
+  title       String   @db.VarChar(30)
+  description String   @db.VarChar(255)
+  createdAt   DateTime @default(now())
+
+  @@map("maps")
+}
