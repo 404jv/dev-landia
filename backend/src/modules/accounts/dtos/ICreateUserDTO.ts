@@ -5,6 +5,9 @@ interface ICreateUserDTO {
   email: string;
   password: string;
   biography?: string;
+  is_admin?: boolean;
+  total_xp?: number;
+  total_coins?: number;
 }
 
 export { ICreateUserDTO };
