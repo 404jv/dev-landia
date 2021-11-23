@@ -72,9 +72,7 @@
 		"import/no-extraneous-dependencies": [
 			"error",
 			{
-				"devDependencies": [
-					"**/*.spec.ts"
-				]
+				"devDependencies": true
 			}
 		],
 		"prettier/prettier": [
