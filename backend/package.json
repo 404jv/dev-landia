@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --ignore-watch node_modules --respawn --transpile-only src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "test": "NODE_ENV=test && jest --runInBand --detectOpenHandles"
+    "test": "NODE_ENV=test && jest --runInBand --detectOpenHandles",
+    "test:watch": "NODE_ENV=test jest --maxWorkers=1 --watch"
   },
   "dependencies": {
     "@types/uuid": "^8.3.1",
