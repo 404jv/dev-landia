@@ -51,7 +51,7 @@ describe('Create User', () => {
         username: 'lydia',
         biography: 'test1',
       })
-    ).rejects.toEqual(new EmailAlreadyExistsError('user@test.com'));
+    ).rejects.toEqual(new EmailAlreadyExistsError('same_email@test.com'));
   });
 
   it('should not be able to create an account with an duplicated username', async () => {
