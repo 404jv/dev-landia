@@ -19,6 +19,9 @@
         "utils/*"
       ]
     },
+    "types": [
+      "reflect-metadata",
+    ],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
