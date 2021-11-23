@@ -21,6 +21,7 @@
     },
     "types": [
       "reflect-metadata",
+      "jest"
     ],
     "esModuleInterop": true,
     "skipLibCheck": true,
