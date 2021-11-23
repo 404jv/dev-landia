@@ -4,6 +4,7 @@ import express from 'express';
 
 import createConnection from '../typeorm/index';
 import { router } from './routes';
+import '@shared/container';
 
 createConnection().then(() => console.log('📦 Database connected.'));
 

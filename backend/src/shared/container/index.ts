@@ -1,9 +1,9 @@
 import { container } from 'tsyringe';
 
+import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
-import { PrismaUsersRepository } from '@modules/accounts/repositories/prisma/PrismaUsersRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
-  PrismaUsersRepository
+  UsersRepository
 );
