@@ -18,11 +18,11 @@ app.use(express.json());
 app.use(router);
 
 app.use(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (
     error: IUseCaseError,
     _request: Request,
     response: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction
   ) => {
     return response.status(error.statusCode).json({
