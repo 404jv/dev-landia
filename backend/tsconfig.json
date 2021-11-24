@@ -17,6 +17,9 @@
       ],
       "@utils/*": [
         "utils/*"
+      ],
+      "@core/*": [
+        "core/*"
       ]
     },
     "types": [
