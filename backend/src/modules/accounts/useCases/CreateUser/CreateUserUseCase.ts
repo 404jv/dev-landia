@@ -1,6 +1,10 @@
 import { inject, injectable } from 'tsyringe';
 
+import { User } from '@modules/accounts/infra/typeorm/entities/User';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+
+import { EmailAlreadyExistsError } from './errors/EmailAlreadyExistsError';
+import { UsernameAlreadyExistsError } from './errors/UsernameAlreadyExistsError';
 
 interface IRequest {
   name: string;
@@ -12,16 +16,41 @@ interface IRequest {
 
 @injectable()
 class CreateUserUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
+  ) {}
 
-  async execute(): Promise<void> {
-    await this.usersRepository.create({
-      name: 'Jão',
-      email: 'joao@gmail.com',
-      password: '123',
-      username: '404jv',
-      biography: 'Tô voando alto',
+  async execute({
+    email,
+    name,
+    password,
+    username,
+    biography,
+  }: IRequest): Promise<User> {
+    const emailAlreadyRegistered = await this.usersRepository.findByEmail(
+      email
+    );
+    if (emailAlreadyRegistered) {
+      throw new EmailAlreadyExistsError(email);
+    }
+
+    const usernameAlreadyRegistered = await this.usersRepository.findByUsername(
+      username
+    );
+    if (usernameAlreadyRegistered) {
+      throw new UsernameAlreadyExistsError(username);
+    }
+
+    const user = await this.usersRepository.create({
+      email,
+      name,
+      password,
+      username,
+      biography,
     });
+
+    return user;
   }
 }
 
