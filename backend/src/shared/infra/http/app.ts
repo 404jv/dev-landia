@@ -9,6 +9,7 @@ import '@shared/container';
 createConnection().then(() => console.log('📦 Database connected.'));
 
 const app = express();
+app.use(express.json());
 
 app.use(router);
 
