@@ -8,8 +8,9 @@
 **RN**
 - Não deve ser possível criar uma conta com o mesmo email.
 - Não deve ser possível criar uma conta com o mesmo username.
-- Não deve ser possível criar um password com menos de 8 caracteres.
+- Não deve ser possível criar um password com menos de 6 caracteres.
 - O username não pode ter mais de 30 caracteres.
+- O username não pode ter menos de 6 caracteres.
 
 ## Criação de atividades
 
