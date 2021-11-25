@@ -1,3 +1,4 @@
+import { hash } from 'bcrypt';
 import { inject, injectable } from 'tsyringe';
 
 import { User } from '@modules/accounts/infra/typeorm/entities/User';
@@ -31,6 +32,7 @@ class CreateUserUseCase {
     const emailAlreadyRegistered = await this.usersRepository.findByEmail(
       email
     );
+
     if (emailAlreadyRegistered) {
       throw new EmailAlreadyExistsError(email);
     }
@@ -38,14 +40,17 @@ class CreateUserUseCase {
     const usernameAlreadyRegistered = await this.usersRepository.findByUsername(
       username
     );
+
     if (usernameAlreadyRegistered) {
       throw new UsernameAlreadyExistsError(username);
     }
 
+    const passwordHash = await hash(password, 8);
+
     const user = await this.usersRepository.create({
       email,
       name,
-      password,
+      password: passwordHash,
       username,
       biography,
     });
