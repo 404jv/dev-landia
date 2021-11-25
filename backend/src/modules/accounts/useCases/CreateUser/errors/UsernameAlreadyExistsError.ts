@@ -1,10 +1,13 @@
 import { IUseCaseError } from '@core/domain/errors/IUseCaseError';
 
-class UsernameAlreadyExistsError extends Error implements IUseCaseError {
+class UsernameAlreadyExistsError implements IUseCaseError {
   statusCode: number;
+  message: string;
+  name: string;
+  stack?: string;
 
   constructor(username: string) {
-    super(`The username '${username}' is already registered!`);
+    this.message = `The username '${username}' is already registered!`;
     this.name = 'UsernameAlreadyExistsError';
     this.statusCode = 400;
   }
