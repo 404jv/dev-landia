@@ -1,6 +1,5 @@
 import { hash } from 'bcrypt';
 
-import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository';
 import { InMemoryUsersRepository } from '@modules/accounts/repositories/in-memory/InMemoryUsersRepository';
 
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
