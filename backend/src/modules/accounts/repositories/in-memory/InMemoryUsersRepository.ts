@@ -40,6 +40,10 @@ class InMemoryUsersRepository implements IUsersRepository {
   async findByUsername(username: string): Promise<User> {
     return this.repository.find((user) => user.username === username);
   }
+
+  async findById(id: string): Promise<User> {
+    return this.repository.find((user) => user.id === id);
+  }
 }
 
 export { InMemoryUsersRepository };
