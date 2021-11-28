@@ -1,6 +1,6 @@
-import { IUseCaseError } from '@core/domain/errors/IUseCaseError';
+import { IAppError } from '@core/domain/errors/IAppError';
 
-export class InvalidEmailOrPassword implements IUseCaseError {
+export class InvalidEmailOrPassword implements IAppError {
   message: string;
   statusCode: number;
   name: string;

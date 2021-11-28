@@ -1,6 +1,6 @@
-import { IUseCaseError } from '@core/domain/errors/IUseCaseError';
+import { IAppError } from '@core/domain/errors/IAppError';
 
-class UsernameAlreadyExistsError implements IUseCaseError {
+class UsernameAlreadyExistsError implements IAppError {
   statusCode: number;
   message: string;
   name: string;
