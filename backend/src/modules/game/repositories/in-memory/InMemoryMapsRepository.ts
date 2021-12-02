@@ -1,5 +1,5 @@
-import { ICreateMapDTO } from '@modules/maps/dtos/ICreateMapDTO';
-import { Map } from '@modules/maps/infra/typeorm/entities/Map';
+import { ICreateMapDTO } from '@modules/game/dtos/ICreateMapDTO';
+import { Map } from '@modules/game/infra/typeorm/entities/Map';
 
 import { IMapsRepository } from '../IMapsRepository';
 

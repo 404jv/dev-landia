@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Map } from '@modules/maps/infra/typeorm/entities/Map';
-import { IMapsRepository } from '@modules/maps/repositories/IMapsRepository';
+import { Map } from '@modules/game/infra/typeorm/entities/Map';
+import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
 
 interface IRequest {
   title: string;

@@ -2,8 +2,8 @@ import { container } from 'tsyringe';
 
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
-import { MapsRepository } from '@modules/maps/infra/typeorm/repositories/MapsRepository';
-import { IMapsRepository } from '@modules/maps/repositories/IMapsRepository';
+import { MapsRepository } from '@modules/game/infra/typeorm/repositories/MapsRepository';
+import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
