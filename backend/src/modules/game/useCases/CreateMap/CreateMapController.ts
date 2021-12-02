@@ -14,7 +14,7 @@ class CreateMapController {
       title,
     });
 
-    return response.sendStatus(200);
+    return response.sendStatus(201);
   }
 }
 
