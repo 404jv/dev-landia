@@ -25,7 +25,7 @@ app.use(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction
   ) => {
-    return response.status(error.statusCode).json({
+    return response.status(error.statusCode || 500).json({
       message: error.message,
     });
   }
