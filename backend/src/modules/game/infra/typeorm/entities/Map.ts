@@ -1,5 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+
+import { Phase } from './Phase';
 
 @Entity('maps')
 class Map {
@@ -11,6 +19,9 @@ class Map {
 
   @Column()
   description: string;
+
+  @OneToMany(() => Phase, (phase) => phase.map)
+  phases: Phase[];
 
   @CreateDateColumn()
   created_at: Date;
