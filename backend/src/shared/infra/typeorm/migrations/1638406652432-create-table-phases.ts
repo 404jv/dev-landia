@@ -22,10 +22,12 @@ export class createTablePhases1638406652432 implements MigrationInterface {
           {
             name: 'type',
             type: 'varchar',
+            enum: ['theory', 'practice'],
           },
           {
             name: 'markdown_text',
             type: 'text',
+            isNullable: true,
           },
           {
             name: 'max_level',
