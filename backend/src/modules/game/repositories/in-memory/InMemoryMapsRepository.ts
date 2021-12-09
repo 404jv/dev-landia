@@ -13,6 +13,7 @@ class InMemoryMapsRepository implements IMapsRepository {
       description,
       title,
     });
+    this.repository.push(map);
 
     return map;
   }
