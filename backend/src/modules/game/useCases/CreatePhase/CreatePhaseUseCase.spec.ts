@@ -4,6 +4,7 @@ import { InMemoryPhasesRepository } from '@modules/game/repositories/in-memory/I
 
 import { CreatePhaseUseCase } from './CreatePhaseUseCase';
 import { InvalidMaxLevelError } from './errors/InvalidMaxLevelError';
+import { MapNotFoundError } from './errors/MapNotFoundError';
 
 let inMemoryPhasesRepository: InMemoryPhasesRepository;
 let inMemoryMapsRepository: InMemoryMapsRepository;
@@ -25,8 +26,13 @@ describe('Create Phase', () => {
   });
 
   it('should be able to create a practice phase', async () => {
+    const map = await inMemoryMapsRepository.create({
+      title: 'Title test',
+      description: 'Description Test',
+    });
+
     const phase: ICreatePhaseDTO = {
-      map_id: '123456',
+      map_id: map.id,
       max_level: 3,
       title: 'Fase prática test',
       type: enType.PRACTICE,
@@ -42,8 +48,13 @@ describe('Create Phase', () => {
   });
 
   it('should be able to create a theory phase', async () => {
+    const map = await inMemoryMapsRepository.create({
+      title: 'Title test',
+      description: 'Description Test',
+    });
+
     const phase: ICreatePhaseDTO = {
-      map_id: '123456',
+      map_id: map.id,
       max_level: 1,
       title: 'Fase teórica fase',
       type: enType.THEORY,
@@ -60,8 +71,13 @@ describe('Create Phase', () => {
   });
 
   it('should not be able to create a practice phase with a max_level less than 3', async () => {
+    const map = await inMemoryMapsRepository.create({
+      title: 'Title test',
+      description: 'Description Test',
+    });
+
     const phase: ICreatePhaseDTO = {
-      map_id: '123456',
+      map_id: map.id,
       max_level: 2,
       title: 'Fase prática test',
       type: enType.PRACTICE,
@@ -73,8 +89,13 @@ describe('Create Phase', () => {
   });
 
   it('should not be able to create a theory phase with a max_level different to 1', async () => {
+    const map = await inMemoryMapsRepository.create({
+      title: 'Title test',
+      description: 'Description Test',
+    });
+
     const phase: ICreatePhaseDTO = {
-      map_id: '123456',
+      map_id: map.id,
       max_level: 5,
       title: 'Fase teórica test',
       type: enType.THEORY,
@@ -82,6 +103,19 @@ describe('Create Phase', () => {
 
     await expect(createPhaseUseCase.execute(phase)).rejects.toEqual(
       new InvalidMaxLevelError()
+    );
+  });
+
+  it('should not be able to create a phase with a non-existent map', async () => {
+    const inCorrectPhase: ICreatePhaseDTO = {
+      map_id: 'non-existent-id',
+      max_level: 5,
+      title: 'Fase test',
+      type: enType.PRACTICE,
+    };
+
+    await expect(createPhaseUseCase.execute(inCorrectPhase)).rejects.toEqual(
+      new MapNotFoundError()
     );
   });
 });

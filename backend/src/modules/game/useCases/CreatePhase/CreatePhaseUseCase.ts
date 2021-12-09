@@ -1,9 +1,11 @@
 import { inject, injectable } from 'tsyringe';
 
 import { ICreatePhaseDTO } from '@modules/game/dtos/ICreatePhaseDTO';
+import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
 import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
 
 import { InvalidMaxLevelError } from './errors/InvalidMaxLevelError';
+import { MapNotFoundError } from './errors/MapNotFoundError';
 
 enum enType {
   THEORY = 'theory',
@@ -14,7 +16,9 @@ enum enType {
 class CreatePhaseUseCase {
   constructor(
     @inject('PhasesRepository')
-    private phasesRepository: IPhasesRepository
+    private phasesRepository: IPhasesRepository,
+    @inject('MapsRepository')
+    private mapsRepository: IMapsRepository
   ) {}
 
   async execute({
@@ -30,6 +34,12 @@ class CreatePhaseUseCase {
 
     if (type === enType.THEORY && max_level !== 1) {
       throw new InvalidMaxLevelError();
+    }
+
+    const mapExists = await this.mapsRepository.findById(map_id);
+
+    if (!mapExists) {
+      throw new MapNotFoundError();
     }
 
     const phase = await this.phasesRepository.create({
