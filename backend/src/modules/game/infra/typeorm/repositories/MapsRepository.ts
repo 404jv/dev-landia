@@ -22,6 +22,12 @@ class MapsRepository implements IMapsRepository {
 
     return map;
   }
+
+  async findById(id: string): Promise<Map> {
+    const map = await this.repository.findOne(id);
+
+    return map;
+  }
 }
 
 export { MapsRepository };

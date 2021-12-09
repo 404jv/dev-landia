@@ -3,6 +3,7 @@ import { Map } from '../infra/typeorm/entities/Map';
 
 interface IMapsRepository {
   create({ description, title }: ICreateMapDTO): Promise<Map>;
+  findById(id: string): Promise<Map>;
 }
 
 export { IMapsRepository };
