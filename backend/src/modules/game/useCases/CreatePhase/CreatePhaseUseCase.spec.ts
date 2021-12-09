@@ -1,10 +1,12 @@
 import { ICreatePhaseDTO } from '@modules/game/dtos/ICreatePhaseDTO';
-import { InMemoryPhaseRepository } from '@modules/game/repositories/in-memory/InMemoryPhaseRepository';
+import { InMemoryMapsRepository } from '@modules/game/repositories/in-memory/InMemoryMapsRepository';
+import { InMemoryPhasesRepository } from '@modules/game/repositories/in-memory/InMemoryPhasesRepository';
 
 import { CreatePhaseUseCase } from './CreatePhaseUseCase';
 import { InvalidMaxLevelError } from './errors/InvalidMaxLevelError';
 
-let inMemoryPhasesRepository: InMemoryPhaseRepository;
+let inMemoryPhasesRepository: InMemoryPhasesRepository;
+let inMemoryMapsRepository: InMemoryMapsRepository;
 let createPhaseUseCase: CreatePhaseUseCase;
 
 enum enType {
@@ -14,8 +16,12 @@ enum enType {
 
 describe('Create Phase', () => {
   beforeEach(() => {
-    inMemoryPhasesRepository = new InMemoryPhaseRepository();
-    createPhaseUseCase = new CreatePhaseUseCase(inMemoryPhasesRepository);
+    inMemoryPhasesRepository = new InMemoryPhasesRepository();
+    inMemoryMapsRepository = new InMemoryMapsRepository();
+    createPhaseUseCase = new CreatePhaseUseCase(
+      inMemoryPhasesRepository,
+      inMemoryMapsRepository
+    );
   });
 
   it('should be able to create a practice phase', async () => {
