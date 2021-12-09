@@ -14,6 +14,10 @@ class InMemoryPhaseRepository implements IPhasesRepository {
 
     return phase;
   }
+
+  async list(): Promise<Phase[]> {
+    return this.repository;
+  }
 }
 
 export { InMemoryPhaseRepository };
