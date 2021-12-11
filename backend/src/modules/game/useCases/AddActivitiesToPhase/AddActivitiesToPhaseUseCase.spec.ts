@@ -1,17 +1,21 @@
 import { IAddActivitiesToPhaseDTO } from '@modules/game/dtos/IAddActivitiesToPhaseDTO';
 import { InMemoryPhaseActivitiesRepository } from '@modules/game/repositories/in-memory/InMemoryPhaseActivitiesRepository';
+import { InMemoryPhasesRepository } from '@modules/game/repositories/in-memory/InMemoryPhasesRepository';
 
 import { AddActivitiesToPhaseUseCase } from './AddActivitiesToPhaseUseCase';
 import { PhaseNotFoundError } from './errors/PhaseNotFoundError';
 
 let inMemoryPhaseActivitiesRepository: InMemoryPhaseActivitiesRepository;
+let inMemoryPhasesRepository: InMemoryPhasesRepository;
 let addActivitiesToPhaseUseCase: AddActivitiesToPhaseUseCase;
 
 describe('Add Activities to Phase', () => {
   beforeEach(() => {
     inMemoryPhaseActivitiesRepository = new InMemoryPhaseActivitiesRepository();
+    inMemoryPhasesRepository = new InMemoryPhasesRepository();
     addActivitiesToPhaseUseCase = new AddActivitiesToPhaseUseCase(
-      inMemoryPhaseActivitiesRepository
+      inMemoryPhaseActivitiesRepository,
+      inMemoryPhasesRepository
     );
   });
 
