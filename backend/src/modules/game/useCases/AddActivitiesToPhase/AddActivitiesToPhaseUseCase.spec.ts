@@ -15,7 +15,7 @@ describe('Add Activities to Phase', () => {
     );
   });
 
-  it('should be not able to add activities to a non-existent phase', async () => {
+  it('should not be able to add activities to a non-existent phase', async () => {
     const phase: IAddActivitiesToPhaseDTO = {
       activities_ids: ['1234'],
       phase_id: 'non-existent-id',
