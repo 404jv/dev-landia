@@ -6,23 +6,16 @@ import { IPhaseActivitiesRepository } from '../IPhaseActivitiesRepository';
 class InMemoryPhaseActivitiesRepository implements IPhaseActivitiesRepository {
   private repository: PhaseActivity[] = [];
 
-  async create({
-    activities_ids,
-    phase_id,
-  }: IAddActivitiesToPhaseDTO): Promise<PhaseActivity[]> {
-    const phaseActivities = activities_ids.map((activity_id) => {
-      const phaseActivities = new PhaseActivity();
+  async create(phase_id: string, activity_id: string): Promise<PhaseActivity> {
+    const phaseActivity = new PhaseActivity();
 
-      Object.assign(phaseActivities, {
-        phase_id,
-        activity_id,
-      });
-
-      this.repository.push(phaseActivities);
-      return phaseActivities;
+    Object.assign(phaseActivity, {
+      phase_id,
+      activity_id,
     });
+    this.repository.push(phaseActivity);
 
-    return phaseActivities;
+    return phaseActivity;
   }
 }
 
