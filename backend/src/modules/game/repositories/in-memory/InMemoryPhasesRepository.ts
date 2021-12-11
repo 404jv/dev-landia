@@ -18,6 +18,10 @@ class InMemoryPhasesRepository implements IPhasesRepository {
   async list(): Promise<Phase[]> {
     return this.repository;
   }
+
+  async findById(id: string): Promise<Phase> {
+    return this.repository.find((phase) => phase.id === id);
+  }
 }
 
 export { InMemoryPhasesRepository };
