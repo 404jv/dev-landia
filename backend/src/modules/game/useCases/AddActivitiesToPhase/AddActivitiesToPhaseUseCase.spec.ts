@@ -30,8 +30,15 @@ describe('Add Activities to Phase', () => {
   });
 
   it('should not be able to add activities to a non-existent phase', async () => {
+    const activity = await inMemoryPhasesRepository.create({
+      map_id: '123',
+      max_level: 5,
+      title: 'Atividade test',
+      type: enType.PRACTICE,
+    });
+
     const activitiesToPhase: IAddActivitiesToPhaseDTO = {
-      activities_ids: ['1234'],
+      activities_ids: [activity.id],
       phase_id: 'non-existent-id',
     };
 
