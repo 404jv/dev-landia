@@ -21,6 +21,7 @@ class InMemoryActivityRepository implements IActivitiesRepository {
       is_needed_code,
       created_at: new Date(),
     });
+    this.repositories.push(activity);
 
     return activity;
   }
