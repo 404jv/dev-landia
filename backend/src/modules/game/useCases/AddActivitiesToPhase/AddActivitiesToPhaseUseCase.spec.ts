@@ -47,7 +47,7 @@ describe('Add Activities to Phase', () => {
     ).rejects.toEqual(new PhaseNotFoundError());
   });
 
-  it('should not be able to add activities to a non-existent phase', async () => {
+  it('should not be able to add non-existents activities to a phase', async () => {
     const phase = await inMemoryPhasesRepository.create({
       map_id: '123',
       title: 'Fase teste',
