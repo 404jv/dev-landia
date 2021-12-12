@@ -29,6 +29,11 @@ class ActivitiesRepository implements IActivitiesRepository {
 
     return activity;
   }
+
+  async findById(id: string): Promise<Activity> {
+    const activity = this.repository.findOne(id);
+    return activity;
+  }
 }
 
 export { ActivitiesRepository };
