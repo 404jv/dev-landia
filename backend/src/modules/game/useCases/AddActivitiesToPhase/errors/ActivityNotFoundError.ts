@@ -9,7 +9,7 @@ class ActivityNotFoundError implements IAppError {
   constructor(activity_id: string) {
     this.message = `Activity with the id ${activity_id} not found`;
     this.statusCode = 404;
-    this.message = 'ActivityNotFoundError';
+    this.name = 'ActivityNotFoundError';
   }
 }
 
