@@ -35,6 +35,11 @@ class PhasesRepository implements IPhasesRepository {
     const phases = await this.repository.query('SELECT * FROM phases');
     return phases;
   }
+
+  async findById(id: string): Promise<Phase> {
+    const phase = this.repository.findOne(id);
+    return phase;
+  }
 }
 
 export { PhasesRepository };
