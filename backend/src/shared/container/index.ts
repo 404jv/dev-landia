@@ -4,9 +4,11 @@ import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/Us
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { ActivitiesRepository } from '@modules/game/infra/typeorm/repositories/ActivitiesRepository';
 import { MapsRepository } from '@modules/game/infra/typeorm/repositories/MapsRepository';
+import { PhaseActivitiesRepository } from '@modules/game/infra/typeorm/repositories/PhaseActivitiesRepository';
 import { PhasesRepository } from '@modules/game/infra/typeorm/repositories/PhasesRepository';
 import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
 import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
+import { IPhaseActivitiesRepository } from '@modules/game/repositories/IPhaseActivitiesRepository';
 import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
 
 container.registerSingleton<IUsersRepository>(
@@ -24,4 +26,9 @@ container.registerSingleton<IPhasesRepository>(
 container.registerSingleton<IActivitiesRepository>(
   'ActivitiesRepository',
   ActivitiesRepository
+);
+
+container.registerSingleton<IPhaseActivitiesRepository>(
+  'PhaseActivitiesRepository',
+  PhaseActivitiesRepository
 );
