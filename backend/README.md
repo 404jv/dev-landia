@@ -55,6 +55,11 @@
 - Se o type for class o max_level deve ser 1.
 - Se o type for class o markdown_text deve ser preenchido.
 
+## Ligação entre fase e atividades
+
+**RN**
+- A mesma atividade não pode pertencer mais de uma vez a uma fase
+
 ## Criação de mapa
 
 **RF**
