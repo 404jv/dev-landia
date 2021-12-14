@@ -4,7 +4,6 @@ import { InMemoryPhaseActivitiesRepository } from '@modules/game/repositories/in
 import { InMemoryPhasesRepository } from '@modules/game/repositories/in-memory/InMemoryPhasesRepository';
 
 import { AddActivitiesToPhaseUseCase } from './AddActivitiesToPhaseUseCase';
-import { ActivityNotFoundError } from './errors/ActivityNotFoundError';
 import { PhaseNotFoundError } from './errors/PhaseNotFoundError';
 
 let inMemoryPhaseActivitiesRepository: InMemoryPhaseActivitiesRepository;
@@ -17,6 +16,11 @@ enum enType {
   PRACTICE = 'practice',
 }
 
+enum enActivityType {
+  BLOCK_ACTIVITY = 'block_activity',
+  QUIZ = 'quiz',
+}
+
 describe('Add Activities to Phase', () => {
   beforeEach(() => {
     inMemoryPhaseActivitiesRepository = new InMemoryPhaseActivitiesRepository();
@@ -24,9 +28,29 @@ describe('Add Activities to Phase', () => {
     inMemoryActivitiesRepository = new InMemoryActivityRepository();
     addActivitiesToPhaseUseCase = new AddActivitiesToPhaseUseCase(
       inMemoryPhaseActivitiesRepository,
-      inMemoryPhasesRepository,
-      inMemoryActivitiesRepository
+      inMemoryPhasesRepository
     );
+  });
+
+  it('should be able to add activities to a phase', async () => {
+    const activity = await inMemoryActivitiesRepository.create({
+      description: 'Atividade Test',
+      title: 'Atividade test',
+      type: enActivityType.BLOCK_ACTIVITY,
+      is_needed_code: false,
+    });
+
+    const phase = await inMemoryPhasesRepository.create({
+      map_id: '123',
+      title: 'Fase teste',
+      max_level: 5,
+      type: enType.PRACTICE,
+    });
+
+    await addActivitiesToPhaseUseCase.execute({
+      phase_id: phase.id,
+      activities_ids: [activity.id],
+    });
   });
 
   it('should not be able to add activities to a non-existent phase', async () => {
@@ -45,23 +69,5 @@ describe('Add Activities to Phase', () => {
     await expect(
       addActivitiesToPhaseUseCase.execute(activitiesToPhase)
     ).rejects.toEqual(new PhaseNotFoundError());
-  });
-
-  it('should not be able to add non-existents activities to a phase', async () => {
-    const phase = await inMemoryPhasesRepository.create({
-      map_id: '123',
-      title: 'Fase teste',
-      max_level: 5,
-      type: enType.PRACTICE,
-    });
-
-    const activitiesToPhase: IAddActivitiesToPhaseDTO = {
-      activities_ids: ['non-existent-id'],
-      phase_id: phase.id,
-    };
-
-    await expect(
-      addActivitiesToPhaseUseCase.execute(activitiesToPhase)
-    ).rejects.toEqual(new ActivityNotFoundError('non-existent-id'));
   });
 });
