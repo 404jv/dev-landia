@@ -1,3 +1,5 @@
+import { ICreateOptionDTO } from './ICreateOptionDTO';
+
 enum enActivityType {
   BLOCK_ACTIVITY = 'block_activity',
   QUIZ = 'quiz',
@@ -9,6 +11,7 @@ interface ICreateActivityDTO {
   description: string;
   type: enActivityType;
   is_needed_code?: boolean;
+  options?: ICreateOptionDTO[];
   created_at?: Date;
 }
 
