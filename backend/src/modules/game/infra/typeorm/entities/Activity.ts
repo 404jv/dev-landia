@@ -1,5 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+
+import { Option } from './Option';
 
 enum enActivityType {
   BLOCK_ACTIVITY = 'block_activity',
@@ -22,6 +30,9 @@ class Activity {
 
   @Column()
   is_needed_code: boolean;
+
+  @OneToMany(() => Option, (option) => option.activity)
+  options: Option[];
 
   @CreateDateColumn()
   created_at: Date;

@@ -1,5 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+
+import { Activity } from './Activity';
 
 enum enOptionType {
   JS_FUNCTION = 'js_function',
@@ -16,6 +24,9 @@ class Option {
 
   @Column()
   activity_id: string;
+
+  @ManyToOne(() => Activity, (activity) => activity.options)
+  activity: Activity;
 
   @Column({ type: 'enum', enum: enOptionType })
   type: string;
