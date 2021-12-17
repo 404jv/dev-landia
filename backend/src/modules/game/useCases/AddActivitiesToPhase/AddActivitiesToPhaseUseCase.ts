@@ -1,7 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
 import { IAddActivitiesToPhaseDTO } from '@modules/game/dtos/IAddActivitiesToPhaseDTO';
-import { IPhaseActivitiesRepository } from '@modules/game/repositories/IPhaseActivitiesRepository';
+import { Phase } from '@modules/game/infra/typeorm/entities/Phase';
+import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
 import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
 
 import { PhaseNotFoundError } from './errors/PhaseNotFoundError';
@@ -9,25 +10,33 @@ import { PhaseNotFoundError } from './errors/PhaseNotFoundError';
 @injectable()
 class AddActivitiesToPhaseUseCase {
   constructor(
-    @inject('PhaseActivitiesRepository')
-    private phaseActivitiesRepository: IPhaseActivitiesRepository,
     @inject('PhasesRepository')
-    private phasesRepository: IPhasesRepository
+    private phasesRepository: IPhasesRepository,
+    @inject('ActivitiesRepository')
+    private activitiesRepository: IActivitiesRepository
   ) {}
 
   async execute({
     activities_ids,
     phase_id,
-  }: IAddActivitiesToPhaseDTO): Promise<void> {
+  }: IAddActivitiesToPhaseDTO): Promise<Phase> {
     const phaseExists = await this.phasesRepository.findById(phase_id);
 
     if (!phaseExists) {
       throw new PhaseNotFoundError();
     }
 
-    activities_ids.map(async (activity_id) => {
-      await this.phaseActivitiesRepository.create(phase_id, activity_id);
-    });
+    const activities = await this.activitiesRepository.findByIds(
+      activities_ids
+    );
+
+    console.log(phaseExists);
+    phaseExists.activities = activities;
+    console.log(phaseExists);
+
+    await this.phasesRepository.update(phaseExists);
+
+    return phaseExists;
   }
 }
 

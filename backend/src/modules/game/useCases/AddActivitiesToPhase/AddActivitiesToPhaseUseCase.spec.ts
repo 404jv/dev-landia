@@ -1,12 +1,10 @@
 import { IAddActivitiesToPhaseDTO } from '@modules/game/dtos/IAddActivitiesToPhaseDTO';
 import { InMemoryActivityRepository } from '@modules/game/repositories/in-memory/InMemoryActivityRepository';
-import { InMemoryPhaseActivitiesRepository } from '@modules/game/repositories/in-memory/InMemoryPhaseActivitiesRepository';
 import { InMemoryPhasesRepository } from '@modules/game/repositories/in-memory/InMemoryPhasesRepository';
 
 import { AddActivitiesToPhaseUseCase } from './AddActivitiesToPhaseUseCase';
 import { PhaseNotFoundError } from './errors/PhaseNotFoundError';
 
-let inMemoryPhaseActivitiesRepository: InMemoryPhaseActivitiesRepository;
 let inMemoryPhasesRepository: InMemoryPhasesRepository;
 let inMemoryActivitiesRepository: InMemoryActivityRepository;
 let addActivitiesToPhaseUseCase: AddActivitiesToPhaseUseCase;
@@ -23,12 +21,11 @@ enum enActivityType {
 
 describe('Add Activities to Phase', () => {
   beforeEach(() => {
-    inMemoryPhaseActivitiesRepository = new InMemoryPhaseActivitiesRepository();
     inMemoryPhasesRepository = new InMemoryPhasesRepository();
     inMemoryActivitiesRepository = new InMemoryActivityRepository();
     addActivitiesToPhaseUseCase = new AddActivitiesToPhaseUseCase(
-      inMemoryPhaseActivitiesRepository,
-      inMemoryPhasesRepository
+      inMemoryPhasesRepository,
+      inMemoryActivitiesRepository
     );
   });
 
