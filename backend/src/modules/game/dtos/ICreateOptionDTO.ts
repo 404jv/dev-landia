@@ -6,7 +6,7 @@ enum enOptionType {
 interface ICreateOptionDTO {
   id?: string;
   name: string;
-  activity_id: string;
+  activity_id?: string;
   type: enOptionType;
   hexadecimal_color: string;
 }
