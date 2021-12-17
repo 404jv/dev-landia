@@ -29,6 +29,10 @@ class InMemoryActivityRepository implements IActivitiesRepository {
   async findById(id: string): Promise<Activity> {
     return this.repositories.find((activity) => activity.id === id);
   }
+
+  async findByIds(ids: string[]): Promise<Activity[]> {
+    return this.repositories.filter((activity) => ids.includes(activity.id));
+  }
 }
 
 export { InMemoryActivityRepository };
