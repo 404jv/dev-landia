@@ -11,7 +11,6 @@ class PhasesRepository implements IPhasesRepository {
   constructor() {
     this.repository = getRepository(Phase);
   }
-
   async create({
     map_id,
     max_level,
@@ -38,6 +37,28 @@ class PhasesRepository implements IPhasesRepository {
 
   async findById(id: string): Promise<Phase> {
     const phase = this.repository.findOne(id);
+    return phase;
+  }
+
+  async update({
+    map_id,
+    max_level,
+    title,
+    type,
+    id,
+    markdown_text,
+  }: ICreatePhaseDTO): Promise<Phase> {
+    const phase = this.repository.create({
+      max_level,
+      map_id,
+      title,
+      type,
+      markdown_text,
+      id,
+    });
+
+    await this.repository.save(phase);
+
     return phase;
   }
 }
