@@ -25,7 +25,7 @@ export class createTableOptions1639522424366 implements MigrationInterface {
             enum: ['js_function', 'command'],
           },
           {
-            name: 'hexadecimal_colar',
+            name: 'hexadecimal_color',
             type: 'varchar',
           },
           {
