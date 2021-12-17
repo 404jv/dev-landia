@@ -1,20 +1,29 @@
 import { InMemoryActivityRepository } from '@modules/game/repositories/in-memory/InMemoryActivityRepository';
+import { InMemoryOptionsRepository } from '@modules/game/repositories/in-memory/InMemoryOptionsRepository';
 
 import { CreateActivityUseCase } from './CreateActivityUseCase';
 
 let createActivityUseCase: CreateActivityUseCase;
 let inMemoryActivitiesRepository: InMemoryActivityRepository;
+let inMemoryOptionsRepository: InMemoryOptionsRepository;
 
 enum enActivityType {
   BLOCK_ACTIVITY = 'block_activity',
   QUIZ = 'quiz',
 }
 
+enum enOptionType {
+  JS_FUNCTION = 'js_function',
+  COMMAND = 'command',
+}
+
 describe('Create activity', () => {
   beforeEach(() => {
     inMemoryActivitiesRepository = new InMemoryActivityRepository();
+    inMemoryOptionsRepository = new InMemoryOptionsRepository();
     createActivityUseCase = new CreateActivityUseCase(
-      inMemoryActivitiesRepository
+      inMemoryActivitiesRepository,
+      inMemoryOptionsRepository
     );
   });
 
@@ -23,6 +32,14 @@ describe('Create activity', () => {
       description: 'Description',
       title: 'Title',
       type: enActivityType.BLOCK_ACTIVITY,
+      options: [
+        {
+          activity_id: '123',
+          hexadecimal_color: '#fff',
+          name: 'print',
+          type: enOptionType.COMMAND,
+        },
+      ],
     });
 
     expect(result).toHaveProperty('id');
