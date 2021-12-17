@@ -26,6 +26,7 @@ class Option {
   activity_id: string;
 
   @ManyToOne(() => Activity, (activity) => activity.options)
+  @JoinColumn({ name: 'activity_id' })
   activity: Activity;
 
   @Column({ type: 'enum', enum: enOptionType })
