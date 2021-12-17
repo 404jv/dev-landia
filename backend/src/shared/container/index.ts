@@ -9,7 +9,6 @@ import { PhasesRepository } from '@modules/game/infra/typeorm/repositories/Phase
 import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
 import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
 import { IOptionsRepository } from '@modules/game/repositories/IOptionsRepository';
-import { IPhaseActivitiesRepository } from '@modules/game/repositories/IPhaseActivitiesRepository';
 import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
 
 container.registerSingleton<IUsersRepository>(
