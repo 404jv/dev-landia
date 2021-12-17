@@ -3,11 +3,14 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
+import { Activity } from './Activity';
 import { Map } from './Map';
 
 enum enType {
@@ -38,6 +41,14 @@ class Phase {
 
   @Column()
   max_level: number;
+
+  @ManyToMany(() => Activity)
+  @JoinTable({
+    name: 'phases_activities',
+    joinColumns: [{ name: 'phase_id' }],
+    inverseJoinColumns: [{ name: 'activity_id' }],
+  })
+  activities: Activity[];
 
   @CreateDateColumn()
   created_at: Date;
