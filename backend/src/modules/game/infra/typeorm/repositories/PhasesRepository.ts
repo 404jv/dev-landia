@@ -47,6 +47,7 @@ class PhasesRepository implements IPhasesRepository {
     type,
     id,
     markdown_text,
+    activities,
   }: ICreatePhaseDTO): Promise<Phase> {
     const phase = this.repository.create({
       max_level,
@@ -55,6 +56,7 @@ class PhasesRepository implements IPhasesRepository {
       type,
       markdown_text,
       id,
+      activities,
     });
 
     await this.repository.save(phase);
