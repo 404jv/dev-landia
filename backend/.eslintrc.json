@@ -21,6 +21,7 @@
 		"prettier"
 	],
 	"rules": {
+    "no-param-reassign": [2, { "props": false }],
     "camelcase": "off",
 		"import/no-unresolved": "error",
 		"@typescript-eslint/naming-convention": [
