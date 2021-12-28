@@ -28,7 +28,7 @@ class MapsRepository implements IMapsRepository {
     return map;
   }
 
-  async list(user_id: string): Promise<Map[]> {
+  async list(): Promise<Map[]> {
     const maps = await this.repository.find({
       relations: ['phases'],
     });
