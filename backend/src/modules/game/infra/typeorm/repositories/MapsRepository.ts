@@ -12,6 +12,11 @@ class MapsRepository implements IMapsRepository {
     this.repository = getRepository(Map);
   }
 
+  async findById(id: string): Promise<Map> {
+    const map = await this.repository.findOne(id);
+    return map;
+  }
+
   async create({ description, title }: ICreateMapDTO): Promise<Map> {
     const map = this.repository.create({
       description,
@@ -23,10 +28,12 @@ class MapsRepository implements IMapsRepository {
     return map;
   }
 
-  async findById(id: string): Promise<Map> {
-    const map = await this.repository.findOne(id);
+  async list(user_id: string): Promise<Map[]> {
+    const maps = await this.repository.find({
+      relations: ['phases'],
+    });
 
-    return map;
+    return maps;
   }
 }
 
