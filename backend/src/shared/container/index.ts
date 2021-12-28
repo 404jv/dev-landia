@@ -6,11 +6,13 @@ import { ActivitiesRepository } from '@modules/game/infra/typeorm/repositories/A
 import { MapsRepository } from '@modules/game/infra/typeorm/repositories/MapsRepository';
 import { OptionsRepository } from '@modules/game/infra/typeorm/repositories/OptionsRepository';
 import { PhasesRepository } from '@modules/game/infra/typeorm/repositories/PhasesRepository';
+import { UsersMapsRepository } from '@modules/game/infra/typeorm/repositories/UsersMapsRepository';
 import { UsersPhasesRepository } from '@modules/game/infra/typeorm/repositories/UsersPhasesRepository';
 import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
 import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
 import { IOptionsRepository } from '@modules/game/repositories/IOptionsRepository';
 import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
+import { IUsersMapsRepository } from '@modules/game/repositories/IUsersMapsRepository';
 import { IUsersPhasesRepository } from '@modules/game/repositories/IUsersPhasesRepository';
 
 container.registerSingleton<IUsersRepository>(
@@ -38,4 +40,9 @@ container.registerSingleton<IOptionsRepository>(
 container.registerSingleton<IUsersPhasesRepository>(
   'UsersPhases',
   UsersPhasesRepository
+);
+
+container.registerSingleton<IUsersMapsRepository>(
+  'UsersMaps',
+  UsersMapsRepository
 );
