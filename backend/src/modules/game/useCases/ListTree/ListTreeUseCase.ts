@@ -12,9 +12,9 @@ class ListTreeUseCase {
     @inject('MapsRepository')
     private mapsRepository: IMapsRepository,
     @inject('UsersPhasesRepository')
-    private usersPhases: IUsersPhasesRepository,
+    private usersPhasesRepository: IUsersPhasesRepository,
     @inject('UsersMapsRepository')
-    private usersMaps: IUsersMapsRepository
+    private usersMapsRepository: IUsersMapsRepository
   ) {}
 
   async execute(user_id: string): Promise<Map[]> {
@@ -22,7 +22,7 @@ class ListTreeUseCase {
 
     const tree = await Promise.all(
       maps.map(async (map) => {
-        const { is_done } = await this.usersMaps.findByUserAndMap(
+        const { is_done } = await this.usersMapsRepository.findByUserAndMap(
           user_id,
           map.id
         );
@@ -47,10 +47,11 @@ class ListTreeUseCase {
   ): Promise<Phase[]> {
     const phasesWithLevel = await Promise.all(
       phases.map(async (phase) => {
-        const { current_level } = await this.usersPhases.findByUserAndPhase(
-          user_id,
-          phase.id
-        );
+        const { current_level } =
+          await this.usersPhasesRepository.findByUserAndPhase(
+            user_id,
+            phase.id
+          );
 
         Object.assign(phase, {
           current_level,
