@@ -38,11 +38,11 @@ container.registerSingleton<IOptionsRepository>(
 );
 
 container.registerSingleton<IUsersPhasesRepository>(
-  'UsersPhases',
+  'UsersPhasesRepository',
   UsersPhasesRepository
 );
 
 container.registerSingleton<IUsersMapsRepository>(
-  'UsersMaps',
+  'UsersMapsRepository',
   UsersMapsRepository
 );

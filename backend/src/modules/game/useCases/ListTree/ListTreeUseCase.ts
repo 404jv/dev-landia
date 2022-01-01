@@ -11,9 +11,9 @@ class ListTreeUseCase {
   constructor(
     @inject('MapsRepository')
     private mapsRepository: IMapsRepository,
-    @inject('UsersPhases')
+    @inject('UsersPhasesRepository')
     private usersPhases: IUsersPhasesRepository,
-    @inject('UsersMaps')
+    @inject('UsersMapsRepository')
     private usersMaps: IUsersMapsRepository
   ) {}
 
