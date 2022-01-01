@@ -21,6 +21,10 @@ class InMemoryMapsRepository implements IMapsRepository {
   async findById(id: string): Promise<Map> {
     return this.repository.find((map) => map.id === id);
   }
+
+  async list(): Promise<Map[]> {
+    return this.repository;
+  }
 }
 
 export { InMemoryMapsRepository };
