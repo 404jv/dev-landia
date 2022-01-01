@@ -30,9 +30,7 @@ class AddActivitiesToPhaseUseCase {
       activities_ids
     );
 
-    console.log(phaseExists);
     phaseExists.activities = activities;
-    console.log(phaseExists);
 
     await this.phasesRepository.update(phaseExists);
 
