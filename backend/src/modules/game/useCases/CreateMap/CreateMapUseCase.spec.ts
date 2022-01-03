@@ -16,11 +16,13 @@ describe('Create Map', () => {
     const map: ICreateMapDTO = {
       title: 'Mapa 1',
       description: 'Description test',
+      order: 1,
     };
 
     const result = await createMapUseCase.execute(map);
 
     expect(result).toHaveProperty('id');
+    expect(result.order).toBe(1);
     expect(result.description).toEqual(map.description);
     expect(result.title).toEqual(map.title);
   });

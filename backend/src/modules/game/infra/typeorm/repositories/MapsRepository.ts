@@ -17,10 +17,11 @@ class MapsRepository implements IMapsRepository {
     return map;
   }
 
-  async create({ description, title }: ICreateMapDTO): Promise<Map> {
+  async create({ description, title, order }: ICreateMapDTO): Promise<Map> {
     const map = this.repository.create({
       description,
       title,
+      order,
     });
 
     await this.repository.save(map);

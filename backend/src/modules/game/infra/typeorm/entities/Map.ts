@@ -20,6 +20,9 @@ class Map {
   @Column()
   description: string;
 
+  @Column()
+  order: number;
+
   @OneToMany(() => Phase, (phase) => phase.map)
   phases: Phase[];
 
