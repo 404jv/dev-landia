@@ -29,6 +29,7 @@ describe('Create Phase', () => {
     const map = await inMemoryMapsRepository.create({
       title: 'Title test',
       description: 'Description Test',
+      order: 1,
     });
 
     const phase: ICreatePhaseDTO = {
@@ -51,6 +52,7 @@ describe('Create Phase', () => {
     const map = await inMemoryMapsRepository.create({
       title: 'Title test',
       description: 'Description Test',
+      order: 1,
     });
 
     const phase: ICreatePhaseDTO = {
@@ -74,6 +76,7 @@ describe('Create Phase', () => {
     const map = await inMemoryMapsRepository.create({
       title: 'Title test',
       description: 'Description Test',
+      order: 1,
     });
 
     const phase: ICreatePhaseDTO = {
@@ -92,6 +95,7 @@ describe('Create Phase', () => {
     const map = await inMemoryMapsRepository.create({
       title: 'Title test',
       description: 'Description Test',
+      order: 1,
     });
 
     const phase: ICreatePhaseDTO = {
