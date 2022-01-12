@@ -42,6 +42,9 @@ class Phase {
   @Column()
   max_level: number;
 
+  @Column()
+  order: number;
+
   @ManyToMany(() => Activity)
   @JoinTable({
     name: 'phases_activities',

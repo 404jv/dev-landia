@@ -7,7 +7,8 @@ class CreatePhaseController {
   async handle(request: Request, response: Response): Promise<Response> {
     console.log('ok 2: ');
 
-    const { title, map_id, max_level, type, markdown_text } = request.body;
+    const { title, map_id, max_level, type, markdown_text, order } =
+      request.body;
 
     const createMapUseCase = container.resolve(CreatePhaseUseCase);
 
@@ -17,6 +18,7 @@ class CreatePhaseController {
       max_level,
       type,
       markdown_text,
+      order,
     });
 
     return response.status(201).json(phase);

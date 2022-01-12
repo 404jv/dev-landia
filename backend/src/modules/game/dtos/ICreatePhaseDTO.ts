@@ -13,6 +13,7 @@ interface ICreatePhaseDTO {
   type: enType;
   activities?: Activity[];
   markdown_text?: string;
+  order: number;
 }
 
 export { ICreatePhaseDTO };
