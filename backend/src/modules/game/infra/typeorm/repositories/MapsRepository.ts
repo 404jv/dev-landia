@@ -30,9 +30,11 @@ class MapsRepository implements IMapsRepository {
   }
 
   async list(): Promise<Map[]> {
-    const maps = await this.repository.find({
-      relations: ['phases'],
-    });
+    const maps = await this.repository
+      .createQueryBuilder('map')
+      .leftJoinAndSelect('map.phases', 'phases')
+      .orderBy('map.order', 'ASC')
+      .getMany();
 
     return maps;
   }
