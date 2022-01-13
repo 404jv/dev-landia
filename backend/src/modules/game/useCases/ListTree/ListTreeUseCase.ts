@@ -22,14 +22,16 @@ class ListTreeUseCase {
 
     const tree = await Promise.all(
       maps.map(async (map) => {
-        const { is_done } = await this.usersMapsRepository.findByUserAndMap(
+        const userMap = await this.usersMapsRepository.findByUserAndMap(
           user_id,
           map.id
         );
 
-        Object.assign(map, {
-          is_done,
-        });
+        if (userMap !== undefined) {
+          Object.assign(map, {
+            is_done: userMap.is_done,
+          });
+        }
 
         const phasesWithLevel = await this.getPhasesLevel(map.phases, user_id);
         map.phases = phasesWithLevel;
@@ -47,15 +49,16 @@ class ListTreeUseCase {
   ): Promise<Phase[]> {
     const phasesWithLevel = await Promise.all(
       phases.map(async (phase) => {
-        const { current_level } =
-          await this.usersPhasesRepository.findByUserAndPhase(
-            user_id,
-            phase.id
-          );
+        const userPhase = await this.usersPhasesRepository.findByUserAndPhase(
+          user_id,
+          phase.id
+        );
 
-        Object.assign(phase, {
-          current_level,
-        });
+        if (userPhase !== undefined) {
+          Object.assign(phase, {
+            current_level: userPhase.current_level,
+          });
+        }
 
         return phase;
       })
