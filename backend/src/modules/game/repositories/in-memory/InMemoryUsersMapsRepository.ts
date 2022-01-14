@@ -23,6 +23,10 @@ class InMemoryUsersMapsRepository implements IUsersMapsRepository {
 
     return userMap;
   }
+
+  async listByUser(user_id: string): Promise<UserMap[]> {
+    return this.repository.filter((userMap) => userMap.user_id === user_id);
+  }
 }
 
 export { InMemoryUsersMapsRepository };

@@ -30,6 +30,16 @@ class UsersMapsRepository implements IUsersMapsRepository {
 
     return userMap;
   }
+
+  async listByUser(user_id: string): Promise<UserMap[]> {
+    const userMaps = await this.repository.find({
+      where: {
+        user_id,
+      },
+    });
+
+    return userMaps;
+  }
 }
 
 export { UsersMapsRepository };
