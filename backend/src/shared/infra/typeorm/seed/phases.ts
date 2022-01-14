@@ -1,5 +1,4 @@
 import { createConnection } from 'typeorm';
-import { v4 as uuidV4 } from 'uuid';
 
 async function create() {
   const connection = await createConnection();
