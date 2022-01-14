@@ -5,8 +5,6 @@ import { CreatePhaseUseCase } from './CreatePhaseUseCase';
 
 class CreatePhaseController {
   async handle(request: Request, response: Response): Promise<Response> {
-    console.log('ok 2: ');
-
     const { title, map_id, max_level, type, markdown_text, order } =
       request.body;
 
