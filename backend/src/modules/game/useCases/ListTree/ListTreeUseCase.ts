@@ -27,11 +27,11 @@ class ListTreeUseCase {
           map.id
         );
 
-        if (userMap !== undefined) {
-          Object.assign(map, {
-            is_done: userMap.is_done,
-          });
-        }
+        if (userMap === undefined) return map;
+
+        Object.assign(map, {
+          is_done: userMap.is_done,
+        });
 
         const phasesWithLevel = await this.getPhasesLevel(map.phases, user_id);
         map.phases = phasesWithLevel;
