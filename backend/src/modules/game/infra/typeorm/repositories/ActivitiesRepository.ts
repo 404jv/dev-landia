@@ -17,12 +17,14 @@ class ActivitiesRepository implements IActivitiesRepository {
     title,
     type,
     is_needed_code,
+    order,
   }: ICreateActivityDTO): Promise<Activity> {
     const activity = this.repository.create({
       description,
       title,
       type,
       is_needed_code,
+      order,
     });
 
     await this.repository.save(activity);

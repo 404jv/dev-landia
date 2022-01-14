@@ -12,6 +12,7 @@ interface ICreateActivityDTO {
   type: enActivityType;
   is_needed_code?: boolean;
   options?: ICreateOptionDTO[];
+  order: number;
   created_at?: Date;
 }
 

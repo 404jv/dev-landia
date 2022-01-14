@@ -11,6 +11,7 @@ class InMemoryActivityRepository implements IActivitiesRepository {
     description,
     is_needed_code,
     type,
+    order,
   }: ICreateActivityDTO): Promise<Activity> {
     const activity = new Activity();
 
@@ -19,6 +20,7 @@ class InMemoryActivityRepository implements IActivitiesRepository {
       description,
       type,
       is_needed_code,
+      order,
       created_at: new Date(),
     });
     this.repositories.push(activity);

@@ -20,12 +20,14 @@ class CreateActivityUseCase {
     type,
     is_needed_code = false,
     options = [],
+    order,
   }: ICreateActivityDTO): Promise<Activity> {
     const activity = await this.activityRepository.create({
       description,
       title,
       type,
       is_needed_code,
+      order,
     });
 
     options.map(async (option) => {

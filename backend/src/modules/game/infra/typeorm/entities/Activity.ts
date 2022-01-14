@@ -31,6 +31,9 @@ class Activity {
   @Column()
   is_needed_code: boolean;
 
+  @Column()
+  order: number;
+
   @OneToMany(() => Option, (option) => option.activity)
   options: Option[];
 
