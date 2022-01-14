@@ -26,6 +26,10 @@ class InMemoryMapsRepository implements IMapsRepository {
   async list(): Promise<Map[]> {
     return this.repository;
   }
+
+  async findByOrder(order: number): Promise<Map> {
+    return this.repository.find((map) => map.order === order);
+  }
 }
 
 export { InMemoryMapsRepository };

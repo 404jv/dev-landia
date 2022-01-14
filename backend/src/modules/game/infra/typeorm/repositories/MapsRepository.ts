@@ -39,6 +39,16 @@ class MapsRepository implements IMapsRepository {
 
     return maps;
   }
+
+  async findByOrder(order: number): Promise<Map> {
+    const map = await this.repository.findOne({
+      where: {
+        order,
+      },
+    });
+
+    return map;
+  }
 }
 
 export { MapsRepository };

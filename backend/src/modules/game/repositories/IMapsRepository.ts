@@ -5,6 +5,7 @@ interface IMapsRepository {
   create({ description, title, order }: ICreateMapDTO): Promise<Map>;
   findById(id: string): Promise<Map>;
   list(): Promise<Map[]>;
+  findByOrder(order: number): Promise<Map>;
 }
 
 export { IMapsRepository };
