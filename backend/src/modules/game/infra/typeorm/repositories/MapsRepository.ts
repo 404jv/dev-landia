@@ -34,6 +34,7 @@ class MapsRepository implements IMapsRepository {
       .createQueryBuilder('map')
       .leftJoinAndSelect('map.phases', 'phases')
       .orderBy('map.order', 'ASC')
+      .addOrderBy('phases.order', 'ASC')
       .getMany();
 
     return maps;
