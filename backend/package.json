@@ -8,7 +8,8 @@
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "NODE_ENV=test && jest --runInBand --detectOpenHandles",
     "test:watch": "NODE_ENV=test jest --maxWorkers=1 --watch",
-    "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts"
+    "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts",
+    "seeds": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/*.ts"
   },
   "dependencies": {
     "@types/uuid": "^8.3.1",
