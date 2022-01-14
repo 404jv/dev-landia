@@ -30,6 +30,7 @@ class InMemoryPhasesRepository implements IPhasesRepository {
     type,
     id,
     markdown_text,
+    order,
   }: ICreatePhaseDTO): Promise<Phase> {
     const phase = await this.findById(id);
 
@@ -40,6 +41,7 @@ class InMemoryPhasesRepository implements IPhasesRepository {
       type,
       id,
       markdown_text,
+      order,
     });
 
     const phaseIndex = this.repository.indexOf(phase);
