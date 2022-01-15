@@ -37,6 +37,7 @@ describe('Create Phase', () => {
       max_level: 3,
       title: 'Fase prática test',
       type: enType.PRACTICE,
+      order: 1,
     };
 
     const result = await createPhaseUseCase.execute(phase);
@@ -61,6 +62,7 @@ describe('Create Phase', () => {
       title: 'Fase teórica fase',
       type: enType.THEORY,
       markdown_text: '## oi',
+      order: 1,
     };
 
     const result = await createPhaseUseCase.execute(phase);
@@ -84,6 +86,7 @@ describe('Create Phase', () => {
       max_level: 2,
       title: 'Fase prática test',
       type: enType.PRACTICE,
+      order: 1,
     };
 
     await expect(createPhaseUseCase.execute(phase)).rejects.toEqual(
@@ -103,6 +106,7 @@ describe('Create Phase', () => {
       max_level: 5,
       title: 'Fase teórica test',
       type: enType.THEORY,
+      order: 1,
     };
 
     await expect(createPhaseUseCase.execute(phase)).rejects.toEqual(
@@ -116,6 +120,7 @@ describe('Create Phase', () => {
       max_level: 5,
       title: 'Fase test',
       type: enType.PRACTICE,
+      order: 1,
     };
 
     await expect(createPhaseUseCase.execute(inCorrectPhase)).rejects.toEqual(

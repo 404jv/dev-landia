@@ -40,6 +40,7 @@ describe('Create activity', () => {
           type: enOptionType.COMMAND,
         },
       ],
+      order: 1,
     });
 
     expect(result).toHaveProperty('id');

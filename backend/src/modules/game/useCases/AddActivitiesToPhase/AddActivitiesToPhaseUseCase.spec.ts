@@ -35,6 +35,7 @@ describe('Add Activities to Phase', () => {
       title: 'Atividade test',
       type: enActivityType.BLOCK_ACTIVITY,
       is_needed_code: false,
+      order: 1,
     });
 
     const phase = await inMemoryPhasesRepository.create({
@@ -42,6 +43,7 @@ describe('Add Activities to Phase', () => {
       title: 'Fase teste',
       max_level: 5,
       type: enType.PRACTICE,
+      order: 1,
     });
 
     await addActivitiesToPhaseUseCase.execute({
@@ -56,6 +58,7 @@ describe('Add Activities to Phase', () => {
       max_level: 5,
       title: 'Atividade test',
       type: enType.PRACTICE,
+      order: 1,
     });
 
     const activitiesToPhase: IAddActivitiesToPhaseDTO = {
