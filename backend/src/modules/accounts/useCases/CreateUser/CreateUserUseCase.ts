@@ -1,5 +1,5 @@
 import { hash } from 'bcrypt';
-import { container, inject, injectable } from 'tsyringe';
+import { inject, injectable } from 'tsyringe';
 
 import { User } from '@modules/accounts/infra/typeorm/entities/User';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
@@ -20,7 +20,9 @@ interface IRequest {
 class CreateUserUseCase {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+    @inject('HandleNextMapUseCase')
+    private handleNextMapUseCase: HandleNextMapUseCase
   ) {}
 
   async execute({
@@ -62,9 +64,7 @@ class CreateUserUseCase {
   }
 
   async setupFirstMap(user_id: string): Promise<void> {
-    const handleNextMapUseCase = container.resolve(HandleNextMapUseCase);
-
-    await handleNextMapUseCase.execute({
+    await this.handleNextMapUseCase.execute({
       user_id,
       finishedMapOrder: 0,
     });
