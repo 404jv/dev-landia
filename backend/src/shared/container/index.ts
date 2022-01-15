@@ -14,6 +14,7 @@ import { IOptionsRepository } from '@modules/game/repositories/IOptionsRepositor
 import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
 import { IUsersMapsRepository } from '@modules/game/repositories/IUsersMapsRepository';
 import { IUsersPhasesRepository } from '@modules/game/repositories/IUsersPhasesRepository';
+import { HandleNextMapUseCase } from '@modules/game/useCases/HandleNextMap/HandleNextMapUseCase';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -45,4 +46,9 @@ container.registerSingleton<IUsersPhasesRepository>(
 container.registerSingleton<IUsersMapsRepository>(
   'UsersMapsRepository',
   UsersMapsRepository
+);
+
+container.registerSingleton<HandleNextMapUseCase>(
+  'HandleNextMapUseCase',
+  HandleNextMapUseCase
 );
