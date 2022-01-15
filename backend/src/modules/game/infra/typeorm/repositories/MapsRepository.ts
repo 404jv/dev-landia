@@ -45,6 +45,7 @@ class MapsRepository implements IMapsRepository {
       where: {
         order,
       },
+      relations: ['phases'],
     });
 
     return map;
