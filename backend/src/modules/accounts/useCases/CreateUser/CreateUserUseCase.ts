@@ -1,5 +1,4 @@
 import { hash } from 'bcrypt';
-import { request } from 'express';
 import { container, inject, injectable } from 'tsyringe';
 
 import { User } from '@modules/accounts/infra/typeorm/entities/User';
