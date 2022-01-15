@@ -1,8 +1,10 @@
 import { hash } from 'bcrypt';
-import { inject, injectable } from 'tsyringe';
+import { request } from 'express';
+import { container, inject, injectable } from 'tsyringe';
 
 import { User } from '@modules/accounts/infra/typeorm/entities/User';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { HandleNextMapUseCase } from '@modules/game/useCases/HandleNextMap/HandleNextMapUseCase';
 
 import { EmailAlreadyExistsError } from './errors/EmailAlreadyExistsError';
 import { UsernameAlreadyExistsError } from './errors/UsernameAlreadyExistsError';
@@ -55,7 +57,18 @@ class CreateUserUseCase {
       biography,
     });
 
+    await this.setupFirstMap(user.id);
+
     return user;
+  }
+
+  async setupFirstMap(user_id: string): Promise<void> {
+    const handleNextMapUseCase = container.resolve(HandleNextMapUseCase);
+
+    await handleNextMapUseCase.execute({
+      user_id,
+      finishedMapOrder: 0,
+    });
   }
 }
 
