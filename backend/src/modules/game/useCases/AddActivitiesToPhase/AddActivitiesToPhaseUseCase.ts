@@ -30,7 +30,7 @@ class AddActivitiesToPhaseUseCase {
       activities_ids
     );
 
-    phaseExists.activities = activities;
+    phaseExists.activities.push(...activities);
 
     await this.phasesRepository.update(phaseExists);
 
