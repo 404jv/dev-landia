@@ -5,11 +5,13 @@ import { GetPhaseUseCase } from './GetPhaseUseCase';
 
 class GetPhaseController {
   async handle(request: Request, response: Response): Promise<Response> {
+    const { phaseLevel, phase_id } = request.body;
+
     const getPhaseUseCase = container.resolve(GetPhaseUseCase);
 
-    await getPhaseUseCase.execute();
+    const phase = await getPhaseUseCase.execute(phase_id, phaseLevel);
 
-    return response.sendStatus(200);
+    return response.status(200).json(phase);
   }
 }
 
