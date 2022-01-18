@@ -51,6 +51,14 @@ class InMemoryPhasesRepository implements IPhasesRepository {
 
     return phase;
   }
+
+  async findAndSelectActivities(
+    id: string,
+    start: number,
+    end: number
+  ): Promise<Phase> {
+    throw new Error('Method not implemented.');
+  }
 }
 
 export { InMemoryPhasesRepository };

@@ -6,6 +6,11 @@ interface IPhasesRepository {
   list(): Promise<Phase[]>;
   findById(id: string): Promise<Phase>;
   update(data: ICreatePhaseDTO): Promise<Phase>;
+  findAndSelectActivities(
+    id: string,
+    start: number,
+    end: number
+  ): Promise<Phase>;
 }
 
 export { IPhasesRepository };

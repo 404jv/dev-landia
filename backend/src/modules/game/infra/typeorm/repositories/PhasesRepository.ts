@@ -67,6 +67,25 @@ class PhasesRepository implements IPhasesRepository {
 
     return phase;
   }
+
+  async findAndSelectActivities(
+    id: string,
+    start: number,
+    end: number
+  ): Promise<Phase> {
+    const phase = await this.repository
+      .createQueryBuilder('phase')
+      .where('phase.id = :id')
+      .innerJoinAndSelect('phase.activities', 'activities')
+      .where('activities.order >= :start')
+      .andWhere('activities.order <= :end')
+      .leftJoinAndSelect('activities.options', 'options')
+      .orderBy('activities.order', 'ASC')
+      .setParameters({ start, end, id })
+      .getOne();
+
+    return phase;
+  }
 }
 
 export { PhasesRepository };
