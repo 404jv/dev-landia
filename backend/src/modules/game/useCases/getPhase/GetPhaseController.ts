@@ -9,9 +9,9 @@ class GetPhaseController {
 
     const getPhaseUseCase = container.resolve(GetPhaseUseCase);
 
-    const phase = await getPhaseUseCase.execute(phase_id, phaseLevel);
+    const activities = await getPhaseUseCase.execute(phase_id, phaseLevel);
 
-    return response.status(200).json(phase);
+    return response.status(200).json(activities);
   }
 }
 
