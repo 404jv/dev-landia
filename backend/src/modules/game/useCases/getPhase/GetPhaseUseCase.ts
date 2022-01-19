@@ -1,7 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
 import { Activity } from '@modules/game/infra/typeorm/entities/Activity';
-import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
 import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
 
 @injectable()
