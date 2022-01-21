@@ -2,12 +2,14 @@ import { container } from 'tsyringe';
 
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { ActivitiesAnswersRepository } from '@modules/game/infra/typeorm/repositories/ActivitiesAnswersRepository';
 import { ActivitiesRepository } from '@modules/game/infra/typeorm/repositories/ActivitiesRepository';
 import { MapsRepository } from '@modules/game/infra/typeorm/repositories/MapsRepository';
 import { OptionsRepository } from '@modules/game/infra/typeorm/repositories/OptionsRepository';
 import { PhasesRepository } from '@modules/game/infra/typeorm/repositories/PhasesRepository';
 import { UsersMapsRepository } from '@modules/game/infra/typeorm/repositories/UsersMapsRepository';
 import { UsersPhasesRepository } from '@modules/game/infra/typeorm/repositories/UsersPhasesRepository';
+import { IActivitiesAnswersRepository } from '@modules/game/repositories/IActivitiesAnswersRepository';
 import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
 import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
 import { IOptionsRepository } from '@modules/game/repositories/IOptionsRepository';
@@ -51,4 +53,9 @@ container.registerSingleton<IUsersMapsRepository>(
 container.registerSingleton<HandleNextMapUseCase>(
   'HandleNextMapUseCase',
   HandleNextMapUseCase
+);
+
+container.registerSingleton<IActivitiesAnswersRepository>(
+  'ActivitiesAnswersRepository',
+  ActivitiesAnswersRepository
 );
