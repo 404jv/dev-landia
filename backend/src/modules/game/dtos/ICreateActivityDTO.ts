@@ -14,6 +14,7 @@ interface ICreateActivityDTO {
   options?: ICreateOptionDTO[];
   order: number;
   created_at?: Date;
+  activity_answer?: ICreateOptionDTO[];
 }
 
 export { ICreateActivityDTO };
