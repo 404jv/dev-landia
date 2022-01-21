@@ -33,14 +33,12 @@ class CreateActivityUseCase {
     options.map(async (option) => {
       const { hexadecimal_color, name, type } = option;
 
-      const optionCreated = await this.optionsRepository.create({
+      await this.optionsRepository.create({
         activity_id: activity.id,
         hexadecimal_color,
         name,
         type,
       });
-
-      return optionCreated;
     });
 
     return activity;
