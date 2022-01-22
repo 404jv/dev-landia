@@ -1,11 +1,11 @@
 import { getRepository, Repository } from 'typeorm';
 
 import { ICreateOptionActivityDTO } from '@modules/game/dtos/ICreateOptionActivityDTO';
-import { IActivitiesAnswersRepository } from '@modules/game/repositories/IActivitiesAnswersRepository';
+import { IActivitiesOptionsRepository } from '@modules/game/repositories/IActivitiesOptionsRepository';
 
 import { ActivityAnswer } from '../entities/ActivityAnswer';
 
-class ActivitiesAnswersRepository implements IActivitiesAnswersRepository {
+class ActivitiesAnswersRepository implements IActivitiesOptionsRepository {
   private repository: Repository<ActivityAnswer>;
 
   constructor() {

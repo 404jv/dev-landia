@@ -1,7 +1,7 @@
 import { ICreateOptionActivityDTO } from '../dtos/ICreateOptionActivityDTO';
 
-interface IActivitiesAnswersRepository {
+interface IActivitiesOptionsRepository {
   create(data: ICreateOptionActivityDTO): Promise<void>;
 }
 
-export { IActivitiesAnswersRepository };
+export { IActivitiesOptionsRepository };

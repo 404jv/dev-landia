@@ -1,10 +1,10 @@
 import { ICreateOptionActivityDTO } from '@modules/game/dtos/ICreateOptionActivityDTO';
 import { ActivityAnswer } from '@modules/game/infra/typeorm/entities/ActivityAnswer';
 
-import { IActivitiesAnswersRepository } from '../IActivitiesAnswersRepository';
+import { IActivitiesOptionsRepository } from '../IActivitiesOptionsRepository';
 
 class InMemoryActivitiesAnswersRepository
-  implements IActivitiesAnswersRepository
+  implements IActivitiesOptionsRepository
 {
   private repository: ActivityAnswer[] = [];
 

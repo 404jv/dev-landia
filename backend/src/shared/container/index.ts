@@ -9,7 +9,7 @@ import { OptionsRepository } from '@modules/game/infra/typeorm/repositories/Opti
 import { PhasesRepository } from '@modules/game/infra/typeorm/repositories/PhasesRepository';
 import { UsersMapsRepository } from '@modules/game/infra/typeorm/repositories/UsersMapsRepository';
 import { UsersPhasesRepository } from '@modules/game/infra/typeorm/repositories/UsersPhasesRepository';
-import { IActivitiesAnswersRepository } from '@modules/game/repositories/IActivitiesAnswersRepository';
+import { IActivitiesOptionsRepository } from '@modules/game/repositories/IActivitiesOptionsRepository';
 import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
 import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
 import { IOptionsRepository } from '@modules/game/repositories/IOptionsRepository';
@@ -55,7 +55,7 @@ container.registerSingleton<HandleNextMapUseCase>(
   HandleNextMapUseCase
 );
 
-container.registerSingleton<IActivitiesAnswersRepository>(
+container.registerSingleton<IActivitiesOptionsRepository>(
   'ActivitiesAnswersRepository',
   ActivitiesAnswersRepository
 );
