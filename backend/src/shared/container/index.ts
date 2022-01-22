@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { ActivitiesAnswersRepository } from '@modules/game/infra/typeorm/repositories/ActivitiesAnswersRepository';
+import { ActivitiesDefaultCodeRepository } from '@modules/game/infra/typeorm/repositories/ActivitiesDefaultCodeRepository';
 import { ActivitiesRepository } from '@modules/game/infra/typeorm/repositories/ActivitiesRepository';
 import { MapsRepository } from '@modules/game/infra/typeorm/repositories/MapsRepository';
 import { OptionsRepository } from '@modules/game/infra/typeorm/repositories/OptionsRepository';
@@ -58,4 +59,9 @@ container.registerSingleton<HandleNextMapUseCase>(
 container.registerSingleton<IActivitiesOptionsRepository>(
   'ActivitiesAnswersRepository',
   ActivitiesAnswersRepository
+);
+
+container.registerSingleton<IActivitiesOptionsRepository>(
+  'ActivitiesDefaultCodeRepository',
+  ActivitiesDefaultCodeRepository
 );
