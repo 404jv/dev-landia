@@ -25,8 +25,12 @@ class InMemoryOptionsRepository implements IOptionsRepository {
     return option;
   }
 
-  findByIds(ids: string[]): Promise<Option[]> {
-    throw new Error('Method not implemented.');
+  async findByIds(ids: string[]): Promise<Option[]> {
+    return this.repository.filter((option) => ids.includes(option.id));
+  }
+
+  async findById(id: string): Promise<Option> {
+    return this.repository.find((option) => option.id === id);
   }
 }
 
