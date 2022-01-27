@@ -38,7 +38,12 @@ class PhasesRepository implements IPhasesRepository {
   }
 
   async findById(id: string): Promise<Phase> {
-    const phase = this.repository.findOne(id);
+    const phase = this.repository.findOne({
+      where: {
+        id,
+      },
+      relations: ['activities'],
+    });
     return phase;
   }
 
