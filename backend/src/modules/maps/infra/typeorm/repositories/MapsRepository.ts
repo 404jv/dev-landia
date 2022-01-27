@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { ICreateMapDTO } from '@modules/game/dtos/ICreateMapDTO';
-import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
+import { ICreateMapDTO } from '@modules/maps/dtos/ICreateMapDTO';
+import { IMapsRepository } from '@modules/maps/repositories/IMapsRepository';
 
 import { Map } from '../entities/Map';
 

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { CreateMapController } from '@modules/game/useCases/CreateMap/CreateMapController';
+import { CreateMapController } from '@modules/maps/useCases/CreateMap/CreateMapController';
 
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';

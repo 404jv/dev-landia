@@ -10,8 +10,8 @@ import {
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
+import { Map } from '../../../../maps/infra/typeorm/entities/Map';
 import { Activity } from './Activity';
-import { Map } from './Map';
 
 enum enType {
   THEORY = 'theory',

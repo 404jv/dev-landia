@@ -1,10 +1,10 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Map } from '@modules/game/infra/typeorm/entities/Map';
 import { Phase } from '@modules/game/infra/typeorm/entities/Phase';
-import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
 import { IUsersMapsRepository } from '@modules/game/repositories/IUsersMapsRepository';
 import { IUsersPhasesRepository } from '@modules/game/repositories/IUsersPhasesRepository';
+import { Map } from '@modules/maps/infra/typeorm/entities/Map';
+import { IMapsRepository } from '@modules/maps/repositories/IMapsRepository';
 
 @injectable()
 class ListTreeUseCase {

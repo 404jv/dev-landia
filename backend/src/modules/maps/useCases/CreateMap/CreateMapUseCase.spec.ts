@@ -1,5 +1,5 @@
-import { ICreateMapDTO } from '@modules/game/dtos/ICreateMapDTO';
-import { InMemoryMapsRepository } from '@modules/game/repositories/in-memory/InMemoryMapsRepository';
+import { ICreateMapDTO } from '@modules/maps/dtos/ICreateMapDTO';
+import { InMemoryMapsRepository } from '@modules/maps/repositories/in-memory/InMemoryMapsRepository';
 
 import { CreateMapUseCase } from './CreateMapUseCase';
 

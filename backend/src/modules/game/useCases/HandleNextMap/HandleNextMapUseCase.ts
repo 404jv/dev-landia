@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
 import { IUsersMapsRepository } from '@modules/game/repositories/IUsersMapsRepository';
 import { IUsersPhasesRepository } from '@modules/game/repositories/IUsersPhasesRepository';
+import { IMapsRepository } from '@modules/maps/repositories/IMapsRepository';
 
 interface IRequest {
   user_id: string;

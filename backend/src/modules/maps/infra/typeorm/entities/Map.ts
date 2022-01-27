@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-import { Phase } from './Phase';
+import { Phase } from '../../../../game/infra/typeorm/entities/Phase';
 
 @Entity('maps')
 class Map {

@@ -5,19 +5,19 @@ import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepositor
 import { ActivitiesAnswersRepository } from '@modules/game/infra/typeorm/repositories/ActivitiesAnswersRepository';
 import { ActivitiesDefaultCodeRepository } from '@modules/game/infra/typeorm/repositories/ActivitiesDefaultCodeRepository';
 import { ActivitiesRepository } from '@modules/game/infra/typeorm/repositories/ActivitiesRepository';
-import { MapsRepository } from '@modules/game/infra/typeorm/repositories/MapsRepository';
 import { OptionsRepository } from '@modules/game/infra/typeorm/repositories/OptionsRepository';
 import { PhasesRepository } from '@modules/game/infra/typeorm/repositories/PhasesRepository';
 import { UsersMapsRepository } from '@modules/game/infra/typeorm/repositories/UsersMapsRepository';
 import { UsersPhasesRepository } from '@modules/game/infra/typeorm/repositories/UsersPhasesRepository';
 import { IActivitiesOptionsRepository } from '@modules/game/repositories/IActivitiesOptionsRepository';
 import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
-import { IMapsRepository } from '@modules/game/repositories/IMapsRepository';
 import { IOptionsRepository } from '@modules/game/repositories/IOptionsRepository';
 import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
 import { IUsersMapsRepository } from '@modules/game/repositories/IUsersMapsRepository';
 import { IUsersPhasesRepository } from '@modules/game/repositories/IUsersPhasesRepository';
 import { HandleNextMapUseCase } from '@modules/game/useCases/HandleNextMap/HandleNextMapUseCase';
+import { MapsRepository } from '@modules/maps/infra/typeorm/repositories/MapsRepository';
+import { IMapsRepository } from '@modules/maps/repositories/IMapsRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',

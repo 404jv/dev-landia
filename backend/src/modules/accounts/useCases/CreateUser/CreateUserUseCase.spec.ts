@@ -1,9 +1,9 @@
 import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUserDTO';
 import { InMemoryUsersRepository } from '@modules/accounts/repositories/in-memory/InMemoryUsersRepository';
-import { InMemoryMapsRepository } from '@modules/game/repositories/in-memory/InMemoryMapsRepository';
 import { InMemoryUsersMapsRepository } from '@modules/game/repositories/in-memory/InMemoryUsersMapsRepository';
 import { InMemoryUsersPhasesRepository } from '@modules/game/repositories/in-memory/InMemoryUsersPhasesRepository';
 import { HandleNextMapUseCase } from '@modules/game/useCases/HandleNextMap/HandleNextMapUseCase';
+import { InMemoryMapsRepository } from '@modules/maps/repositories/in-memory/InMemoryMapsRepository';
 
 import { CreateUserUseCase } from './CreateUserUseCase';
 import { EmailAlreadyExistsError } from './errors/EmailAlreadyExistsError';
