@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import { ICreateActivityDTO } from '@modules/game/dtos/ICreateActivityDTO';
+import { IUpdateActivityDTO } from '@modules/game/dtos/IUpdateActivityDTO';
 import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
 
 import { Activity } from '../entities/Activity';
@@ -33,13 +34,23 @@ class ActivitiesRepository implements IActivitiesRepository {
   }
 
   async findById(id: string): Promise<Activity> {
-    const activity = await this.repository.findOne(id);
+    const activity = await this.repository.findOne({
+      where: {
+        id,
+      },
+      relations: ['options'],
+    });
     return activity;
   }
 
   async findByIds(ids: string[]): Promise<Activity[]> {
     const activities = await this.repository.findByIds(ids);
     return activities;
+  }
+
+  async update(data: IUpdateActivityDTO): Promise<Activity> {
+    const activity = await this.repository.create(data);
+    return activity;
   }
 }
 

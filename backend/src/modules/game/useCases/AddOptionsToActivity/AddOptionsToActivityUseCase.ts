@@ -1,8 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
 import { IAddOptionsToActivityDTO } from '@modules/game/dtos/IAddOptionsToActivityDTO';
-import { IActivitiesOptionsRepository } from '@modules/game/repositories/IActivitiesOptionsRepository';
+import { Activity } from '@modules/game/infra/typeorm/entities/Activity';
 import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
+import { IOptionsRepository } from '@modules/game/repositories/IOptionsRepository';
 
 import { ActivityNotFoundError } from './errors/PhaseNotFoundError';
 
@@ -11,15 +12,15 @@ class AddOptionsToActivityUseCase {
   constructor(
     @inject('ActivitiesRepository')
     private activitiesRepository: IActivitiesRepository,
-    @inject('ActivitiesAnswersRepository')
-    private activitiesAnswersRepository: IActivitiesOptionsRepository
+    @inject('OptionsRepository')
+    private optionsRepository: IOptionsRepository
   ) {}
 
   async execute({
     activityAnswerOptionsIds,
     activityDefaultCodeOptionsIds,
     activity_id,
-  }: IAddOptionsToActivityDTO): Promise<void> {
+  }: IAddOptionsToActivityDTO): Promise<Activity> {
     const activityExists = await this.activitiesRepository.findById(
       activity_id
     );
@@ -28,24 +29,30 @@ class AddOptionsToActivityUseCase {
       throw new ActivityNotFoundError();
     }
 
-    console.log(activityExists.default_code);
+    const defaultCode = await this.optionsRepository.findByIds(
+      activityDefaultCodeOptionsIds
+    );
 
-    /*
-      Não posso fazer um array de string!
-      Vai ter que ser um array de objetos com order e id
+    console.log(defaultCode, activityDefaultCodeOptionsIds);
 
-      Talvez se eu achar alguma forma de substituir sempre as options anterior
-      com esse novo array de options. Ae o order fica o index da option
-      no array.
+    /* 
+      se as opções se repetirem vai dar ruim, pois o findByIds não retorna
+      ids duplicado.
+
+      preciso separar tudo isso em módulos. Simbora Refatora =)
     */
 
-    // activityAnswerOptionsIds.map(async (option_id, index) => {
-    //   await this.activitiesAnswerRepository.create({
-    //     activity_id,
-    //     option_id,
-    //     order: index + 1,
-    //   });
-    // });
+    activityExists.default_code = defaultCode;
+
+    const answerOptions = await this.optionsRepository.findByIds(
+      activityAnswerOptionsIds
+    );
+
+    activityExists.activity_answer = answerOptions;
+
+    await this.activitiesRepository.update(activityExists);
+
+    return activityExists;
   }
 }
 

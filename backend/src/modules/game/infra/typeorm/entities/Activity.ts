@@ -2,11 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
+import { ActivityDefaultCode } from './ActivityDefaultCode';
 import { Option } from './Option';
 
 enum enActivityType {
@@ -36,6 +39,22 @@ class Activity {
 
   @OneToMany(() => Option, (option) => option.activity)
   options: Option[];
+
+  @ManyToMany(() => Option)
+  @JoinTable({
+    name: 'activity_default_code',
+    joinColumns: [{ name: 'activity_id' }],
+    inverseJoinColumns: [{ name: 'option_id' }],
+  })
+  default_code: Option[];
+
+  @ManyToMany(() => Option)
+  @JoinTable({
+    name: 'activity_answer',
+    joinColumns: [{ name: 'activity_id' }],
+    inverseJoinColumns: [{ name: 'option_id' }],
+  })
+  activity_answer: Option[];
 
   @CreateDateColumn()
   created_at: Date;

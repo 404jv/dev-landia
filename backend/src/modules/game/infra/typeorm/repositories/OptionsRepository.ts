@@ -29,6 +29,11 @@ class OptionsRepository implements IOptionsRepository {
 
     return option;
   }
+
+  async findByIds(ids: string[]): Promise<Option[]> {
+    const options = await this.repository.findByIds(ids);
+    return options;
+  }
 }
 
 export { OptionsRepository };

@@ -3,6 +3,7 @@ import { Option } from '../infra/typeorm/entities/Option';
 
 interface IOptionsRepository {
   create(data: ICreateOptionDTO): Promise<Option>;
+  findByIds(ids: string[]): Promise<Option[]>;
 }
 
 export { IOptionsRepository };
