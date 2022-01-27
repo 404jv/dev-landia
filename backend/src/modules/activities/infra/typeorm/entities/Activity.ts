@@ -9,7 +9,6 @@ import {
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-import { ActivityDefaultCode } from './ActivityDefaultCode';
 import { Option } from './Option';
 
 enum enActivityType {

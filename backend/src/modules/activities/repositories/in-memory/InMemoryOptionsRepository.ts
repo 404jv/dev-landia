@@ -1,5 +1,5 @@
-import { ICreateOptionDTO } from '@modules/game/dtos/ICreateOptionDTO';
-import { Option } from '@modules/game/infra/typeorm/entities/Option';
+import { ICreateOptionDTO } from '@modules/activities/dtos/ICreateOptionDTO';
+import { Option } from '@modules/activities/infra/typeorm/entities/Option';
 
 import { IOptionsRepository } from '../IOptionsRepository';
 
@@ -23,6 +23,10 @@ class InMemoryOptionsRepository implements IOptionsRepository {
     this.repository.push(option);
 
     return option;
+  }
+
+  findByIds(ids: string[]): Promise<Option[]> {
+    throw new Error('Method not implemented.');
   }
 }
 

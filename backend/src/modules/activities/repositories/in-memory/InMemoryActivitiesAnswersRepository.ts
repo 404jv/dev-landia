@@ -1,5 +1,5 @@
-import { ICreateOptionActivityDTO } from '@modules/game/dtos/ICreateOptionActivityDTO';
-import { ActivityAnswer } from '@modules/game/infra/typeorm/entities/ActivityAnswer';
+import { ICreateOptionActivityDTO } from '@modules/activities/dtos/ICreateOptionActivityDTO';
+import { ActivityAnswer } from '@modules/activities/infra/typeorm/entities/ActivityAnswer';
 
 import { IActivitiesOptionsRepository } from '../IActivitiesOptionsRepository';
 

@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
-import { ICreateActivityDTO } from '@modules/game/dtos/ICreateActivityDTO';
-import { Activity } from '@modules/game/infra/typeorm/entities/Activity';
-import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
-import { IOptionsRepository } from '@modules/game/repositories/IOptionsRepository';
+import { ICreateActivityDTO } from '@modules/activities/dtos/ICreateActivityDTO';
+import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
+import { IActivitiesRepository } from '@modules/activities/repositories/IActivitiesRepository';
+import { IOptionsRepository } from '@modules/activities/repositories/IOptionsRepository';
 
 @injectable()
 class CreateActivityUseCase {

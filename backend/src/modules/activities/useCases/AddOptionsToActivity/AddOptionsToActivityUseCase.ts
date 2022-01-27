@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IAddOptionsToActivityDTO } from '@modules/game/dtos/IAddOptionsToActivityDTO';
-import { Activity } from '@modules/game/infra/typeorm/entities/Activity';
-import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
-import { IOptionsRepository } from '@modules/game/repositories/IOptionsRepository';
+import { IAddOptionsToActivityDTO } from '@modules/activities/dtos/IAddOptionsToActivityDTO';
+import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
+import { IActivitiesRepository } from '@modules/activities/repositories/IActivitiesRepository';
+import { IOptionsRepository } from '@modules/activities/repositories/IOptionsRepository';
 
 import { ActivityNotFoundError } from './errors/PhaseNotFoundError';
 

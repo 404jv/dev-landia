@@ -1,5 +1,6 @@
-import { ICreateActivityDTO } from '@modules/game/dtos/ICreateActivityDTO';
-import { Activity } from '@modules/game/infra/typeorm/entities/Activity';
+import { ICreateActivityDTO } from '@modules/activities/dtos/ICreateActivityDTO';
+import { IUpdateActivityDTO } from '@modules/activities/dtos/IUpdateActivityDTO';
+import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
 
 import { IActivitiesRepository } from '../IActivitiesRepository';
 
@@ -34,6 +35,10 @@ class InMemoryActivityRepository implements IActivitiesRepository {
 
   async findByIds(ids: string[]): Promise<Activity[]> {
     return this.repositories.filter((activity) => ids.includes(activity.id));
+  }
+
+  update(data: IUpdateActivityDTO): Promise<Activity> {
+    throw new Error('Method not implemented.');
   }
 }
 

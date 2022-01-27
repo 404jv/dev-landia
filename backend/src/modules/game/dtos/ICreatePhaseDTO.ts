@@ -1,4 +1,4 @@
-import { Activity } from '../infra/typeorm/entities/Activity';
+import { Activity } from '../../activities/infra/typeorm/entities/Activity';
 
 enum enType {
   THEORY = 'theory',

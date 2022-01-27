@@ -1,5 +1,3 @@
-import { Activity } from '../infra/typeorm/entities/Activity';
-
 enum enOptionType {
   JS_FUNCTION = 'js_function',
   COMMAND = 'command',

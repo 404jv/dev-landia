@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { AddOptionsToActivityController } from '@modules/game/useCases/AddOptionsToActivity/AddOptionsToActivityController';
-import { CreateActivityController } from '@modules/game/useCases/CreateActivity/CreateActivityController';
+import { AddOptionsToActivityController } from '@modules/activities/useCases/AddOptionsToActivity/AddOptionsToActivityController';
+import { CreateActivityController } from '@modules/activities/useCases/CreateActivity/CreateActivityController';
 
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';

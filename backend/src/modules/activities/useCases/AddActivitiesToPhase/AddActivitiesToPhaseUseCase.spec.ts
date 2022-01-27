@@ -1,5 +1,5 @@
-import { IAddActivitiesToPhaseDTO } from '@modules/game/dtos/IAddActivitiesToPhaseDTO';
-import { InMemoryActivityRepository } from '@modules/game/repositories/in-memory/InMemoryActivityRepository';
+import { IAddActivitiesToPhaseDTO } from '@modules/activities/dtos/IAddActivitiesToPhaseDTO';
+import { InMemoryActivityRepository } from '@modules/activities/repositories/in-memory/InMemoryActivityRepository';
 import { InMemoryPhasesRepository } from '@modules/game/repositories/in-memory/InMemoryPhasesRepository';
 
 import { AddActivitiesToPhaseUseCase } from './AddActivitiesToPhaseUseCase';

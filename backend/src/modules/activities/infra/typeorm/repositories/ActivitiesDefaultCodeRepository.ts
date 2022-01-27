@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { ICreateOptionActivityDTO } from '@modules/game/dtos/ICreateOptionActivityDTO';
-import { IActivitiesOptionsRepository } from '@modules/game/repositories/IActivitiesOptionsRepository';
+import { ICreateOptionActivityDTO } from '@modules/activities/dtos/ICreateOptionActivityDTO';
+import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
 
 import { ActivityDefaultCode } from '../entities/ActivityDefaultCode';
 

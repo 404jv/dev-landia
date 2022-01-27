@@ -1,6 +1,6 @@
-import { InMemoryActivitiesAnswersRepository } from '@modules/game/repositories/in-memory/InMemoryActivitiesAnswersRepository';
-import { InMemoryActivityRepository } from '@modules/game/repositories/in-memory/InMemoryActivityRepository';
-import { InMemoryOptionsRepository } from '@modules/game/repositories/in-memory/InMemoryOptionsRepository';
+import { InMemoryActivitiesAnswersRepository } from '@modules/activities/repositories/in-memory/InMemoryActivitiesAnswersRepository';
+import { InMemoryActivityRepository } from '@modules/activities/repositories/in-memory/InMemoryActivityRepository';
+import { InMemoryOptionsRepository } from '@modules/activities/repositories/in-memory/InMemoryOptionsRepository';
 
 import { CreateActivityUseCase } from './CreateActivityUseCase';
 

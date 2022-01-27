@@ -1,8 +1,8 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { ICreateActivityDTO } from '@modules/game/dtos/ICreateActivityDTO';
-import { IUpdateActivityDTO } from '@modules/game/dtos/IUpdateActivityDTO';
-import { IActivitiesRepository } from '@modules/game/repositories/IActivitiesRepository';
+import { ICreateActivityDTO } from '@modules/activities/dtos/ICreateActivityDTO';
+import { IUpdateActivityDTO } from '@modules/activities/dtos/IUpdateActivityDTO';
+import { IActivitiesRepository } from '@modules/activities/repositories/IActivitiesRepository';
 
 import { Activity } from '../entities/Activity';
 
@@ -49,7 +49,7 @@ class ActivitiesRepository implements IActivitiesRepository {
   }
 
   async update(data: IUpdateActivityDTO): Promise<Activity> {
-    const activity = await this.repository.create(data);
+    const activity = await this.repository.save(data);
     return activity;
   }
 }
