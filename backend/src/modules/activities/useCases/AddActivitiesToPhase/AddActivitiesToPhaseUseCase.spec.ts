@@ -1,6 +1,6 @@
 import { IAddActivitiesToPhaseDTO } from '@modules/activities/dtos/IAddActivitiesToPhaseDTO';
 import { InMemoryActivityRepository } from '@modules/activities/repositories/in-memory/InMemoryActivityRepository';
-import { InMemoryPhasesRepository } from '@modules/game/repositories/in-memory/InMemoryPhasesRepository';
+import { InMemoryPhasesRepository } from '@modules/phases/repositories/in-memory/InMemoryPhasesRepository';
 
 import { AddActivitiesToPhaseUseCase } from './AddActivitiesToPhaseUseCase';
 import { PhaseNotFoundError } from './errors/PhaseNotFoundError';

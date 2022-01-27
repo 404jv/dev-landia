@@ -2,8 +2,8 @@ import { inject, injectable } from 'tsyringe';
 
 import { IAddActivitiesToPhaseDTO } from '@modules/activities/dtos/IAddActivitiesToPhaseDTO';
 import { IActivitiesRepository } from '@modules/activities/repositories/IActivitiesRepository';
-import { Phase } from '@modules/game/infra/typeorm/entities/Phase';
-import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
+import { Phase } from '@modules/phases/infra/typeorm/entities/Phase';
+import { IPhasesRepository } from '@modules/phases/repositories/IPhasesRepository';
 
 import { PhaseNotFoundError } from './errors/PhaseNotFoundError';
 

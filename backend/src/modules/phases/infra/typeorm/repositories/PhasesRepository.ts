@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
-import { ICreatePhaseDTO } from '@modules/game/dtos/ICreatePhaseDTO';
-import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
+import { ICreatePhaseDTO } from '@modules/phases/dtos/ICreatePhaseDTO';
+import { IPhasesRepository } from '@modules/phases/repositories/IPhasesRepository';
 
 import { Phase } from '../entities/Phase';
 

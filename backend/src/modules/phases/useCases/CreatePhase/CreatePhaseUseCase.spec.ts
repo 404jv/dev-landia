@@ -1,6 +1,6 @@
-import { ICreatePhaseDTO } from '@modules/game/dtos/ICreatePhaseDTO';
-import { InMemoryPhasesRepository } from '@modules/game/repositories/in-memory/InMemoryPhasesRepository';
 import { InMemoryMapsRepository } from '@modules/maps/repositories/in-memory/InMemoryMapsRepository';
+import { ICreatePhaseDTO } from '@modules/phases/dtos/ICreatePhaseDTO';
+import { InMemoryPhasesRepository } from '@modules/phases/repositories/in-memory/InMemoryPhasesRepository';
 
 import { CreatePhaseUseCase } from './CreatePhaseUseCase';
 import { InvalidMaxLevelError } from './errors/InvalidMaxLevelError';

@@ -1,5 +1,5 @@
-import { ICreatePhaseDTO } from '@modules/game/dtos/ICreatePhaseDTO';
-import { Phase } from '@modules/game/infra/typeorm/entities/Phase';
+import { ICreatePhaseDTO } from '@modules/phases/dtos/ICreatePhaseDTO';
+import { Phase } from '@modules/phases/infra/typeorm/entities/Phase';
 
 import { IPhasesRepository } from '../IPhasesRepository';
 

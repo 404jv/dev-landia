@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 
-import { ICreatePhaseDTO } from '@modules/game/dtos/ICreatePhaseDTO';
-import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
 import { IMapsRepository } from '@modules/maps/repositories/IMapsRepository';
+import { ICreatePhaseDTO } from '@modules/phases/dtos/ICreatePhaseDTO';
+import { IPhasesRepository } from '@modules/phases/repositories/IPhasesRepository';
 
 import { InvalidMaxLevelError } from './errors/InvalidMaxLevelError';
 import { MapNotFoundError } from './errors/MapNotFoundError';

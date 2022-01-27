@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
 import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
-import { IPhasesRepository } from '@modules/game/repositories/IPhasesRepository';
+import { IPhasesRepository } from '@modules/phases/repositories/IPhasesRepository';
 
 @injectable()
 class GetPhaseUseCase {

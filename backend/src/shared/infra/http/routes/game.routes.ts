@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { GetPhaseController } from '@modules/game/useCases/getPhase/GetPhaseController';
 import { ListTreeController } from '@modules/game/useCases/ListTree/ListTreeController';
+import { GetPhaseController } from '@modules/phases/useCases/getPhase/GetPhaseController';
 
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
