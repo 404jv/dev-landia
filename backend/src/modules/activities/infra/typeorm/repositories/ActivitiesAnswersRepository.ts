@@ -28,7 +28,16 @@ class ActivitiesAnswersRepository implements IActivitiesOptionsRepository {
   }
 
   async findOptionsByActivityId(activity_id: string): Promise<Option[]> {
-    throw new Error('Method not implemented.');
+    const options = await this.repository.query(`
+      SELECT options.*, aa.order
+      FROM activities AS ac
+      JOIN options ON options.activity_id = ac.id
+      JOIN activity_answer AS aa ON aa.activity_id = ac.id AND options.id = aa.option_id
+      WHERE ac.id = '${activity_id}'
+      ORDER BY aa.order;
+    `);
+
+    return options;
   }
 
   async deleteAllByActivityId(activity_id: string): Promise<void> {
