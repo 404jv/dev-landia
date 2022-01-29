@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import { IAddOptionsToActivityDTO } from '@modules/activities/dtos/IAddOptionsToActivityDTO';
 import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
+import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
 import { IActivitiesRepository } from '@modules/activities/repositories/IActivitiesRepository';
 import { IOptionsRepository } from '@modules/activities/repositories/IOptionsRepository';
 
@@ -12,8 +13,10 @@ class AddOptionsToActivityUseCase {
   constructor(
     @inject('ActivitiesRepository')
     private activitiesRepository: IActivitiesRepository,
-    @inject('OptionsRepository')
-    private optionsRepository: IOptionsRepository
+    @inject('ActivitiesDefaultCodeRepository')
+    private defaultCodeRepository: IActivitiesOptionsRepository,
+    @inject('ActivitiesAnswersRepository')
+    private activitiesAnswersRepository: IActivitiesOptionsRepository
   ) {}
 
   async execute({
@@ -21,38 +24,44 @@ class AddOptionsToActivityUseCase {
     activityDefaultCodeOptionsIds,
     activity_id,
   }: IAddOptionsToActivityDTO): Promise<Activity> {
-    const activityExists = await this.activitiesRepository.findById(
-      activity_id
-    );
+    const activity = await this.activitiesRepository.findById(activity_id);
 
-    if (!activityExists) {
+    if (!activity) {
       throw new ActivityNotFoundError();
     }
 
-    const defaultCode = await this.optionsRepository.findByIds(
-      activityDefaultCodeOptionsIds
-    );
+    this.defaultCodeRepository.deleteAllByActivityId(activity_id);
+    this.activitiesAnswersRepository.deleteAllByActivityId(activity_id);
 
-    console.log(defaultCode, activityDefaultCodeOptionsIds);
+    activityDefaultCodeOptionsIds.map(async (option_id, index) => {
+      await this.defaultCodeRepository.create({
+        activity_id,
+        option_id,
+        order: index + 1,
+      });
+    });
 
-    /* 
-      se as opções se repetirem vai dar ruim, pois o findByIds não retorna
-      ids duplicado.
+    const defaultCode =
+      await this.defaultCodeRepository.findOptionsByActivityId(activity_id);
 
-      preciso separar tudo isso em módulos. Simbora Refatora =)
-    */
+    activity.default_code = defaultCode;
 
-    activityExists.default_code = defaultCode;
+    activityAnswerOptionsIds.map(async (option_id, index) => {
+      await this.activitiesAnswersRepository.create({
+        activity_id,
+        option_id,
+        order: index + 1,
+      });
+    });
 
-    const answerOptions = await this.optionsRepository.findByIds(
-      activityAnswerOptionsIds
-    );
+    const activityAnswer =
+      await this.activitiesAnswersRepository.findOptionsByActivityId(
+        activity_id
+      );
 
-    activityExists.activity_answer = answerOptions;
+    activity.activity_answer = activityAnswer;
 
-    await this.activitiesRepository.update(activityExists);
-
-    return activityExists;
+    return activity;
   }
 }
 
