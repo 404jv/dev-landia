@@ -39,6 +39,14 @@ class ActivitiesDefaultCodeRepository implements IActivitiesOptionsRepository {
 
     return options;
   }
+
+  async deleteAllByActivityId(activity_id: string): Promise<void> {
+    await this.repository
+      .createQueryBuilder('activity_default_code')
+      .delete()
+      .where('activity_default_code.activity_id = activity_id', { activity_id })
+      .execute();
+  }
 }
 
 export { ActivitiesDefaultCodeRepository };
