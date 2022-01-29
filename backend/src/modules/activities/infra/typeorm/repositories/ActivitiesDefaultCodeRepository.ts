@@ -4,6 +4,7 @@ import { ICreateOptionActivityDTO } from '@modules/activities/dtos/ICreateOption
 import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
 
 import { ActivityDefaultCode } from '../entities/ActivityDefaultCode';
+import { Option } from '../entities/Option';
 
 class ActivitiesDefaultCodeRepository implements IActivitiesOptionsRepository {
   private repository: Repository<ActivityDefaultCode>;
@@ -24,6 +25,19 @@ class ActivitiesDefaultCodeRepository implements IActivitiesOptionsRepository {
     });
 
     await this.repository.save(activityCode);
+  }
+
+  async findOptionsByActivityId(activity_id: string): Promise<Option[]> {
+    const options = await this.repository.query(`
+      SELECT options.*, adf.order
+      FROM activities AS ac
+      JOIN options ON options.activity_id = ac.id
+      JOIN activity_default_code AS adf ON adf.activity_id = ac.id AND options.id = adf.option_id
+      WHERE ac.id = '${activity_id}'
+      ORDER BY adf.order;
+    `);
+
+    return options;
   }
 }
 

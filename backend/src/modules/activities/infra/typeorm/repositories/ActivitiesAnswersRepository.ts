@@ -4,6 +4,7 @@ import { ICreateOptionActivityDTO } from '@modules/activities/dtos/ICreateOption
 import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
 
 import { ActivityAnswer } from '../entities/ActivityAnswer';
+import { Option } from '../entities/Option';
 
 class ActivitiesAnswersRepository implements IActivitiesOptionsRepository {
   private repository: Repository<ActivityAnswer>;
@@ -24,6 +25,10 @@ class ActivitiesAnswersRepository implements IActivitiesOptionsRepository {
     });
 
     await this.repository.save(activityAnswer);
+  }
+
+  async findOptionsByActivityId(activity_id: string): Promise<Option[]> {
+    throw new Error('Method not implemented.');
   }
 }
 
