@@ -4,7 +4,6 @@ import { IAddOptionsToActivityDTO } from '@modules/activities/dtos/IAddOptionsTo
 import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
 import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
 import { IActivitiesRepository } from '@modules/activities/repositories/IActivitiesRepository';
-import { IOptionsRepository } from '@modules/activities/repositories/IOptionsRepository';
 
 import { ActivityNotFoundError } from './errors/PhaseNotFoundError';
 
