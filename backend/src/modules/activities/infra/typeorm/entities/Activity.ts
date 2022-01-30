@@ -2,8 +2,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
@@ -39,20 +37,10 @@ class Activity {
   @OneToMany(() => Option, (option) => option.activity)
   options: Option[];
 
-  @ManyToMany(() => Option)
-  @JoinTable({
-    name: 'activity_default_code',
-    joinColumns: [{ name: 'activity_id' }],
-    inverseJoinColumns: [{ name: 'option_id' }],
-  })
+  @OneToMany(() => Option, (option) => option.activity)
   default_code: Option[];
 
-  @ManyToMany(() => Option)
-  @JoinTable({
-    name: 'activity_answer',
-    joinColumns: [{ name: 'activity_id' }],
-    inverseJoinColumns: [{ name: 'option_id' }],
-  })
+  @OneToMany(() => Option, (option) => option.activity)
   activity_answer: Option[];
 
   @CreateDateColumn()
