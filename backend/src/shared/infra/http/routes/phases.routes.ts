@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { AddActivitiesToPhaseController } from '@modules/game/useCases/AddActivitiesToPhase/AddActivitiesToPhaseController';
-import { CreatePhaseController } from '@modules/game/useCases/CreatePhase/CreatePhaseController';
+import { AddActivitiesToPhaseController } from '@modules/activities/useCases/AddActivitiesToPhase/AddActivitiesToPhaseController';
+import { CreatePhaseController } from '@modules/phases/useCases/CreatePhase/CreatePhaseController';
 
 import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
