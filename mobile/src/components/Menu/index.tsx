@@ -6,13 +6,15 @@ import Animated, { EasingNode } from "react-native-reanimated";
 import { MenuBar, ProgressMenuBar } from "./styles";
 
 import theme from '../../Global/styles/theme';
+import { NavigationProp } from "@react-navigation/native";
 
 interface IMenuProps {
 	totalActivities: number;
 	progressCount: number;
+	onPress: () => any;
 }
 
-export function Menu({ totalActivities, progressCount }: IMenuProps) {
+export function Menu({ totalActivities, progressCount, onPress }: IMenuProps) {
 	const [progress, setProgress] = useState(new Animated.Value(0));
 
 	const progressAnimated = progress.interpolate({
@@ -49,8 +51,8 @@ export function Menu({ totalActivities, progressCount }: IMenuProps) {
 
 	return (
 		<MenuBar>
-			<TouchableOpacity activeOpacity={0.7}>
-				<MaterialIcons name="close" size={50} color="#37464F" />
+			<TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+				<MaterialIcons name="close" size={50} color="#37464F"/>
 			</TouchableOpacity>
 
 			{handleStatusBar()}
