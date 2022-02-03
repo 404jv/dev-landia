@@ -29,6 +29,7 @@ import { Menu } from '../../components/Menu';
 import { Bash } from '../../components/Bash';
 import { Editor } from '../../components/Editor';
 import { ActivityStatusModal } from '../../components/ActivityStatusModal';
+import { useNavigation } from '@react-navigation/native';
 
 interface IOption {
 	name: string;
@@ -48,7 +49,7 @@ type Activity = {
 	options: IOption[];
 }
 
-export function Activity() {
+export function Activity({navigation}) {
 	const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
 	const [compileCode, setCompileCode] = useState<IOption[]>([]);
 	const [progressBarCount, setProgressBarCount] = useState(0);
@@ -223,9 +224,11 @@ export function Activity() {
 		setCompileCode(currentActivity.default_code);
 	}, []);
 
+	const Navigation = useNavigation();
+
 	return (
 		<Container>
-			<Menu progressCount={progressBarCount} totalActivities={5} />
+			<Menu progressCount={progressBarCount} totalActivities={5} onPress={ () => Navigation.goBack()}/>
 
 			<ScrollView>
 				<Section>
