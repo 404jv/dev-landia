@@ -1,4 +1,3 @@
-import { InMemoryActivitiesAnswersRepository } from '@modules/activities/repositories/in-memory/InMemoryActivitiesAnswersRepository';
 import { InMemoryActivityRepository } from '@modules/activities/repositories/in-memory/InMemoryActivityRepository';
 import { InMemoryOptionsRepository } from '@modules/activities/repositories/in-memory/InMemoryOptionsRepository';
 
@@ -7,7 +6,6 @@ import { CreateActivityUseCase } from './CreateActivityUseCase';
 let createActivityUseCase: CreateActivityUseCase;
 let inMemoryActivitiesRepository: InMemoryActivityRepository;
 let inMemoryOptionsRepository: InMemoryOptionsRepository;
-let inMemoryActivitiesAnswersRepository: InMemoryActivitiesAnswersRepository;
 
 enum enActivityType {
   BLOCK_ACTIVITY = 'block_activity',
@@ -23,13 +21,10 @@ describe('Create activity', () => {
   beforeEach(() => {
     inMemoryActivitiesRepository = new InMemoryActivityRepository();
     inMemoryOptionsRepository = new InMemoryOptionsRepository();
-    inMemoryActivitiesAnswersRepository =
-      new InMemoryActivitiesAnswersRepository();
 
     createActivityUseCase = new CreateActivityUseCase(
       inMemoryActivitiesRepository,
-      inMemoryOptionsRepository,
-      inMemoryActivitiesAnswersRepository
+      inMemoryOptionsRepository
     );
   });
 
@@ -52,6 +47,9 @@ describe('Create activity', () => {
           hexadecimal_color: '#fff',
           name: 'print',
           type: enOptionType.COMMAND,
+          id: null,
+          activity: null,
+          created_at: null,
         },
       ],
       order: 1,
