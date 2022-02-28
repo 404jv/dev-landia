@@ -3,12 +3,12 @@ import { Connection } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
 import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
-import { ActivitiesRepository } from '@modules/activities/infra/typeorm/repositories/ActivitiesRepository';
-import { MapsRepository } from '@modules/maps/infra/typeorm/repositories/MapsRepository';
 import { ICreatePhaseDTO } from '@modules/phases/dtos/ICreatePhaseDTO';
-import { PhasesRepository } from '@modules/phases/infra/typeorm/repositories/PhasesRepository';
 import { app } from '@shared/infra/http/app';
 import createConnection from '@shared/infra/typeorm';
+import { createActivity } from '@test/factories/ActivityFactory';
+import { createMap } from '@test/factories/MapFactory';
+import { createPhase } from '@test/factories/PhaseFactory';
 import {
   createAdminAndAuthenticate,
   createUserAndAuthenticate,
@@ -19,16 +19,6 @@ let phase: ICreatePhaseDTO;
 let activity: Activity;
 let adminToken: string;
 let userToken: string;
-
-enum enActivityType {
-  BLOCK_ACTIVITY = 'block_activity',
-  QUIZ = 'quiz',
-}
-
-enum enType {
-  THEORY = 'theory',
-  PRACTICE = 'practice',
-}
 
 describe('Add Activities to Phase', () => {
   beforeAll(async () => {
@@ -41,29 +31,9 @@ describe('Add Activities to Phase', () => {
     const userJwt = await createUserAndAuthenticate();
     userToken = userJwt.token;
 
-    const activitiesRepository = new ActivitiesRepository();
-    activity = await activitiesRepository.create({
-      title: 'Activity Test',
-      description: 'test',
-      order: 1,
-      type: enActivityType.BLOCK_ACTIVITY,
-    });
-
-    const mapsRepository = new MapsRepository();
-    const map = await mapsRepository.create({
-      description: 'Map Test',
-      title: 'Map test',
-      order: 1,
-    });
-
-    const phasesRepository = new PhasesRepository();
-    phase = await phasesRepository.create({
-      title: 'Phase Test',
-      map_id: map.id,
-      max_level: 3,
-      order: 1,
-      type: enType.PRACTICE,
-    });
+    activity = await createActivity();
+    const map = await createMap();
+    phase = await createPhase(map.id);
   });
 
   afterAll(async () => {
