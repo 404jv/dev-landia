@@ -1,4 +1,4 @@
-import { response, Router } from 'express';
+import { Router } from 'express';
 
 import { activityRoutes } from './activity.routes';
 import { authenticateRoutes } from './authenticate.routes';
