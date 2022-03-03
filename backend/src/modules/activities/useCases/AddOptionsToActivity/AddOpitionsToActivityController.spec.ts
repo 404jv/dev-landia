@@ -1,8 +1,8 @@
 import request from 'supertest';
 import { Connection } from 'typeorm';
+import { v4 as uuidV4 } from 'uuid';
 
 import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
-import { OptionsRepository } from '@modules/activities/infra/typeorm/repositories/OptionsRepository';
 import { app } from '@shared/infra/http/app';
 import createConnection from '@shared/infra/typeorm';
 import { createActivity } from '@test/factories/ActivityFactory';
@@ -11,11 +11,9 @@ import { createAdminAndAuthenticate } from '@test/factories/UserFactory';
 let connection: Connection;
 let adminToken: string;
 let activity: Activity;
-
-enum enOptionType {
-  JS_FUNCTION = 'js_function',
-  COMMAND = 'command',
-}
+let optionId1: string;
+let optionId2: string;
+let optionId3: string;
 
 describe('Add Options to Activity', () => {
   beforeAll(async () => {
@@ -26,6 +24,9 @@ describe('Add Options to Activity', () => {
     adminToken = adminJwt.token;
 
     activity = await createActivity();
+    optionId1 = activity.options[0].id;
+    optionId2 = activity.options[1].id;
+    optionId3 = activity.options[2].id;
   });
 
   afterAll(async () => {
@@ -34,29 +35,6 @@ describe('Add Options to Activity', () => {
   });
 
   it('Should be able to add default code and answer to activity', async () => {
-    const optionsRepository = new OptionsRepository();
-
-    const { id: optionId1 } = await optionsRepository.create({
-      name: 'Option 1',
-      hexadecimal_color: '#A6A8FC',
-      type: enOptionType.JS_FUNCTION,
-      activity_id: activity.id,
-    });
-
-    const { id: optionId2 } = await optionsRepository.create({
-      name: 'Option 2',
-      hexadecimal_color: '#2288C2',
-      type: enOptionType.JS_FUNCTION,
-      activity_id: activity.id,
-    });
-
-    const { id: optionId3 } = await optionsRepository.create({
-      name: 'Option 3',
-      hexadecimal_color: '#AC0C11',
-      type: enOptionType.JS_FUNCTION,
-      activity_id: activity.id,
-    });
-
     const response = await request(app)
       .post('/activities/add-options')
       .send({
@@ -67,5 +45,21 @@ describe('Add Options to Activity', () => {
       .set('Authorization', `Bearer ${adminToken}`);
 
     expect(response.statusCode).toEqual(204);
+  });
+
+  it('Should throws 404 when try to add options to a non-existent activity', async () => {
+    const nonExistentId = uuidV4();
+
+    const response = await request(app)
+      .post('/activities/add-options')
+      .send({
+        activityAnswerOptionsIds: [optionId1, optionId2, optionId3],
+        activityDefaultCodeOptionsIds: [optionId1],
+        activity_id: nonExistentId,
+      })
+      .set('Authorization', `Bearer ${adminToken}`);
+
+    expect(response.statusCode).toEqual(404);
+    expect(response.body.message).toEqual('Activity Not Found');
   });
 });
