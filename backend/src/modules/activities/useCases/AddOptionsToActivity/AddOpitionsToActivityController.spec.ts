@@ -6,7 +6,10 @@ import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
 import { app } from '@shared/infra/http/app';
 import createConnection from '@shared/infra/typeorm';
 import { createActivity } from '@test/factories/ActivityFactory';
-import { createAdminAndAuthenticate } from '@test/factories/UserFactory';
+import {
+  createAdminAndAuthenticate,
+  createUserAndAuthenticate,
+} from '@test/factories/UserFactory';
 
 let connection: Connection;
 let adminToken: string;
@@ -61,5 +64,21 @@ describe('Add Options to Activity', () => {
 
     expect(response.statusCode).toEqual(404);
     expect(response.body.message).toEqual('Activity Not Found');
+  });
+
+  it('Should throws 404 when a non admin try to add options to a activity', async () => {
+    const { token } = await createUserAndAuthenticate();
+
+    const response = await request(app)
+      .post('/activities/add-options')
+      .send({
+        activityAnswerOptionsIds: [optionId1, optionId2, optionId3],
+        activityDefaultCodeOptionsIds: [optionId1],
+        activity_id: activity.id,
+      })
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(response.statusCode).toEqual(404);
+    expect(response.body.message).toEqual('Page Not Found');
   });
 });
