@@ -10,7 +10,9 @@ import { router } from './routes';
 
 import '@shared/container';
 
-createConnection().then(() => console.log('📦 Database connected.'));
+createConnection().then(
+  () => process.env.NODE_ENV !== 'test' && console.log('📦 Database connected.')
+);
 
 const app = express();
 app.use(express.json());
