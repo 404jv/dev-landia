@@ -66,9 +66,6 @@ describe('Add Options to Activity', () => {
       })
       .set('Authorization', `Bearer ${adminToken}`);
 
-    console.log(response.body);
-
-    expect(response.statusCode).toEqual(201);
-    expect(response.body.options).toHaveLength(3);
+    expect(response.statusCode).toEqual(204);
   });
 });
