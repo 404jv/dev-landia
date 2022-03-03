@@ -22,7 +22,7 @@ class CreateActivityUseCase {
     options = [],
     order,
   }: ICreateActivityDTO): Promise<Activity> {
-    const { id: activity_id } = await this.activityRepository.create({
+    const activity = await this.activityRepository.create({
       description,
       title,
       type,
@@ -30,22 +30,26 @@ class CreateActivityUseCase {
       order,
     });
 
-    options.map(async (option) => {
-      const { hexadecimal_color, name, type } = option;
+    const optionsCreated = await Promise.all(
+      options.map(async (option) => {
+        const { hexadecimal_color, name, type } = option;
 
-      await this.optionsRepository.create({
-        activity_id,
-        hexadecimal_color,
-        name,
-        type,
-      });
-    });
+        const optionCreated = await this.optionsRepository.create({
+          activity_id: activity.id,
+          hexadecimal_color,
+          name,
+          type,
+        });
 
-    const activityWithOptions = await this.activityRepository.findById(
-      activity_id
+        return optionCreated;
+      })
     );
 
-    return activityWithOptions;
+    Object.assign(activity, {
+      options: optionsCreated,
+    });
+
+    return activity;
   }
 }
 
