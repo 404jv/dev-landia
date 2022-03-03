@@ -4,7 +4,7 @@ import { IAddOptionsToActivityDTO } from '@modules/activities/dtos/IAddOptionsTo
 import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
 import { IActivitiesRepository } from '@modules/activities/repositories/IActivitiesRepository';
 
-import { ActivityNotFoundError } from './errors/PhaseNotFoundError';
+import { ActivityNotFoundError } from './errors/ActivityNotFoundError';
 
 @injectable()
 class AddOptionsToActivityUseCase {
