@@ -58,5 +58,6 @@ describe('Create map controller', () => {
       .set('Authorization', `Bearer ${userToken}`);
 
     expect(response.statusCode).toEqual(404);
+    expect(response.body.message).toBe('Page Not Found');
   });
 });
