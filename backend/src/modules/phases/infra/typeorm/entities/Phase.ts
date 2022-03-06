@@ -44,7 +44,8 @@ class Phase {
   @Column()
   order: number;
 
-  @OneToMany(() => Activity, (activity) => activity.phase_id)
+  @OneToMany(() => Activity, (activity) => activity.phase)
+  @JoinColumn()
   activities: Activity[];
 
   @CreateDateColumn()
