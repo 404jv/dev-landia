@@ -4,6 +4,8 @@ import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
 import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
 import { IPhasesRepository } from '@modules/phases/repositories/IPhasesRepository';
 
+const TOTAL_ACTIVITIES_PER_LEVEL = 5;
+
 @injectable()
 class GetPhaseUseCase {
   constructor(
@@ -16,7 +18,7 @@ class GetPhaseUseCase {
   ) {}
 
   async execute(phase_id: string, phaseLevel: number): Promise<Activity[]> {
-    let activitiesEnd = phaseLevel * 5 - 1;
+    let activitiesEnd = phaseLevel * TOTAL_ACTIVITIES_PER_LEVEL - 1;
     const activitiesStart = activitiesEnd - 4;
 
     if (activitiesEnd <= 0) {
