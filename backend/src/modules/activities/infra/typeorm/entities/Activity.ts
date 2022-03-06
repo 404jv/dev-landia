@@ -25,6 +25,9 @@ class Activity {
   @Column()
   description: string;
 
+  @Column()
+  phase_id: string;
+
   @Column({ type: 'enum', enum: enActivityType })
   type: enActivityType;
 

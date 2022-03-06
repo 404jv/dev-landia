@@ -5,8 +5,15 @@ import { CreateActivityUseCase } from './CreateActivityUseCase';
 
 class CreateActivityController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { description, title, type, is_needed_code, options, order } =
-      request.body;
+    const {
+      description,
+      title,
+      type,
+      is_needed_code,
+      options,
+      order,
+      phase_id,
+    } = request.body;
 
     const createActivityUseCase = container.resolve(CreateActivityUseCase);
 
@@ -17,6 +24,7 @@ class CreateActivityController {
       is_needed_code,
       options,
       order,
+      phase_id,
     });
 
     return response.status(201).json(activity);

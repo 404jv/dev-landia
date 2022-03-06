@@ -17,6 +17,7 @@ interface ICreateActivityDTO {
   created_at?: Date;
   activity_answer?: Option[];
   default_code?: Option[];
+  phase_id: string;
 }
 
 export { ICreateActivityDTO };

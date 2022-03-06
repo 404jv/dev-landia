@@ -12,7 +12,7 @@ enum enOptionType {
   COMMAND = 'command',
 }
 
-export async function createActivity(): Promise<Activity> {
+export async function createActivity(phase_id: string): Promise<Activity> {
   const activitiesRepository = new ActivitiesRepository();
 
   const activity = await activitiesRepository.create({
@@ -20,6 +20,7 @@ export async function createActivity(): Promise<Activity> {
     description: 'Activity test',
     order: 1,
     type: enActivityType.BLOCK_ACTIVITY,
+    phase_id,
   });
 
   const optionsRepository = new OptionsRepository();

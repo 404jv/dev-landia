@@ -21,6 +21,7 @@ class CreateActivityUseCase {
     is_needed_code = false,
     options = [],
     order,
+    phase_id,
   }: ICreateActivityDTO): Promise<Activity> {
     const activity = await this.activityRepository.create({
       description,
@@ -28,6 +29,7 @@ class CreateActivityUseCase {
       type,
       is_needed_code,
       order,
+      phase_id,
     });
 
     const optionsCreated = await Promise.all(
