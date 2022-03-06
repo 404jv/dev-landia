@@ -35,14 +35,14 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
     title: 'Phase Test',
     map_id,
     max_level: 3,
-    order: 1,
+    order: 0,
     type: enType.PRACTICE,
   });
 
   const activity1 = await activitiesRepository.create({
     title: 'Activity 1',
     description: 'Activity test',
-    order: 1,
+    order: 0,
     type: enActivityType.BLOCK_ACTIVITY,
     phase_id: phase.id,
   });
@@ -50,7 +50,7 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
   const activity2 = await activitiesRepository.create({
     title: 'Activity 2',
     description: 'Activity test',
-    order: 2,
+    order: 1,
     type: enActivityType.BLOCK_ACTIVITY,
     phase_id: phase.id,
   });
@@ -58,7 +58,7 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
   const activity3 = await activitiesRepository.create({
     title: 'Activity 3',
     description: 'Activity test',
-    order: 3,
+    order: 2,
     type: enActivityType.BLOCK_ACTIVITY,
     phase_id: phase.id,
   });
@@ -66,7 +66,7 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
   const activity4 = await activitiesRepository.create({
     title: 'Activity 4',
     description: 'Activity test',
-    order: 4,
+    order: 3,
     type: enActivityType.BLOCK_ACTIVITY,
     phase_id: phase.id,
   });
@@ -74,7 +74,7 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
   const activity5 = await activitiesRepository.create({
     title: 'Activity 5',
     description: 'Activity test',
-    order: 5,
+    order: 4,
     type: enActivityType.BLOCK_ACTIVITY,
     phase_id: phase.id,
   });
@@ -82,7 +82,7 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
   const activity6 = await activitiesRepository.create({
     title: 'Activity 6',
     description: 'Activity test',
-    order: 6,
+    order: 5,
     type: enActivityType.BLOCK_ACTIVITY,
     phase_id: phase.id,
   });

@@ -16,8 +16,12 @@ class GetPhaseUseCase {
   ) {}
 
   async execute(phase_id: string, phaseLevel: number): Promise<Activity[]> {
-    const activitiesEnd = phaseLevel * 5 - 1;
+    let activitiesEnd = phaseLevel * 5 - 1;
     const activitiesStart = activitiesEnd - 4;
+
+    if (activitiesEnd <= 0) {
+      activitiesEnd = 4;
+    }
 
     const { activities } = await this.phasesRepository.findAndSelectActivities(
       phase_id,
