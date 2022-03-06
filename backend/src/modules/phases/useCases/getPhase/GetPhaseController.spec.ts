@@ -45,8 +45,3 @@ describe('Get Phase Controller', () => {
     expect(response.body).toHaveLength(5);
   });
 });
-
-/*
-  - Retornar 5 atividade
-
-*/

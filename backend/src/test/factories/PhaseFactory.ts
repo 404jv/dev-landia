@@ -31,48 +31,6 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
 
   const activitiesRepository = new ActivitiesRepository();
 
-  const activity1 = await activitiesRepository.create({
-    title: 'Activity 1',
-    description: 'Activity test',
-    order: 1,
-    type: enActivityType.BLOCK_ACTIVITY,
-  });
-
-  const activity2 = await activitiesRepository.create({
-    title: 'Activity 2',
-    description: 'Activity test',
-    order: 2,
-    type: enActivityType.BLOCK_ACTIVITY,
-  });
-
-  const activity3 = await activitiesRepository.create({
-    title: 'Activity 3',
-    description: 'Activity test',
-    order: 3,
-    type: enActivityType.BLOCK_ACTIVITY,
-  });
-
-  const activity4 = await activitiesRepository.create({
-    title: 'Activity 4',
-    description: 'Activity test',
-    order: 4,
-    type: enActivityType.BLOCK_ACTIVITY,
-  });
-
-  const activity5 = await activitiesRepository.create({
-    title: 'Activity 5',
-    description: 'Activity test',
-    order: 5,
-    type: enActivityType.BLOCK_ACTIVITY,
-  });
-
-  const activity6 = await activitiesRepository.create({
-    title: 'Activity 6',
-    description: 'Activity test',
-    order: 6,
-    type: enActivityType.BLOCK_ACTIVITY,
-  });
-
   const phase = await phasesRepository.create({
     title: 'Phase Test',
     map_id,
@@ -81,7 +39,53 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
     type: enType.PRACTICE,
   });
 
-  // Phase e activities não devem ser many to many!
+  const activity1 = await activitiesRepository.create({
+    title: 'Activity 1',
+    description: 'Activity test',
+    order: 1,
+    type: enActivityType.BLOCK_ACTIVITY,
+    phase_id: phase.id,
+  });
+
+  const activity2 = await activitiesRepository.create({
+    title: 'Activity 2',
+    description: 'Activity test',
+    order: 2,
+    type: enActivityType.BLOCK_ACTIVITY,
+    phase_id: phase.id,
+  });
+
+  const activity3 = await activitiesRepository.create({
+    title: 'Activity 3',
+    description: 'Activity test',
+    order: 3,
+    type: enActivityType.BLOCK_ACTIVITY,
+    phase_id: phase.id,
+  });
+
+  const activity4 = await activitiesRepository.create({
+    title: 'Activity 4',
+    description: 'Activity test',
+    order: 4,
+    type: enActivityType.BLOCK_ACTIVITY,
+    phase_id: phase.id,
+  });
+
+  const activity5 = await activitiesRepository.create({
+    title: 'Activity 5',
+    description: 'Activity test',
+    order: 5,
+    type: enActivityType.BLOCK_ACTIVITY,
+    phase_id: phase.id,
+  });
+
+  const activity6 = await activitiesRepository.create({
+    title: 'Activity 6',
+    description: 'Activity test',
+    order: 6,
+    type: enActivityType.BLOCK_ACTIVITY,
+    phase_id: phase.id,
+  });
 
   phase.activities = [
     activity1,
@@ -91,8 +95,6 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
     activity5,
     activity6,
   ];
-
-  await phasesRepository.update(phase);
 
   return phase;
 }

@@ -6,6 +6,8 @@ import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
 import { app } from '@shared/infra/http/app';
 import createConnection from '@shared/infra/typeorm';
 import { createActivity } from '@test/factories/ActivityFactory';
+import { createMap } from '@test/factories/MapFactory';
+import { createPhase } from '@test/factories/PhaseFactory';
 import {
   createAdminAndAuthenticate,
   createUserAndAuthenticate,
@@ -26,7 +28,10 @@ describe('Add Options to Activity', () => {
     const adminJwt = await createAdminAndAuthenticate();
     adminToken = adminJwt.token;
 
-    activity = await createActivity();
+    const { id: map_id } = await createMap();
+    const { id: phase_id } = await createPhase(map_id);
+
+    activity = await createActivity(phase_id);
     optionId1 = activity.options[0].id;
     optionId2 = activity.options[1].id;
     optionId3 = activity.options[2].id;

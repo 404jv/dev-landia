@@ -53,6 +53,7 @@ describe('Create activity', () => {
         },
       ],
       order: 1,
+      phase_id: null,
     });
 
     expect(result).toHaveProperty('id');
