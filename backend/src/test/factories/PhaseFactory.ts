@@ -2,6 +2,8 @@ import { ActivitiesRepository } from '@modules/activities/infra/typeorm/reposito
 import { Phase } from '@modules/phases/infra/typeorm/entities/Phase';
 import { PhasesRepository } from '@modules/phases/infra/typeorm/repositories/PhasesRepository';
 
+import { createManyOptions } from './OptionFactorty';
+
 enum enActivityType {
   BLOCK_ACTIVITY = 'block_activity',
   QUIZ = 'quiz',
@@ -47,6 +49,8 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
     phase_id: phase.id,
   });
 
+  await createManyOptions(activity1.id);
+
   const activity2 = await activitiesRepository.create({
     title: 'Activity 2',
     description: 'Activity test',
@@ -54,6 +58,8 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
     type: enActivityType.BLOCK_ACTIVITY,
     phase_id: phase.id,
   });
+
+  await createManyOptions(activity2.id);
 
   const activity3 = await activitiesRepository.create({
     title: 'Activity 3',
@@ -63,6 +69,8 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
     phase_id: phase.id,
   });
 
+  await createManyOptions(activity3.id);
+
   const activity4 = await activitiesRepository.create({
     title: 'Activity 4',
     description: 'Activity test',
@@ -71,6 +79,8 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
     phase_id: phase.id,
   });
 
+  await createManyOptions(activity4.id);
+
   const activity5 = await activitiesRepository.create({
     title: 'Activity 5',
     description: 'Activity test',
@@ -78,6 +88,8 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
     type: enActivityType.BLOCK_ACTIVITY,
     phase_id: phase.id,
   });
+
+  await createManyOptions(activity5.id);
 
   const activity6 = await activitiesRepository.create({
     title: 'Activity 6',
