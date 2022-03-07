@@ -39,9 +39,10 @@ describe('Get Phase Controller', () => {
       })
       .set('Authorization', `Bearer ${userToken}`);
 
-    console.log(response.body);
-
     expect(response.statusCode).toEqual(200);
     expect(response.body).toHaveLength(5);
+    expect(response.body[0]).toHaveProperty('default_code');
+    expect(response.body[0]).toHaveProperty('activity_answer');
+    expect(response.body[0]).toHaveProperty('options');
   });
 });
