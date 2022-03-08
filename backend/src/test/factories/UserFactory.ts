@@ -8,6 +8,7 @@ interface IReturn {
   user: {
     name: string;
     email: string;
+    id: string;
   };
   token: string;
 }
@@ -39,6 +40,7 @@ export async function createUserAndAuthenticate(): Promise<IReturn> {
   return {
     token,
     user: {
+      id: user.id,
       name: user.name,
       email: user.email,
     },
@@ -69,6 +71,7 @@ export async function createAdminAndAuthenticate(): Promise<IReturn> {
     user: {
       name: admin.name,
       email: admin.email,
+      id: admin.id,
     },
   };
 }
