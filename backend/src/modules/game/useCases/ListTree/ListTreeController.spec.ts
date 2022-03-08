@@ -3,6 +3,7 @@ import { Connection } from 'typeorm';
 
 import { app } from '@shared/infra/http/app';
 import createConnection from '@shared/infra/typeorm';
+import { startUserMap, startUserPhase } from '@test/factories/GameFactory';
 import { createMap } from '@test/factories/MapFactory';
 import { createPhase } from '@test/factories/PhaseFactory';
 import { createUserAndAuthenticate } from '@test/factories/UserFactory';
@@ -17,14 +18,16 @@ describe('List Tree Controller', () => {
     await connection.runMigrations();
 
     const userJwt = await createUserAndAuthenticate();
+    userToken = userJwt.token;
 
     const map1 = await createMap();
-    await createPhase(map1.id);
+    const phase = await createPhase(map1.id);
 
     const map2 = await createMap();
     await createPhase(map2.id);
 
-    userToken = userJwt.token;
+    await startUserMap(userJwt.user.id, map1.id);
+    await startUserPhase(userJwt.user.id, phase.id);
   });
 
   afterAll(async () => {
@@ -37,9 +40,12 @@ describe('List Tree Controller', () => {
       .get('/game/tree')
       .set('Authorization', `Bearer ${userToken}`);
 
+    const responseBody = response.body;
+
     expect(response.statusCode).toEqual(200);
-    expect(response.body).toHaveLength(2);
-    expect(response.body[0].phases).toHaveLength(1);
-    expect(response.body[0].order).toEqual(1);
+    expect(responseBody).toHaveLength(2);
+    expect(responseBody[0].order).toEqual(1);
+    expect(responseBody[0].phases[0].current_level).toEqual(0);
+    expect(responseBody.is_done).toBeFalsy();
   });
 });
