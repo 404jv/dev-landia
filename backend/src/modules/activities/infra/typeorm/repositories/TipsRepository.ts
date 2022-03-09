@@ -11,8 +11,15 @@ class TipsRepository implements ITipsRepository {
     this.repository = getRepository(Tip);
   }
 
-  create(): Promise<void> {
-    throw new Error('Method not implemented.');
+  async create(name: string, activity_id: string): Promise<Tip> {
+    const tip = this.repository.create({
+      name,
+      activity_id,
+    });
+
+    await this.repository.save(tip);
+
+    return tip;
   }
 }
 

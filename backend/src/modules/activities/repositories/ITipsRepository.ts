@@ -1,5 +1,7 @@
+import { Tip } from '../infra/typeorm/entities/Tip';
+
 interface ITipsRepository {
-  create(): Promise<void>;
+  create(name: string, activity_id: string): Promise<Tip>;
 }
 
 export { ITipsRepository };

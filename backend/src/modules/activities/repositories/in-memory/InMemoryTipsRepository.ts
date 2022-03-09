@@ -5,8 +5,17 @@ import { ITipsRepository } from '../ITipsRepository';
 class InMemoryTipsRepository implements ITipsRepository {
   private repository: Tip[] = [];
 
-  create(): Promise<void> {
-    throw new Error('Method not implemented.');
+  async create(name: string, activity_id: string): Promise<Tip> {
+    const tip = new Tip();
+
+    Object.assign(tip, {
+      name,
+      activity_id,
+    });
+
+    this.repository.push(tip);
+
+    return tip;
   }
 }
 
