@@ -1,9 +1,13 @@
 import { inject, injectable } from 'tsyringe';
 
 import { ICreateActivityDTO } from '@modules/activities/dtos/ICreateActivityDTO';
+import { ICreateOptionDTO } from '@modules/activities/dtos/ICreateOptionDTO';
 import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
+import { Option } from '@modules/activities/infra/typeorm/entities/Option';
+import { Tip } from '@modules/activities/infra/typeorm/entities/Tip';
 import { IActivitiesRepository } from '@modules/activities/repositories/IActivitiesRepository';
 import { IOptionsRepository } from '@modules/activities/repositories/IOptionsRepository';
+import { ITipsRepository } from '@modules/activities/repositories/ITipsRepository';
 
 @injectable()
 class CreateActivityUseCase {
@@ -11,7 +15,9 @@ class CreateActivityUseCase {
     @inject('ActivitiesRepository')
     private activityRepository: IActivitiesRepository,
     @inject('OptionsRepository')
-    private optionsRepository: IOptionsRepository
+    private optionsRepository: IOptionsRepository,
+    @inject('TipsRepository')
+    private tipsRepository: ITipsRepository
   ) {}
 
   async execute({
@@ -22,6 +28,7 @@ class CreateActivityUseCase {
     options = [],
     order,
     phase_id,
+    tips,
   }: ICreateActivityDTO): Promise<Activity> {
     const activity = await this.activityRepository.create({
       description,
@@ -32,12 +39,30 @@ class CreateActivityUseCase {
       phase_id,
     });
 
+    const optionsCreated = await this.createActivityOptions(
+      options,
+      activity.id
+    );
+
+    activity.options = optionsCreated;
+
+    const tipsCreated = await this.createActivityTips(tips, activity.id);
+
+    activity.tips = tipsCreated;
+
+    return activity;
+  }
+
+  async createActivityOptions(
+    options: ICreateOptionDTO[],
+    activity_id: string
+  ): Promise<Option[]> {
     const optionsCreated = await Promise.all(
       options.map(async (option) => {
         const { hexadecimal_color, name, type } = option;
 
         const optionCreated = await this.optionsRepository.create({
-          activity_id: activity.id,
+          activity_id,
           hexadecimal_color,
           name,
           type,
@@ -47,11 +72,21 @@ class CreateActivityUseCase {
       })
     );
 
-    Object.assign(activity, {
-      options: optionsCreated,
-    });
+    return optionsCreated;
+  }
 
-    return activity;
+  async createActivityTips(
+    tips: string[],
+    activity_id: string
+  ): Promise<Tip[]> {
+    const tipsCreated = await Promise.all(
+      tips.map(async (tip) => {
+        const tipCreated = await this.tipsRepository.create(tip, activity_id);
+        return tipCreated;
+      })
+    );
+
+    return tipsCreated;
   }
 }
 

@@ -13,6 +13,7 @@ class CreateActivityController {
       options,
       order,
       phase_id,
+      tips,
     } = request.body;
 
     const createActivityUseCase = container.resolve(CreateActivityUseCase);
@@ -25,6 +26,7 @@ class CreateActivityController {
       options,
       order,
       phase_id,
+      tips,
     });
 
     return response.status(201).json(activity);
