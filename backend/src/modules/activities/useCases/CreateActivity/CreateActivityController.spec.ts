@@ -40,6 +40,7 @@ describe('Create Activity Controller', () => {
       type: 'block_activity',
       is_needed_code: false,
       phase_id,
+      tips: ['Tip 1 test', 'Tip 2 test'],
       options: [
         {
           name: 'option 1',
@@ -62,6 +63,7 @@ describe('Create Activity Controller', () => {
 
     expect(response.statusCode).toEqual(201);
     expect(response.body.options).toHaveLength(2);
+    expect(response.body.tips).toHaveLength(2);
   });
 
   it('Should return 404 when a non admin try to create an activity', async () => {
@@ -72,6 +74,7 @@ describe('Create Activity Controller', () => {
       description: 'Activity test',
       type: 'block_activity',
       is_needed_code: false,
+      tips: ['Tip 1 test', 'Tip 2 test'],
       phase_id,
       options: [
         {

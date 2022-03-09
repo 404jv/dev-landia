@@ -1,11 +1,13 @@
 import { InMemoryActivityRepository } from '@modules/activities/repositories/in-memory/InMemoryActivityRepository';
 import { InMemoryOptionsRepository } from '@modules/activities/repositories/in-memory/InMemoryOptionsRepository';
+import { InMemoryTipsRepository } from '@modules/activities/repositories/in-memory/InMemoryTipsRepository';
 
 import { CreateActivityUseCase } from './CreateActivityUseCase';
 
 let createActivityUseCase: CreateActivityUseCase;
 let inMemoryActivitiesRepository: InMemoryActivityRepository;
 let inMemoryOptionsRepository: InMemoryOptionsRepository;
+let inMemoryTipsRepository: InMemoryTipsRepository;
 
 enum enActivityType {
   BLOCK_ACTIVITY = 'block_activity',
@@ -21,10 +23,12 @@ describe('Create activity', () => {
   beforeEach(() => {
     inMemoryActivitiesRepository = new InMemoryActivityRepository();
     inMemoryOptionsRepository = new InMemoryOptionsRepository();
+    inMemoryTipsRepository = new InMemoryTipsRepository();
 
     createActivityUseCase = new CreateActivityUseCase(
       inMemoryActivitiesRepository,
-      inMemoryOptionsRepository
+      inMemoryOptionsRepository,
+      inMemoryTipsRepository
     );
   });
 
@@ -33,6 +37,7 @@ describe('Create activity', () => {
       description: 'Description',
       title: 'Title',
       type: enActivityType.BLOCK_ACTIVITY,
+      tips: [],
       options: [
         {
           activity_id: '123',
