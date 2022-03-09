@@ -18,6 +18,7 @@ interface ICreateActivityDTO {
   activity_answer?: Option[];
   default_code?: Option[];
   phase_id: string;
+  tips?: string[];
 }
 
 export { ICreateActivityDTO };
