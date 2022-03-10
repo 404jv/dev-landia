@@ -33,20 +33,18 @@ class GetPhaseUseCase {
 
     const activitiesWithAnswer = await Promise.all(
       activities.map(async (activity) => {
-        const activity_answer =
+        const activityAnswer =
           await this.activitiesAnswersRepository.findOptionsByActivityId(
             activity.id
           );
 
-        const default_code =
+        const defaultCode =
           await this.activitiesDefaultCodeRepository.findOptionsByActivityId(
             activity.id
           );
 
-        Object.assign(activity, {
-          activity_answer,
-          default_code,
-        });
+        activity.default_code = defaultCode;
+        activity.activity_answer = activityAnswer;
 
         return activity;
       })
