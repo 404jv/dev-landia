@@ -43,6 +43,7 @@ describe('Get Phase Controller', () => {
     expect(response.body).toHaveLength(5);
     expect(response.body[0]).toHaveProperty('default_code');
     expect(response.body[0]).toHaveProperty('activity_answer');
+    expect(response.body[0]).toHaveProperty('tips');
     expect(response.body[0]).toHaveProperty('options');
   });
 });
