@@ -85,6 +85,7 @@ class PhasesRepository implements IPhasesRepository {
       .where('activities.order >= :start')
       .andWhere('activities.order <= :end')
       .leftJoinAndSelect('activities.options', 'options')
+      .leftJoinAndSelect('activities.tips', 'tips')
       .orderBy('activities.order', 'ASC')
       .setParameters({ start, end, id })
       .getOne();
