@@ -110,3 +110,18 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
 
   return phase;
 }
+
+export async function createTheoryPhase(map_id: string): Promise<Phase> {
+  const phasesRepository = new PhasesRepository();
+
+  const phase = phasesRepository.create({
+    title: 'Theory Phase',
+    type: enType.THEORY,
+    map_id,
+    max_level: 1,
+    order: 0,
+    markdown_text: '# Theory Phase',
+  });
+
+  return phase;
+}

@@ -4,11 +4,15 @@ import { Connection } from 'typeorm';
 import { app } from '@shared/infra/http/app';
 import createConnection from '@shared/infra/typeorm';
 import { createMap } from '@test/factories/MapFactory';
-import { createPhaseAndActivities } from '@test/factories/PhaseFactory';
+import {
+  createPhaseAndActivities,
+  createTheoryPhase,
+} from '@test/factories/PhaseFactory';
 import { createUserAndAuthenticate } from '@test/factories/UserFactory';
 
 let connection: Connection;
-let phase_id: string;
+let practicePhaseId: string;
+let theoryPhaseId: string;
 let userToken: string;
 
 describe('Get Phase Controller', () => {
@@ -18,8 +22,13 @@ describe('Get Phase Controller', () => {
 
     const map = await createMap();
 
-    const phase = await createPhaseAndActivities(map.id);
-    phase_id = phase.id;
+    const practicePhase = await createPhaseAndActivities(map.id);
+    practicePhaseId = practicePhase.id;
+
+    const theoryPhase = await createTheoryPhase(map.id);
+    theoryPhaseId = theoryPhase.id;
+
+    console.log(theoryPhaseId);
 
     const userJwt = await createUserAndAuthenticate();
     userToken = userJwt.token;
@@ -34,7 +43,7 @@ describe('Get Phase Controller', () => {
     const response = await request(app)
       .get('/game/get-phase')
       .send({
-        phase_id,
+        practicePhaseId,
         phaseLevel: 0,
       })
       .set('Authorization', `Bearer ${userToken}`);
@@ -45,5 +54,17 @@ describe('Get Phase Controller', () => {
     expect(response.body[0]).toHaveProperty('activity_answer');
     expect(response.body[0]).toHaveProperty('tips');
     expect(response.body[0]).toHaveProperty('options');
+  });
+
+  it('Should be able to a user get their theory phase', async () => {
+    const response = await request(app)
+      .get('/game/get-phase')
+      .send({
+        theoryPhaseId,
+        phaseLevel: 0,
+      })
+      .set('Authorization', `Bearer ${userToken}`);
+
+    expect(response.statusCode).toEqual(200);
   });
 });
