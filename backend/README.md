@@ -16,5 +16,3 @@ A table `phases` tem uma coluna chamada `type`, essa é responsável por diferen
 Ao mostrarmos as fases no aplicativo, a única diferença de uma fase e uma aula será o ícone, abaixo o circulo "introdução" é uma aula e os outros são fases:
 
 <img align="center" src="./public/home_print.png" />
-
-test
