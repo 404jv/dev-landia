@@ -5,7 +5,7 @@ import { GetPracticePhaseUseCase } from './GetPracticePhaseUseCase';
 
 class GetPracticePhaseController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { phase_id } = request.body;
+    const { id: phase_id } = request.params;
     const { id: user_id } = request.user;
 
     const getPhaseUseCase = container.resolve(GetPracticePhaseUseCase);

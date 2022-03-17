@@ -13,7 +13,7 @@ const getPracticePhaseController = new GetPracticePhaseController();
 gameRoutes.use(ensureAuthenticated);
 gameRoutes.get('/tree', listTreeController.handle);
 gameRoutes.get(
-  '/get-phase',
+  '/practice-phase/:id',
   ensureAuthenticated,
   getPracticePhaseController.handle
 );

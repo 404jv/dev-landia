@@ -35,10 +35,7 @@ describe('Get Practice Phase Controller', () => {
 
   it('Should be able to a user get their phase', async () => {
     const response = await request(app)
-      .get('/game/get-phase')
-      .send({
-        phase_id: practicePhaseId,
-      })
+      .get(`/game/practice-phase/${practicePhaseId}`)
       .set('Authorization', `Bearer ${userToken}`);
 
     expect(response.statusCode).toEqual(200);
