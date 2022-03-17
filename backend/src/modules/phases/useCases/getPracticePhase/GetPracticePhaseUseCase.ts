@@ -2,32 +2,33 @@ import { inject, injectable } from 'tsyringe';
 
 import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
 import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
+import { IUsersPhasesRepository } from '@modules/game/repositories/IUsersPhasesRepository';
 import { Phase } from '@modules/phases/infra/typeorm/entities/Phase';
 import { IPhasesRepository } from '@modules/phases/repositories/IPhasesRepository';
-
-enum enType {
-  THEORY = 'theory',
-  PRACTICE = 'practice',
-}
 
 const TOTAL_ACTIVITIES_PER_LEVEL = 5;
 
 @injectable()
-class GetPhaseUseCase {
+class GetPracticePhaseUseCase {
   constructor(
     @inject('PhasesRepository')
     private phasesRepository: IPhasesRepository,
     @inject('ActivitiesAnswersRepository')
     private activitiesAnswersRepository: IActivitiesOptionsRepository,
     @inject('ActivitiesDefaultCodeRepository')
-    private activitiesDefaultCodeRepository: IActivitiesOptionsRepository
+    private activitiesDefaultCodeRepository: IActivitiesOptionsRepository,
+    @inject('UsersPhasesRepository')
+    private usersPhasesRepository: IUsersPhasesRepository
   ) {}
 
   async execute(
     phase_id: string,
-    phaseLevel: number
+    user_id: string
   ): Promise<Activity[] | Phase> {
-    let activitiesEnd = phaseLevel * TOTAL_ACTIVITIES_PER_LEVEL - 1;
+    const { current_level } =
+      await this.usersPhasesRepository.findByUserAndPhase(user_id, phase_id);
+
+    let activitiesEnd = current_level * TOTAL_ACTIVITIES_PER_LEVEL - 1;
     const activitiesStart = activitiesEnd - 4;
 
     if (activitiesEnd <= 0) {
@@ -39,15 +40,6 @@ class GetPhaseUseCase {
       activitiesStart,
       activitiesEnd
     );
-
-    console.log(phase);
-
-    // return phase theory
-
-    if (phase.type === enType.THEORY) {
-      console.log('oi111111');
-      return phase;
-    }
 
     const { activities } = phase;
 
@@ -74,4 +66,4 @@ class GetPhaseUseCase {
   }
 }
 
-export { GetPhaseUseCase };
+export { GetPracticePhaseUseCase };
