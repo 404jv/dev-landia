@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
 import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
+import { Option } from '@modules/activities/infra/typeorm/entities/Option';
 import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
 import { IUsersPhasesRepository } from '@modules/game/repositories/IUsersPhasesRepository';
 import { Phase } from '@modules/phases/infra/typeorm/entities/Phase';
@@ -43,26 +44,35 @@ class GetPracticePhaseUseCase {
 
     const { activities } = phase;
 
-    const activitiesWithAnswer = await Promise.all(
+    const activitiesWithOptions = await Promise.all(
       activities.map(async (activity) => {
-        const activityAnswer =
-          await this.activitiesAnswersRepository.findOptionsByActivityId(
-            activity.id
-          );
+        const [activityAnswer, defaultCode] =
+          await this.getActivityAnswerAndDefaultCode(activity.id);
 
-        const defaultCode =
-          await this.activitiesDefaultCodeRepository.findOptionsByActivityId(
-            activity.id
-          );
-
-        activity.default_code = defaultCode;
         activity.activity_answer = activityAnswer;
+        activity.default_code = defaultCode;
 
         return activity;
       })
     );
 
-    return activitiesWithAnswer;
+    return activitiesWithOptions;
+  }
+
+  private async getActivityAnswerAndDefaultCode(
+    activity_id: string
+  ): Promise<Option[][]> {
+    const activityAnswer =
+      await this.activitiesAnswersRepository.findOptionsByActivityId(
+        activity_id
+      );
+
+    const defaultCode =
+      await this.activitiesDefaultCodeRepository.findOptionsByActivityId(
+        activity_id
+      );
+
+    return [activityAnswer, defaultCode];
   }
 }
 
