@@ -1,5 +1,4 @@
 ## Documentação
-test
 O aplicativo é composto por mapas, fases, atividades e aulas. 
 
 - Os mapas são sessões de estudo com uma ou duas metas de estudo, por exemplo, manipular strings. 
