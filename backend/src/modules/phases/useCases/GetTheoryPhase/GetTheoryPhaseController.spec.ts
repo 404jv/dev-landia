@@ -41,6 +41,7 @@ describe('Get Theory Phase Controller', () => {
 
     expect(response.statusCode).toEqual(200);
     expect(response.body.title).toBeTruthy();
+    expect(response.body.current_level).toEqual(0);
     expect(response.body.type).toEqual('theory');
     expect(response.body.markdown_text).toBeTruthy();
     expect(response.body.activities).toHaveLength(0);
