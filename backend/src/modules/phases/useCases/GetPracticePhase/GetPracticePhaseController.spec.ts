@@ -45,4 +45,13 @@ describe('Get Practice Phase Controller', () => {
     expect(response.body[0]).toHaveProperty('tips');
     expect(response.body[0]).toHaveProperty('options');
   });
+
+  it('Should return status 401 when a anonymous user try to get phase', async () => {
+    const response = await request(app).get(
+      `/game/theory-phase/${practicePhaseId}`
+    );
+
+    expect(response.statusCode).toEqual(401);
+    expect(response.body.message).toEqual('Token is missing');
+  });
 });
