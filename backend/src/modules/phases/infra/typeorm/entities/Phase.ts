@@ -3,9 +3,8 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
@@ -45,12 +44,8 @@ class Phase {
   @Column()
   order: number;
 
-  @ManyToMany(() => Activity)
-  @JoinTable({
-    name: 'phases_activities',
-    joinColumns: [{ name: 'phase_id' }],
-    inverseJoinColumns: [{ name: 'activity_id' }],
-  })
+  @OneToMany(() => Activity, (activity) => activity.phase)
+  @JoinColumn()
   activities: Activity[];
 
   @CreateDateColumn()

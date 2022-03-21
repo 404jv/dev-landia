@@ -1,77 +1,18 @@
-# Funcionalidades
+## Documentação
+O aplicativo é composto por mapas, fases, atividades e aulas. 
 
-## Criação de conta
+- Os mapas são sessões de estudo com uma ou duas metas de estudo, por exemplo, manipular strings. 
+- As fases são composta por diversas atividades que serão usadas repetitivamente para cumprir a meta do mapa.
+- As atividades são problemas pequenos e especifico que vai ajudar o aluno a praticar o conteúdo do fase.
+- As aulas são um artigos escritos escritos em markdown que descrevem o conteúdo do mapa.
 
-**RF**
-- Deve ser possível o usuário criar uma conta.
+## Diagrama
+o diagrama pode ser encontrado [aqui](https://lucid.app/lucidchart/baa3fd86-d248-40fc-898b-3eaa7da3ac6d/edit?invitationId=inv_4310d971-d43b-46f6-85b5-1221de03e802).
 
-**RN**
-- Não deve ser possível criar uma conta com o mesmo email.
-- Não deve ser possível criar uma conta com o mesmo username.
-- Não deve ser possível criar um password com menos de 6 caracteres.
-- O username não pode ter mais de 30 caracteres.
-- O username não pode ter menos de 6 caracteres.
+## Fases vs Aulas
+A table `phases` tem uma coluna chamada `type`, essa é responsável por diferenciar uma fase teórica (aula) de uma fase pratica (fase normal composta por atividades). Portanto, as fases do tipo teórica serão fases que não possuem nenhuma atividade, apenas o texto markdown na coluna chamada `markdown_text`. Já as fases práticas possuem um relacionamento `one to many` com as atividades, e não tem um `markdown_text`.
 
-## Criação de atividades
+**Diferença visual**
+Ao mostrarmos as fases no aplicativo, a única diferença de uma fase e uma aula será o ícone, abaixo o circulo "introdução" é uma aula e os outros são fases:
 
-**RF**
-- Deve ser possível criar uma atividade.
-
-**RN**
-- O usuário que criar a atividade deve ser um administrador.
-
-## Criação de opções para uma atividade (options e default_code)
-
-**RF**
-- Deve ser possível criar uma opção
-
-**RN**
-- O usuário que criar a opção deve ser um administrador.
-- O usuário pode cadastrar mais de uma opção para a mesma atividade
-- Não deve ser possível criar uma opção para uma atividade não existente.
-- Uma opção no array de options só pode ser vinculado uma vez.
-- Uma opção no array de default_code pode ser vinculada mais de uma vez.
-
-## Criação de dicas (tips)
-
-**RF**
-- Deve ser possível criar dica para uma atividade.
-
-**RN**
-- O usuário que criar a opção deve ser um administrador.
-- O usuário pode cadastrar mais de uma dica para a mesma atividade
-- Não deve ser possível criar uma dica para uma atividade não existente.
-- Uma dica não pode se repetir para a mesma atividade.
-
-## Criação de Fase
-
-**RF**
-- Deve ser possível criar uma fase
-
-**RN**
-- A fase deve ter apenas um mapa.
-- Se o type for activity o max_level tem que ser no mínimo 3.
-- Se o type for activity a quantidade de atividades associadas deve ser max_level * 5. Pois cada level tem 5 atividades.
-- Se o type for class o max_level deve ser 1.
-- Se o type for class o markdown_text deve ser preenchido.
-
-## Ligação entre fase e atividades
-
-**RN**
-- A mesma atividade não pode pertencer mais de uma vez a uma fase
-
-## Criação de mapa
-
-**RF**
-- Deve ser possível criar um mapa
-
-**RN**
-- O mapa deve ter no mínimo 1 atividade.
-
-## Listagem do mapa e atividades
-
-**RF**
-- Deve ser possível listar os mapas com as fases
-
-**RN**
-- O usuário tem que estar autenticado
+<img align="center" src="./public/home_print.png" />

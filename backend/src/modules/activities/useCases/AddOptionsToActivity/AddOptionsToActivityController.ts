@@ -15,13 +15,13 @@ class AddOptionsToActivityController {
       AddOptionsToActivityUseCase
     );
 
-    const activity = await addOptionsToActivityUseCase.execute({
+    await addOptionsToActivityUseCase.execute({
       activityAnswerOptionsIds,
       activityDefaultCodeOptionsIds,
       activity_id,
     });
 
-    return response.status(201).json(activity);
+    return response.sendStatus(204);
   }
 }
 

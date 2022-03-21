@@ -19,6 +19,7 @@ class ActivitiesRepository implements IActivitiesRepository {
     type,
     is_needed_code,
     order,
+    phase_id,
   }: ICreateActivityDTO): Promise<Activity> {
     const activity = this.repository.create({
       description,
@@ -26,6 +27,7 @@ class ActivitiesRepository implements IActivitiesRepository {
       type,
       is_needed_code,
       order,
+      phase_id,
     });
 
     await this.repository.save(activity);

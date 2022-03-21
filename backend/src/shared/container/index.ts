@@ -6,9 +6,11 @@ import { ActivitiesAnswersRepository } from '@modules/activities/infra/typeorm/r
 import { ActivitiesDefaultCodeRepository } from '@modules/activities/infra/typeorm/repositories/ActivitiesDefaultCodeRepository';
 import { ActivitiesRepository } from '@modules/activities/infra/typeorm/repositories/ActivitiesRepository';
 import { OptionsRepository } from '@modules/activities/infra/typeorm/repositories/OptionsRepository';
+import { TipsRepository } from '@modules/activities/infra/typeorm/repositories/TipsRepository';
 import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
 import { IActivitiesRepository } from '@modules/activities/repositories/IActivitiesRepository';
 import { IOptionsRepository } from '@modules/activities/repositories/IOptionsRepository';
+import { ITipsRepository } from '@modules/activities/repositories/ITipsRepository';
 import { UsersMapsRepository } from '@modules/game/infra/typeorm/repositories/UsersMapsRepository';
 import { UsersPhasesRepository } from '@modules/game/infra/typeorm/repositories/UsersPhasesRepository';
 import { IUsersMapsRepository } from '@modules/game/repositories/IUsersMapsRepository';
@@ -65,3 +67,5 @@ container.registerSingleton<IActivitiesOptionsRepository>(
   'ActivitiesDefaultCodeRepository',
   ActivitiesDefaultCodeRepository
 );
+
+container.registerSingleton<ITipsRepository>('TipsRepository', TipsRepository);
