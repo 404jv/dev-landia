@@ -1,2 +1,2 @@
 # dev-landia
-💙 Aplicativo para aprender programação gratuito.
+💙 Aplicativo gratuito para aprender programação.
