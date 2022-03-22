@@ -14,16 +14,29 @@
 ## Diagrama do banco de dados 📚
 ![Diagrama do dev-landia](/diagram.png)
 
+## Licença
+Distribuído sob a licença MIT. Consulte `LICENSE.txt` para obter mais informações.
+
+## Contribuições
+As contribuições são o que tornam a comunidade open source um lugar incrível para aprender, inspirar e criar. Quaisquer contribuições que você fizer serão **muito bem vindas**.
+
+Se você tiver uma sugestão para melhorar esse projeto, faça uma fork do repositório e crie um pull request. Você também pode simplesmente abrir uma issue com a tag "melhoria". 
+Não se esqueça de dar uma estrela ao projeto! Obrigado novamente!
+
+1. Faça uma fork
+2. Crie sua Feature Branch (`git checkout -b feature/SuaFeature`)
+3. Faça um Commit das suas mudanças (`git commit -m 'Adicionei minha feature'`)
+4. Dê um Push para a Branch (`git push origin feature/SuaFeature`)
+5. Abra um Pull Request 
+
 ## Como executar a aplicação 👨🏾‍💻
 ### Pré-requisitos
 * yarn
 ```bash
 npm install --global yarn
 ```
-* Node
-Siga os passos da instalação no [site oficial](https://nodejs.org/en/download/)
-* Docker
-Siga os passos da instalação nessa [documentação](https://www.notion.so/Docker-e-Docker-Compose-16771f2ceefe4a05a8c29df4ca49e97a)
+* Node: Siga os passos da instalação no [site oficial](https://nodejs.org/en/download/)
+* Docker: Siga os passos da instalação nessa [documentação](https://www.notion.so/Docker-e-Docker-Compose-16771f2ceefe4a05a8c29df4ca49e97a)
 
 ### Instalação
 1. Clone o repositório
@@ -48,5 +61,15 @@ docker-compose up -d
 5. Rode as migrations do TypeORM
 ```bash
 yarn typeorm migration:run
+```
+6. Instale as dependências necessárias do mobile
+```bash
+cd ..
+```
+```bash
+cd mobile
+```
+```bash
+yarn
 ```
 
