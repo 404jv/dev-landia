@@ -11,6 +11,7 @@ import { createUserAndAuthenticate } from '@test/factories/UserFactory';
 let connection: Connection;
 let userToken: string;
 let phaseId: string;
+let mapId: string;
 
 describe('Correct Phase Controller', () => {
   beforeAll(async () => {
@@ -18,6 +19,7 @@ describe('Correct Phase Controller', () => {
     await connection.runMigrations();
 
     const map = await createMap();
+    mapId = map.id;
 
     const phase = await createPhaseAndActivities(map.id);
     phaseId = phase.id;
@@ -36,10 +38,12 @@ describe('Correct Phase Controller', () => {
   it('Should be able to a user correct their phase', async () => {
     const response = await request(app)
       .put(`/game/correct/${phaseId}`)
+      .send({ map_id: mapId })
       .set('Authorization', `Bearer ${userToken}`);
 
     expect(response.statusCode).toEqual(200);
-    expect(response.body.xp).toBeGreaterThan(5);
-    expect(response.body.coins).toBeGreaterThan(1);
+    expect(response.body.total_xp).toBeGreaterThanOrEqual(5);
+    expect(response.body.total_coins).toBeGreaterThanOrEqual(1);
+    expect(response.body.current_level).toBeGreaterThanOrEqual(1);
   });
 });
