@@ -27,6 +27,10 @@ class InMemoryUsersPhasesRepository implements IUsersPhasesRepository {
 
     return userPhase;
   }
+
+  update(userPhase: UserPhase): Promise<UserPhase> {
+    throw new Error('Method not implemented.');
+  }
 }
 
 export { InMemoryUsersPhasesRepository };

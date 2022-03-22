@@ -33,6 +33,11 @@ class UsersPhasesRepository implements IUsersPhasesRepository {
 
     return userPhase;
   }
+
+  async update(data: UserPhase): Promise<UserPhase> {
+    const userPhase = await this.repository.save(data);
+    return userPhase;
+  }
 }
 
 export { UsersPhasesRepository };
