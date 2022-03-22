@@ -30,6 +30,10 @@ class InMemoryMapsRepository implements IMapsRepository {
   async findByOrder(order: number): Promise<Map> {
     return this.repository.find((map) => map.order === order);
   }
+
+  findWithUserLevel(id: string): Promise<Map> {
+    throw new Error('Method not implemented.');
+  }
 }
 
 export { InMemoryMapsRepository };
