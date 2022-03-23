@@ -5,17 +5,19 @@
   <img src="https://img.shields.io/github/license/404jv/dev-landia?style=for-the-badge"/>
 </div>
 
+<br />
+
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="./logo.png" alt="Logo" width="80" height="80">
+    <img src="./logo.png" alt="Logo" width="160" height="40">
   </a>
 
-  <h3 align="center">dev-landia 🚀</h3>
+  <h2 align="center">dev-landia</h2>
 
   <p align="center">
     💙 Aplicativo gratuito para aprender programação.
     <br />
-    <a href="./docs.md"><strong>Explore the docs »</strong></a>
+    <a href="./docs.md"><strong>Explore a documentação »</strong></a>
     <br />
     <br />
     ·
@@ -25,17 +27,35 @@
   </p>
 </div>
 
-## Tecnologias utilizadas 🛠
+<details>
+  <summary><h3>Tabela de conteúdos</h3></summary>
+  <ol>
+    <li><a href="#tecnologias-utilizadas">Tecnologias utilizadas</a></li>
+    <li><a href="#layout-do-projeto-no-figma">Layout do projeto no Figma</a></li>
+    <li><a href="#diagrama-do-banco-de-dados">Diagrama do banco de dados</a></li>
+    <li><a href="#licença">Licença</a></li>
+    <li><a href="#contribuições">Contribuições</a></li>
+    <li>
+      <a href="#como-executar-a-aplicação">Como executar a aplicação</a>
+      <ul>
+        <li><a href="#pré-requisitos">Pré-requisitos</a></li>
+        <li><a href="#instalação">Instalação</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
+
+## Tecnologias utilizadas 
 - Node 
 - React Native 
 - Typescript
 - PostgreSQL 
 - TypeORM
 
-## Layout do projeto no Figma 🎨
+## Layout do projeto no Figma 
 - Clique [aqui](https://www.figma.com/file/r6sYsIta8Ae2lnoAIvTNxo/TCC?node-id=0%3A1) para acessar o layout
 
-## Diagrama do banco de dados 📚
+## Diagrama do banco de dados 
 ![Diagrama do dev-landia](/diagram.png)
 
 ## Licença
@@ -53,7 +73,7 @@ Não se esqueça de dar uma estrela ao projeto! Obrigado novamente!
 4. Dê um Push para a Branch (`git push origin feature/SuaFeature`)
 5. Abra um Pull Request 
 
-## Como executar a aplicação 👨🏾‍💻
+## Como executar a aplicação 
 ### Pré-requisitos
 * yarn
 ```bash
@@ -97,3 +117,27 @@ cd mobile
 yarn
 ```
 
+## Autores
+
+<div>
+  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/53544964?v=4" width="80px;" alt="Foto do João Victor Ramalho">
+  <br />
+  <sub><b>João Victor Ramalho</b></sub></a> <a href="https://github.com/404jv" title="Github">🚀</a>
+  [![Twitter Badge](https://img.shields.io/badge/-@401jv-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/401jv)](https://twitter.com/401jv)
+  <img src="https://img.shields.io/badge/-joaovictorramalho7@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:joaovictorramalho7@gmail.com"/>
+</div>
+
+<div>
+  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/84464007?v=4" width="80px;" alt="Foto do Ruan Pablo">
+  <br />
+  <sub><b>Ruan Pablo</b></sub></a> <a href="https://github.com/1SyuLi" title="Github">👩‍🚀</a>
+  <img src="https://img.shields.io/badge/-ruangoio01@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:ruangoio01@gmail.com"/>
+</div>
+
+<div>
+  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/86677587?v=4" width="80px;" alt="Foto do João Vitor Lima">
+  <br />
+  <sub><b>João Vitor Lima</b></sub></a> <a href="https://github.com/jvolima" title="Github">⚡</a>
+  [![Twitter Badge](https://img.shields.io/badge/-@JvoLima1-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/JvoLima1)](https://twitter.com/JvoLima1)
+  <img src="https://img.shields.io/badge/-jvolima2004@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:jvolima2004@gmail.com"/>
+</div>
