@@ -119,19 +119,19 @@ yarn
 
 ## Autores
 <img src="https://avatars.githubusercontent.com/u/53544964?v=4" width="100px;" alt="Foto do João Victor Ramalho"/>
-<a href="https://github.com/404jv">João Victor Ramalho</a> 🚀 
+<a href="https://github.com/404jv" target="_blank">João Victor Ramalho</a> 🚀 
 
 <br />
 <br />
 
 <div>
-  <a href="https://twitter.com/tgmarinho">
+  <a href="https://twitter.com/401jv" target="_blank">
     <img src="https://img.shields.io/badge/-@401jv-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/401jv"/>
   </a>
-  <a href="mailto:joaovictorramalho7@gmail.com">
+  <a href="mailto:joaovictorramalho7@gmail.com" target="_blank">
     <img src="https://img.shields.io/badge/-joaovictorramalho7@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:joaovictorramalho7@gmail.com"/>
   </a>
-  <a href="https://www.linkedin.com/in/404jv/">
+  <a href="https://www.linkedin.com/in/404jv/" target="_blank">
     <img src="https://img.shields.io/badge/-João Victor Ramalho Alves-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/João-Victor-Ramalho-Alves/"/>
   </a>
 </div>
@@ -140,13 +140,13 @@ yarn
 <br />
 
 <img src="https://avatars.githubusercontent.com/u/84464007?v=4" width="100px;" alt="Foto do Ruan Pablo"/>
-<a href="https://github.com/1SyuLi">Ruan Pablo</a> 🚀 
+<a href="https://github.com/1SyuLi" target="_blank">Ruan Pablo</a> 🚀 
 
 <br />
 <br />
 
 <div>
-  <a href="ruangoio01@gmail.com">
+  <a href="ruangoio01@gmail.com" target="_blank">
     <img src="https://img.shields.io/badge/-ruangoio01@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:ruangoio01@gmail.com"/>
   </a>
 </div>
@@ -155,19 +155,19 @@ yarn
 <br />
 
 <img src="https://avatars.githubusercontent.com/u/86677587?v=4" width="100px;" alt="Foto do João Vitor Lima"/>
-<a href="https://github.com/jvolima">João Vitor Lima</a> 🚀 
+<a href="https://github.com/jvolima" target="_blank">João Vitor Lima</a> 🚀 
 
 <br />
 <br />
 
 <div>
-  <a href="https://twitter.com/JvoLima1">
+  <a href="https://twitter.com/JvoLima1" target="_blank">
     <img src="https://img.shields.io/badge/-@JvoLima1-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/JvoLima1"/>
   </a>
-  <a href="mailto:jvolima2004@gmail.com">
+  <a href="mailto:jvolima2004@gmail.com" target="_blank">
     <img src="https://img.shields.io/badge/-jvolima2004@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:jvolima2004@gmail.com"/>
   </a>
-  <a href="https://www.linkedin.com/in/jo%C3%A3o-vitor-de-oliveira-lima-36b573215/">
+  <a href="https://www.linkedin.com/in/jo%C3%A3o-vitor-de-oliveira-lima-36b573215/" target="_blank">
     <img src="https://img.shields.io/badge/-João Vitor de Oliveira Lima-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/João-Vitor-de-Oliveira-Lima/"/>
   </a>
 </div>
