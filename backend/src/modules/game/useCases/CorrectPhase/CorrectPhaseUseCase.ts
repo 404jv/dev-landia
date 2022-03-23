@@ -1,7 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { UserMap } from '@modules/game/infra/typeorm/entities/UserMap';
 import { UserPhase } from '@modules/game/infra/typeorm/entities/UserPhase';
+import { IUsersMapsRepository } from '@modules/game/repositories/IUsersMapsRepository';
 import { IUsersPhasesRepository } from '@modules/game/repositories/IUsersPhasesRepository';
 import { IMapsRepository } from '@modules/maps/repositories/IMapsRepository';
 import { Phase } from '@modules/phases/infra/typeorm/entities/Phase';
@@ -18,6 +20,7 @@ interface IResponse {
   total_coins: number;
   total_xp: number;
   current_level: number;
+  is_map_done: boolean;
 }
 
 @injectable()
@@ -32,7 +35,7 @@ class CorrectPhaseUseCase {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
     @inject('UsersMapsRepository')
-    private usersMapsRepository: IMapsRepository
+    private usersMapsRepository: IUsersMapsRepository
   ) {}
 
   async execute({ map_id, phase_id, user_id }: IRequest): Promise<IResponse> {
@@ -52,17 +55,14 @@ class CorrectPhaseUseCase {
       userPhaseLevel
     );
 
+    currentPlayingPhase.userPhase = newUserLevel;
+
     const isMapDone = await this.isAllPhasesDone(phases);
 
     if (isMapDone) {
       const { userMap } = map;
-
-      userMap.is_done = true;
-
-      this.handleNextMapUseCase.execute({
-        user_id,
-        finishedMapOrder: map.order,
-      });
+      await this.setUserMapAsDone(userMap);
+      await this.startNewUserMap(user_id, map.order);
     }
 
     const [total_coins, total_xp] = await this.giveUserReward(user_id);
@@ -71,6 +71,7 @@ class CorrectPhaseUseCase {
       current_level: newUserLevel.current_level,
       total_coins,
       total_xp,
+      is_map_done: isMapDone,
     };
   }
 
@@ -112,6 +113,21 @@ class CorrectPhaseUseCase {
     await this.usersRepository.update(user);
 
     return [user.total_coins, user.total_xp];
+  }
+
+  async setUserMapAsDone(userMap: UserMap): Promise<void> {
+    userMap.is_done = true;
+    await this.usersMapsRepository.update(userMap);
+  }
+
+  async startNewUserMap(
+    user_id: string,
+    finishedMapOrder: number
+  ): Promise<void> {
+    await this.handleNextMapUseCase.execute({
+      user_id,
+      finishedMapOrder,
+    });
   }
 }
 
