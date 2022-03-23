@@ -11,13 +11,15 @@ class UsersPhasesRepository implements IUsersPhasesRepository {
     this.repository = getRepository(UserPhase);
   }
 
-  async create(user_id: string, phase_id: string): Promise<void> {
+  async create(user_id: string, phase_id: string): Promise<UserPhase> {
     const userPhase = this.repository.create({
       user_id,
       phase_id,
     });
 
     await this.repository.save(userPhase);
+
+    return userPhase;
   }
 
   async findByUserAndPhase(
