@@ -27,6 +27,10 @@ class InMemoryUsersMapsRepository implements IUsersMapsRepository {
   async listByUser(user_id: string): Promise<UserMap[]> {
     return this.repository.filter((userMap) => userMap.user_id === user_id);
   }
+
+  update(userMap: UserMap): Promise<UserMap> {
+    throw new Error('Method not implemented.');
+  }
 }
 
 export { InMemoryUsersMapsRepository };
