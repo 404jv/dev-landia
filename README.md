@@ -42,7 +42,7 @@
         <li><a href="#instalação">Instalação</a></li>
       </ul>
     </li>
-    <li><a href="#autores"></li>
+    <li><a href="#autores">Autores</li>
   </ol>
 </details>
 
