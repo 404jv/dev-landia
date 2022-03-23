@@ -1,11 +1,35 @@
-# dev-landia 🚀
-## 💙 Aplicativo gratuito para aprender programação.
+<div>
+  <img src="https://img.shields.io/github/issues/404jv/dev-landia?style=for-the-badge"/>
+  <img src="https://img.shields.io/github/forks/404jv/dev-landia?style=for-the-badge"/>
+  <img src="https://img.shields.io/github/stars/404jv/dev-landia?style=for-the-badge"/>
+  <img src="https://img.shields.io/github/license/404jv/dev-landia?style=for-the-badge"/>
+</div>
+
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="./logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">dev-landia 🚀</h3>
+
+  <p align="center">
+    💙 Aplicativo gratuito para aprender programação.
+    <br />
+    <a href="./docs.md"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    ·
+    <a href="https://github.com/404jv/dev-landia/issues">Reporte algum Bug</a>
+    ·
+    <a href="https://github.com/404jv/dev-landia/issues">Solicite uma feature</a>
+  </p>
+</div>
 
 ## Tecnologias utilizadas 🛠
 - Node 
-- React Native ⚛
+- React Native 
 - Typescript
-- PostgreSQL 🐘
+- PostgreSQL 
 - TypeORM
 
 ## Layout do projeto no Figma 🎨
