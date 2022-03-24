@@ -70,8 +70,6 @@ describe('Correct Phase Controller', () => {
       .send({ map_id: map2Id })
       .set('Authorization', `Bearer ${userToken}`);
 
-    console.log(response.body);
-
     expect(response.statusCode).toEqual(200);
     expect(response.body.total_xp).toBeGreaterThanOrEqual(5);
     expect(response.body.total_coins).toBeGreaterThanOrEqual(1);
