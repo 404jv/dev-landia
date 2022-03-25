@@ -7,7 +7,7 @@ export const Container = styled.View`
 
 export const Icon = styled.View`
     border-radius: 100px;
-    background-color: ${({ theme }) => theme.colors.secundary};
+    background-color: ${({ theme }) => theme.colors.secondary};
     position: absolute;
     padding: 20px;
     margin-top: 4px;
@@ -19,7 +19,7 @@ export const Level = styled.View`
     position: absolute;
     width: 22px;
     height: 22px;
-    background-color: ${({ theme }) => theme.colors.secundary};
+    background-color: ${({ theme }) => theme.colors.secondary};
     border-radius: 11px;
     border-width: 1.5px;
     border-color: ${({ theme }) => theme.colors.stroke};
