@@ -17,7 +17,7 @@
   <p align="center">
     💙 Aplicativo gratuito para aprender programação.
     <br />
-    <a href="./docs.md"><strong>Explore a documentação »</strong></a>
+    <a href="./DOCS.md"><strong>Explore a documentação »</strong></a>
     <br />
     <br />
     ·
