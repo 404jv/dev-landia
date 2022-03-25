@@ -1,66 +1,155 @@
-import React from 'react';
-import { Feather } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, StatusBar } from 'react-native';
+import { useTheme } from 'styled-components';
+import { Phase } from './Phase';
 
-import { Step } from '../../components/Step';
+import goldCoin from '../../assets/gold.png';
+import xpCoin from '../../assets/xp.png';
+import medalCoin from '../../assets/medal.png';
+
+import { useRef } from 'react';
 
 
-import { 
+import {
     Container,
     Header,
-    Coin,
-    CoinText,
-    LevelContainerI,
-    LevelContainerII,
-    FirstStep,
-    SecondStep,
+    Content,
+    CoinView,
+    Image,
+    CoinValue,
+    Phases,
+    PhasePosition,
 } from './styles';
+import { useNavigation } from '@react-navigation/native';
+
+export function Home() {
+
+    const theme = useTheme();
+    const navigation = useNavigation();
 
 
-export function Home({ navigation }) {
+    const scrollRef = useRef<any>();
 
+    function handleScrollToBottom() {
+        scrollRef.current?.scrollTo({
+            y: 9999,
+            animated: true,
+        });
+    }
+
+
+    const phases = [
+        {
+            id: 1,
+            iconName: 'box',
+            name: 'Testes',
+            level: 0,
+        },
+        {
+            id: 2,
+            iconName: 'monitor',
+            name: 'Algoritmo',
+            level: 5,
+        },
+        {
+            id: 3,
+            iconName: 'zap',
+            name: 'Comandos',
+            level: 2,
+        },
+        {
+            id: 4,
+            iconName: 'play-circle',
+            name: 'Introdução',
+            level: 5,
+        },
+        {
+            id: 5,
+            iconName: 'monitor',
+            name: 'Algoritmo',
+            level: 5,
+        },
+        {
+            id: 6,
+            iconName: 'zap',
+            name: 'Comandos',
+            level: 5,
+        },
+        {
+            id: 7,
+            iconName: 'play-circle',
+            name: 'Introdução',
+            level: 5,
+        },
+        {
+            id: 8,
+            iconName: 'monitor',
+            name: 'Algoritmo',
+            level: 5,
+        },
+
+    ]
+
+
+    let cont = 0;
+
+    function handlePosition() {
+        if (cont >= 4) {
+            cont = 0;
+        }
+
+        cont = cont + 1;
+        return cont;
+    }
+
+    function handleAchiviments() {
+        navigation.navigate('Achievements')
+    }
+
+
+    useEffect(() => {
+        handleScrollToBottom();
+    }, []);
 
     return (
         <Container>
+            <StatusBar barStyle='light-content' backgroundColor={theme.colors.primary} />
+
             <Header>
-                <Coin> 
-                    <Feather name="slack" size={26} color="#45A7AD"/>
-                    <CoinText>232</CoinText>
-                </Coin>
+                <Content>
+                    <CoinView>
+                        <Image source={goldCoin} />
+                        <CoinValue>23</CoinValue>
+                    </CoinView>
 
-                <Coin> 
-                    <Feather name="codesandbox" size={26} color="#844799"/>
-                    <CoinText>12</CoinText>
-                </Coin>
+                    <CoinView>
+                        <Image source={xpCoin} />
+                        <CoinValue>232</CoinValue>
+                    </CoinView>
 
-                <Coin> 
-                    <Feather name="moon" size={26} color="#702230"/>
-                    <CoinText>23</CoinText>
-                </Coin>
+                    <CoinView>
+                        <TouchableOpacity onPress={handleAchiviments} style={{ flexDirection: 'row' }}>
+                            <Image source={medalCoin} />
+                            <CoinValue>17</CoinValue>
+                        </TouchableOpacity>
+                    </CoinView>
 
+                </Content>
             </Header>
 
-            
-
-
-            <LevelContainerI>
-                <Step IconName="box" level={0}/>
-            </LevelContainerI>
-
-            <LevelContainerII>
-                <FirstStep>
-                    <Step  IconName="monitor" level={5} LvName="Algoritmo"/>
-                </FirstStep>
-
-                <SecondStep>
-                    <Step IconName="zap" level={2} LvName="Comandos"/>
-                </SecondStep>
-            </LevelContainerII>
-
-            <LevelContainerI>
-                <Step IconName="play-circle" level={5} LvName="Introdução" onPress={() => navigation.navigate('Activity')}/>
-            </LevelContainerI>
-
+            <ScrollView ref={scrollRef}>
+                <Phases>
+                    {phases.map(phase => {
+                        return (
+                            <PhasePosition key={phase.id} keyPosition={handlePosition()}>
+                                <Phase IconName={phase.iconName} level={phase.level} LvName={phase.name} />
+                            </PhasePosition>
+                        )
+                    })}
+                </Phases>
+            </ScrollView>
 
         </Container>
-    )
+    );
 }

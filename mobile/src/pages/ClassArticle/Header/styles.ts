@@ -10,7 +10,7 @@ export const MenuBar = styled.View`
 export const Title = styled.Text`
   font-size: 32px;
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.blue};
   text-align: center;
   justify-content: center;
   margin-left: 8px;
