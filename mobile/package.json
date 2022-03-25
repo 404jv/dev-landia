@@ -1,10 +1,12 @@
 {
+  "name": "devlandia",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "android": "react-native run-android",
+    "android": "expo run:android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
-    "start": "react-native start"
+    "start": "expo start --dev-client"
   },
   "dependencies": {
     "@expo-google-fonts/jetbrains-mono": "^0.2.0",

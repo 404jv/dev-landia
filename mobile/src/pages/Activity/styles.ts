@@ -1,5 +1,5 @@
-import { Feather } from '@expo/vector-icons';
 import styled from 'styled-components/native';
+import { Feather } from '@expo/vector-icons';
 
 
 export const Container = styled.View`
@@ -10,8 +10,7 @@ export const Container = styled.View`
 export const Text = styled.Text`
     line-height: 19px;
     font-size: 16px;
-    color: #fff;
-    font-family: ${({ theme }) => theme.fonts.regular};
+    color: ${({ theme }) => theme.colors.white};
 `;
 
 export const Section = styled.View`
@@ -23,8 +22,7 @@ export const Section = styled.View`
 export const Title = styled.Text`
     font-size: 32px;
     margin-bottom: 8px;
-    color: ${({ theme }) => theme.colors.primary};
-    font-family: ${({ theme }) => theme.fonts.regular};
+    color: ${({ theme }) => theme.colors.blue};
 `;
 
 export const Description = styled.View`
@@ -51,7 +49,7 @@ export const CompileButton = styled.TouchableOpacity`
 export const CompileIconButton = styled.View`
     width: 64px;
     height: 64px;
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.blue};
     border-radius: 50px;
     justify-content: center;
     align-items: center;

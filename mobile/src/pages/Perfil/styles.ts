@@ -1,120 +1,115 @@
-import { Feather, MaterialIcons } from '@expo/vector-icons';
-import styled from 'styled-components/native';
-import { RFValue } from 'react-native-responsive-fontsize';
+import { Feather } from "@expo/vector-icons";
+import styled from "styled-components/native";
 
-import { Image } from 'react-native';
-
-
-
-export const Container = styled.View`
-    background-color: #22282B;
-    flex: 1;
-
-`;
-
+export const Container = styled.ScrollView`
+  flex: 1;
+  background-color: ${({ theme }) => theme.colors.background};
+`
 
 export const Header = styled.View`
-    width: 100%;
-    height: 80px;
+  width: 100%;
+  height: 80px;
+  background-color: ${({ theme }) => theme.colors.primary};
+  align-items: center;
+  flex-direction: row;
 
-    align-items: center;
-    flex-direction: row;
-    border-bottom-width: 1px;
-    border-style: solid;
-    border-bottom-color: #45A7AD;
-`;
-
-
-export const HeaderText = styled.Text`
-    color: #45A7AD;
-    font-size: 23px;
-    margin-left: ${RFValue(116)}px;
-`;
-
+  border-bottom-width: 2px;
+  border-style: solid;
+  border-bottom-color: ${({ theme }) => theme.colors.blue};
+`
 
 export const Icon = styled(Feather)`
-    color: #45A7AD;
-    font-size: 27px;
-    margin-left: ${RFValue(18)}px;
-`;
+  margin-left: 18px;
+  color: #1F6FEB; 
+  font-size: 27px;
+`
 
+export const ContainerHeaderText = styled.View`
+  position: absolute;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`
 
-export const PerfilInfo = styled.View`
-    width: 100%;
-    height: 122px;
-    flex-direction: row;
-    align-items: center;
-`;
+export const HeaderTitle = styled.Text`
+  color: ${({ theme }) => theme.colors.blue};
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+`
 
-export const PerfilImageContainer = styled.View`
-    margin: 18px;
-    width: 90px;
-    height: 90px;
-    background-color: #C4C4C4;
-    border-radius: 45px;
-    border-width: 3px;
-    border-style: solid;
-    border-color: #45A7AD;
-`;
+export const ContainerPerfil = styled.View`
+  margin-top: 46px;
+  margin-left: 18px;
+  flex-direction: row;
+  width: 100%;
+`
 
-export const PerfilEdit = styled.View`
-    width: 25px;
-    height: 25px;
-    background-color: #C4C4C4;
-    border-radius: 12.5px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #45A7AD;
-    position: absolute;
-    right: 0;
-    align-items: center;
-    justify-content: center;
-`;
+export const ContainerImage = styled.View`
+  width: 90px;
+  height: 90px;
+  border-radius: 90px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: ${({ theme }) => theme.colors.blue};
+  background-color: ${({ theme }) => theme.colors.stroke};
+  justify-content: center;
+  align-items: center;
+`
 
+export const ContainerEditImage = styled.TouchableOpacity`
+  width: 19px;
+  height: 19px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.stroke};
+  border-radius: 19px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: ${({ theme }) => theme.colors.blue};
+  position: relative;
+  top: 10px;
+  right: 20px;
+`
 
-export const PerfilEditIcon = styled(MaterialIcons)`
-    font-size: 14px;
-`;
+export const ContainerInfos = styled.View`
+  margin-left: 10px;
+`
 
-export const PerfilContent = styled.View`
-    margin-left: 20px;
-`;
+export const Name = styled.Text`
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.title};
+`
 
-export const UserName = styled.Text`
-    color: #FFF;
-    font-size: 28px;
-`;
+export const Username = styled.Text`
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.subTitle};
+`
 
-export const UserId = styled.Text`
-    margin-top: -5px;
-    color: #9FA2A5;
-    font-size: 14px;
-`;
+export const Bio = styled.Text`
+  margin-top: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: ${({ theme }) => theme.colors.description};
+`
 
-export const UserDescription = styled.Text`
-    color: #C9C9C9;
-    font-size: 14px;
-    margin-top: 5px;
-`;
+export const StatisticsTitle = styled.Text`
+  margin-top: 38px;
+  margin-left: 18px;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.blue};
+`
 
-export const PerfilCoinsView = styled.View`
-    flex: 1;
-    margin: 18px;
-`;
-
-export const CoinStats = styled.Text`
-    color: #36B1BF;
-    font-size: 20px;
-`;
-
-export const CoinView = styled.View`
-    margin-top: 10px;
-    flex-direction: row;
-    align-items: center;
-`;
-
-export const PerfilImage = styled(Image)`
-    width: 85px;
-    height: 85px;
-    border-radius: 42.5px;
-`;
+export const ContainerStatisticsCards = styled.View`
+  flex-direction: row;
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-bottom: 12px;
+`

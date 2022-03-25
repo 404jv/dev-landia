@@ -9,7 +9,7 @@ export const Content = styled.ScrollView`
   margin-bottom: 32px;
 `
 export const FinishButton = styled.TouchableOpacity`
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.blue};
   width: 100%;
   align-items: center;
   justify-content: center;
