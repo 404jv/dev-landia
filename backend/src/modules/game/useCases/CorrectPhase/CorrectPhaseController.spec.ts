@@ -39,11 +39,16 @@ describe('Correct Phase Controller', () => {
     const { token, user } = await createUserAndAuthenticate();
     userToken = token;
 
+    const map3 = await createMap();
+    const phase3 = await createPhaseAndActivities(map3.id);
+
     await startUserMap(user.id, map1Id);
     await startUserMap(user.id, map2Id);
+    await startUserMap(user.id, map3.id);
 
     await startUserPhase(user.id, phase1Id);
     await startUserPhaseAtLevel2(user.id, phase2Id);
+    await startUserPhase(user.id, phase3.id);
   });
 
   afterAll(async () => {
