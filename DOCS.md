@@ -1,7 +1,7 @@
 # Documentação 
 
 <details>
-  <summary><h3>Tabela de conteúdos</h3></summary>
+  <summary><h3>Seções</h3></summary>
   <ol>
     <li>
       <a href="rotas-relacionadas-ao-usuário">Rotas relacionadas ao usuário</a>
