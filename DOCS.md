@@ -1,5 +1,37 @@
 # Documentação 
 
+<details>
+  <summary><h3>Seções</h3></summary>
+  <ol>
+    <li>
+      <a href="rotas-relacionadas-ao-usuário">Rotas relacionadas ao usuário</a>
+      <ul>
+        <li><a href="#criação-de-usuário">Criação de usuário</a></li>
+        <li><a href="#autenticação-do-usuário">Autenticação do usuário</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#rotas-relacionadas-aos-mapas">Rotas relacionadas aos mapas</a>
+      <ul>
+        <li><a href="#criação-de-mapas">Criação de mapas</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#rotas-relacionadas-às-fases">Rotas relacionadas às fases</a>
+      <ul>
+        <li><a href="#criação-de-fases">Criação de fases</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#rotas-relacionadas-às-atividades">Rotas relacionadas às atividades</a>
+      <ul>
+        <li><a href="#criação-de-atividades">Criação de atividades</a></li>
+        <li><a href="#adicionar-opções-para-uma-atividade">Adicionar opções para uma atividade</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
+
 ## Rotas relacionadas ao usuário 
 
 ### Criação de usuário
@@ -46,6 +78,10 @@ Autentica o usuário, se houver sucesso retorna um token JWT, o email e o nome d
 
 <br />
 
+<a href="#documentação">Voltar para o topo</a>
+
+<br />
+
 ## Rotas relacionadas aos mapas
 
 ### Criação de mapas
@@ -65,6 +101,10 @@ Cadastra um mapa, se houver sucesso retorna o status code 201.
 
 <strong>Regras de negócio</strong>
 - Apenas usuários administradores devem ter acesso à essa rota.
+
+<br />
+
+<a href="#documentação">Voltar para o topo</a>
 
 <br />
 
@@ -106,6 +146,10 @@ Exemplo de criação de fase teórica
 - Não deve ser possível cadastrar uma fase teórica com um max_level diferente de 1.
 - Não deve ser possível cadastrar uma fase se o map_id não pertencer a nenhum mapa existente.
 - Atributo "markdown_text" é opcional.
+
+<br />
+
+<a href="#documentação">Voltar para o topo</a>
 
 <br />
 
@@ -191,5 +235,9 @@ Adiciona opções para uma atividade, se houver sucesso retorna o status code 20
 <strong>Regras de negócio</strong>
 - Apenas usuários administradores devem ter acesso à essa rota.
 - Não deve ser possível adicionar opções para uma atividade se o activity_id informado não pertencer a nenhuma atividade existente.
+
+<br />
+
+<a href="#documentação">Voltar para o topo</a>
 
 <br />
