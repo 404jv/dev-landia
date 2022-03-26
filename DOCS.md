@@ -29,6 +29,12 @@
         <li><a href="#adicionar-opções-para-uma-atividade">Adicionar opções para uma atividade</a></li>
       </ul>
     </li>
+    <li>
+      <a href="#rotas-relacionadas-ao-game">Rotas relacionadas ao game</a>
+      <ul>
+        <li><a href="#listagem-da-árvore-de-fases">Listagem da árvore de fases</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 
@@ -235,6 +241,24 @@ Adiciona opções para uma atividade, se houver sucesso retorna o status code 20
 <strong>Regras de negócio</strong>
 - Apenas usuários administradores devem ter acesso à essa rota.
 - Não deve ser possível adicionar opções para uma atividade se o activity_id informado não pertencer a nenhuma atividade existente.
+
+<br />
+
+<a href="#documentação">Voltar para o topo</a>
+
+<br />
+
+## Rotas relacionadas ao game 
+
+### Listagem da árvore de fases
+<div>
+  <strong>GET</strong> /game/tree
+</div>
+
+<br />
+
+<strong>Regras de negócio</strong>
+- Apenas usuários autenticados devem ter acesso à essa rota
 
 <br />
 
