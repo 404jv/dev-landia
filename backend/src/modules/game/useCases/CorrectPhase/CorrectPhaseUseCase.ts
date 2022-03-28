@@ -50,12 +50,11 @@ class CorrectPhaseUseCase {
 
     const currentPlayingPhase = phases.find((phase) => phase.id === phase_id);
 
-    const newUserLevel = await this.updateUserLevel(
-      currentPlayingPhase,
-      userPhaseLevel
-    );
+    if (userPhaseLevel.current_level < currentPlayingPhase.max_level) {
+      const newPhaseLevel = await this.updatePhaseLevel(userPhaseLevel);
 
-    currentPlayingPhase.userPhase = newUserLevel;
+      currentPlayingPhase.userPhase = newPhaseLevel;
+    }
 
     const isMapDone = await this.isAllPhasesDone(phases);
 
@@ -66,28 +65,22 @@ class CorrectPhaseUseCase {
     }
 
     const [total_coins, total_xp] = await this.giveUserReward(user_id);
+    const { current_level } = currentPlayingPhase.userPhase;
 
     return {
-      current_level: newUserLevel.current_level,
+      current_level,
       total_coins,
       total_xp,
       is_map_done: isMapDone,
     };
   }
 
-  async updateUserLevel(
-    phase: Phase,
-    userLevel: UserPhase
-  ): Promise<UserPhase> {
-    if (userLevel.current_level < phase.max_level) {
-      userLevel.current_level += 1;
+  async updatePhaseLevel(userLevel: UserPhase): Promise<UserPhase> {
+    userLevel.current_level += 1;
 
-      const newUserLevel = await this.usersPhasesRepository.update(userLevel);
+    const newPhaseLevel = await this.usersPhasesRepository.update(userLevel);
 
-      return newUserLevel;
-    }
-
-    return undefined;
+    return newPhaseLevel;
   }
 
   async isAllPhasesDone(phases: Phase[]): Promise<boolean> {
