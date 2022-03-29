@@ -6,6 +6,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "splash" : {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#1F6FEB"
+    },
     "android": {
       "package": "com.devlandia"
     }
