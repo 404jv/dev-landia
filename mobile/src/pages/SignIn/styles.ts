@@ -4,12 +4,17 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 
-export const Container = styled.View`
-   flex: 1;
-   background-color: ${({ theme }) => theme.colors.title};
-   padding-top: ${getStatusBarHeight() + 55}px;
-   padding-left: 40px;
-   padding-right: 40px;
+export const Container = styled.ScrollView.attrs(({ theme }) => ({
+    contentContainerStyle: {
+        flexGrow: 1,
+        backgroundColor: theme.colors.title
+    }
+}))`
+    height: 100%;
+    background-color: ${({ theme }) => theme.colors.title};
+    padding-top: ${getStatusBarHeight() + 55}px;
+    padding-left: 40px;
+    padding-right: 40px;
 `;
 
 export const Logo = styled.Image``;

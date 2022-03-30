@@ -1,5 +1,13 @@
-import React from 'react';
-import { StatusBar, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import {
+    StatusBar,
+    TouchableOpacity,
+    KeyboardAvoidingView,
+    TouchableWithoutFeedback,
+    Keyboard,
+    Platform,
+} from 'react-native';
+
 import { useTheme } from 'styled-components';
 
 import LogoPng from '../../assets/BlueLogo.png';
@@ -21,11 +29,18 @@ import {
 export function SignIn() {
 
     const theme = useTheme();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    function handleSignIn() {
+        console.log("Email", email);
+        console.log("Senha", password);
+    }
 
     return (
-        <Container>
-            <StatusBar backgroundColor={theme.colors.title} barStyle='dark-content' />
 
+        <Container >
+            <StatusBar backgroundColor={theme.colors.title} barStyle='dark-content' />
             <Logo source={LogoPng} />
 
             <Title>
@@ -45,18 +60,24 @@ export function SignIn() {
                     keyboardType='email-address'
                     autoCorrect={false}
                     autoCapitalize="none"
+                    onChangeText={setEmail}
+                    value={email}
                 />
 
                 <PasswordInput
                     iconName='lock'
                     placeholder='Senha'
+                    onChangeText={setPassword}
+                    value={password}
                 />
+
             </Form>
 
             <Button
                 title='Login'
                 bgColor={theme.colors.blue}
                 textColor={theme.colors.white}
+                onPress={handleSignIn}
             />
 
             <SignUp>
@@ -66,5 +87,6 @@ export function SignIn() {
             </SignUp>
 
         </Container>
+
     );
 }
