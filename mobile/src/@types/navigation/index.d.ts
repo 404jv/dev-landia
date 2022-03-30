@@ -6,6 +6,7 @@ export declare global {
             Achievements: undefined;
             Perfil: undefined;
             Nada: undefined;
+            SignIn: undefined;
         }
     }
 }

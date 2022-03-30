@@ -11,6 +11,11 @@ export default {
         subTitle: '#9FA2A5',
         description: '#C9C9C9',
 
+        black_title: '#47474D',
+        black_subTitle: '#6E6E70',
+
+        text_detail: '#AEAEB3',
+
         blue: '#1F6FEB',
         lightBlue: '#425675',
 

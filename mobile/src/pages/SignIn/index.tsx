@@ -1,21 +1,21 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, TouchableOpacity } from 'react-native';
 import { useTheme } from 'styled-components';
 
-import logoPng from '../../assets/logo.png';
-import { SignInButton } from './SignInButton';
+import LogoPng from '../../assets/BlueLogo.png';
+import { Button } from '../../components/Form/Button';
 
-import googlePng from '../../assets/google.png';
-import applePng from '../../assets/apple.png';
+import { Input } from '../../components/Form/Input';
+import { PasswordInput } from '../../components/Form/PasswordInput';
 
 import {
     Container,
-    Header,
     Logo,
-    Description,
-    Label,
-    Footer,
-    ButtonGroup,
+    Title,
+    SubTitle,
+    Form,
+    SignUp,
+    SignUpText,
 } from './styles';
 
 export function SignIn() {
@@ -24,28 +24,47 @@ export function SignIn() {
 
     return (
         <Container>
-            <StatusBar barStyle='light-content' backgroundColor={theme.colors.blue} />
+            <StatusBar backgroundColor={theme.colors.title} barStyle='dark-content' />
 
-            <Header>
-                <Logo source={logoPng} />
+            <Logo source={LogoPng} />
 
-                <Description>
-                    Leve suas dev skills{'\n'}
-                    a um novo nível{'\n'}
-                    de forma divertida
-                </Description>
+            <Title>
+                Faça seu login ou{'\n'}
+                cadastre-se
+            </Title>
 
-                <Label>
-                    Faça seu login com{'\n'}
-                    uma das contas abaixo
-                </Label>
-            </Header>
-            <Footer>
-                <ButtonGroup>
-                    <SignInButton title='Entrar com Google' icon={googlePng} />
-                    <SignInButton title='Entrar com Apple' icon={applePng} />
-                </ButtonGroup>
-            </Footer>
+            <SubTitle>
+                Faça seu login para começar{'\n'}
+                uma experiência incrível.
+            </SubTitle>
+
+            <Form>
+                <Input
+                    iconName='mail'
+                    placeholder='E-mail'
+                    keyboardType='email-address'
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                />
+
+                <PasswordInput
+                    iconName='lock'
+                    placeholder='Senha'
+                />
+            </Form>
+
+            <Button
+                title='Login'
+                bgColor={theme.colors.blue}
+                textColor={theme.colors.white}
+            />
+
+            <SignUp>
+                <TouchableOpacity>
+                    <SignUpText>Criar conta gratuita</SignUpText>
+                </TouchableOpacity>
+            </SignUp>
+
         </Container>
     );
 }
