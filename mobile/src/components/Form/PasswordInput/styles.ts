@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { TextInput } from 'react-native';
 
 export const Container = styled.View`
    width: 100%;
@@ -17,7 +18,7 @@ export const IconContainer = styled.View`
     justify-content: center;
 `;
 
-export const InputText = styled.TextInput`
+export const InputText = styled(TextInput)`
     flex: 1;
     background-color: ${({ theme }) => theme.colors.title};
     color: ${({ theme }) => theme.colors.text_detail};

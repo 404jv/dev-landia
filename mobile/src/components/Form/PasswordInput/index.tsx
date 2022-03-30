@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 import { TextInputProps } from 'react-native';
@@ -19,6 +19,13 @@ interface InputProps extends TextInputProps {
 export function PasswordInput({ iconName, ...rest }: InputProps) {
 
     const theme = useTheme();
+    const [revealPassword, setRevealPassword] = useState(true);
+
+    function handleRevealPassword() {
+        setRevealPassword(!revealPassword);
+    }
+
+
 
     return (
         <Container>
@@ -26,11 +33,18 @@ export function PasswordInput({ iconName, ...rest }: InputProps) {
                 <Feather name={iconName} size={26} color={theme.colors.text_detail} />
             </IconContainer>
 
-            <InputText {...rest} as={InputText} />
+            <InputText
+                secureTextEntry={revealPassword}
+                {...rest}
+            />
 
             <IconContainer>
-                <TouchableOpacity>
-                    <Feather name='eye' size={26} color={theme.colors.text_detail} />
+                <TouchableOpacity onPress={handleRevealPassword}>
+                    <Feather
+                        name={revealPassword ? 'eye' : 'eye-off'}
+                        size={26}
+                        color={theme.colors.text_detail}
+                    />
                 </TouchableOpacity>
             </IconContainer>
         </Container>
