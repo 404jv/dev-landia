@@ -1,5 +1,14 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+
+import { Map } from '@modules/maps/infra/typeorm/entities/Map';
 
 @Entity('user_map')
 class UserMap {
@@ -11,6 +20,10 @@ class UserMap {
 
   @Column()
   map_id: string;
+
+  @OneToOne(() => Map)
+  @JoinColumn({ name: 'map_id' })
+  map: Map;
 
   @Column()
   is_done: boolean;

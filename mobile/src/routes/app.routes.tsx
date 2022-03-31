@@ -1,79 +1,35 @@
-import React, { useEffect } from 'react';
-import { Platform} from 'react-native';
-
-import {Feather } from '@expo/vector-icons';
-
-import { Home } from '../pages/Home';
-import { Perfil } from '../pages/Perfil';
-import { Activity } from './../pages/Activity/index';
-import { CustomTabBarButton } from '../components/CustomTabBarButton';
-
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-const { Navigator, Screen } = createBottomTabNavigator();
+import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
-const Stack = createStackNavigator();
+const { Navigator, Screen, Group } = createStackNavigator();
+
+import { Home } from '../pages/Home';
+import { SignIn } from '../pages/SignIn';
+import { Achievements } from '../pages/Achievements';
+import { Activity } from '../pages/Activity';
+import { TabRoutes } from './tab.routes';
 
 
 
 
-function BottomTabBarHome(){
+export function AppRoutes() {
 
+    const user = null;
 
-    return(
-        <Navigator
-            screenOptions={{
-                tabBarShowLabel: false,
-                headerShown: false,
-                tabBarActiveTintColor: '#45A7AD',
-                tabBarInactiveTintColor: '#FFFFFF',
-                tabBarStyle: {
-                    backgroundColor: '#1C2124',
-                    borderTopWidth: 0,
-                    height: 55,
-                    paddingVertical: Platform.OS === 'ios' ? 20 : 0,
-        
-                },
-            }}
-        >
-    
-            <Screen 
-                name="Nada" 
-                component={Home}
-                options={{
-                    tabBarIcon: (({size, color}) => <Feather name="menu" color={color} size={size}/>),
-                    
-                }}
-                
-            />
-    
-            <Screen 
-                name="HomeScreen" 
-                component={Home}
-                options={{
-                    tabBarIcon: (({color}) => <CustomTabBarButton name="book-open" size={40} color={color}/>),
-                    tabBarActiveTintColor: '#fff',                
-                }}
-            />
-        
-            <Screen 
-                name="Perfil" 
-                component={Perfil}
-                options={{
-                    tabBarIcon: (({size, color}) => <Feather name="user" color={color} size={size}/>),
-                }}
-            />
-    
+    return (
+        <Navigator screenOptions={{ headerShown: false, }} initialRouteName='Home' >
+            {
+                user != null ?
+                    <Group>
+                        <Screen name='Home' component={TabRoutes} />
+                        <Screen name='Activity' component={Activity} />
+                        <Screen name='Achievements' component={Achievements} />
+                    </Group>
+                    :
+                    <Group>
+                        <Screen name='SignIn' component={SignIn} />
+                    </Group>
+            }
         </Navigator>
-    )
-}
-
-
-export function AppRoutes(){
-    return(
-        <Stack.Navigator screenOptions={{headerShown: false,}}>
-            <Stack.Screen name='Home' component={BottomTabBarHome}/>
-            <Stack.Screen name='Activity' component={Activity}/>
-        </Stack.Navigator>
     )
 }

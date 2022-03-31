@@ -5,9 +5,12 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+
+import { UserPhase } from '@modules/game/infra/typeorm/entities/UserPhase';
 
 import { Activity } from '../../../../activities/infra/typeorm/entities/Activity';
 import { Map } from '../../../../maps/infra/typeorm/entities/Map';
@@ -47,6 +50,9 @@ class Phase {
   @OneToMany(() => Activity, (activity) => activity.phase)
   @JoinColumn()
   activities: Activity[];
+
+  @OneToOne(() => UserPhase, (UserPhase) => UserPhase.phase)
+  userPhase: UserPhase;
 
   @CreateDateColumn()
   created_at: Date;

@@ -44,6 +44,10 @@ class InMemoryUsersRepository implements IUsersRepository {
   async findById(id: string): Promise<User> {
     return this.repository.find((user) => user.id === id);
   }
+
+  update(data: ICreateUserDTO): Promise<User> {
+    throw new Error('Method not implemented.');
+  }
 }
 
 export { InMemoryUsersRepository };

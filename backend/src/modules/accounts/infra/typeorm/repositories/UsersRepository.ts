@@ -33,6 +33,11 @@ class UsersRepository implements IUsersRepository {
     const user = await this.repositories.findOne(id);
     return user;
   }
+
+  async update(data: ICreateUserDTO): Promise<User> {
+    const user = await this.repositories.save(data);
+    return user;
+  }
 }
 
 export { UsersRepository };

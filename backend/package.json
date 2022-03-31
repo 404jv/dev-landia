@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/uuid": "^8.3.1",
     "bcrypt": "^5.0.1",
+    "class-transformer": "^0.5.1",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",

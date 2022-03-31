@@ -54,7 +54,7 @@
 - [TypeORM](https://typeorm.io/)
 
 ## Layout do projeto no Figma 
-- Clique [aqui](https://www.figma.com/file/r6sYsIta8Ae2lnoAIvTNxo/TCC?node-id=0%3A1) para acessar o layout
+- Clique [aqui](https://www.figma.com/file/jiwnsl1AbgdJGJ11MaPf0V/DevL%C3%A2ndia?node-id=0%3A1) para acessar o layout
 
 ## Diagrama do banco de dados 
 ![Diagrama do dev-landia](/diagram.png)

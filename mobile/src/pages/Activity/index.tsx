@@ -6,23 +6,23 @@ import { playSound } from '../../utils/playSound';
 import { ScrollView } from 'react-native';
 
 import {
-	Description,
-	Title,
-	Section,
-	Container,
-	Text,
-	SectionButtons,
-	CompileButton,
-	CompileIconButton,
-	SeeAnswerButton,
-	SeeAnswerIconButton,
-	ModalContainer,
-	ModalHeader,
-	ModalIcon,
-	ModalTitle,
-	ModalContentText,
-	ModalButton,
-	ModalButtonText,
+    Description,
+    Title,
+    Section,
+    Container,
+    Text,
+    SectionButtons,
+    CompileButton,
+    CompileIconButton,
+    SeeAnswerButton,
+    SeeAnswerIconButton,
+    ModalContainer,
+    ModalHeader,
+    ModalIcon,
+    ModalTitle,
+    ModalContentText,
+    ModalButton,
+    ModalButtonText,
 } from './styles';
 
 import { Menu } from '../../components/Menu';
@@ -30,290 +30,296 @@ import { Bash } from '../../components/Bash';
 import { Editor } from '../../components/Editor';
 import { ActivityStatusModal } from '../../components/ActivityStatusModal';
 import { useNavigation } from '@react-navigation/native';
+import { StatusBar } from 'react-native';
+import { useTheme } from 'styled-components';
 
 interface IOption {
-	name: string;
-	type: string;
-	hexadecimal_color: string;
+    name: string;
+    type: string;
+    hexadecimal_color: string;
 }
 
 type Activity = {
-	id: string;
-	title: string;
-	description: string;
-	type: string;
-	default_code: IOption[];
-	answer: IOption[];
-	is_needed_tests: boolean;
-	tips: string[];
-	options: IOption[];
+    id: string;
+    title: string;
+    description: string;
+    type: string;
+    default_code: IOption[];
+    answer: IOption[];
+    is_needed_tests: boolean;
+    tips: string[];
+    options: IOption[];
 }
 
-export function Activity({navigation}) {
-	const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
-	const [compileCode, setCompileCode] = useState<IOption[]>([]);
-	const [progressBarCount, setProgressBarCount] = useState(0);
-	const [isUserAnswer, setIsUserAnswer] = useState(true);
+export function Activity() {
+    const Navigation = useNavigation();
+    const theme = useTheme();
 
-	const activity: Activity = {
-		id: String(new Date().getTime()),
-		title: 'atividade',
-		description: 'Nesse desafio você vai desenhar a bandeira da França com alguns comandos.',
-		type: 'block',
-		default_code: [
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-			}
-		],
-		answer: [
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-			},
-			{
-				name: "newLine",
-				type: "js_function",
-				hexadecimal_color: "#169E96",
-			},
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-			}
-		],
-		is_needed_tests: false,
-		tips: [
-			"Use o drawBlueBox para desenhar a caixa azul.",
-			"Use o drawRedBox para desenhar a caixa vermelha.",
-			"Use o drawWhiteBox para desenhar a caixa branca.",
-			"Use o newLine para criar uma nova linha",
-		],
-		options: [
-			{
-				name: "drawBlueBox",
-				type: "js_function",
-				hexadecimal_color: "#0055A4",
-			},
-			{
-				name: "drawWhiteBox",
-				type: "js_function",
-				hexadecimal_color: "#FFFFFF",
-			},
-			{
-				name: "drawRedBox",
-				type: "js_function",
-				hexadecimal_color: "#EF4135",
-			},
-			{
-				name: "newLine",
-				type: "js_function",
-				hexadecimal_color: "#169E96",
-			}
-		]
-	}
+    const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
+    const [compileCode, setCompileCode] = useState<IOption[]>([]);
+    const [progressBarCount, setProgressBarCount] = useState(0);
+    const [isUserAnswer, setIsUserAnswer] = useState(true);
 
-	const [activities, setActivities] = useState<Activity[]>([
-		activity,
-		activity,
-		activity,
-		activity,
-		activity,
-	]);
+    const activity: Activity = {
+        id: String(new Date().getTime()),
+        title: 'atividade',
+        description: 'Nesse desafio você vai desenhar a bandeira da França com alguns comandos.',
+        type: 'block',
+        default_code: [
+            {
+                name: "drawBlueBox",
+                type: "js_function",
+                hexadecimal_color: "#0055A4",
+            },
+            {
+                name: "drawWhiteBox",
+                type: "js_function",
+                hexadecimal_color: "#FFFFFF",
+            },
+            {
+                name: "drawRedBox",
+                type: "js_function",
+                hexadecimal_color: "#EF4135",
+            }
+        ],
+        answer: [
+            {
+                name: "drawBlueBox",
+                type: "js_function",
+                hexadecimal_color: "#0055A4",
+            },
+            {
+                name: "drawWhiteBox",
+                type: "js_function",
+                hexadecimal_color: "#FFFFFF",
+            },
+            {
+                name: "drawRedBox",
+                type: "js_function",
+                hexadecimal_color: "#EF4135",
+            },
+            {
+                name: "newLine",
+                type: "js_function",
+                hexadecimal_color: "#169E96",
+            },
+            {
+                name: "drawBlueBox",
+                type: "js_function",
+                hexadecimal_color: "#0055A4",
+            },
+            {
+                name: "drawWhiteBox",
+                type: "js_function",
+                hexadecimal_color: "#FFFFFF",
+            },
+            {
+                name: "drawRedBox",
+                type: "js_function",
+                hexadecimal_color: "#EF4135",
+            }
+        ],
+        is_needed_tests: false,
+        tips: [
+            "Use o drawBlueBox para desenhar a caixa azul.",
+            "Use o drawRedBox para desenhar a caixa vermelha.",
+            "Use o drawWhiteBox para desenhar a caixa branca.",
+            "Use o newLine para criar uma nova linha",
+        ],
+        options: [
+            {
+                name: "drawBlueBox",
+                type: "js_function",
+                hexadecimal_color: "#0055A4",
+            },
+            {
+                name: "drawWhiteBox",
+                type: "js_function",
+                hexadecimal_color: "#FFFFFF",
+            },
+            {
+                name: "drawRedBox",
+                type: "js_function",
+                hexadecimal_color: "#EF4135",
+            },
+            {
+                name: "newLine",
+                type: "js_function",
+                hexadecimal_color: "#169E96",
+            }
+        ]
+    }
 
-	const [currentActivity, setCurrentActivity] = useState(activities[0]);
-	const [isCurrentActivityCorrect, setIsCurrentActivityCorrect] = useState(false);
+    const [activities, setActivities] = useState<Activity[]>([
+        activity,
+        activity,
+        activity,
+        activity,
+        activity,
+    ]);
 
-	async function handleCheckAnswer() {
-		const userAnswer = codeEditor;
+    const [currentActivity, setCurrentActivity] = useState(activities[0]);
+    const [isCurrentActivityCorrect, setIsCurrentActivityCorrect] = useState(false);
 
-		setCompileCode(userAnswer);
+    async function handleCheckAnswer() {
+        const userAnswer = codeEditor;
 
-		if (!isUserAnswer) {
-			await playSound('correctSong');
-			setIsCurrentActivityCorrect(true);
-			return;
-		}
+        setCompileCode(userAnswer);
 
-		if (userAnswer.length !== currentActivity.answer.length) {
-			await playSound('wrongSong');
-			return;
-		}
+        if (!isUserAnswer) {
+            await playSound('correctSong');
+            setIsCurrentActivityCorrect(true);
+            return;
+        }
 
-		const isActivityCorrect = userAnswer.every((line, index) => {
-			if (line.name !== currentActivity.answer[index].name) {
-				return false;
-			}
+        if (userAnswer.length !== currentActivity.answer.length) {
+            await playSound('wrongSong');
+            return;
+        }
 
-			return true;
-		});
+        const isActivityCorrect = userAnswer.every((line, index) => {
+            if (line.name !== currentActivity.answer[index].name) {
+                return false;
+            }
 
-		if (!isActivityCorrect) {
-			await playSound('wrongSong');
-			return;
-		}
+            return true;
+        });
 
-		await playSound('correctSong');
-		setProgressBarCount(oldState => oldState + 1);
-		setIsCurrentActivityCorrect(true);
-	}
+        if (!isActivityCorrect) {
+            await playSound('wrongSong');
+            return;
+        }
 
-	async function handleNextActivity() {
-		if (activities.length === 0) {
-			return;
-		}
+        await playSound('correctSong');
+        setProgressBarCount(oldState => oldState + 1);
+        setIsCurrentActivityCorrect(true);
+    }
 
-		if (isUserAnswer) {
-			setActivities(activities.filter((activity, i) => i !== 0));
-		} else {
-			const wrongActivity = activities.shift();
-			activities.push(wrongActivity);
-		}
+    async function handleNextActivity() {
+        if (activities.length === 0) {
+            return;
+        }
 
-		setCurrentActivity(activities[0]);
-		setIsCurrentActivityCorrect(false);
-		setIsUserAnswer(true);
-		setCodeEditor(currentActivity.default_code);
-		setCompileCode(currentActivity.default_code);
-	}
+        if (isUserAnswer) {
+            setActivities(activities.filter((activity, i) => i !== 0));
+        } else {
+            const wrongActivity = activities.shift();
+            activities.push(wrongActivity);
+        }
 
-	function handleShowAnswer() {
-		setCodeEditor(currentActivity.answer);
-		setIsUserAnswer(false);
-		setIsConfirmedToShowAnswer(false);
-	}
+        setCurrentActivity(activities[0]);
+        setIsCurrentActivityCorrect(false);
+        setIsUserAnswer(true);
+        setCodeEditor(currentActivity.default_code);
+        setCompileCode(currentActivity.default_code);
+    }
 
-	const [isConfirmedToShowAnswer, setIsConfirmedToShowAnswer] = useState(false);
-	const showWarningToShowAnswerModal = () => setIsConfirmedToShowAnswer(true);
-	const hideWarningToShowAnswerModal = () => setIsConfirmedToShowAnswer(false);
+    function handleShowAnswer() {
+        setCodeEditor(currentActivity.answer);
+        setIsUserAnswer(false);
+        setIsConfirmedToShowAnswer(false);
+    }
 
-	useEffect(() => {
-		setCodeEditor(currentActivity.default_code);
-		setCompileCode(currentActivity.default_code);
-	}, []);
+    const [isConfirmedToShowAnswer, setIsConfirmedToShowAnswer] = useState(false);
+    const showWarningToShowAnswerModal = () => setIsConfirmedToShowAnswer(true);
+    const hideWarningToShowAnswerModal = () => setIsConfirmedToShowAnswer(false);
 
-	const Navigation = useNavigation();
+    useEffect(() => {
+        setCodeEditor(currentActivity.default_code);
+        setCompileCode(currentActivity.default_code);
+    }, []);
 
-	return (
-		<Container>
-			<Menu progressCount={progressBarCount} totalActivities={5} onPress={ () => Navigation.goBack()}/>
 
-			<ScrollView>
-				<Section>
-					<Title>Bora codar</Title>
-					<Text>{currentActivity.description}</Text>
-				</Section>
 
-				<Section>
-					<Title>Dicas</Title>
-					<Description>
-						{currentActivity.tips.map((tip, index) => (
-							<Text key={index}>{`▪︎ ${tip}`}</Text>
-						))}
-					</Description>
-				</Section>
+    return (
+        <Container>
+            <StatusBar barStyle='light-content' backgroundColor={theme.colors.background} />
+            <Menu progressCount={progressBarCount} totalActivities={5} onPress={() => { }} />
 
-				<Section>
-					<Title>Objetivo do código</Title>
-					<Bash options={currentActivity.answer} />
-				</Section>
+            <ScrollView>
+                <Section>
+                    <Title>Bora codar</Title>
+                    <Text>{currentActivity.description}</Text>
+                </Section>
 
-				<Section>
-					<Title>Resultado atual</Title>
-					<Bash options={compileCode} />
-				</Section>
+                <Section>
+                    <Title>Dicas</Title>
+                    <Description>
+                        {currentActivity.tips.map((tip, index) => (
+                            <Text key={index}>{`▪︎ ${tip}`}</Text>
+                        ))}
+                    </Description>
+                </Section>
 
-				<Section>
-					<Title>Seu código</Title>
+                <Section>
+                    <Title>Objetivo do código</Title>
+                    <Bash options={currentActivity.answer} />
+                </Section>
 
-					<Editor
-						options={currentActivity.options}
-						codeEditor={codeEditor}
-						setCodeEditor={setCodeEditor}
-					/>
-				</Section>
+                <Section>
+                    <Title>Resultado atual</Title>
+                    <Bash options={compileCode} />
+                </Section>
 
-				<SectionButtons>
-					<SeeAnswerButton onPress={showWarningToShowAnswerModal}>
-						<SeeAnswerIconButton>
-							<MaterialIcons name="remove-red-eye" size={32} color="#fff" />
-						</SeeAnswerIconButton>
+                <Section>
+                    <Title>Seu código</Title>
 
-						<Text>Solução</Text>
-					</SeeAnswerButton>
+                    <Editor
+                        options={currentActivity.options}
+                        codeEditor={codeEditor}
+                        setCodeEditor={setCodeEditor}
+                    />
+                </Section>
 
-					<CompileButton onPress={handleCheckAnswer}>
-						<CompileIconButton>
-							<MaterialIcons name="play-arrow" size={41} color="#fff" />
-						</CompileIconButton>
 
-						<Text>Compilar</Text>
-					</CompileButton>
-				</SectionButtons>
-			</ScrollView>
+                <SectionButtons>
+                    <SeeAnswerButton onPress={showWarningToShowAnswerModal}>
+                        <SeeAnswerIconButton>
+                            <MaterialIcons name="remove-red-eye" size={32} color="#fff" />
+                        </SeeAnswerIconButton>
 
-			<Provider>
-				<Portal>
-					<Modal
-						visible={isConfirmedToShowAnswer}
-						onDismiss={hideWarningToShowAnswerModal}
-					>
-						<ModalContainer>
-							<ModalHeader>
-								<ModalTitle>Mostrar Solução?</ModalTitle>
-								<ModalIcon name="x" onPress={hideWarningToShowAnswerModal} />
-							</ModalHeader>
+                        <Text>Solução</Text>
+                    </SeeAnswerButton>
 
-							<ModalContentText>
-								Clicando no botão confirmar vai ser mostrado a solução correta.
-								A atividade vai para o final da fila então não esqueça de memoriza-la
-							</ModalContentText>
+                    <CompileButton onPress={handleCheckAnswer}>
+                        <CompileIconButton>
+                            <MaterialIcons name="play-arrow" size={41} color="#fff" />
+                        </CompileIconButton>
 
-							<ModalButton onPress={handleShowAnswer}>
-								<ModalButtonText>Confirmar</ModalButtonText>
-							</ModalButton>
-						</ModalContainer>
+                        <Text>Compilar</Text>
+                    </CompileButton>
+                </SectionButtons>
+            </ScrollView>
+            <Provider>
+                <Portal>
+                    <Modal
+                        visible={isConfirmedToShowAnswer}
+                        onDismiss={hideWarningToShowAnswerModal}
+                    >
+                        <ModalContainer>
+                            <ModalHeader>
+                                <ModalTitle>Mostrar Solução?</ModalTitle>
+                                <ModalIcon name="x" onPress={hideWarningToShowAnswerModal} />
+                            </ModalHeader>
 
-					</Modal>
-				</Portal>
-			</Provider>
+                            <ModalContentText>
+                                Clicando no botão confirmar vai ser mostrado a solução correta.
+                                A atividade vai para o final da fila então não esqueça de memoriza-la
+                            </ModalContentText>
 
-			<ActivityStatusModal
-				isModalVisible={isCurrentActivityCorrect}
-				handleNextActivity={handleNextActivity}
-			/>
-		</Container>
-	)
+                            <ModalButton onPress={handleShowAnswer}>
+                                <ModalButtonText>Confirmar</ModalButtonText>
+                            </ModalButton>
+                        </ModalContainer>
+
+                    </Modal>
+                </Portal>
+            </Provider>
+
+            <ActivityStatusModal
+                isModalVisible={isCurrentActivityCorrect}
+                handleNextActivity={handleNextActivity}
+            />
+        </Container>
+    )
 }

@@ -5,7 +5,7 @@ import { IUsersPhasesRepository } from '../IUsersPhasesRepository';
 class InMemoryUsersPhasesRepository implements IUsersPhasesRepository {
   private repository: UserPhase[] = [];
 
-  async create(user_id: string, phase_id: string): Promise<void> {
+  async create(user_id: string, phase_id: string): Promise<UserPhase> {
     const userPhase = new UserPhase();
 
     Object.assign(userPhase, {
@@ -14,6 +14,8 @@ class InMemoryUsersPhasesRepository implements IUsersPhasesRepository {
     });
 
     this.repository.push(userPhase);
+
+    return userPhase;
   }
 
   async findByUserAndPhase(
@@ -26,6 +28,10 @@ class InMemoryUsersPhasesRepository implements IUsersPhasesRepository {
     );
 
     return userPhase;
+  }
+
+  update(userPhase: UserPhase): Promise<UserPhase> {
+    throw new Error('Method not implemented.');
   }
 }
 

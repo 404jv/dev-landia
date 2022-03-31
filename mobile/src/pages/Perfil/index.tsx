@@ -1,71 +1,94 @@
-import React from 'react';
-import { Image } from 'react-native';
-import { PerfilCoins } from '../../components/PerfilCoins';
+import React from "react";
+import { StatusBar, Image, ImageSourcePropType, View, FlatList } from "react-native";
+import { Container, ContainerPerfil, ContainerHeaderText, ContainerImage, Header, HeaderTitle, Icon, ContainerInfos, Name, Username, Bio, StatisticsTitle, ContainerStatisticsCards, ContainerEditImage } from "./styles";
+import { Feather } from "@expo/vector-icons";
+import { useTheme } from "styled-components/native";
+import wizard from "../../assets/wizard.png";
+import coin from "../../assets/gold.png";
+import medal from "../../assets/medal.png";
+import potion from "../../assets/xp.png";
+import { StatisticsCard } from "./StatisticsCard";
 
-import { 
-    Container, 
-    Header,
-    HeaderText,
-    Icon,
-    PerfilInfo,
-    PerfilImageContainer,
-    PerfilImage,
-    PerfilEdit,
-    PerfilEditIcon,
-    PerfilContent,
-    UserName,
-    UserId,
-    UserDescription,
-    PerfilCoinsView,
-    CoinStats,
-    CoinView,
-} from './styles';
+interface StatisticItem {
+    name: string;
+    number: number;
+    image: ImageSourcePropType;
+}
 
+export function Perfil() {
+    const theme = useTheme();
 
-export function Perfil(){
+    const data = [
+        {
+            name: "Coin",
+            number: 23,
+            image: coin
+        },
+        {
+            name: "Experience",
+            number: 232,
+            image: potion
+        },
+        {
+            name: "Medals",
+            number: 17,
+            image: medal
+        }
+    ];
 
-    return(
+    return (
         <Container>
+            <StatusBar
+                barStyle="light-content"
+                backgroundColor={theme.colors.primary}
+            />
+
             <Header>
-                <Icon name="user"/>
-                <HeaderText>Perfil</HeaderText>
+                <Icon
+                    name="user"
+                />
+                <ContainerHeaderText>
+                    <HeaderTitle>Perfil</HeaderTitle>
+                </ContainerHeaderText>
             </Header>
 
-            <PerfilInfo>
-                <PerfilImageContainer>
-                    <PerfilImage 
-                        source={
-                            {uri: 'https://i.pinimg.com/564x/82/69/ba/8269ba31e93f37b3d711dd544cce7a30.jpg'}
-                        }
-                    />
+            <ContainerPerfil>
+                <ContainerImage>
+                    <Image source={wizard} />
+                </ContainerImage>
 
-                    <PerfilEdit>
-                        <PerfilEditIcon name="edit"/>
-                    </PerfilEdit>
-                </PerfilImageContainer>
+                <ContainerEditImage activeOpacity={0.8}>
+                    <Feather name="edit-2" size={9} color={theme.colors.title} />
+                </ContainerEditImage>
 
-                <PerfilContent>
-                    <UserName>Ruan Pablo</UserName>
-                    <UserId>@NaPpY</UserId>
-                    <UserDescription>🐒 this is not the end!</UserDescription>
-                </PerfilContent>
+                <ContainerInfos>
+                    <Name>Ruan Pablo</Name>
+                    <Username>@NaPpY</Username>
+                    <Bio>🙃  this is not the end</Bio>
+                </ContainerInfos>
+            </ContainerPerfil>
 
-            </PerfilInfo>
+            <StatisticsTitle>Estatísticas</StatisticsTitle>
 
-            <PerfilCoinsView>
-                <CoinStats>Estatísticas</CoinStats>
-
-                <CoinView>
-                    <PerfilCoins name="slack" color="#45A7AD" coins="472" description='Total de BTC'/>
-                    <PerfilCoins name="codesandbox" color="#702230" coins="32456" description='Total de XP'/>
-                </CoinView>
-
-                <CoinView>
-                    <PerfilCoins name="moon" color="#844799" coins="231" description='Medalhas'/>
-                </CoinView>
-
-            </PerfilCoinsView>
-
+            <ContainerStatisticsCards>
+                <StatisticsCard
+                    name={"Coin"}
+                    number={23}
+                    image={coin}
+                />
+                <StatisticsCard
+                    name={"Experience"}
+                    number={232}
+                    image={potion}
+                />
+            </ContainerStatisticsCards>
+            <ContainerStatisticsCards>
+                <StatisticsCard
+                    name={"Medals"}
+                    number={17}
+                    image={medal}
+                />
+            </ContainerStatisticsCards>
         </Container>
     )
 }

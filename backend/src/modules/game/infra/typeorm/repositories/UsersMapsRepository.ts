@@ -40,6 +40,11 @@ class UsersMapsRepository implements IUsersMapsRepository {
 
     return userMaps;
   }
+
+  async update(userMap: UserMap): Promise<UserMap> {
+    await this.repository.save(userMap);
+    return userMap;
+  }
 }
 
 export { UsersMapsRepository };

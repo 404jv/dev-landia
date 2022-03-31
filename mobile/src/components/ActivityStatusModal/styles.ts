@@ -18,6 +18,6 @@ export const ModalButton = styled.TouchableOpacity`
 
 export const ModalTextButton = styled.Text`
   font-size: 24px;
-  color: #fff;
-  font-weight: bold;
+  color: ${({ theme }) => theme.colors.white};
+  font-family: ${({ theme }) => theme.fonts.bold};
 `;

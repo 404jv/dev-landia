@@ -13,7 +13,23 @@ class MapsRepository implements IMapsRepository {
   }
 
   async findById(id: string): Promise<Map> {
-    const map = await this.repository.findOne(id);
+    const map = await this.repository.findOne({
+      where: {
+        id,
+      },
+      relations: ['phases'],
+    });
+    return map;
+  }
+
+  async findWithUserLevel(id: string): Promise<Map> {
+    const map = await this.repository.findOne({
+      where: {
+        id,
+      },
+      relations: ['phases', 'phases.userPhase', 'userMap'],
+    });
+
     return map;
   }
 

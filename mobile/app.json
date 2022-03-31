@@ -5,7 +5,13 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
-  },
-  "name": "devlandia"
+    ],
+    "splash" : {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#1F6FEB"
+    },
+    "android": {
+      "package": "com.devlandia"
+    }
+  }
 }

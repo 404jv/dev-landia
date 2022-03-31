@@ -1,62 +1,43 @@
 import React, { ReactNode } from 'react';
 import { Text, View } from "react-native";
+import { useTheme } from 'styled-components';
 import { Activity } from "../../pages/Activity";
 
+import {
+    Box,
+    NewLine,
+} from './styles';
+
 interface ICommandProps {
-  commandName: string;
+    commandName: string;
+    color: string,
 }
 
 interface ICommands {
-  drawBlueBox: () => ReactNode;
-  drawRedBox: () => ReactNode;
-  drawWhiteBox: () => ReactNode;
-  newLine: () => ReactNode;
+    drawBlueBox: () => ReactNode;
+    drawRedBox: () => ReactNode;
+    drawWhiteBox: () => ReactNode;
+    newLine: () => ReactNode;
+    // drawBox: () => ReactNode;
 }
 
-export function Command({ commandName }: ICommandProps) {
+export function Command({ commandName, color }: ICommandProps) {
 
-  const commands: ICommands = {
-    drawBlueBox: () => {
-      return (
-        <View style={{
-          width: 17,
-          height: 17,
-          backgroundColor: '#0055A4',
-        }}></View>
-      );
-    },
-    drawRedBox: () => {
-      return (
-        <View style={{
-          width: 17,
-          height: 17,
-          backgroundColor: '#EF4135',
-        }}></View>
-      );
-    },
-    drawWhiteBox: () => {
-      return (
-        <View style={{
-          width: 17,
-          height: 17,
-          backgroundColor: '#FFF',
-        }}></View>
-      );
-    },
-    newLine: () => {
-      return (
-        <View style={{
-          width: 995,
-        }}></View>
-      );
+    const theme = useTheme();
+
+    const commands: ICommands = {
+        drawBlueBox: () => <Box bgColor={theme.colors.bash.blue} />,
+        drawRedBox: () => <Box bgColor={theme.colors.bash.red} />,
+        drawWhiteBox: () => <Box bgColor={theme.colors.bash.white} />,
+        newLine: () => <NewLine />,
+        // drawBox: () => <Box bgColor={color} />,
     }
-  }
 
-  const command = commands[commandName]();
+    const command = commands[commandName]();
 
-  return (
-    <View>
-      {command ? command : <View></View>}
-    </View>
-  );
+    return (
+        <View>
+            {command ? command : <View></View>}
+        </View>
+    );
 }

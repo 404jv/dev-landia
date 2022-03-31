@@ -9,5 +9,5 @@ export const MenuBar = styled.View`
 
 export const ProgressMenuBar = styled.View`
     width: 80%;
-    background-color: #37464F;
+    background-color: ${({ theme }) => theme.colors.stroke};
 `;

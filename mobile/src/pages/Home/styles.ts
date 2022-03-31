@@ -1,66 +1,75 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native'
 import { RFValue } from 'react-native-responsive-fontsize';
 
-
 export const Container = styled.View`
-    flex: 1;
-    /* background-color: ${({ theme }) => theme.colors.background}; */
-    background-color: #22282B;
+   flex: 1;
+   background-color: ${({ theme }) => theme.colors.background};
 `;
 
 
 export const Header = styled.View`
-    background-color: #1C2124;
     width: 100%;
-    height: ${RFValue(54)}px;
-    border-color: #2F3437;
+    height: ${RFValue(80)}px;
     border-bottom-width: 1px;
     border-style: solid;
+    border-bottom-color: ${({ theme }) => theme.colors.stroke};
+    background-color: ${({ theme }) => theme.colors.primary};
+`;
 
-
+export const Content = styled.View`
+    height: ${RFValue(80)}px;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 `;
 
-export const Coin = styled.View`
-    margin-left: 20px;
-    align-items: center;
-    flex-direction: row;
-`;
-
-export const CoinText = styled.Text`
-    margin-left: 5px;
-    font-size: 20px;
-    color: #fff;
-    font-family: ${({ theme }) => theme.fonts.regular};
-`;
-
-export const LevelContainerI = styled.View`
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 10px;
+export const CoinView = styled.View`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-`
-
-export const LevelContainerII = styled.View`
-    margin-top: 10px;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 10px;
-    flex-direction: row;
-    justify-content: space-between;
-`
-
-export const FirstStep = styled.View`
-    margin-top: 40px;
+    margin: 0 25px;
 `;
 
-export const SecondStep = styled.View`
-    margin-bottom: 40px;
+export const Image = styled.Image`
+    width: 30px;
+    height: 30px;
+`;
+
+export const CoinValue = styled.Text`
+    font-size: ${RFValue(20)}px;
+    color: ${({ theme }) => theme.colors.title};
+    margin-left: 6px;
+`;
+
+
+export const Phases = styled.View`
+    align-items: center;
+    padding: 10px;
+`;
+
+
+interface PhasePositionProps {
+    keyPosition: number;
+}
+
+export const PhasePosition = styled.View<PhasePositionProps>`
+   ${({ keyPosition }) => keyPosition === 1 && css`
+        margin-top: 20px;
+    `}
+
+   ${({ keyPosition }) => keyPosition === 2 && css`
+        margin-right: 200px;
+    `}
+
+    ${({ keyPosition }) => keyPosition === 3 && css`
+        margin-left: 200px;
+        margin-top: -70px;
+    `}
+
+    ${({ keyPosition }) => keyPosition === 4 && css`
+        margin-top: 40px;
+        margin-bottom: 30px;
+    `}
 `;
 
 
