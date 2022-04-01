@@ -56,14 +56,14 @@ export function SignUp() {
             onChangeText={setUser}
             value={user}
           />
-          <Button
-            style={{ marginTop: 50 }}
-            title="Próximo"
-            bgColor={theme.colors.blue}
-            textColor={theme.colors.white}
-            onPress={handleSignUp} 
-          />
         </Form>
+
+        <Button
+          title="Próximo"
+          bgColor={theme.colors.blue}
+          textColor={theme.colors.white}
+          onPress={handleSignUp} 
+        />
       </ContentContainer>
     </Container>
   )

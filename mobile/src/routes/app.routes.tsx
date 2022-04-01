@@ -8,6 +8,7 @@ import { SignIn } from '../pages/SignIn';
 import { Achievements } from '../pages/Achievements';
 import { Activity } from '../pages/Activity';
 import { TabRoutes } from './tab.routes';
+import { SignUp } from '../pages/SignUp';
 
 
 

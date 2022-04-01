@@ -60,4 +60,5 @@ export const FormTitle = styled.Text`
 
 export const Form = styled.View`
   margin-top: 36px;
+  margin-bottom: 55px;
 `
