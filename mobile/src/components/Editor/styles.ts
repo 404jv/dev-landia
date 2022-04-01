@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 export const EditorContainer = styled.View`
   background-color: ${({ theme }) => theme.colors.secondary};
@@ -13,7 +13,7 @@ export const OptionEditorCode = styled.TouchableOpacity`
   margin: 2px;
   border-radius: 8px;
   min-height: 24px;
-`
+`;
 
 export const OptionsContainer = styled.View`
   flex-direction: row;

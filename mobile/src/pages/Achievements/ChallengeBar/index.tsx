@@ -1,29 +1,27 @@
-import React from 'react';
+import React from "react";
 
-import {
-    ProgressBar,
-    ProgressBarSize,
-    Container,
-    BarText,
-} from './styles';
-
+import { ProgressBar, ProgressBarSize, Container, BarText } from "./styles";
 
 interface ChallengeBarProps {
-    currentChallenge: number,
-    maxChallenge: number,
+  currentChallenge: number;
+  maxChallenge: number;
 }
 
-export function ChallengeBar({ currentChallenge, maxChallenge }: ChallengeBarProps) {
+export function ChallengeBar({
+  currentChallenge,
+  maxChallenge,
+}: ChallengeBarProps): JSX.Element {
+  const size = (currentChallenge * 100) / maxChallenge;
 
-    const size = (currentChallenge * 100) / maxChallenge
+  return (
+    <Container>
+      <ProgressBar>
+        <ProgressBarSize size={size} />
+      </ProgressBar>
 
-    return (
-        <Container>
-            <ProgressBar>
-                <ProgressBarSize size={size} />
-            </ProgressBar>
-
-            <BarText>{currentChallenge}/{maxChallenge}</BarText>
-        </Container>
-    );
+      <BarText>
+        {currentChallenge}/{maxChallenge}
+      </BarText>
+    </Container>
+  );
 }

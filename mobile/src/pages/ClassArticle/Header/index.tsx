@@ -1,26 +1,29 @@
-import { MaterialIcons } from '@expo/vector-icons';
-import React from 'react';
+import { MaterialIcons } from "@expo/vector-icons";
+import React from "react";
 
-import { TouchableOpacity } from 'react-native';
-import { useTheme } from 'styled-components';
-
-import { Title, MenuBar } from './styles';
+import { TouchableOpacity } from "react-native";
+import { Title } from "react-native-paper";
+import { useTheme } from "styled-components";
+import { MenuBar } from "./styles";
 
 type Props = {
-    title: string;
-}
+  title: string;
+};
 
-export function Header({ title }: Props) {
+export function Header({ title }: Props): JSX.Element {
+  const theme = useTheme();
 
-    const theme = useTheme();
+  return (
+    <MenuBar>
+      <TouchableOpacity activeOpacity={0.7}>
+        <MaterialIcons
+          name="arrow-back"
+          size={32}
+          color={theme.colors.stroke}
+        />
+      </TouchableOpacity>
 
-    return (
-        <MenuBar>
-            <TouchableOpacity activeOpacity={0.7}>
-                <MaterialIcons name="arrow-back" size={32} color={theme.colors.stroke} />
-            </TouchableOpacity>
-
-            <Title>{title}</Title>
-        </MenuBar>
-    );
+      <Title>{title}</Title>
+    </MenuBar>
+  );
 }

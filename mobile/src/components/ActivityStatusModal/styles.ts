@@ -1,13 +1,13 @@
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
 
 export const Title = styled.Text`
   font-size: 24px;
   font-weight: bold;
-  color: #93D333;
+  color: #93d333;
 `;
 
 export const ModalButton = styled.TouchableOpacity`
-  background-color: #93D333;
+  background-color: #93d333;
   width: 100%;
   align-items: center;
   justify-content: center;

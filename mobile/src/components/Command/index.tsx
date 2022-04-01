@@ -1,43 +1,30 @@
-import React, { ReactNode } from 'react';
-import { Text, View } from "react-native";
-import { useTheme } from 'styled-components';
-import { Activity } from "../../pages/Activity";
+import React, { ReactNode } from "react";
+import { View } from "react-native";
 
-import {
-    Box,
-    NewLine,
-} from './styles';
+import { Box, NewLine } from "./styles";
 
 interface ICommandProps {
-    commandName: string;
-    color: string,
+  commandName: string;
+  color: string;
 }
 
 interface ICommands {
-    drawBlueBox: () => ReactNode;
-    drawRedBox: () => ReactNode;
-    drawWhiteBox: () => ReactNode;
-    newLine: () => ReactNode;
-    // drawBox: () => ReactNode;
+  drawBlueBox: () => ReactNode;
+  drawRedBox: () => ReactNode;
+  drawWhiteBox: () => ReactNode;
+  newLine: () => ReactNode;
+  // drawBox: () => ReactNode;
 }
 
-export function Command({ commandName, color }: ICommandProps) {
+export function Command({ commandName, color }: ICommandProps): JSX.Element {
+  const commands: ICommands = {
+    drawBlueBox: () => <Box bgColor={color} />,
+    drawRedBox: () => <Box bgColor={color} />,
+    drawWhiteBox: () => <Box bgColor={color} />,
+    newLine: () => <NewLine />,
+  };
 
-    const theme = useTheme();
+  const command = commands[commandName];
 
-    const commands: ICommands = {
-        drawBlueBox: () => <Box bgColor={theme.colors.bash.blue} />,
-        drawRedBox: () => <Box bgColor={theme.colors.bash.red} />,
-        drawWhiteBox: () => <Box bgColor={theme.colors.bash.white} />,
-        newLine: () => <NewLine />,
-        // drawBox: () => <Box bgColor={color} />,
-    }
-
-    const command = commands[commandName]();
-
-    return (
-        <View>
-            {command ? command : <View></View>}
-        </View>
-    );
+  return <View>{command || <View />}</View>;
 }
