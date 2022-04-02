@@ -25,8 +25,8 @@ export function AppRoutes(): JSX.Element {
         </Group>
       ) : (
         <Group>
-          <Screen name="SignUp" component={SignUp} />
           <Screen name="SignIn" component={SignIn} />
+          <Screen name="SignUp" component={SignUp} />
           <Screen name="FinishSignUp" component={FinishSignUp} />
         </Group>
       )}

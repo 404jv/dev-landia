@@ -5,6 +5,8 @@ export declare global {
       Activity: undefined;
       Achievements: undefined;
       Perfil: undefined;
+      SignIn: undefined;
+      SignUp: undefined;
       Nada: undefined;
     }
   }

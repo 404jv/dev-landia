@@ -25,6 +25,7 @@ export function Home(): JSX.Element {
   const theme = useTheme();
   const navigation = useNavigation();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const scrollRef = useRef<any>();
 
   function handleScrollToBottom(): void {
