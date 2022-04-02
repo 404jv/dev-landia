@@ -3,7 +3,9 @@ import * as Yup from "yup";
 
 import { Feather } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
-import { Alert, StatusBar } from "react-native";
+import { Alert, StatusBar, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import {
   Title,
   Form,
@@ -19,6 +21,7 @@ import { Button } from "../../components/Form/Button";
 
 export function SignUp(): JSX.Element {
   const theme = useTheme();
+  const navigation = useNavigation();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -42,11 +45,18 @@ export function SignUp(): JSX.Element {
     }
   }
 
+  function handleGoBack(): void {
+    navigation.goBack();
+  }
+
   return (
     <Container>
       <StatusBar backgroundColor={theme.colors.title} barStyle="dark-content" />
       <Header>
-        <Feather name="arrow-left" size={21} color="#47474D" />
+        <TouchableOpacity onPress={handleGoBack}>
+          <Feather name="arrow-left" size={21} color="#47474D" />
+        </TouchableOpacity>
+
         <ContainerChangeScreen>
           <ChangeScreen isActive />
           <ChangeScreen isActive={false} />
@@ -54,7 +64,9 @@ export function SignUp(): JSX.Element {
       </Header>
       <ContentContainer>
         <Title>cadastre-se{"\n"}abaixo</Title>
+
         <FormTitle>1. Dados</FormTitle>
+
         <Form>
           <Input
             iconName="user"

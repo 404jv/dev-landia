@@ -1,13 +1,13 @@
 import styled from "styled-components/native";
-import { RFValue } from 'react-native-responsive-fontsize';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { RFValue } from "react-native-responsive-fontsize";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 export const Container = styled.ScrollView.attrs(({ theme }) => ({
   contentContainerStyle: {
     flexGrow: 1,
     backgroundColor: theme.colors.background,
-    alignItems: 'center'
-  }
+    alignItems: "center",
+  },
 }))`
   height: 100%;
   background-color: ${({ theme }) => theme.colors.background};
@@ -15,7 +15,6 @@ export const Container = styled.ScrollView.attrs(({ theme }) => ({
   padding-left: 40px;
   padding-right: 40px;
 `;
-
 
 export const Logo = styled.Image``;
 
@@ -36,4 +35,3 @@ export const Button = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
 `;
-

@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import * as Yup from "yup";
 
-import {
-  Alert,
-  StatusBar,
-  TouchableOpacity,
-} from 'react-native';
+import { Alert, StatusBar, TouchableOpacity } from "react-native";
 
-import { useTheme } from 'styled-components';
+import { useTheme } from "styled-components";
 
-import LogoPng from '../../assets/BlueLogo.png';
-import { Button } from '../../components/Form/Button';
+import { useNavigation } from "@react-navigation/native";
+import LogoPng from "../../assets/BlueLogo.png";
+import { Button } from "../../components/Form/Button";
 
-import { Input } from '../../components/Form/Input';
-import { PasswordInput } from '../../components/Form/PasswordInput';
+import { Input } from "../../components/Form/Input";
+import { PasswordInput } from "../../components/Form/PasswordInput";
 
 import {
   Container,
@@ -23,57 +20,59 @@ import {
   Form,
   SignUp,
   SignUpText,
-} from './styles';
+} from "./styles";
 
-export function SignIn() {
+export function SignIn(): JSX.Element {
+  const navigation = useNavigation();
 
   const theme = useTheme();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  async function handleSignIn() {
-
+  async function handleSignIn(): Promise<void> {
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
-          .required('E-mail é obrigatório')
-          .email('Digite um e-mail válido'),
+          .required("E-mail é obrigatório")
+          .email("Digite um e-mail válido"),
         password: Yup.string()
-          .required('Senha é obrigatória')
-          .min(6, 'A senha deve ter no mínimo 6 caracteres'),
+          .required("Senha é obrigatória")
+          .min(6, "A senha deve ter no mínimo 6 caracteres"),
       });
 
       await schema.validate({ email, password });
-      console.log('Validation passed', { email, password });
+      console.log("Validation passed", { email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
-        Alert.alert('Erro na validação', error.message);
+        Alert.alert("Erro na validação", error.message);
       }
     }
+  }
 
+  function handleSignUpScreen(): void {
+    navigation.navigate("SignUp");
   }
 
   return (
-
-    <Container >
-      <StatusBar backgroundColor={theme.colors.title} barStyle='dark-content' />
+    <Container>
+      <StatusBar backgroundColor={theme.colors.title} barStyle="dark-content" />
       <Logo source={LogoPng} />
 
       <Title>
-        Faça seu login ou{'\n'}
+        Faça seu login ou{"\n"}
         cadastre-se
       </Title>
 
       <SubTitle>
-        Faça seu login para começar{'\n'}
+        Faça seu login para começar{"\n"}
         uma experiência incrível.
       </SubTitle>
 
       <Form>
         <Input
-          iconName='mail'
-          placeholder='E-mail'
-          keyboardType='email-address'
+          iconName="mail"
+          placeholder="E-mail"
+          keyboardType="email-address"
           autoCorrect={false}
           autoCapitalize="none"
           onChangeText={setEmail}
@@ -81,29 +80,25 @@ export function SignIn() {
         />
 
         <PasswordInput
-          iconName='lock'
-          placeholder='Senha'
+          iconName="lock"
+          placeholder="Senha"
           onChangeText={setPassword}
           value={password}
         />
-
       </Form>
 
       <Button
-        title='Login'
+        title="Login"
         bgColor={theme.colors.blue}
         textColor={theme.colors.white}
         onPress={handleSignIn}
       />
 
-
       <SignUp>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleSignUpScreen}>
           <SignUpText>Criar conta gratuita</SignUpText>
         </TouchableOpacity>
       </SignUp>
-
     </Container>
-
   );
 }

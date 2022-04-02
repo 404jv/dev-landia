@@ -7,9 +7,10 @@ import { Container, Icon, Level, LevelText, LevelName } from "./styles";
 
 interface Props {
   level: number;
-  IconName: any; // Any para corrigir problemas <==
+  IconName: React.ComponentProps<typeof Feather>["name"];
   LvName?: string;
-  onPress?: () => any; // Any para corrigir problemas <==
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onPress?: () => any;
 }
 
 export function Phase({
