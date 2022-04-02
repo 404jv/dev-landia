@@ -11,6 +11,7 @@ type AuthContextData = {
 export const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthContextProps): JSX.Element {
+
   async function signIn(): Promise<void> {
     console.log("Função de Login 😁");
   }
