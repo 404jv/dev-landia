@@ -2,7 +2,6 @@ import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { Home } from "../pages/Home";
 import { Achievements } from "../pages/Achievements";
 import { Activity } from "../pages/Activity";
 import { TabRoutes } from "./tab.routes";
