@@ -1,49 +1,109 @@
-import React from "react";
-import { StatusBar } from "react-native";
-import { useTheme } from "styled-components";
+import React, { useState } from 'react';
+import * as Yup from 'yup';
 
-import logoPng from "../../assets/logo.png";
-import { SignInButton } from "./SignInButton";
+import {
+  Alert,
+  StatusBar,
+  TouchableOpacity,
+} from 'react-native';
 
-import googlePng from "../../assets/google.png";
-import applePng from "../../assets/apple.png";
+import { useTheme } from 'styled-components';
+
+import LogoPng from '../../assets/BlueLogo.png';
+import { Button } from '../../components/Form/Button';
+
+import { Input } from '../../components/Form/Input';
+import { PasswordInput } from '../../components/Form/PasswordInput';
 
 import {
   Container,
-  Header,
   Logo,
-  Description,
-  Label,
-  Footer,
-  ButtonGroup,
-} from "./styles";
+  Title,
+  SubTitle,
+  Form,
+  SignUp,
+  SignUpText,
+} from './styles';
 
-export function SignIn(): JSX.Element {
+export function SignIn() {
+
   const theme = useTheme();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  async function handleSignIn() {
+
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required('E-mail é obrigatório')
+          .email('Digite um e-mail válido'),
+        password: Yup.string()
+          .required('Senha é obrigatória')
+          .min(6, 'A senha deve ter no mínimo 6 caracteres'),
+      });
+
+      await schema.validate({ email, password });
+      console.log('Validation passed', { email, password });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert('Erro na validação', error.message);
+      }
+    }
+
+  }
 
   return (
-    <Container>
-      <StatusBar barStyle="light-content" backgroundColor={theme.colors.blue} />
 
-      <Header>
-        <Logo source={logoPng} />
+    <Container >
+      <StatusBar backgroundColor={theme.colors.title} barStyle='dark-content' />
+      <Logo source={LogoPng} />
 
-        <Description>
-          Leve suas dev skills{"\n"}a um novo nível{"\n"}
-          de forma divertida
-        </Description>
+      <Title>
+        Faça seu login ou{'\n'}
+        cadastre-se
+      </Title>
 
-        <Label>
-          Faça seu login com{"\n"}
-          uma das contas abaixo
-        </Label>
-      </Header>
-      <Footer>
-        <ButtonGroup>
-          <SignInButton title="Entrar com Google" icon={googlePng} />
-          <SignInButton title="Entrar com Apple" icon={applePng} />
-        </ButtonGroup>
-      </Footer>
+      <SubTitle>
+        Faça seu login para começar{'\n'}
+        uma experiência incrível.
+      </SubTitle>
+
+      <Form>
+        <Input
+          iconName='mail'
+          placeholder='E-mail'
+          keyboardType='email-address'
+          autoCorrect={false}
+          autoCapitalize="none"
+          onChangeText={setEmail}
+          value={email}
+        />
+
+        <PasswordInput
+          iconName='lock'
+          placeholder='Senha'
+          onChangeText={setPassword}
+          value={password}
+        />
+
+      </Form>
+
+      <Button
+        title='Login'
+        bgColor={theme.colors.blue}
+        textColor={theme.colors.white}
+        onPress={handleSignIn}
+      />
+
+
+      <SignUp>
+        <TouchableOpacity>
+          <SignUpText>Criar conta gratuita</SignUpText>
+        </TouchableOpacity>
+      </SignUp>
+
     </Container>
+
   );
 }
