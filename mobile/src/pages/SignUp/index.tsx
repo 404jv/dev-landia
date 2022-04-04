@@ -38,6 +38,9 @@ export function SignUp(): JSX.Element {
       });
 
       const userData = await schema.validate({ name, email, user });
+      navigation.navigate("NextSignUp", {
+        userData,
+      });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert(error.message);
