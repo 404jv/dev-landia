@@ -9,6 +9,7 @@ import { TabRoutes } from "./tab.routes";
 import { SignIn } from "../pages/SignIn";
 import { SignUp } from "../pages/SignUp";
 import { FinishSignUp } from "../pages/FinishSignUp";
+import { NextSignUp } from "../pages/NextSignUp";
 
 const { Navigator, Screen, Group } = createStackNavigator();
 
@@ -27,6 +28,7 @@ export function AppRoutes(): JSX.Element {
         <Group>
           <Screen name="SignIn" component={SignIn} />
           <Screen name="SignUp" component={SignUp} />
+          <Screen name="NextSignUp" component={NextSignUp} />
           <Screen name="FinishSignUp" component={FinishSignUp} />
         </Group>
       )}
