@@ -19,6 +19,7 @@ import {
   Title,
 } from "./styles";
 import { PasswordInput } from "../../components/Form/PasswordInput";
+import { api } from "../../services/api";
 
 interface UserDataInfos {
   userData: {
@@ -54,11 +55,22 @@ export function NextSignUp(): JSX.Element {
       });
 
       const userPassword = await schema.validate({ password, confirmPassword });
-      navigation.navigate("FinishSignUp");
+
+      const { email, name, user } = userData;
+
+      await api.post("/users/create", {
+        name,
+        email,
+        username: user,
+        password: userPassword.password,
+      });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert(error.message);
+        return;
       }
+
+      Alert.alert(error.response.data.message);
     }
   }
 
