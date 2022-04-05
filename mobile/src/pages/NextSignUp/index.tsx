@@ -57,7 +57,7 @@ export function NextSignUp(): JSX.Element {
       return Alert.alert("Aceite os termos de uso");
     }
 
-    const response = await api
+    await api
       .post("users/create", {
         name: userData.name,
         email: userData.email,
