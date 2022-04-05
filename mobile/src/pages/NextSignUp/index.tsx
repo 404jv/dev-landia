@@ -1,6 +1,5 @@
 import { Feather } from "@expo/vector-icons";
 import CheckBox from "expo-checkbox";
-import * as Yup from "yup";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 import { StatusBar, Alert, TouchableOpacity } from "react-native";
@@ -30,8 +29,8 @@ interface UserDataInfos {
 }
 
 export function NextSignUp(): JSX.Element {
-  const data = useRoute().params as UserDataInfos;
-  const { userData } = data;
+  const route = useRoute().params as UserDataInfos;
+  const { userData } = route;
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -44,34 +43,47 @@ export function NextSignUp(): JSX.Element {
     navigation.goBack();
   }
 
+  // eslint-disable-next-line consistent-return
   async function handleFinishSignUp(): Promise<void> {
-    try {
-      const schema = Yup.object().shape({
-        password: Yup.string().required("Senha é obrigatória"),
-        confirmPassword: Yup.string().oneOf(
-          [null, Yup.ref("password")],
-          "As senhas precisam ser iguais"
-        ),
-      });
-
-      const userPassword = await schema.validate({ password, confirmPassword });
-
-      const { email, name, user } = userData;
-
-      await api.post("/users/create", {
-        name,
-        email,
-        username: user,
-        password: userPassword.password,
-      });
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        Alert.alert(error.message);
-        return;
-      }
-
-      Alert.alert(error.response.data.message);
+    if (!password || !confirmPassword) {
+      return Alert.alert("Senha é obrigatória");
     }
+
+    if (password !== confirmPassword) {
+      return Alert.alert("Senhas não conferem");
+    }
+
+    if (!termIsAccepted) {
+      return Alert.alert("Aceite os termos de uso");
+    }
+
+    await api
+      .post("users/create", {
+        name: userData.name,
+        email: userData.email,
+        username: userData.user,
+        password,
+      })
+      .then(() => {
+        navigation.navigate("FinishSignUp");
+      })
+      .catch((error) => {
+        if (
+          error.response.data.message ===
+          `The email '${userData.email}' is already registered!`
+        ) {
+          return Alert.alert("Email já cadastrado");
+        }
+
+        if (
+          error.response.data.message ===
+          `The username '${userData.user}' is already registered!`
+        ) {
+          return Alert.alert("Usuário já cadastrado");
+        }
+
+        return Alert.alert("Erro ao realizar cadastro");
+      });
   }
 
   return (
