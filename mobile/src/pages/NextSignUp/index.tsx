@@ -18,7 +18,7 @@ import {
   Title,
 } from "./styles";
 import { PasswordInput } from "../../components/Form/PasswordInput";
-import { useAuth } from "../../hooks/auth";
+import { api } from "../../services/api";
 
 interface UserDataInfos {
   userData: {
@@ -46,7 +46,7 @@ export function NextSignUp(): JSX.Element {
   // eslint-disable-next-line consistent-return
   async function handleFinishSignUp(): Promise<void> {
     if (!password || !confirmPassword) {
-      return Alert.alert("Erro", "Preencha todos os campos");
+      return Alert.alert("Senha é obrigatória");
     }
 
     if (password !== confirmPassword) {
@@ -56,6 +56,34 @@ export function NextSignUp(): JSX.Element {
     if (!termIsAccepted) {
       return Alert.alert("Aceite os termos de uso");
     }
+
+    const response = await api
+      .post("users/create", {
+        name: userData.name,
+        email: userData.email,
+        username: userData.user,
+        password,
+      })
+      .then(() => {
+        navigation.navigate("FinishSignUp");
+      })
+      .catch((error) => {
+        if (
+          error.response.data.message ===
+          `The email '${userData.email}' is already registered!`
+        ) {
+          return Alert.alert("Email já cadastrado");
+        }
+
+        if (
+          error.response.data.message ===
+          `The username '${userData.user}' is already registered!`
+        ) {
+          return Alert.alert("Usuário já cadastrado");
+        }
+
+        return Alert.alert("Erro ao realizar cadastro");
+      });
   }
 
   return (
