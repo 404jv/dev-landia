@@ -9,7 +9,7 @@ import { MenuBar, ProgressMenuBar } from "./styles";
 interface IMenuProps {
   totalActivities: number;
   progressCount: number;
-  onPress: () => any;
+  onPress?: () => any;
 }
 
 export function Menu({
