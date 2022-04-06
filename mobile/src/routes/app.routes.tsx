@@ -10,15 +10,16 @@ import { SignIn } from "../pages/SignIn";
 import { SignUp } from "../pages/SignUp";
 import { FinishSignUp } from "../pages/FinishSignUp";
 import { NextSignUp } from "../pages/NextSignUp";
+import { useAuth } from "../hooks/auth";
 
 const { Navigator, Screen, Group } = createStackNavigator();
 
 export function AppRoutes(): JSX.Element {
-  const user = null;
+  const { userData } = useAuth();
 
   return (
     <Navigator screenOptions={{ headerShown: false }} initialRouteName="Home">
-      {user != null ? (
+      {userData != null ? (
         <Group>
           <Screen name="Home" component={TabRoutes} />
           <Screen name="Activity" component={Activity} />

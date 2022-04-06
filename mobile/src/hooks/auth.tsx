@@ -1,25 +1,84 @@
-import React, { createContext, useContext, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useEffect,
+} from "react";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { api } from "../services/api";
 
 interface AuthContextProps {
   children: ReactNode;
 }
 
-type AuthContextData = {
-  signIn: () => Promise<void>;
+type User = {
+  name: string;
+  email: string;
 };
+
+interface AuthResponse {
+  user: User;
+  token: string;
+}
+
+type AuthContextData = {
+  signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
+  userData: User | null;
+};
+
+const USER_STORAGE = "@devlandia:user";
+const TOKEN_STORAGE = "@devlandia:token";
 
 export const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthContextProps): JSX.Element {
-  async function signIn(): Promise<void> {
-    console.log("Função de Login 😁");
+  const [userData, setUserData] = useState<User | null>(null);
+
+  async function signIn(email: string, password: string): Promise<void> {
+    try {
+      const response = await api.post("/sessions", { email, password });
+      const { user, token } = response.data as AuthResponse;
+
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
+
+      await AsyncStorage.setItem(USER_STORAGE, JSON.stringify(user));
+      await AsyncStorage.setItem(TOKEN_STORAGE, token);
+      setUserData(user);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  async function signOut(): Promise<void> {
+    await AsyncStorage.removeItem(USER_STORAGE);
+    await AsyncStorage.removeItem(TOKEN_STORAGE);
+    setUserData(null);
+  }
+
+  useEffect(() => {
+    async function loadStorage(): Promise<void> {
+      const localUser = await AsyncStorage.getItem(USER_STORAGE);
+      const localToken = await AsyncStorage.getItem(TOKEN_STORAGE);
+
+      if (localUser && localToken) {
+        setUserData(JSON.parse(localUser));
+        api.defaults.headers.common.Authorization = `Bearer ${localToken}`;
+      }
+    }
+
+    loadStorage();
+  }, []);
 
   return (
     <AuthContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         signIn,
+        signOut,
+        userData,
       }}
     >
       {children}
