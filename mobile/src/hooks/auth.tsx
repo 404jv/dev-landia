@@ -7,6 +7,7 @@ import React, {
 } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 import { api } from "../services/api";
 
 interface AuthContextProps {
@@ -41,14 +42,16 @@ function AuthProvider({ children }: AuthContextProps): JSX.Element {
     try {
       const response = await api.post("/sessions", { email, password });
       const { user, token } = response.data as AuthResponse;
-
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
       await AsyncStorage.setItem(USER_STORAGE, JSON.stringify(user));
       await AsyncStorage.setItem(TOKEN_STORAGE, token);
       setUserData(user);
     } catch (error) {
-      console.log(error);
+      const errorMessage = error.response.status;
+      if (errorMessage === 401) {
+        Alert.alert("Email ou senha incorretos");
+      }
     }
   }
 
