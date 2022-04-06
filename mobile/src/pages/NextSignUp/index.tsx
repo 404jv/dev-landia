@@ -68,15 +68,16 @@ export function NextSignUp(): JSX.Element {
         navigation.navigate("FinishSignUp");
       })
       .catch((error) => {
+        const errorMessage = error.response.data.error;
         if (
-          error.response.data.message ===
+          errorMessage ===
           `The email '${userData.email}' is already registered!`
         ) {
           return Alert.alert("Email já cadastrado");
         }
 
         if (
-          error.response.data.message ===
+          errorMessage ===
           `The username '${userData.user}' is already registered!`
         ) {
           return Alert.alert("Usuário já cadastrado");
