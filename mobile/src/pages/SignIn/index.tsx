@@ -21,9 +21,11 @@ import {
   SignUp,
   SignUpText,
 } from "./styles";
+import { useAuth } from "../../hooks/auth";
 
 export function SignIn(): JSX.Element {
   const navigation = useNavigation();
+  const { signIn } = useAuth();
 
   const theme = useTheme();
   const [email, setEmail] = useState("");
@@ -41,7 +43,7 @@ export function SignIn(): JSX.Element {
       });
 
       await schema.validate({ email, password });
-      console.log("Validation passed", { email, password });
+      await signIn(email, password);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Erro na validação", error.message);
