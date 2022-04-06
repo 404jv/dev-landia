@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Modal, Portal, Provider } from "react-native-paper";
-import { playSound } from "../../utils/playSound";
-
 import { ScrollView } from "react-native";
+import { useTheme } from "styled-components";
+import { StatusBar } from "react-native";
+import { playSound } from "../../utils/playSound";
 
 import {
   Description,
@@ -29,9 +30,6 @@ import { Menu } from "../../components/Menu";
 import { Bash } from "../../components/Bash";
 import { Editor } from "../../components/Editor";
 import { ActivityStatusModal } from "../../components/ActivityStatusModal";
-import { useNavigation } from "@react-navigation/native";
-import { StatusBar } from "react-native";
-import { useTheme } from "styled-components";
 
 interface IOption {
   name: string;
@@ -51,14 +49,14 @@ type Activity = {
   options: IOption[];
 };
 
-export function Activity() {
-  const Navigation = useNavigation();
+export function Activity(): JSX.Element {
   const theme = useTheme();
 
   const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
   const [compileCode, setCompileCode] = useState<IOption[]>([]);
   const [progressBarCount, setProgressBarCount] = useState(0);
   const [isUserAnswer, setIsUserAnswer] = useState(true);
+  const [isConfirmedToShowAnswer, setIsConfirmedToShowAnswer] = useState(false);
 
   const activity: Activity = {
     id: String(new Date().getTime()),
@@ -163,7 +161,7 @@ export function Activity() {
   const [isCurrentActivityCorrect, setIsCurrentActivityCorrect] =
     useState(false);
 
-  async function handleCheckAnswer() {
+  async function handleCheckAnswer(): Promise<void> {
     const userAnswer = codeEditor;
 
     setCompileCode(userAnswer);
@@ -197,13 +195,13 @@ export function Activity() {
     setIsCurrentActivityCorrect(true);
   }
 
-  async function handleNextActivity() {
+  async function handleNextActivity(): Promise<void> {
     if (activities.length === 0) {
       return;
     }
 
     if (isUserAnswer) {
-      setActivities(activities.filter((activity, i) => i !== 0));
+      setActivities(activities.filter((ac, i) => i !== 0));
     } else {
       const wrongActivity = activities.shift();
       activities.push(wrongActivity);
@@ -216,15 +214,16 @@ export function Activity() {
     setCompileCode(currentActivity.default_code);
   }
 
-  function handleShowAnswer() {
+  function handleShowAnswer(): void {
     setCodeEditor(currentActivity.answer);
     setIsUserAnswer(false);
     setIsConfirmedToShowAnswer(false);
   }
 
-  const [isConfirmedToShowAnswer, setIsConfirmedToShowAnswer] = useState(false);
-  const showWarningToShowAnswerModal = () => setIsConfirmedToShowAnswer(true);
-  const hideWarningToShowAnswerModal = () => setIsConfirmedToShowAnswer(false);
+  const showWarningToShowAnswerModal = (): void =>
+    setIsConfirmedToShowAnswer(true);
+  const hideWarningToShowAnswerModal = (): void =>
+    setIsConfirmedToShowAnswer(false);
 
   useEffect(() => {
     setCodeEditor(currentActivity.default_code);
@@ -237,11 +236,7 @@ export function Activity() {
         barStyle="light-content"
         backgroundColor={theme.colors.background}
       />
-      <Menu
-        progressCount={progressBarCount}
-        totalActivities={5}
-        onPress={() => {}}
-      />
+      <Menu progressCount={progressBarCount} totalActivities={5} />
 
       <ScrollView>
         <Section>
@@ -253,6 +248,7 @@ export function Activity() {
           <Title>Dicas</Title>
           <Description>
             {currentActivity.tips.map((tip, index) => (
+              // eslint-disable-next-line react/no-array-index-key
               <Text key={index}>{`▪︎ ${tip}`}</Text>
             ))}
           </Description>
