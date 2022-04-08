@@ -76,3 +76,7 @@ export const PhasePosition = styled.View<PhasePositionProps>`
       margin-bottom: 30px;
     `}
 `;
+
+export const CardSeparator = styled.View`
+  height: 16px;
+`

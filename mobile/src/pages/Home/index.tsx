@@ -17,6 +17,7 @@ import {
   CoinView,
   Image,
   CoinValue,
+  CardSeparator,
 } from "./styles";
 
 export function Home(): JSX.Element {
@@ -26,6 +27,24 @@ export function Home(): JSX.Element {
   function handleAchievements(): void {
     navigation.navigate("Achievements");
   }
+
+  const data = [
+    {
+      name: "Introdução", 
+      description: "Entenderemos o básico de T.I e como tudo se conecta com programação.",
+      percentage: 100,
+    },
+    {
+      name: "Algoritmo", 
+      description: "Entenderemos o básico de T.I e como tudo se conecta com programação.",
+      percentage: 50,
+    },
+    {
+      name: "Estrutura de dados", 
+      description: "Entenderemos o básico de T.I e como tudo se conecta com programação.",
+      percentage: 20,
+    }
+  ]
 
   return (
     <Container>
@@ -59,10 +78,15 @@ export function Home(): JSX.Element {
       </Header>
 
       <FlatList
-        style={{ paddingHorizontal: 20, marginTop: 20 }}
-        data={[1]}
-        keyExtractor={(item) => String(item)}
-        renderItem={({ item }) => <Card />}
+        style={{ paddingHorizontal: 20, marginTop: 40 }}
+        data={data}
+        keyExtractor={(item) => String(item.name)}
+        renderItem={({ item }) => <Card  
+          name={item.name}
+          description={item.description}
+          percentage={item.percentage}
+        />}
+        ItemSeparatorComponent={() => <CardSeparator />}
       />
     </Container>
   );

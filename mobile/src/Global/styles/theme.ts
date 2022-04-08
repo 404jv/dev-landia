@@ -19,6 +19,8 @@ export default {
     blue: "#1F6FEB",
     lightBlue: "#425675",
 
+    progressBar: "#AF9156",
+
     bash: {
       blue: "#0055A4",
       red: "#EF4135",
