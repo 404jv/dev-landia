@@ -46,11 +46,11 @@ export const Percentage = styled.Text<PercentageProps>`
 `;
 
 export const CardTexts = styled.View`
-  max-width: 220px;
+  max-width: 230px;
   width: 100%;
   flex-direction: column;
   margin-top: 6px;
-  margin-left: 40px
+  margin-left: 30px
 `
 
 export const Title = styled.Text`
