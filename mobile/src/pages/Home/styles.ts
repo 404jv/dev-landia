@@ -79,4 +79,4 @@ export const PhasePosition = styled.View<PhasePositionProps>`
 
 export const CardSeparator = styled.View`
   height: 16px;
-`
+`;
