@@ -1,6 +1,17 @@
 import React from "react";
 
-import { CardIcon, Container, Percentage, CardInfo, CardTexts, Title, Description, ContainerInfos, ProgressBar, ContainerProgressBar } from "./styles";
+import {
+  CardIcon,
+  Container,
+  Percentage,
+  CardInfo,
+  CardTexts,
+  Title,
+  Description,
+  ContainerInfos,
+  ProgressBar,
+  ContainerProgressBar,
+} from "./styles";
 
 interface CardProps {
   name: string;
@@ -8,19 +19,21 @@ interface CardProps {
   percentage: number;
 }
 
-export function Card({ name, description, percentage }: CardProps): JSX.Element {
+export function Card({
+  name,
+  description,
+  percentage,
+}: CardProps): JSX.Element {
   return (
     <Container>
       <ContainerInfos>
         <CardInfo>
-          <CardIcon name="play-circle" percentage={percentage}/>
+          <CardIcon name="play-circle" percentage={percentage} />
           <Percentage percentage={percentage}>{percentage}%</Percentage>
         </CardInfo>
         <CardTexts>
           <Title>{name}</Title>
-          <Description>
-            {description}
-          </Description>
+          <Description>{description}</Description>
         </CardTexts>
       </ContainerInfos>
       <ContainerProgressBar>
