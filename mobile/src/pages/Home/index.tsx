@@ -30,21 +30,24 @@ export function Home(): JSX.Element {
 
   const data = [
     {
-      name: "Introdução", 
-      description: "Entenderemos o básico de T.I e como tudo se conecta com programação.",
+      name: "Introdução",
+      description:
+        "Entenderemos o básico de T.I e como tudo se conecta com programação.",
       percentage: 100,
     },
     {
-      name: "Algoritmo", 
-      description: "Entenderemos o básico de T.I e como tudo se conecta com programação.",
+      name: "Algoritmo",
+      description:
+        "Entenderemos o básico de T.I e como tudo se conecta com programação.",
       percentage: 50,
     },
     {
-      name: "Estrutura de dados", 
-      description: "Entenderemos o básico de T.I e como tudo se conecta com programação.",
+      name: "Estrutura de dados",
+      description:
+        "Entenderemos o básico de T.I e como tudo se conecta com programação.",
       percentage: 20,
-    }
-  ]
+    },
+  ];
 
   return (
     <Container>
@@ -81,11 +84,13 @@ export function Home(): JSX.Element {
         style={{ paddingHorizontal: 20, marginTop: 40 }}
         data={data}
         keyExtractor={(item) => String(item.name)}
-        renderItem={({ item }) => <Card  
-          name={item.name}
-          description={item.description}
-          percentage={item.percentage}
-        />}
+        renderItem={({ item }) => (
+          <Card
+            name={item.name}
+            description={item.description}
+            percentage={item.percentage}
+          />
+        )}
         ItemSeparatorComponent={() => <CardSeparator />}
       />
     </Container>
