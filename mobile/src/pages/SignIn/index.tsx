@@ -37,9 +37,7 @@ export function SignIn(): JSX.Element {
         email: Yup.string()
           .required("E-mail é obrigatório")
           .email("Digite um e-mail válido"),
-        password: Yup.string()
-          .required("Senha é obrigatória")
-          .min(6, "A senha deve ter no mínimo 6 caracteres"),
+        password: Yup.string().required("Senha é obrigatória"),
       });
 
       await schema.validate({ email, password });
