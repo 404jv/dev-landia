@@ -70,7 +70,7 @@ export const SeeAnswerIconButton = styled.View`
   align-items: center;
 `;
 
-//Modal//
+// Modal//
 
 export const ModalContainer = styled.View`
   margin: 10px;
@@ -90,7 +90,7 @@ export const ModalIcon = styled(Feather)`
 `;
 export const ModalTitle = styled.Text`
   font-size: 24px;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.bash.blue};
 `;
 
 export const ModalContentText = styled.Text`
@@ -103,5 +103,5 @@ export const ModalButton = styled.TouchableOpacity`
 `;
 export const ModalButtonText = styled.Text`
   font-size: 20px;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.bash.blue};
 `;

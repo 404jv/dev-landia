@@ -1,4 +1,5 @@
 import React from "react";
+import { TouchableOpacityProps } from "react-native";
 
 import {
   CardIcon,
@@ -13,7 +14,7 @@ import {
   ContainerProgressBar,
 } from "./styles";
 
-interface CardProps {
+interface CardProps extends TouchableOpacityProps {
   name: string;
   description: string;
   percentage: number;
@@ -23,9 +24,10 @@ export function Card({
   name,
   description,
   percentage,
+  ...rest
 }: CardProps): JSX.Element {
   return (
-    <Container>
+    <Container {...rest}>
       <ContainerInfos>
         <CardInfo>
           <CardIcon name="play-circle" percentage={percentage} />

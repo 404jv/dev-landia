@@ -28,6 +28,10 @@ export function Home(): JSX.Element {
     navigation.navigate("Achievements");
   }
 
+  function handleActivity(): void {
+    navigation.navigate("Activity");
+  }
+
   const data = [
     {
       name: "Introdução",
@@ -81,17 +85,19 @@ export function Home(): JSX.Element {
       </Header>
 
       <FlatList
-        style={{ paddingHorizontal: 20, marginTop: 40 }}
         data={data}
+        showsVerticalScrollIndicator={false}
+        style={{ paddingHorizontal: 20, marginTop: 40 }}
         keyExtractor={(item) => String(item.name)}
+        ItemSeparatorComponent={() => <CardSeparator />}
         renderItem={({ item }) => (
           <Card
             name={item.name}
             description={item.description}
             percentage={item.percentage}
+            onPress={handleActivity}
           />
         )}
-        ItemSeparatorComponent={() => <CardSeparator />}
       />
     </Container>
   );
