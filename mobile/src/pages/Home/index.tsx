@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, TouchableOpacity } from "react-native";
 import { StatusBar } from "react-native";
 import { useTheme } from "styled-components";
@@ -10,6 +10,9 @@ import goldCoin from "../../assets/gold.png";
 import xpCoin from "../../assets/xp.png";
 import medalCoin from "../../assets/medal.png";
 
+import { useAuth } from "../../hooks/auth";
+import { api } from "../../services/api";
+
 import {
   Container,
   Header,
@@ -20,9 +23,32 @@ import {
   CardSeparator,
 } from "./styles";
 
+type PhaseProps = {
+  created_at: string;
+  id: string;
+  map_id: string;
+  markdown_text?: boolean | null;
+  max_level?: number | null;
+  order: number;
+  title: string;
+  type: string;
+};
+
+interface MapProps {
+  created_at: string;
+  id: string;
+  description: string;
+  is_done: boolean;
+  order: number;
+  title: string;
+  phases: PhaseProps[];
+}
+
 export function Home(): JSX.Element {
   const theme = useTheme();
   const navigation = useNavigation();
+
+  const [maps, setMaps] = useState<MapProps[]>([]);
 
   function handleAchievements(): void {
     navigation.navigate("Achievements");
@@ -53,6 +79,15 @@ export function Home(): JSX.Element {
     },
   ];
 
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    async function getTree() {
+      const response = await api.get("/game/tree");
+      setMaps(response.data);
+    }
+
+    getTree();
+  }, []);
   return (
     <Container>
       <StatusBar
