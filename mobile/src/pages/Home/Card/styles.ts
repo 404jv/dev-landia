@@ -1,20 +1,13 @@
 import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 import globalTheme from "../../../Global/styles/theme";
 
-type CardIconProps = {
+type Props = {
   percentage: number;
 };
 
-type PercentageProps = {
-  percentage: number;
-};
-
-type ProgressBarProps = {
-  percentage: number;
-};
-
-export const Container = styled.View`
+export const Container = styled(TouchableOpacity)`
   width: 100%;
 `;
 
@@ -33,7 +26,8 @@ export const CardInfo = styled.View`
   margin-left: 14px;
 `;
 
-export const CardIcon = styled(Feather)<CardIconProps>`
+// eslint-disable-next-line prettier/prettier
+export const CardIcon = styled(Feather) <Props>`
   font-size: 60px;
   color: ${({ percentage }) =>
     percentage === 100
@@ -42,7 +36,7 @@ export const CardIcon = styled(Feather)<CardIconProps>`
   margin-bottom: 6px;
 `;
 
-export const Percentage = styled.Text<PercentageProps>`
+export const Percentage = styled.Text<Props>`
   font-size: 18px;
   font-family: ${({ theme }) => theme.fonts.medium};
   color: ${({ percentage }) =>
@@ -80,7 +74,7 @@ export const ContainerProgressBar = styled.View`
   border-radius: 12px;
 `;
 
-export const ProgressBar = styled.View<ProgressBarProps>`
+export const ProgressBar = styled.View<Props>`
   width: ${({ percentage }) => percentage}%;
   height: 14px;
   background-color: ${({ percentage }) =>
