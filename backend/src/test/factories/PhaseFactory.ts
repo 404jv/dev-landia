@@ -2,7 +2,7 @@ import { ActivitiesRepository } from '@modules/activities/infra/typeorm/reposito
 import { Phase } from '@modules/phases/infra/typeorm/entities/Phase';
 import { PhasesRepository } from '@modules/phases/infra/typeorm/repositories/PhasesRepository';
 
-import { createManyOptions } from './OptionFactorty';
+import { createManyOptions } from './OptionFactory';
 
 enum enActivityType {
   BLOCK_ACTIVITY = 'block_activity',

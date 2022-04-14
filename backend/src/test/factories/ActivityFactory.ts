@@ -1,7 +1,7 @@
 import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
 import { ActivitiesRepository } from '@modules/activities/infra/typeorm/repositories/ActivitiesRepository';
 
-import { createManyOptions } from './OptionFactorty';
+import { createManyOptions } from './OptionFactory';
 
 enum enActivityType {
   BLOCK_ACTIVITY = 'block_activity',
