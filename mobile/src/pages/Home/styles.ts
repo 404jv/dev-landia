@@ -45,38 +45,19 @@ export const Phases = styled.View`
   padding: 10px;
 `;
 
-interface PhasePositionProps {
-  keyPosition: number;
-}
-
-export const PhasePosition = styled.View<PhasePositionProps>`
-  ${({ keyPosition }) =>
-    keyPosition === 1 &&
-    css`
-      margin-top: 20px;
-    `}
-
-  ${({ keyPosition }) =>
-    keyPosition === 2 &&
-    css`
-      margin-right: 200px;
-    `}
-
-    ${({ keyPosition }) =>
-    keyPosition === 3 &&
-    css`
-      margin-left: 200px;
-      margin-top: -70px;
-    `}
-
-    ${({ keyPosition }) =>
-    keyPosition === 4 &&
-    css`
-      margin-top: 40px;
-      margin-bottom: 30px;
-    `}
-`;
-
 export const CardSeparator = styled.View`
   height: 16px;
+`;
+
+export const MapTitle = styled.Text`
+  color: ${({ theme }) => theme.colors.white};
+  font-size: ${RFValue(20)}px;
+  align-self: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
+
+export const CardWrapper = styled.View`
+  padding: 0px 16px;
+  margin-bottom: 20px;
 `;
