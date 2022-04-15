@@ -10,6 +10,7 @@ interface ICreatePhaseDTO {
   map_id: string;
   title: string;
   max_level: number;
+  description: string;
   type: enType;
   activities?: Activity[];
   markdown_text?: string;

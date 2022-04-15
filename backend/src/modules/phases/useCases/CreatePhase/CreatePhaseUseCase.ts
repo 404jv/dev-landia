@@ -26,6 +26,7 @@ class CreatePhaseUseCase {
     max_level,
     title,
     type,
+    description,
     markdown_text,
     order,
   }: ICreatePhaseDTO): Promise<ICreatePhaseDTO> {
@@ -48,6 +49,7 @@ class CreatePhaseUseCase {
       max_level,
       title,
       type,
+      description,
       markdown_text,
       order,
     });

@@ -42,6 +42,9 @@ class Phase {
   markdown_text: string;
 
   @Column()
+  description: string;
+
+  @Column()
   max_level: number;
 
   @Column()

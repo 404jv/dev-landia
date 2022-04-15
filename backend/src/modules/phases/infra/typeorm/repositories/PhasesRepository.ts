@@ -16,6 +16,7 @@ class PhasesRepository implements IPhasesRepository {
     max_level,
     title,
     type,
+    description,
     markdown_text,
     order,
   }: ICreatePhaseDTO): Promise<Phase> {
@@ -24,6 +25,7 @@ class PhasesRepository implements IPhasesRepository {
       map_id,
       title,
       type,
+      description,
       markdown_text,
       order,
     });
@@ -54,6 +56,7 @@ class PhasesRepository implements IPhasesRepository {
     type,
     id,
     markdown_text,
+    description,
     activities,
     order,
   }: ICreatePhaseDTO): Promise<Phase> {
@@ -63,6 +66,7 @@ class PhasesRepository implements IPhasesRepository {
       title,
       type,
       markdown_text,
+      description,
       id,
       order,
       activities,
