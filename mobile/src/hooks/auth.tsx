@@ -28,7 +28,6 @@ type AuthContextData = {
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   userData: User | null;
-  userToken: string | null;
 };
 
 const USER_STORAGE = "@devlandia:user";
@@ -38,7 +37,6 @@ export const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthContextProps): JSX.Element {
   const [userData, setUserData] = useState<User | null>(null);
-  const [userToken, setUserToken] = useState<string | null>(null);
 
   async function signIn(email: string, password: string): Promise<void> {
     try {
@@ -49,7 +47,6 @@ function AuthProvider({ children }: AuthContextProps): JSX.Element {
       await AsyncStorage.setItem(USER_STORAGE, JSON.stringify(user));
       await AsyncStorage.setItem(TOKEN_STORAGE, token);
       setUserData(user);
-      setUserToken(token);
     } catch (error) {
       const errorMessage = error.response.status;
       if (errorMessage === 401) {
@@ -62,7 +59,6 @@ function AuthProvider({ children }: AuthContextProps): JSX.Element {
     await AsyncStorage.removeItem(USER_STORAGE);
     await AsyncStorage.removeItem(TOKEN_STORAGE);
     setUserData(null);
-    setUserToken(null);
   }
 
   useEffect(() => {
@@ -72,7 +68,6 @@ function AuthProvider({ children }: AuthContextProps): JSX.Element {
 
       if (localUser && localToken) {
         setUserData(JSON.parse(localUser));
-        setUserToken(JSON.parse(localToken));
         api.defaults.headers.common.Authorization = `Bearer ${localToken}`;
       }
     }
@@ -87,7 +82,6 @@ function AuthProvider({ children }: AuthContextProps): JSX.Element {
         signIn,
         signOut,
         userData,
-        userToken,
       }}
     >
       {children}

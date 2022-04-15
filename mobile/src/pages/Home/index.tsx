@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, TouchableOpacity } from "react-native";
+import { FlatList, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "react-native";
 import { useTheme } from "styled-components";
 import { useNavigation } from "@react-navigation/native";
@@ -21,13 +21,15 @@ import {
   Image,
   CoinValue,
   CardSeparator,
+  MapTitle,
+  CardWrapper,
 } from "./styles";
 
 type PhaseProps = {
   created_at: string;
   id: string;
   map_id: string;
-  markdown_text?: boolean | null;
+  markdown_text?: string | null;
   max_level?: number | null;
   order: number;
   title: string;
@@ -118,7 +120,7 @@ export function Home(): JSX.Element {
           </CoinView>
         </Content>
       </Header>
-
+      {/* 
       <FlatList
         data={data}
         showsVerticalScrollIndicator={false}
@@ -134,6 +136,18 @@ export function Home(): JSX.Element {
           />
         )}
       />
+      */}
+
+      {maps.map((map) => (
+        <View key={map.id}>
+          <MapTitle>{map.title}</MapTitle>
+          {map.phases.map((phase) => (
+            <CardWrapper key={phase.id}>
+              <Card name={phase.title} description="" percentage={0} />
+            </CardWrapper>
+          ))}
+        </View>
+      ))}
     </Container>
   );
 }
