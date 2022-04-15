@@ -5,8 +5,15 @@ import { CreatePhaseUseCase } from './CreatePhaseUseCase';
 
 class CreatePhaseController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { title, map_id, max_level, type, markdown_text, order } =
-      request.body;
+    const {
+      title,
+      map_id,
+      max_level,
+      type,
+      markdown_text,
+      order,
+      description,
+    } = request.body;
 
     const createMapUseCase = container.resolve(CreatePhaseUseCase);
 
@@ -17,6 +24,7 @@ class CreatePhaseController {
       type,
       markdown_text,
       order,
+      description,
     });
 
     return response.status(201).json(phase);

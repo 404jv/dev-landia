@@ -37,6 +37,7 @@ describe('Create Phase', () => {
       max_level: 3,
       title: 'Fase prática test',
       type: enType.PRACTICE,
+      description: 'Descrição da fase prática test',
       order: 1,
     };
 
@@ -61,6 +62,7 @@ describe('Create Phase', () => {
       max_level: 1,
       title: 'Fase teórica fase',
       type: enType.THEORY,
+      description: 'Descrição da fase teórica test',
       markdown_text: '## oi',
       order: 1,
     };
@@ -86,6 +88,7 @@ describe('Create Phase', () => {
       max_level: 2,
       title: 'Fase prática test',
       type: enType.PRACTICE,
+      description: 'Descrição da fase prática test',
       order: 1,
     };
 
@@ -106,6 +109,7 @@ describe('Create Phase', () => {
       max_level: 5,
       title: 'Fase teórica test',
       type: enType.THEORY,
+      description: 'Descrição da fase teórica test',
       order: 1,
     };
 
@@ -120,6 +124,7 @@ describe('Create Phase', () => {
       max_level: 5,
       title: 'Fase test',
       type: enType.PRACTICE,
+      description: 'Descrição da fase test',
       order: 1,
     };
 

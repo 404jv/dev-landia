@@ -42,6 +42,7 @@ describe('Create Phase Controller', () => {
       map_id,
       max_level: 3,
       type: 'practice',
+      description: 'Descrição da fase 1',
       order: 1,
     };
 
@@ -60,6 +61,7 @@ describe('Create Phase Controller', () => {
       map_id,
       max_level: 1,
       type: 'theory',
+      description: 'Descrição da fase 2',
       markdown_text: '# Fase 2 test',
       order: 2,
     };
@@ -79,6 +81,7 @@ describe('Create Phase Controller', () => {
       map_id,
       max_level: 1,
       type: 'practice',
+      description: 'Descrição da fase inválida',
       order: 3,
     };
 
@@ -99,6 +102,7 @@ describe('Create Phase Controller', () => {
       map_id,
       max_level: 2,
       type: 'theory',
+      description: 'Descrição da fase inválida',
       markdown_text: '# Invalid phase test',
       order: 4,
     };
@@ -122,6 +126,7 @@ describe('Create Phase Controller', () => {
       map_id: nonExistentMapId,
       max_level: 1,
       type: 'theory',
+      description: 'Descrição da fase inválida',
       markdown_text: '# Phase test',
       order: 5,
     };
@@ -141,6 +146,7 @@ describe('Create Phase Controller', () => {
       map_id,
       max_level: 3,
       type: 'practice',
+      description: 'Descrição da fase 1',
       order: 1,
     };
 

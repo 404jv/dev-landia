@@ -29,6 +29,7 @@ class InMemoryPhasesRepository implements IPhasesRepository {
     title,
     type,
     id,
+    description,
     markdown_text,
     order,
   }: ICreatePhaseDTO): Promise<Phase> {
@@ -40,6 +41,7 @@ class InMemoryPhasesRepository implements IPhasesRepository {
       title,
       type,
       id,
+      description,
       markdown_text,
       order,
     });
