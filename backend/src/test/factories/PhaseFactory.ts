@@ -21,6 +21,7 @@ export async function createPhase(map_id: string): Promise<Phase> {
     title: 'Phase Test',
     map_id,
     max_level: 3,
+    description: 'Description phase test',
     order: 1,
     type: enType.PRACTICE,
   });
@@ -37,6 +38,7 @@ export async function createPhaseAndActivities(map_id: string): Promise<Phase> {
     title: 'Phase Test',
     map_id,
     max_level: 3,
+    description: 'Description phase test',
     order: 0,
     type: enType.PRACTICE,
   });
@@ -119,6 +121,7 @@ export async function createTheoryPhase(map_id: string): Promise<Phase> {
     type: enType.THEORY,
     map_id,
     max_level: 1,
+    description: 'Description theory phase test',
     order: 0,
     markdown_text: '# Theory Phase',
   });
