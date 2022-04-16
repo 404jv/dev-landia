@@ -9,7 +9,7 @@ export const Container = styled.View`
   border-style: solid;
   border-color: ${({ theme }) => theme.colors.title};
   border-radius: 8px;
-  margin-right: 34px;
+  margin-right: 20px;
 `;
 
 export const ContainerNumbers = styled.View`
