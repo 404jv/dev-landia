@@ -29,6 +29,7 @@ type PhaseProps = {
   created_at: string;
   id: string;
   map_id: string;
+  description: string;
   markdown_text?: string | null;
   max_level?: number | null;
   order: number;
@@ -59,27 +60,6 @@ export function Home(): JSX.Element {
   function handleActivity(): void {
     navigation.navigate("Activity");
   }
-
-  const data = [
-    {
-      name: "Introdução",
-      description:
-        "Entenderemos o básico de T.I e como tudo se conecta com programação.",
-      percentage: 100,
-    },
-    {
-      name: "Algoritmo",
-      description:
-        "Entenderemos o básico de T.I e como tudo se conecta com programação.",
-      percentage: 50,
-    },
-    {
-      name: "Estrutura de dados",
-      description:
-        "Entenderemos o básico de T.I e como tudo se conecta com programação.",
-      percentage: 20,
-    },
-  ];
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -120,30 +100,17 @@ export function Home(): JSX.Element {
           </CoinView>
         </Content>
       </Header>
-      {/* 
-      <FlatList
-        data={data}
-        showsVerticalScrollIndicator={false}
-        style={{ paddingHorizontal: 20, marginTop: 40 }}
-        keyExtractor={(item) => String(item.name)}
-        ItemSeparatorComponent={() => <CardSeparator />}
-        renderItem={({ item }) => (
-          <Card
-            name={item.name}
-            description={item.description}
-            percentage={item.percentage}
-            onPress={handleActivity}
-          />
-        )}
-      />
-      */}
 
       {maps.map((map) => (
         <View key={map.id}>
           <MapTitle>{map.title}</MapTitle>
           {map.phases.map((phase) => (
             <CardWrapper key={phase.id}>
-              <Card name={phase.title} description="" percentage={0} />
+              <Card
+                name={phase.title}
+                description={phase.description}
+                percentage={0}
+              />
             </CardWrapper>
           ))}
         </View>

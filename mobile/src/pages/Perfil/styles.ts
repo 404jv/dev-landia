@@ -112,4 +112,5 @@ export const ContainerStatisticsCards = styled.View`
   margin-top: 30px;
   margin-left: 20px;
   margin-bottom: 12px;
+  justify-content: space-between;
 `;

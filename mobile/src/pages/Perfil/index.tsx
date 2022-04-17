@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StatusBar,
   Image,
@@ -29,6 +29,7 @@ import coin from "../../assets/gold.png";
 import medal from "../../assets/medal.png";
 import potion from "../../assets/xp.png";
 import { StatisticsCard } from "./StatisticsCard";
+import { api } from "../../services/api";
 
 interface StatisticItem {
   name: string;
@@ -36,26 +37,28 @@ interface StatisticItem {
   image: ImageSourcePropType;
 }
 
-export function Perfil(): JSX.Element {
-  const theme = useTheme();
+interface UserInfos {
+  name: string;
+  username: string;
+  biography: string;
+  total_coins: number;
+  total_xp: number;
+}
 
-  const data = [
-    {
-      name: "Coin",
-      number: 23,
-      image: coin,
-    },
-    {
-      name: "Experience",
-      number: 232,
-      image: potion,
-    },
-    {
-      name: "Medals",
-      number: 17,
-      image: medal,
-    },
-  ];
+export function Perfil(): JSX.Element {
+  const [userInfos, setUserInfos] = useState<UserInfos>();
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    async function getProfile() {
+      const response = await api.get("users/profile");
+      setUserInfos(response.data);
+    }
+
+    getProfile();
+  }, []);
+
+  const theme = useTheme();
 
   return (
     <Container>
@@ -81,17 +84,25 @@ export function Perfil(): JSX.Element {
         </ContainerEditImage>
 
         <ContainerInfos>
-          <Name>Ruan Pablo</Name>
-          <Username>@NaPpY</Username>
-          <Bio>🙃 this is not the end</Bio>
+          <Name>{userInfos?.name}</Name>
+          <Username>{userInfos?.username}</Username>
+          <Bio>{userInfos?.biography}</Bio>
         </ContainerInfos>
       </ContainerPerfil>
 
       <StatisticsTitle>Estatísticas</StatisticsTitle>
 
       <ContainerStatisticsCards>
-        <StatisticsCard name="Coin" number={23} image={coin} />
-        <StatisticsCard name="Experience" number={232} image={potion} />
+        <StatisticsCard
+          name="Coin"
+          number={userInfos?.total_coins}
+          image={coin}
+        />
+        <StatisticsCard
+          name="Experience"
+          number={userInfos?.total_xp}
+          image={potion}
+        />
       </ContainerStatisticsCards>
       <ContainerStatisticsCards>
         <StatisticsCard name="Medals" number={17} image={medal} />
