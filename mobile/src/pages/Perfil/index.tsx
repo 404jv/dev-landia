@@ -30,6 +30,7 @@ import medal from "../../assets/medal.png";
 import potion from "../../assets/xp.png";
 import { StatisticsCard } from "./StatisticsCard";
 import { api } from "../../services/api";
+import { useAuth } from "../../hooks/auth";
 
 interface StatisticItem {
   name: string;
@@ -48,11 +49,19 @@ interface UserInfos {
 export function Perfil(): JSX.Element {
   const [userInfos, setUserInfos] = useState<UserInfos>();
 
+  const { signOut } = useAuth();
+
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     async function getProfile() {
-      const response = await api.get("users/profile");
-      setUserInfos(response.data);
+      try {
+        const response = await api.get("users/profile");
+        setUserInfos(response.data);
+      } catch (error) {
+        if (error.response.status === 401) {
+          signOut();
+        }
+      }
     }
 
     getProfile();
