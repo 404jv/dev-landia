@@ -25,7 +25,6 @@
   </p>
 </div>
 
-<details>
   <summary><h3>Tabela de conteúdos</h3></summary>
   <ol>
     <li><a href="#🏆-placar-de-contribuições">Placar de contribuições</a></li>
@@ -43,7 +42,6 @@
     </li>
     <li><a href="#autores">Autores</a></li>
   </ol>
-</details>
 
 ## 🏆 Placar de contribuições
 <div align="center">
