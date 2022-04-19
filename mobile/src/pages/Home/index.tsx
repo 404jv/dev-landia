@@ -35,6 +35,7 @@ type PhaseProps = {
   order: number;
   title: string;
   type: string;
+  current_level: number;
 };
 
 interface MapProps {
@@ -61,11 +62,24 @@ export function Home(): JSX.Element {
     navigation.navigate("Activity");
   }
 
+  function calculateProgress(currentLevel: number, maxLevel: number): number {
+    const percentage = (currentLevel / maxLevel) * 100;
+    return Math.floor(percentage);
+  }
+
+  const { signOut } = useAuth();
+
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     async function getTree() {
-      const response = await api.get("/game/tree");
-      setMaps(response.data);
+      try {
+        const response = await api.get("/game/tree");
+        setMaps(response.data);
+      } catch (error) {
+        if (error.response.status === 401) {
+          signOut();
+        }
+      }
     }
 
     getTree();
@@ -109,7 +123,10 @@ export function Home(): JSX.Element {
               <Card
                 name={phase.title}
                 description={phase.description}
-                percentage={0}
+                percentage={calculateProgress(
+                  phase.current_level,
+                  phase.max_level
+                )}
               />
             </CardWrapper>
           ))}
