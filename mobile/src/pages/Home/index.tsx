@@ -67,11 +67,19 @@ export function Home(): JSX.Element {
     return Math.floor(percentage);
   }
 
+  const { signOut } = useAuth();
+
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     async function getTree() {
-      const response = await api.get("/game/tree");
-      setMaps(response.data);
+      try {
+        const response = await api.get("/game/tree");
+        setMaps(response.data);
+      } catch (error) {
+        if (error.response.status === 401) {
+          signOut();
+        }
+      }
     }
 
     getTree();
