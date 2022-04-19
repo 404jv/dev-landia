@@ -9,7 +9,7 @@
 
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="./logo.png" alt="Logo" width="160" height="40">
+    <img src="./public/logo.png" alt="Logo" width="160" height="40">
   </a>
 
   <h2 align="center">dev-landia</h2>
@@ -57,7 +57,7 @@
 - Clique [aqui](https://www.figma.com/file/jiwnsl1AbgdJGJ11MaPf0V/DevL%C3%A2ndia?node-id=0%3A1) para acessar o layout
 
 ## Diagrama do banco de dados 
-![Diagrama do dev-landia](/diagram.png)
+![Diagrama do dev-landia](/public/diagram.png)
 
 ## Licença
 Distribuído sob a licença MIT. Consulte `LICENSE.txt` para obter mais informações.
