@@ -12,8 +12,6 @@
     <img src="./public/logo.png" alt="Logo" width="160" height="40">
   </a>
 
-  <h2 align="center">dev-landia</h2>
-
   <p align="center">
     💙 Aplicativo gratuito para aprender programação.
     <br />
@@ -26,6 +24,13 @@
     <a href="https://github.com/404jv/dev-landia/issues">Solicite uma funcionalidade</a>
   </p>
 </div>
+
+## 🏆 Placar de contribuições
+| Nome | Issues fechadas |
+|------|--------------|
+| <img src="https://avatars.githubusercontent.com/u/84464007?v=4" width="100px;" alt="Foto do Ruan Pablo" />  <a href="https://github.com/1SyuLi">Ruan Pablo</a> | 1 |
+| <img src="https://avatars.githubusercontent.com/u/86677587?v=4" width="100px;" alt="Foto do João Vitor Lima"/> <a href="https://github.com/jvolima">João Vitor Lima 🏆</a> | 2 |
+<img src="https://avatars.githubusercontent.com/u/53544964?v=4" width="100px;" alt="Foto do João Victor Ramalho"/> <a href="https://github.com/404jv">João Victor Ramalho</a> | 1 |
 
 <details>
   <summary><h3>Tabela de conteúdos</h3></summary>
