@@ -35,6 +35,7 @@ type PhaseProps = {
   order: number;
   title: string;
   type: string;
+  current_level: number;
 };
 
 interface MapProps {
@@ -59,6 +60,11 @@ export function Home(): JSX.Element {
 
   function handleActivity(): void {
     navigation.navigate("Activity");
+  }
+
+  function calculateProgress(currentLevel: number, maxLevel: number): number {
+    const percentage = (currentLevel / maxLevel) * 100;
+    return Math.floor(percentage);
   }
 
   useEffect(() => {
@@ -109,7 +115,10 @@ export function Home(): JSX.Element {
               <Card
                 name={phase.title}
                 description={phase.description}
-                percentage={0}
+                percentage={calculateProgress(
+                  phase.current_level,
+                  phase.max_level
+                )}
               />
             </CardWrapper>
           ))}
