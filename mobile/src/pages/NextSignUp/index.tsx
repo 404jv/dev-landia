@@ -68,7 +68,7 @@ export function NextSignUp(): JSX.Element {
         navigation.navigate("FinishSignUp");
       })
       .catch((error) => {
-        const errorMessage = error.response.data.error;
+        const errorMessage = error.response.data.message;
         if (
           errorMessage ===
           `The email '${userData.email}' is already registered!`
