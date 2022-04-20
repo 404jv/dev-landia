@@ -11,6 +11,7 @@
     "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts",
     "seed:map": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/maps.ts",
     "seed:phase": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/phases.ts",
+    "seed:activity": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/activities.ts",
     "seed:user": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/user.ts"
   },
   "dependencies": {
