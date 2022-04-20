@@ -27,7 +27,7 @@ export function Card({
   ...rest
 }: CardProps): JSX.Element {
   return (
-    <Container {...rest}>
+    <Container {...rest} activeOpacity={0.8}>
       <ContainerInfos>
         <CardInfo>
           <CardIcon name="play-circle" percentage={percentage} />
