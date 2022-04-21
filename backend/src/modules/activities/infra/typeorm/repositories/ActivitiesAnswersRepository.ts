@@ -41,11 +41,7 @@ class ActivitiesAnswersRepository implements IActivitiesOptionsRepository {
   }
 
   async deleteAllByActivityId(activity_id: string): Promise<void> {
-    await this.repository
-      .createQueryBuilder('activity_answer')
-      .delete()
-      .where('activity_answer.activity_id = activity_id', { activity_id })
-      .execute();
+    await this.repository.delete({ activity_id });
   }
 }
 
