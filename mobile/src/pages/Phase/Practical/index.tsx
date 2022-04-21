@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Modal, Portal, Provider } from "react-native-paper";
-import { ActivityIndicator, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { useTheme } from "styled-components";
 import { StatusBar } from "react-native";
-import { useRoute } from "@react-navigation/native";
 import { playSound } from "../../../utils/playSound";
 
 import {
@@ -31,12 +30,15 @@ import { Menu } from "../../../components/Menu";
 import { Bash } from "../../../components/Bash";
 import { Editor } from "../../../components/Editor";
 import { ActivityStatusModal } from "../../../components/ActivityStatusModal";
-import { api } from "../../../services/api";
 
 interface IOption {
   name: string;
   type: string;
   hexadecimal_color: string;
+}
+
+interface TipsProps {
+  name: string;
 }
 
 type Activity = {
@@ -47,7 +49,7 @@ type Activity = {
   default_code: IOption[];
   activity_answer: IOption[];
   is_needed_tests: boolean;
-  tips: string[];
+  tips: TipsProps[];
   options: IOption[];
   order: number;
 };

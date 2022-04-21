@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 import { ActivityIndicator, StatusBar } from "react-native";
 
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { Container, Text } from "./styles";
+import { useRoute } from "@react-navigation/native";
+import { Container } from "./styles";
 
 import { Practical } from "./Practical";
 import { api } from "../../services/api";
@@ -15,6 +15,10 @@ interface IOption {
   hexadecimal_color: string;
 }
 
+interface TipsProps {
+  name: string;
+}
+
 type Activity = {
   id: string;
   title: string;
@@ -23,14 +27,12 @@ type Activity = {
   default_code: IOption[];
   activity_answer: IOption[];
   is_needed_tests: boolean;
-  tips: string[];
+  tips: TipsProps[];
   options: IOption[];
   order: number;
 };
 
 export function Phase(): JSX.Element {
-  const navigation = useNavigation<any>();
-
   const [activities, setActivities] = useState<Activity[]>([]);
   const [currentActivity, setCurrentActivity] = useState<Activity>();
   const [isLoading, setIsLoading] = useState(true);
@@ -39,6 +41,7 @@ export function Phase(): JSX.Element {
   const theme = useTheme();
   const route = useRoute();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { phase } = route.params as any;
 
   function handleNextActivity(isUserAnswer: boolean): void {
@@ -72,9 +75,11 @@ export function Phase(): JSX.Element {
       setLoad(false);
     }
 
+    // eslint-disable-next-line eqeqeq
     if (currentActivity != undefined) {
       setIsLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentActivity]);
 
   return (

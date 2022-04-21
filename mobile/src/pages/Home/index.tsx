@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { StatusBar } from "react-native";
 import { useTheme } from "styled-components";
 import { useNavigation } from "@react-navigation/native";
@@ -20,7 +20,6 @@ import {
   CoinView,
   Image,
   CoinValue,
-  CardSeparator,
   MapTitle,
   CardWrapper,
 } from "./styles";
@@ -50,6 +49,7 @@ interface MapProps {
 
 export function Home(): JSX.Element {
   const theme = useTheme();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation = useNavigation<any>();
 
   const [maps, setMaps] = useState<MapProps[]>([]);
@@ -58,7 +58,7 @@ export function Home(): JSX.Element {
     navigation.navigate("Achievements");
   }
 
-  function handleActivity(phase): any {
+  function handleActivity(phase: PhaseProps): void {
     navigation.navigate("Phase", { phase });
   }
 
@@ -70,8 +70,7 @@ export function Home(): JSX.Element {
   const { signOut } = useAuth();
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    async function getTree() {
+    async function getTree(): Promise<void> {
       try {
         const response = await api.get("/game/tree");
         setMaps(response.data);
@@ -83,6 +82,7 @@ export function Home(): JSX.Element {
     }
 
     getTree();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Container>
