@@ -59,7 +59,7 @@ export function Home(): JSX.Element {
   }
 
   function handleActivity(phase): any {
-    navigation.navigate("Activities", { phase });
+    navigation.navigate("Phase", { phase });
   }
 
   function calculateProgress(currentLevel: number, maxLevel: number): number {

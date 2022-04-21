@@ -8,5 +8,5 @@ export const Container = styled.View`
 export const Text = styled.Text`
   line-height: 19px;
   font-size: 16px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
 `;

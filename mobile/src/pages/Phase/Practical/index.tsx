@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Modal, Portal, Provider } from "react-native-paper";
-import { ScrollView } from "react-native";
+import { ActivityIndicator, ScrollView } from "react-native";
 import { useTheme } from "styled-components";
 import { StatusBar } from "react-native";
+import { useRoute } from "@react-navigation/native";
 import { playSound } from "../../../utils/playSound";
 
 import {
@@ -44,18 +45,22 @@ type Activity = {
   description: string;
   type: string;
   default_code: IOption[];
-  answer: IOption[];
+  activity_answer: IOption[];
   is_needed_tests: boolean;
   tips: string[];
   options: IOption[];
   order: number;
 };
 
-interface PhaseProps {
-  PhaseId: string;
+interface Props {
+  currentActivity: Activity;
+  handleNextActivity: (isUserAnswer: boolean) => void;
 }
 
-export function Practical({ PhaseId }: PhaseProps): JSX.Element {
+export function Practical({
+  currentActivity,
+  handleNextActivity,
+}: Props): JSX.Element {
   const theme = useTheme();
 
   const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
@@ -64,9 +69,6 @@ export function Practical({ PhaseId }: PhaseProps): JSX.Element {
   const [isUserAnswer, setIsUserAnswer] = useState(true);
   const [isConfirmedToShowAnswer, setIsConfirmedToShowAnswer] = useState(false);
 
-  const [activities, setActivities] = useState<Activity[]>([]);
-
-  const [currentActivity, setCurrentActivity] = useState(activities[0]);
   const [isCurrentActivityCorrect, setIsCurrentActivityCorrect] =
     useState(false);
 
@@ -81,13 +83,13 @@ export function Practical({ PhaseId }: PhaseProps): JSX.Element {
       return;
     }
 
-    if (userAnswer.length !== currentActivity.answer.length) {
+    if (userAnswer.length !== currentActivity.activity_answer.length) {
       await playSound("wrongSong");
       return;
     }
 
     const isActivityCorrect = userAnswer.every((line, index) => {
-      if (line.name !== currentActivity.answer[index].name) {
+      if (line.name !== currentActivity.activity_answer[index].name) {
         return false;
       }
 
@@ -104,27 +106,8 @@ export function Practical({ PhaseId }: PhaseProps): JSX.Element {
     setIsCurrentActivityCorrect(true);
   }
 
-  async function handleNextActivity(): Promise<void> {
-    if (activities.length === 0) {
-      return;
-    }
-
-    if (isUserAnswer) {
-      setActivities(activities.filter((ac, i) => i !== 0));
-    } else {
-      const wrongActivity = activities.shift();
-      activities.push(wrongActivity);
-    }
-
-    setCurrentActivity(activities[0]);
-    setIsCurrentActivityCorrect(false);
-    setIsUserAnswer(true);
-    setCodeEditor(currentActivity.default_code);
-    setCompileCode(currentActivity.default_code);
-  }
-
   function handleShowAnswer(): void {
-    setCodeEditor(currentActivity.answer);
+    setCodeEditor(currentActivity.activity_answer);
     setIsUserAnswer(false);
     setIsConfirmedToShowAnswer(false);
   }
@@ -135,26 +118,18 @@ export function Practical({ PhaseId }: PhaseProps): JSX.Element {
     setIsConfirmedToShowAnswer(false);
 
   useEffect(() => {
-    async function loadActivities(): Promise<void> {
-      const response = await api.get(`/game/practice-phase/${PhaseId}`);
-      response.data.map((activity) => {
-        console.log(activity.default_code);
-        setActivities((oldItem) => [...oldItem, activity]);
-      });
-    }
-
-    loadActivities();
     setCodeEditor(currentActivity.default_code);
     setCompileCode(currentActivity.default_code);
-  }, []);
-
+    setIsCurrentActivityCorrect(false);
+  }, [currentActivity.default_code]);
   return (
     <Container>
       <StatusBar
         barStyle="light-content"
         backgroundColor={theme.colors.background}
       />
-      {/* <Menu progressCount={progressBarCount} totalActivities={5} />
+
+      <Menu progressCount={progressBarCount} totalActivities={5} />
 
       <ScrollView>
         <Section>
@@ -167,14 +142,14 @@ export function Practical({ PhaseId }: PhaseProps): JSX.Element {
           <Description>
             {currentActivity.tips.map((tip, index) => (
               // eslint-disable-next-line react/no-array-index-key
-              <Text key={index}>{`▪︎ ${tip}`}</Text>
+              <Text key={index}>{`▪︎ ${tip.name}`}</Text>
             ))}
           </Description>
         </Section>
 
         <Section>
           <Title>Objetivo do código</Title>
-          <Bash options={currentActivity.answer} />
+          <Bash options={currentActivity.activity_answer} />
         </Section>
 
         <Section>
@@ -237,9 +212,10 @@ export function Practical({ PhaseId }: PhaseProps): JSX.Element {
       </Provider>
 
       <ActivityStatusModal
+        isUserAnswer={isUserAnswer}
         isModalVisible={isCurrentActivityCorrect}
-        handleNextActivity={handleNextActivity}
-      /> */}
+        handleNextActivity={() => handleNextActivity(isCurrentActivityCorrect)}
+      />
     </Container>
   );
 }
