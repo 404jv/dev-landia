@@ -48,7 +48,7 @@
 
   | Pessoa | Issues fechadas |
   |:------:|:--------------:|
-  | <img src="https://avatars.githubusercontent.com/u/86677587?v=4" width="100px;" alt="Foto do João Vitor Lima"/> <br/> <a href="https://github.com/jvolima">João Vitor Lima 🏆</a> | 2 |
+  | <img src="https://avatars.githubusercontent.com/u/86677587?v=4" width="100px;" alt="Foto do João Vitor Lima"/> <br/> <a href="https://github.com/jvolima">João Vitor Lima 🏆</a> | 3 |
   | <img src="https://avatars.githubusercontent.com/u/84464007?v=4" width="100px;" alt="Foto do Ruan Pablo" /> <br/> <a href="https://github.com/1SyuLi">Ruan Pablo Gomes</a> | 1 |
   <img src="https://avatars.githubusercontent.com/u/53544964?v=4" width="100px;" alt="Foto do João Victor Ramalho"/> <br/> <a href="https://github.com/404jv">João Victor Ramalho</a> | 1 |
 
