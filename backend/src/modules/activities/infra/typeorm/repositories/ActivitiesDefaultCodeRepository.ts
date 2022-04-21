@@ -41,11 +41,7 @@ class ActivitiesDefaultCodeRepository implements IActivitiesOptionsRepository {
   }
 
   async deleteAllByActivityId(activity_id: string): Promise<void> {
-    await this.repository
-      .createQueryBuilder('activity_default_code')
-      .delete()
-      .where('activity_default_code.activity_id = activity_id', { activity_id })
-      .execute();
+    await this.repository.delete({ activity_id });
   }
 }
 
