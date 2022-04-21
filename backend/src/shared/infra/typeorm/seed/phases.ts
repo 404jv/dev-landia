@@ -36,7 +36,7 @@ async function create() {
       phases(id, map_id, title, type, description, max_level, "order")
     VALUES (
       '2895a53e-b43f-43fb-8ae8-ef7bf4da1f00',
-      '2fad788d-e552-4232-ab72-ff4aa3ef6378',
+      '654b369c-8459-4c7e-be93-b74531c7f8de',
       'Fase 1',
       'practice',
       'descrição fase 1',
