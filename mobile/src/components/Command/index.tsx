@@ -25,6 +25,5 @@ export function Command({ commandName, color }: ICommandProps): JSX.Element {
   };
 
   const command = commands[commandName];
-
-  return <View>{command || <View />}</View>;
+  return <View>{command() || <View />}</View>;
 }

@@ -50,7 +50,7 @@ interface MapProps {
 
 export function Home(): JSX.Element {
   const theme = useTheme();
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   const [maps, setMaps] = useState<MapProps[]>([]);
 
@@ -58,8 +58,8 @@ export function Home(): JSX.Element {
     navigation.navigate("Achievements");
   }
 
-  function handleActivity(): void {
-    navigation.navigate("Activity");
+  function handleActivity(phase): any {
+    navigation.navigate("Activities", { phase });
   }
 
   function calculateProgress(currentLevel: number, maxLevel: number): number {
@@ -123,6 +123,7 @@ export function Home(): JSX.Element {
               <Card
                 name={phase.title}
                 description={phase.description}
+                onPress={() => handleActivity(phase)}
                 percentage={calculateProgress(
                   phase.current_level,
                   phase.max_level

@@ -3,7 +3,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { Achievements } from "../pages/Achievements";
-import { Activity } from "../pages/Activity";
+import { Activities } from "../pages/Activity";
 import { TabRoutes } from "./tab.routes";
 
 import { SignIn } from "../pages/SignIn";
@@ -22,7 +22,7 @@ export function AppRoutes(): JSX.Element {
       {userData != null ? (
         <Group>
           <Screen name="Home" component={TabRoutes} />
-          <Screen name="Activity" component={Activity} />
+          <Screen name="Activities" component={Activities} />
           <Screen name="Achievements" component={Achievements} />
         </Group>
       ) : (
