@@ -7,12 +7,14 @@ import { ModalButton, ModalTextButton, Title } from "./styles";
 
 type Props = {
   isModalVisible: boolean;
-  handleNextActivity: () => void;
+  handleNextActivity: (isUserAnswer: boolean) => void;
+  isUserAnswer: boolean;
 };
 
 export function ActivityStatusModal({
   isModalVisible,
   handleNextActivity,
+  isUserAnswer,
 }: Props): JSX.Element {
   const modalizeRef = useRef<Modalize>(null);
 
@@ -27,6 +29,7 @@ export function ActivityStatusModal({
   useEffect(() => {
     if (isModalVisible) {
       onOpen();
+      return;
     }
     onClose();
   }, [isModalVisible]);
@@ -43,7 +46,7 @@ export function ActivityStatusModal({
     >
       <Title>Ótimo código!</Title>
 
-      <ModalButton onPress={handleNextActivity}>
+      <ModalButton onPress={() => handleNextActivity(isUserAnswer)}>
         <ModalTextButton>Continuar</ModalTextButton>
       </ModalButton>
     </Modalize>

@@ -40,8 +40,8 @@ export function SignIn(): JSX.Element {
         password: Yup.string().required("Senha é obrigatória"),
       });
 
-      await schema.validate({ email, password });
-      await signIn(email, password);
+      await schema.validate({ email: email.trim(), password });
+      await signIn(email.trim(), password);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Erro na validação", error.message);

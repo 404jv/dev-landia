@@ -37,9 +37,17 @@ export function SignUp(): JSX.Element {
         name: Yup.string().required("Nome é obrigatório"),
       });
 
-      const userData = await schema.validate({ name, email, user });
+      const userData = await schema.validate({
+        name: name.trim(),
+        email: email.trim(),
+        user: user.trim(),
+      });
       navigation.navigate("NextSignUp", {
-        userData,
+        userData: {
+          name: name.trim(),
+          email: email.trim(),
+          user: user.trim(),
+        },
       });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {

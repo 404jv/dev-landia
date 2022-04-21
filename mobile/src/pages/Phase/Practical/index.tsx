@@ -4,7 +4,7 @@ import { Modal, Portal, Provider } from "react-native-paper";
 import { ScrollView } from "react-native";
 import { useTheme } from "styled-components";
 import { StatusBar } from "react-native";
-import { playSound } from "../../utils/playSound";
+import { playSound } from "../../../utils/playSound";
 
 import {
   Description,
@@ -26,15 +26,19 @@ import {
   ModalButtonText,
 } from "./styles";
 
-import { Menu } from "../../components/Menu";
-import { Bash } from "../../components/Bash";
-import { Editor } from "../../components/Editor";
-import { ActivityStatusModal } from "../../components/ActivityStatusModal";
+import { Menu } from "../../../components/Menu";
+import { Bash } from "../../../components/Bash";
+import { Editor } from "../../../components/Editor";
+import { ActivityStatusModal } from "../../../components/ActivityStatusModal";
 
 interface IOption {
   name: string;
   type: string;
   hexadecimal_color: string;
+}
+
+interface TipsProps {
+  name: string;
 }
 
 type Activity = {
@@ -43,13 +47,22 @@ type Activity = {
   description: string;
   type: string;
   default_code: IOption[];
-  answer: IOption[];
+  activity_answer: IOption[];
   is_needed_tests: boolean;
-  tips: string[];
+  tips: TipsProps[];
   options: IOption[];
+  order: number;
 };
 
-export function Activity(): JSX.Element {
+interface Props {
+  currentActivity: Activity;
+  handleNextActivity: (isUserAnswer: boolean) => void;
+}
+
+export function Practical({
+  currentActivity,
+  handleNextActivity,
+}: Props): JSX.Element {
   const theme = useTheme();
 
   const [codeEditor, setCodeEditor] = useState<IOption[]>([]);
@@ -58,106 +71,6 @@ export function Activity(): JSX.Element {
   const [isUserAnswer, setIsUserAnswer] = useState(true);
   const [isConfirmedToShowAnswer, setIsConfirmedToShowAnswer] = useState(false);
 
-  const activity: Activity = {
-    id: String(new Date().getTime()),
-    title: "atividade",
-    description:
-      "Nesse desafio você vai desenhar a bandeira da França com alguns comandos.",
-    type: "block",
-    default_code: [
-      {
-        name: "drawBlueBox",
-        type: "js_function",
-        hexadecimal_color: "#0055A4",
-      },
-      {
-        name: "drawWhiteBox",
-        type: "js_function",
-        hexadecimal_color: "#FFFFFF",
-      },
-      {
-        name: "drawRedBox",
-        type: "js_function",
-        hexadecimal_color: "#EF4135",
-      },
-    ],
-    answer: [
-      {
-        name: "drawBlueBox",
-        type: "js_function",
-        hexadecimal_color: "#0055A4",
-      },
-      {
-        name: "drawWhiteBox",
-        type: "js_function",
-        hexadecimal_color: "#FFFFFF",
-      },
-      {
-        name: "drawRedBox",
-        type: "js_function",
-        hexadecimal_color: "#EF4135",
-      },
-      {
-        name: "newLine",
-        type: "js_function",
-        hexadecimal_color: "#169E96",
-      },
-      {
-        name: "drawBlueBox",
-        type: "js_function",
-        hexadecimal_color: "#0055A4",
-      },
-      {
-        name: "drawWhiteBox",
-        type: "js_function",
-        hexadecimal_color: "#FFFFFF",
-      },
-      {
-        name: "drawRedBox",
-        type: "js_function",
-        hexadecimal_color: "#EF4135",
-      },
-    ],
-    is_needed_tests: false,
-    tips: [
-      "Use o drawBlueBox para desenhar a caixa azul.",
-      "Use o drawRedBox para desenhar a caixa vermelha.",
-      "Use o drawWhiteBox para desenhar a caixa branca.",
-      "Use o newLine para criar uma nova linha",
-    ],
-    options: [
-      {
-        name: "drawBlueBox",
-        type: "js_function",
-        hexadecimal_color: "#0055A4",
-      },
-      {
-        name: "drawWhiteBox",
-        type: "js_function",
-        hexadecimal_color: "#FFFFFF",
-      },
-      {
-        name: "drawRedBox",
-        type: "js_function",
-        hexadecimal_color: "#EF4135",
-      },
-      {
-        name: "newLine",
-        type: "js_function",
-        hexadecimal_color: "#169E96",
-      },
-    ],
-  };
-
-  const [activities, setActivities] = useState<Activity[]>([
-    activity,
-    activity,
-    activity,
-    activity,
-    activity,
-  ]);
-
-  const [currentActivity, setCurrentActivity] = useState(activities[0]);
   const [isCurrentActivityCorrect, setIsCurrentActivityCorrect] =
     useState(false);
 
@@ -172,13 +85,13 @@ export function Activity(): JSX.Element {
       return;
     }
 
-    if (userAnswer.length !== currentActivity.answer.length) {
+    if (userAnswer.length !== currentActivity.activity_answer.length) {
       await playSound("wrongSong");
       return;
     }
 
     const isActivityCorrect = userAnswer.every((line, index) => {
-      if (line.name !== currentActivity.answer[index].name) {
+      if (line.name !== currentActivity.activity_answer[index].name) {
         return false;
       }
 
@@ -195,27 +108,8 @@ export function Activity(): JSX.Element {
     setIsCurrentActivityCorrect(true);
   }
 
-  async function handleNextActivity(): Promise<void> {
-    if (activities.length === 0) {
-      return;
-    }
-
-    if (isUserAnswer) {
-      setActivities(activities.filter((ac, i) => i !== 0));
-    } else {
-      const wrongActivity = activities.shift();
-      activities.push(wrongActivity);
-    }
-
-    setCurrentActivity(activities[0]);
-    setIsCurrentActivityCorrect(false);
-    setIsUserAnswer(true);
-    setCodeEditor(currentActivity.default_code);
-    setCompileCode(currentActivity.default_code);
-  }
-
   function handleShowAnswer(): void {
-    setCodeEditor(currentActivity.answer);
+    setCodeEditor(currentActivity.activity_answer);
     setIsUserAnswer(false);
     setIsConfirmedToShowAnswer(false);
   }
@@ -228,14 +122,15 @@ export function Activity(): JSX.Element {
   useEffect(() => {
     setCodeEditor(currentActivity.default_code);
     setCompileCode(currentActivity.default_code);
-  }, []);
-
+    setIsCurrentActivityCorrect(false);
+  }, [currentActivity.default_code]);
   return (
     <Container>
       <StatusBar
         barStyle="light-content"
         backgroundColor={theme.colors.background}
       />
+
       <Menu progressCount={progressBarCount} totalActivities={5} />
 
       <ScrollView>
@@ -249,14 +144,14 @@ export function Activity(): JSX.Element {
           <Description>
             {currentActivity.tips.map((tip, index) => (
               // eslint-disable-next-line react/no-array-index-key
-              <Text key={index}>{`▪︎ ${tip}`}</Text>
+              <Text key={index}>{`▪︎ ${tip.name}`}</Text>
             ))}
           </Description>
         </Section>
 
         <Section>
           <Title>Objetivo do código</Title>
-          <Bash options={currentActivity.answer} />
+          <Bash options={currentActivity.activity_answer} />
         </Section>
 
         <Section>
@@ -319,8 +214,9 @@ export function Activity(): JSX.Element {
       </Provider>
 
       <ActivityStatusModal
+        isUserAnswer={isUserAnswer}
         isModalVisible={isCurrentActivityCorrect}
-        handleNextActivity={handleNextActivity}
+        handleNextActivity={() => handleNextActivity(isCurrentActivityCorrect)}
       />
     </Container>
   );

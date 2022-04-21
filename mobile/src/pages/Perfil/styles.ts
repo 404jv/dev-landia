@@ -73,10 +73,13 @@ export const ContainerEditImage = styled.TouchableOpacity`
 `;
 
 export const ContainerInfos = styled.View`
+  max-width: 240px;
+  width: 100%;
   margin-left: 10px;
 `;
 
 export const Name = styled.Text`
+  width: 100%;
   font-size: 36px;
   line-height: 42px;
   font-weight: 500;
@@ -100,7 +103,7 @@ export const Bio = styled.Text`
 
 export const StatisticsTitle = styled.Text`
   margin-top: 38px;
-  margin-left: 18px;
+  margin-left: 20px;
   font-size: 24px;
   line-height: 28px;
   font-weight: 500;
