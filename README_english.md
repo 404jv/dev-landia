@@ -72,7 +72,7 @@
 ![Diagrama do dev-landia](/public/diagram.png)
 
 ## License
-Distribuído sob a licença MIT. Consulte `LICENSE.txt` para obter mais informações.
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contribuitions
 Contributions are what make the open source community an amazing place to learn, inspire, and create. Any contributions you make are **most welcome**.
