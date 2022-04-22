@@ -7,7 +7,7 @@
 
 <br />
 
-<h2><a href="./README_english.md">English version</a></h2>
+<h2><a href="./README.md">Versão Português</a></h2>
 
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
@@ -15,42 +15,42 @@
   </a>
 
   <p align="center">
-    💙 Aplicativo gratuito para aprender programação.
+    💙 Free app to learn to program.
     <br />
-    <a href="./DOCS.md"><strong>Explore a documentação »</strong></a>
+    <a href="./DOCS.md"><strong>Explore the documentation »</strong></a>
     <br />
     <br />
     ·
-    <a href="https://github.com/404jv/dev-landia/issues">Reporte algum Bug</a>
+    <a href="https://github.com/404jv/dev-landia/issues">Report any bug</a>
     ·
-    <a href="https://github.com/404jv/dev-landia/issues">Solicite uma funcionalidade</a>
+    <a href="https://github.com/404jv/dev-landia/issues">Request a feature</a>
   </p>
 </div>
 
 
 
-  <summary><h3>Tabela de conteúdos</h3></summary>
+  <summary><h3>Table of contents</h3></summary>
   <ol>
-    <li><a href="#🏆-placar-de-contribuições">Placar de contribuições</a></li>
-    <li><a href="#tecnologias-utilizadas">Tecnologias utilizadas</a></li>
-    <li><a href="#layout-do-projeto-no-figma">Layout do projeto no Figma</a></li>
-    <li><a href="#diagrama-do-banco-de-dados">Diagrama do banco de dados</a></li>
-    <li><a href="#licença">Licença</a></li>
-    <li><a href="#contribuições">Contribuições</a></li>
+    <li><a href="#🏆-contribution-scoreboard">Contribution scoreboard</a></li>
+    <li><a href="#technologies-used">Technologies used</a></li>
+    <li><a href="#project-layout-in-figma">Project layout in Figma</a></li>
+    <li><a href="#database-diagram">Database diagram</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contribuitions">Contribuitions</a></li>
     <li>
-      <a href="#como-executar-a-aplicação">Como executar a aplicação</a>
+      <a href="#how-to-run-the-application">How to run the application</a>
       <ul>
-        <li><a href="#pré-requisitos">Pré-requisitos</a></li>
-        <li><a href="#instalação">Instalação</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#autores">Autores</a></li>
+    <li><a href="#authors">Authors</a></li>
   </ol>
 
-## 🏆 Placar de contribuições
+## 🏆 Contribution scoreboard
 <div align="center">
 
-  | Pessoa | Issues fechadas |
+  | Person | Issues closed |
   |:------:|:--------------:|
   | <img src="https://avatars.githubusercontent.com/u/86677587?v=4" width="100px;" alt="Foto do João Vitor Lima"/> <br/> <a href="https://github.com/jvolima">João Vitor Lima 🏆</a> | 3 |
   | <img src="https://avatars.githubusercontent.com/u/84464007?v=4" width="100px;" alt="Foto do Ruan Pablo" /> <br/> <a href="https://github.com/1SyuLi">Ruan Pablo Gomes</a> | 1 |
@@ -58,68 +58,68 @@
 
 </div>
 
-## Tecnologias utilizadas 
+## Technologies used 
 - [Node](https://nodejs.org/en/)
 - [React Native](https://reactnative.dev/)
 - [Typescript](https://www.typescriptlang.org/)
 - [PostgreSQL](https://www.postgresql.org/) 
 - [TypeORM](https://typeorm.io/)
 
-## Layout do projeto no Figma 
-- Clique [aqui](https://www.figma.com/file/jiwnsl1AbgdJGJ11MaPf0V/DevL%C3%A2ndia?node-id=0%3A1) para acessar o layout
+## Project layout in Figma 
+- Click [here](https://www.figma.com/file/jiwnsl1AbgdJGJ11MaPf0V/DevL%C3%A2ndia?node-id=0%3A1) to access layout
 
-## Diagrama do banco de dados 
+## Database diagram 
 ![Diagrama do dev-landia](/public/diagram.png)
 
-## Licença
+## License
 Distribuído sob a licença MIT. Consulte `LICENSE.txt` para obter mais informações.
 
-## Contribuições
-As contribuições são o que tornam a comunidade open source um lugar incrível para aprender, inspirar e criar. Quaisquer contribuições que você fizer serão **muito bem vindas**.
+## Contribuitions
+Contributions are what make the open source community an amazing place to learn, inspire, and create. Any contributions you make are **most welcome**.
 
-Se você tiver uma sugestão para melhorar esse projeto, faça uma fork do repositório e crie um pull request. Você também pode simplesmente abrir uma issue com a tag "melhoria". 
-Não se esqueça de dar uma estrela ao projeto! Obrigado novamente!
+If you have a suggestion to improve this project, fork the repository and create a pull request. You can also simply open an issue with the tag "improvement".
+Don't forget to give the project a star! Thank you again!
 
-1. Faça uma fork
-2. Crie sua Feature Branch (`git checkout -b feature/SuaFeature`)
-3. Faça um Commit das suas mudanças (`git commit -m 'Adicionei minha feature'`)
-4. Dê um Push para a Branch (`git push origin feature/SuaFeature`)
-5. Abra um Pull Request 
+1. Fork
+2. Create your Feature Branch (`git checkout -b feature/SuaFeature`)
+3. Make a commit of your changes (`git commit -m 'Adicionei minha feature'`)
+4. Make a push to the branch (`git push origin feature/SuaFeature`)
+5. Open Pull Request 
 
-## Como executar a aplicação 
-### Pré-requisitos
+## How to run the application 
+### Prerequisites
 * yarn
 ```bash
 npm install --global yarn
 ```
-* Node: Siga os passos da instalação no [site oficial](https://nodejs.org/en/download/)
-* Docker: Siga os passos da instalação nessa [documentação](https://www.notion.so/Docker-e-Docker-Compose-16771f2ceefe4a05a8c29df4ca49e97a)
+* Node: Follow the steps of installation in [oficial website](https://nodejs.org/en/download/)
+* Docker: Follow the steps of installation in this [documentation](https://www.notion.so/Docker-e-Docker-Compose-16771f2ceefe4a05a8c29df4ca49e97a)
 
-### Instalação
-1. Clone o repositório
+### Installation
+1. Download the repository
 ```bash
 git clone https://github.com/404jv/dev-landia.git
 ```
-2. Acesse a pasta do projeto
+2. Access the project folder
 ```bash
 cd dev-landia
 ```
-3. Instale as dependências necessárias do back-end
+3. Install back-end dependencies
 ```bash
 cd backend
 ```
 ```bash
 yarn
 ```
-4. Inicialize o docker 
+4. Initialize docker
 ```bash
 docker-compose up -d
 ```
-5. Rode as migrations do TypeORM
+5. Run TypeORM migrations
 ```bash
 yarn typeorm migration:run
 ```
-6. Instale as dependências necessárias do mobile
+6. Install mobile dependencies
 ```bash
 cd ..
 ```
@@ -130,7 +130,7 @@ cd mobile
 yarn
 ```
 
-## Autores
+## Authors
 <img src="https://avatars.githubusercontent.com/u/53544964?v=4" width="100px;" alt="Foto do João Victor Ramalho"/>
 <a href="https://github.com/404jv">João Victor Ramalho</a> 🚀 
 
@@ -199,5 +199,3 @@ yarn
     <img src="https://img.shields.io/badge/david0motta@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
   </a>
 </div>
-
-
