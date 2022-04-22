@@ -7,7 +7,7 @@
 
 <br />
 
-<h2><a href="./README.md">Versão Português</a></h2>
+<h2><a href="./README.md">Portuguese version</a></h2>
 
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
