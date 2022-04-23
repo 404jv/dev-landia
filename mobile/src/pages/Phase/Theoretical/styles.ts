@@ -20,7 +20,7 @@ export const FinishButton = styled.TouchableOpacity`
 
 export const TextButton = styled.Text`
   font-size: 16px;
-  color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
   letter-spacing: 2px;
 `;

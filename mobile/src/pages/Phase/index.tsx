@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-
-import { useTheme } from "styled-components";
+import { useRoute } from "@react-navigation/native";
 import { ActivityIndicator, StatusBar } from "react-native";
 
-import { useRoute } from "@react-navigation/native";
+import { useTheme } from "styled-components";
+import { api } from "../../services/api";
+
 import { Container } from "./styles";
 
 import { Practical } from "./Practical";
-import { api } from "../../services/api";
+import { Theoretical } from "./Theoretical";
 
 interface IOption {
   name: string;
@@ -19,7 +20,7 @@ interface TipsProps {
   name: string;
 }
 
-type Activity = {
+type PracticeActivity = {
   id: string;
   title: string;
   description: string;
@@ -32,9 +33,23 @@ type Activity = {
   order: number;
 };
 
+type TheoreticalActivity = {
+  id: string;
+  title: string;
+  markdown_text: string;
+};
+
 export function Phase(): JSX.Element {
-  const [activities, setActivities] = useState<Activity[]>([]);
-  const [currentActivity, setCurrentActivity] = useState<Activity>();
+  const [practiceActivities, setPracticeActivities] = useState<
+    PracticeActivity[]
+  >([]);
+  const [currentPracticeActivity, setCurrentPracticeActivity] =
+    useState<PracticeActivity>();
+
+  const [theoreticalActivity, setTheoreticalActivity] = useState(
+    {} as TheoreticalActivity
+  );
+
   const [isLoading, setIsLoading] = useState(true);
   const [load, setLoad] = useState(true);
 
@@ -43,44 +58,63 @@ export function Phase(): JSX.Element {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { phase } = route.params as any;
+  const phase_type = phase.type;
 
   function handleNextActivity(isUserAnswer: boolean): void {
-    if (activities.length === 0) {
+    if (practiceActivities.length === 0) {
       return;
     }
 
     if (isUserAnswer) {
-      activities.shift();
+      practiceActivities.shift();
     } else {
-      const wrongActivity = activities.shift();
-      activities.push(wrongActivity);
+      const wrongActivity = practiceActivities.shift();
+      practiceActivities.push(wrongActivity);
     }
 
-    setCurrentActivity(activities[0]);
+    setCurrentPracticeActivity(practiceActivities[0]);
   }
 
   useEffect(() => {
-    async function LoadActivity(): Promise<void> {
+    async function LoadPracticeActivity(): Promise<void> {
       const response = await api.get(`/game/practice-phase/${phase.id}`);
+      setPracticeActivities(response.data);
 
-      setActivities(response.data);
-
-      if (currentActivity === undefined) {
-        setCurrentActivity(response.data[0]);
+      if (currentPracticeActivity === undefined) {
+        setCurrentPracticeActivity(response.data[0]);
       }
     }
 
-    if (load) {
-      LoadActivity();
-      setLoad(false);
+    if (phase_type === "practice") {
+      if (load) {
+        LoadPracticeActivity();
+        setLoad(false);
+      }
+
+      // eslint-disable-next-line eqeqeq
+      if (currentPracticeActivity != undefined) {
+        setIsLoading(false);
+      }
     }
 
-    // eslint-disable-next-line eqeqeq
-    if (currentActivity != undefined) {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPracticeActivity]);
+
+  useEffect(() => {
+    async function LoadTheoreticalActivity(): Promise<void> {
+      try {
+        const response = await api.get(`/game/theory-phase/${phase.id}`);
+        setTheoreticalActivity(response.data);
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    }
+
+    if (phase_type === "theory") {
+      LoadTheoreticalActivity();
       setIsLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentActivity]);
+  }, []);
 
   return (
     <>
@@ -88,16 +122,26 @@ export function Phase(): JSX.Element {
         barStyle="light-content"
         backgroundColor={theme.colors.background}
       />
-
-      {!isLoading && activities.length > 0 ? (
-        <Practical
-          handleNextActivity={handleNextActivity}
-          currentActivity={currentActivity}
-        />
-      ) : (
+      {isLoading && (
         <Container>
           <ActivityIndicator size="large" color={theme.colors.blue} />
         </Container>
+      )}
+
+      {!isLoading &&
+        practiceActivities.length > 0 &&
+        phase_type === "practice" && (
+          <Practical
+            handleNextActivity={handleNextActivity}
+            currentActivity={currentPracticeActivity}
+          />
+        )}
+
+      {!isLoading && phase_type === "theory" && (
+        <Theoretical
+          title={theoreticalActivity.title}
+          markdown_text={theoreticalActivity.markdown_text}
+        />
       )}
     </>
   );
