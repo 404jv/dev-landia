@@ -123,6 +123,7 @@ export function Practical({
     setCodeEditor(currentActivity.default_code);
     setCompileCode(currentActivity.default_code);
     setIsCurrentActivityCorrect(false);
+    setIsUserAnswer(true);
   }, [currentActivity.default_code]);
   return (
     <Container>
@@ -216,7 +217,7 @@ export function Practical({
       <ActivityStatusModal
         isUserAnswer={isUserAnswer}
         isModalVisible={isCurrentActivityCorrect}
-        handleNextActivity={() => handleNextActivity(isCurrentActivityCorrect)}
+        handleNextActivity={handleNextActivity}
       />
     </Container>
   );
