@@ -13,7 +13,7 @@ async function create() {
       'practice',
       'descrição fase 2',
       3,
-      2
+      1
     );
   `);
 
@@ -27,7 +27,7 @@ async function create() {
       'practice',
       'descrição fase 3',
       3,
-      3
+      2
     );
   `);
 
@@ -41,7 +41,7 @@ async function create() {
       'practice',
       'descrição fase 1',
       3,
-      1
+      0
     );
   `);
 
