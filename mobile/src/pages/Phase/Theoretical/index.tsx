@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import Markdown, { ASTNode } from "react-native-markdown-display";
 import SyntaxHighlighter from "react-native-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { useNavigation } from "@react-navigation/native";
 import { Header } from "./Header";
 import theme from "../../../Global/styles/theme";
 import { markdownText } from "./class1";
@@ -14,6 +15,7 @@ import {
   ContainerScrollView,
   Content,
 } from "./styles";
+import { api } from "../../../services/api";
 
 const rules = {
   fence: (node: ASTNode) => {
@@ -62,16 +64,26 @@ const styles = StyleSheet.create({
 });
 
 interface TeorychActivityProps {
+  id: string;
+  map_id: string;
   title: string;
   markdown_text: string;
 }
 
 export function Theoretical({
+  id,
+  map_id,
   title,
   markdown_text,
 }: TeorychActivityProps): JSX.Element {
-  function handleFinishClass(): void {
+  const navigation = useNavigation();
+
+  async function handleFinishClass(): Promise<void> {
     console.log("🎉 Aula Finalizada!");
+    await api.put(`/game/correct/${id}`, {
+      map_id,
+    });
+    navigation.navigate("Home");
   }
 
   return (

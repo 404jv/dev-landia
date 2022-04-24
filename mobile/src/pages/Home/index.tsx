@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { StatusBar } from "react-native";
 import { useTheme } from "styled-components";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import { Card } from "./Card";
 
@@ -47,12 +47,18 @@ interface MapProps {
   phases: PhaseProps[];
 }
 
+interface UserInfos {
+  total_coins: number;
+  total_xp: number;
+}
+
 export function Home(): JSX.Element {
   const theme = useTheme();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigation = useNavigation<any>();
 
   const [maps, setMaps] = useState<MapProps[]>([]);
+  const [userInfos, setUserInfos] = useState<UserInfos>();
 
   function handleAchievements(): void {
     navigation.navigate("Achievements");
@@ -69,21 +75,35 @@ export function Home(): JSX.Element {
 
   const { signOut } = useAuth();
 
-  useEffect(() => {
-    async function getTree(): Promise<void> {
-      try {
-        const response = await api.get("/game/tree");
-        setMaps(response.data);
-      } catch (error) {
-        if (error.response.status === 401) {
-          signOut();
+  useFocusEffect(
+    React.useCallback(() => {
+      const getUserInfos = async (): Promise<void> => {
+        try {
+          const response = await api.get("/users/profile");
+          setUserInfos(response.data);
+        } catch (error) {
+          if (error.response.status === 401) {
+            signOut();
+          }
         }
-      }
-    }
+      };
 
-    getTree();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      const getTree = async (): Promise<void> => {
+        try {
+          const response = await api.get("/game/tree");
+          setMaps(response.data);
+        } catch (error) {
+          if (error.response.status === 401) {
+            signOut();
+          }
+        }
+      };
+
+      getUserInfos();
+      getTree();
+    }, [])
+  );
+
   return (
     <Container>
       <StatusBar
@@ -95,12 +115,12 @@ export function Home(): JSX.Element {
         <Content>
           <CoinView>
             <Image source={goldCoin} />
-            <CoinValue>23</CoinValue>
+            <CoinValue>{userInfos?.total_coins}</CoinValue>
           </CoinView>
 
           <CoinView>
             <Image source={xpCoin} />
-            <CoinValue>232</CoinValue>
+            <CoinValue>{userInfos?.total_xp}</CoinValue>
           </CoinView>
 
           <CoinView>
