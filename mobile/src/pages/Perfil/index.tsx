@@ -52,8 +52,7 @@ export function Perfil(): JSX.Element {
   const { signOut } = useAuth();
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    async function getProfile() {
+    async function getProfile(): Promise<void> {
       try {
         const response = await api.get("users/profile");
         setUserInfos(response.data);

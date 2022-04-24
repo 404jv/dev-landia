@@ -9,6 +9,7 @@ import {
 } from "./styles";
 
 interface IOption {
+  id: string;
   name: string;
   type: string;
   hexadecimal_color: string;
@@ -40,8 +41,7 @@ export function Editor({
       <EditorContainer>
         {codeEditor.map((code, index) => (
           <OptionEditorCode
-            // eslint-disable-next-line react/no-array-index-key
-            key={index}
+            key={`${code.id}-${index + 1}`}
             onPress={() => handleDeleteCodeFromEditor(index)}
           >
             <Text style={{ color: code.hexadecimal_color }}>
@@ -52,8 +52,10 @@ export function Editor({
       </EditorContainer>
       <OptionsContainer>
         {options?.map((option, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <OptionCode key={index} onPress={() => handleAddCodeToEditor(index)}>
+          <OptionCode
+            key={`${option.id}-${index + 1}`}
+            onPress={() => handleAddCodeToEditor(index)}
+          >
             <Text style={{ color: option.hexadecimal_color }}>
               {option.type === "js_function" ? `${option.name}()` : option.name}
             </Text>

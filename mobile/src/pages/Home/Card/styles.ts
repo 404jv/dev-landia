@@ -26,8 +26,7 @@ export const CardInfo = styled.View`
   margin-left: 14px;
 `;
 
-// eslint-disable-next-line prettier/prettier
-export const CardIcon = styled(Feather) <Props>`
+export const CardIcon = styled(Feather)<Props>`
   font-size: 60px;
   color: ${({ percentage }) =>
     percentage === 100
