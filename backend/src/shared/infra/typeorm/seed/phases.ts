@@ -3,6 +3,7 @@ import { createConnection } from 'typeorm';
 async function create() {
   const connection = await createConnection();
 
+  // map 1
   await connection.query(`
     INSERT INTO 
       phases(id, map_id, title, type, description, max_level, "order")
@@ -13,7 +14,7 @@ async function create() {
       'practice',
       'descrição fase 2',
       3,
-      1
+      0
     );
   `);
 
@@ -27,10 +28,26 @@ async function create() {
       'practice',
       'descrição fase 3',
       3,
+      1
+    );
+  `);
+
+  await connection.query(`
+    INSERT INTO 
+      phases(id, map_id, title, type, markdown_text, description, max_level, "order")
+    VALUES (
+      '647dabcc-39b9-442e-8f62-7b26b886601a',
+      '654b369c-8459-4c7e-be93-b74531c7f8de',
+      'Fase teórica',
+      'theory',
+      '# Isso é uma fase teórica',
+      'descrição fase teórica',
+      1,
       2
     );
   `);
 
+  // map 2
   await connection.query(`
     INSERT INTO 
       phases(id, map_id, title, type, description, max_level, "order")
