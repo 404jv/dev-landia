@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from "react";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { ActivityIndicator, StatusBar } from "react-native";
 
 import { useTheme } from "styled-components";
@@ -35,6 +36,7 @@ type PracticeActivity = {
 
 type TheoreticalActivity = {
   id: string;
+  map_id: string;
   title: string;
   markdown_text: string;
 };
@@ -60,9 +62,14 @@ export function Phase(): JSX.Element {
   const { phase } = route.params as any;
   const phase_type = phase.type;
 
-  function handleNextActivity(isUserAnswer: boolean): void {
-    if (practiceActivities.length === 0) {
-      return;
+  const navigation = useNavigation();
+
+  async function handleNextActivity(isUserAnswer: boolean): Promise<void> {
+    if (practiceActivities.length === 1) {
+      await api.put(`/game/correct/${phase.id}`, {
+        map_id: phase.map_id,
+      });
+      navigation.navigate("Home");
     }
 
     if (isUserAnswer) {
@@ -131,14 +138,16 @@ export function Phase(): JSX.Element {
       {!isLoading &&
         practiceActivities.length > 0 &&
         phase_type === "practice" && (
-          <Practical
-            handleNextActivity={handleNextActivity}
-            currentActivity={currentPracticeActivity}
-          />
-        )}
+        <Practical
+          handleNextActivity={handleNextActivity}
+          currentActivity={currentPracticeActivity}
+        />
+      )}
 
       {!isLoading && phase_type === "theory" && (
         <Theoretical
+          id={theoreticalActivity.id}
+          map_id={theoreticalActivity.map_id}
           title={theoreticalActivity.title}
           markdown_text={theoreticalActivity.markdown_text}
         />
