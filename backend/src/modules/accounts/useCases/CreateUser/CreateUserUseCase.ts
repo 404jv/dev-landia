@@ -66,7 +66,7 @@ class CreateUserUseCase {
   async setupFirstMap(user_id: string): Promise<void> {
     await this.handleNextMapUseCase.execute({
       user_id,
-      finishedMapOrder: 0,
+      finishedMapOrder: -1,
     });
   }
 }
