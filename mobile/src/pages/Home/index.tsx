@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Alert, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "react-native";
 import { useTheme } from "styled-components";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -54,8 +54,7 @@ interface UserInfos {
 
 export function Home(): JSX.Element {
   const theme = useTheme();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation();
 
   const [maps, setMaps] = useState<MapProps[]>([]);
   const [userInfos, setUserInfos] = useState<UserInfos>();
@@ -65,6 +64,11 @@ export function Home(): JSX.Element {
   }
 
   function handleActivity(phase: PhaseProps): void {
+    if (phase.current_level === phase.max_level) {
+      Alert.alert("Você já completou essa fase!");
+      return;
+    }
+
     navigation.navigate("Phase", { phase });
   }
 

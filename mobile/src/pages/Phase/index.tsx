@@ -41,6 +41,21 @@ type TheoreticalActivity = {
   markdown_text: string;
 };
 
+type PhaseParams = {
+  phase: {
+    created_at: string;
+    id: string;
+    map_id: string;
+    description: string;
+    markdown_text?: string | null;
+    max_level?: number | null;
+    order: number;
+    title: string;
+    type: string;
+    current_level: number;
+  }
+}
+
 export function Phase(): JSX.Element {
   const [practiceActivities, setPracticeActivities] = useState<
     PracticeActivity[]
@@ -58,8 +73,7 @@ export function Phase(): JSX.Element {
   const theme = useTheme();
   const route = useRoute();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { phase } = route.params as any;
+  const { phase } = route.params as PhaseParams;
   const phase_type = phase.type;
 
   const navigation = useNavigation();
@@ -98,13 +112,10 @@ export function Phase(): JSX.Element {
         setLoad(false);
       }
 
-      // eslint-disable-next-line eqeqeq
-      if (currentPracticeActivity != undefined) {
+      if (currentPracticeActivity !== undefined) {
         setIsLoading(false);
       }
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPracticeActivity]);
 
   useEffect(() => {

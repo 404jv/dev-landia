@@ -12,6 +12,7 @@ import {
 } from "./styles";
 
 interface IOption {
+  id: string;
   name: string;
   type: string;
   hexadecimal_color: string;
@@ -38,8 +39,7 @@ export function Bash({ options, text }: IBashProps): JSX.Element {
           {options ? (
             options.map((line, index) => (
               <Command
-                // eslint-disable-next-line react/no-array-index-key
-                key={index}
+                key={`${line.id}-${index + 1}`}
                 commandName={line.name}
                 color={line.hexadecimal_color}
               />

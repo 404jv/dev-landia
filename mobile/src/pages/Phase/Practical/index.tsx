@@ -32,12 +32,14 @@ import { Editor } from "../../../components/Editor";
 import { ActivityStatusModal } from "../../../components/ActivityStatusModal";
 
 interface IOption {
+  id: string;
   name: string;
   type: string;
   hexadecimal_color: string;
 }
 
 interface TipsProps {
+  id: string;
   name: string;
 }
 
@@ -144,8 +146,7 @@ export function Practical({
           <Title>Dicas</Title>
           <Description>
             {currentActivity.tips.map((tip, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <Text key={index}>{`▪︎ ${tip.name}`}</Text>
+              <Text key={tip.id}>{`▪︎ ${tip.name}`}</Text>
             ))}
           </Description>
         </Section>

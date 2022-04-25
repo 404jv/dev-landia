@@ -43,18 +43,20 @@ export function NextSignUp(): JSX.Element {
     navigation.goBack();
   }
 
-  // eslint-disable-next-line consistent-return
   async function handleFinishSignUp(): Promise<void> {
     if (!password || !confirmPassword) {
-      return Alert.alert("Senha é obrigatória");
+      Alert.alert("Senha é obrigatória");
+      return;
     }
 
     if (password !== confirmPassword) {
-      return Alert.alert("Senhas não conferem");
+      Alert.alert("Senhas não conferem");
+      return;
     }
 
     if (!termIsAccepted) {
-      return Alert.alert("Aceite os termos de uso");
+      Alert.alert("Aceite os termos de uso");
+      return;
     }
 
     await api
