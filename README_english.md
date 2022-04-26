@@ -129,6 +129,11 @@ cd mobile
 ```bash
 yarn
 ```
+7. Copy the `.env.example`:
+```bash
+cp .env.example .env
+```
+Open the file and set it with your data.
 
 ## Authors
 <img src="https://avatars.githubusercontent.com/u/53544964?v=4" width="100px;" alt="Foto do João Victor Ramalho"/>
