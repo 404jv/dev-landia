@@ -130,6 +130,12 @@ cd mobile
 ```bash
 yarn
 ```
+7. Clone o `.env.example`:
+```bash
+cp .env.example .env
+```
+Abra o arquivo e preencha com suas informações.
+
 
 ## Autores
 <img src="https://avatars.githubusercontent.com/u/53544964?v=4" width="100px;" alt="Foto do João Victor Ramalho"/>
