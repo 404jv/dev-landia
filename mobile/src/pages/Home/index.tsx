@@ -69,6 +69,11 @@ export function Home(): JSX.Element {
       return;
     }
 
+    if (phase.current_level === undefined) {
+      Alert.alert("Você ainda não liberou essa fase!");
+      return;
+    }
+
     navigation.navigate("Phase", { phase });
   }
 
@@ -95,7 +100,13 @@ export function Home(): JSX.Element {
       const getTree = async (): Promise<void> => {
         try {
           const response = await api.get("/game/tree");
-          setMaps(response.data);
+          setMaps(
+            response.data.sort(function compare(a, b) {
+              if (a.order > b.order) return -1;
+              if (a.order < b.order) return 1;
+              return 0;
+            })
+          );
         } catch (error) {
           if (error.response.status === 401) {
             signOut();
