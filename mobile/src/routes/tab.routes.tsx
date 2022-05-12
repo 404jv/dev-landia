@@ -32,7 +32,7 @@ export function TabRoutes(): JSX.Element {
       }}
     >
       <Screen
-        name="Nada"
+        name="WIP"
         component={Home}
         options={{
           tabBarIcon: ({ size, color }) => (

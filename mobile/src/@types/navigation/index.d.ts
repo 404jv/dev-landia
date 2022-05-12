@@ -35,7 +35,6 @@ export declare global {
       NextSignUp: NextSignUpProps;
       FinishSignUp: undefined;
       Phase: PhaseProps;
-      Nada: undefined;
     }
   }
 }
