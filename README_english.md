@@ -17,7 +17,7 @@
   <p align="center">
     💙 Free app to learn to program.
     <br />
-    <a href="./DOCS.md"><strong>Explore the documentation »</strong></a>
+    <a href="./DOCS_english.md"><strong>Explore the documentation »</strong></a>
     <br />
     <br />
     ·
