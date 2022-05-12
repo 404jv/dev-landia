@@ -1,10 +1,13 @@
-import { Feather } from "@expo/vector-icons";
-import CheckBox from "expo-checkbox";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
+
+import { Feather } from "@expo/vector-icons";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { StatusBar, Alert, TouchableOpacity } from "react-native";
 import { useTheme } from "styled-components";
 import { Button } from "../../components/Form/Button";
+import { PasswordInput } from "../../components/Form/PasswordInput";
+import { api } from "../../services/api";
+
 import {
   ChangeScreen,
   Container,
@@ -16,9 +19,8 @@ import {
   Header,
   TextTerms,
   Title,
+  CheckBox,
 } from "./styles";
-import { PasswordInput } from "../../components/Form/PasswordInput";
-import { api } from "../../services/api";
 
 interface UserDataInfos {
   userData: {
@@ -130,15 +132,9 @@ export function NextSignUp(): JSX.Element {
 
         <ContainerTerms>
           <CheckBox
-            value={termIsAccepted}
-            onValueChange={() => setTermIsAccepted(!termIsAccepted)}
-            style={{
-              marginRight: 26,
-              width: 23,
-              height: 23,
-              backgroundColor: theme.colors.text_detail,
-              borderWidth: 0,
-            }}
+            activeOpacity={0.8}
+            isActive={termIsAccepted}
+            onPress={() => setTermIsAccepted(!termIsAccepted)}
           />
           <TextTerms>Termos de uso</TextTerms>
         </ContainerTerms>
