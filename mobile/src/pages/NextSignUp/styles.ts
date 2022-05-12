@@ -1,3 +1,4 @@
+import { TouchableOpacity } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
@@ -73,4 +74,17 @@ export const TextTerms = styled.Text`
   line-height: 23px;
   text-align: center;
   color: ${({ theme }) => theme.colors.text_detail};
+`;
+
+type CheckBoxProps = {
+  isActive: boolean;
+};
+
+// eslint-disable-next-line prettier/prettier
+export const CheckBox = styled(TouchableOpacity) <CheckBoxProps>`
+  margin-right: 26px;
+  width: 23px;
+  height: 23px;
+  background-color: ${({ theme, isActive }) =>
+    isActive ? theme.colors.bash.blue : theme.colors.text_detail};
 `;
