@@ -12,12 +12,14 @@ import { Practical } from "./Practical";
 import { Theoretical } from "./Theoretical";
 
 interface IOption {
+  id: string;
   name: string;
   type: string;
   hexadecimal_color: string;
 }
 
 interface TipsProps {
+  id: string;
   name: string;
 }
 
