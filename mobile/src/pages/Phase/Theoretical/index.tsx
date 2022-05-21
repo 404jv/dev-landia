@@ -1,12 +1,12 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
 import Markdown, { ASTNode } from "react-native-markdown-display";
+
+import React from "react";
+import { StyleSheet } from "react-native";
 import SyntaxHighlighter from "react-native-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useNavigation } from "@react-navigation/native";
 import { Header } from "./Header";
 import theme from "../../../Global/styles/theme";
-import { markdownText } from "./class1";
 import { Bash } from "../../../components/Bash";
 
 import {
