@@ -20,7 +20,6 @@
     "@react-navigation/stack": "^6.0.11",
     "axios": "^0.26.1",
     "expo": "^45.0.0",
-    "expo-app-loading": "~2.0.0",
     "expo-asset": "~8.5.0",
     "expo-av": "~11.2.3",
     "expo-font": "~10.1.0",
