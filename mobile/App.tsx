@@ -1,12 +1,4 @@
 import React from "react";
-import AppLoading from "expo-app-loading";
-
-import {
-  useFonts,
-  Roboto_400Regular,
-  Roboto_500Medium,
-  Roboto_700Bold,
-} from "@expo-google-fonts/roboto";
 
 import { ThemeProvider } from "styled-components";
 import { NavigationContainer } from "@react-navigation/native";
@@ -14,16 +6,13 @@ import { AuthProvider } from "./src/hooks/auth";
 import theme from "./src/Global/styles/theme";
 
 import { AppRoutes } from "./src/routes/app.routes";
+import useCachedResources from "./src/hooks/useCachedResources";
 
 export default function App(): JSX.Element {
-  const [fontsLoaded] = useFonts({
-    Roboto_400Regular,
-    Roboto_500Medium,
-    Roboto_700Bold,
-  });
+  const isLoadingComplete = useCachedResources();
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
+  if (!isLoadingComplete) {
+    return null;
   }
 
   return (
