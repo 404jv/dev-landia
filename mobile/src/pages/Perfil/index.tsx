@@ -113,7 +113,7 @@ export function Perfil(): JSX.Element {
         />
       </ContainerStatisticsCards>
       <ContainerStatisticsCards>
-        <StatisticsCard name="Medals" number={17} image={medal} />
+        <StatisticsCard name="Medals" number={0} image={medal} />
       </ContainerStatisticsCards>
     </Container>
   );

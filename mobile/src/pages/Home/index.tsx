@@ -144,7 +144,7 @@ export function Home(): JSX.Element {
               style={{ flexDirection: "row" }}
             >
               <Image source={medalCoin} />
-              <CoinValue>17</CoinValue>
+              <CoinValue>0</CoinValue>
             </TouchableOpacity>
           </CoinView>
         </Content>
