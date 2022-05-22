@@ -108,7 +108,7 @@ export function Phase(): JSX.Element {
     }
   }
 
-  async function loadTheoryPhase(): Promise<void> {
+  async function loadTheoreticalPhase(): Promise<void> {
     try {
       const response = await api.get(`/game/theory-phase/${phase.id}`);
       setTheoreticalActivity(response.data);
@@ -127,7 +127,7 @@ export function Phase(): JSX.Element {
         return;
       }
 
-      await loadTheoryPhase();
+      await loadTheoreticalPhase();
     }
 
     loadActivity();
