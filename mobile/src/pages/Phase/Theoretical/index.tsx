@@ -79,7 +79,6 @@ export function Theoretical({
   const navigation = useNavigation();
 
   async function handleFinishClass(): Promise<void> {
-    console.log("🎉 Aula Finalizada!");
     await api.put(`/game/correct/${id}`, {
       map_id,
     });
