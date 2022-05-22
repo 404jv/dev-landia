@@ -1,7 +1,6 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { ActivityIndicator, StatusBar } from "react-native";
+import { ActivityIndicator, Alert, StatusBar } from "react-native";
 
 import { useTheme } from "styled-components";
 import { api } from "../../services/api";
@@ -55,8 +54,8 @@ type PhaseParams = {
     title: string;
     type: string;
     current_level: number;
-  }
-}
+  };
+};
 
 export function Phase(): JSX.Element {
   const [practiceActivities, setPracticeActivities] = useState<
@@ -65,10 +64,10 @@ export function Phase(): JSX.Element {
   const [currentPracticeActivity, setCurrentPracticeActivity] =
     useState<PracticeActivity>();
 
-  const [theoreticalActivity, setTheoreticalActivity] = useState<TheoreticalActivity>();
+  const [theoreticalActivity, setTheoreticalActivity] =
+    useState<TheoreticalActivity>();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [load, setLoad] = useState(true);
 
   const theme = useTheme();
   const route = useRoute();
@@ -96,70 +95,71 @@ export function Phase(): JSX.Element {
     setCurrentPracticeActivity(practiceActivities[0]);
   }
 
-  useEffect(() => {
-    async function LoadPracticeActivity(): Promise<void> {
+  async function loadPracticeActivity(): Promise<void> {
+    try {
       const response = await api.get(`/game/practice-phase/${phase.id}`);
+
       setPracticeActivities(response.data);
-
-      if (currentPracticeActivity === undefined) {
-        setCurrentPracticeActivity(response.data[0]);
-      }
-    }
-
-    if (phase_type === "practice") {
-      if (load) {
-        LoadPracticeActivity();
-        setLoad(false);
-      }
-
-      if (currentPracticeActivity !== undefined) {
-        setIsLoading(false);
-      }
-    }
-  }, [currentPracticeActivity, load, phase.id, phase_type]);
-
-  useEffect(() => {
-    async function LoadTheoreticalActivity(): Promise<void> {
-      try {
-        const response = await api.get(`/game/theory-phase/${phase.id}`);
-        setTheoreticalActivity(response.data);
-      } catch (error) {
-        console.log(error.response.data.message);
-      }
-    }
-
-    if (phase_type === "theory") {
-      LoadTheoreticalActivity();
+      setCurrentPracticeActivity(response.data[0]);
+    } catch (error) {
+      Alert.alert("Oops! Algo deu errado");
+    } finally {
       setIsLoading(false);
     }
+  }
+
+  async function loadTheoryPhase(): Promise<void> {
+    try {
+      const response = await api.get(`/game/theory-phase/${phase.id}`);
+      setTheoreticalActivity(response.data);
+    } catch (error) {
+      Alert.alert("Oops! Algo deu errado");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    setIsLoading(true);
+    async function loadActivity(): Promise<void> {
+      if (phase_type === "practice") {
+        await loadPracticeActivity();
+        return;
+      }
+
+      await loadTheoryPhase();
+    }
+
+    loadActivity();
   }, []);
 
   return (
     <>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={theme.colors.background}
-      />
-      {isLoading && (
+      {isLoading === true ? (
         <Container>
           <ActivityIndicator size="large" color={theme.colors.blue} />
         </Container>
-      )}
+      ) : (
+        <>
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor={theme.colors.background}
+          />
 
-      {(!isLoading && phase_type === "practice") && (
-        <Practical
-          handleNextActivity={handleNextActivity}
-          currentActivity={currentPracticeActivity}
-        />
-      )}
-
-      {!isLoading && phase_type === "theory" && (
-        <Theoretical
-          id={theoreticalActivity.id}
-          map_id={theoreticalActivity.map_id}
-          title={theoreticalActivity.title}
-          markdown_text={theoreticalActivity.markdown_text}
-        />
+          {phase_type === "practice" ? (
+            <Practical
+              handleNextActivity={handleNextActivity}
+              currentActivity={currentPracticeActivity}
+            />
+          ) : (
+            <Theoretical
+              id={theoreticalActivity.id}
+              map_id={theoreticalActivity.map_id}
+              title={theoreticalActivity.title}
+              markdown_text={theoreticalActivity.markdown_text}
+            />
+          )}
+        </>
       )}
     </>
   );
