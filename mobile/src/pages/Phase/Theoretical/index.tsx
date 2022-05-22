@@ -8,7 +8,6 @@ import { useNavigation } from "@react-navigation/native";
 import { Header } from "./Header";
 import theme from "../../../Global/styles/theme";
 import { Bash } from "../../../components/Bash";
-import { markdownText } from "./class1";
 
 import {
   FinishButton,
