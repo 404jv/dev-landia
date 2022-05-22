@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Header } from "./Header";
 import theme from "../../../Global/styles/theme";
 import { Bash } from "../../../components/Bash";
+import { markdownText } from "./class1";
 
 import {
   FinishButton,
@@ -37,19 +38,23 @@ const rules = {
 const styles = StyleSheet.create({
   heading1: {
     fontSize: 32,
+    lineHeight: 40,
+    color: theme.colors.blue,
     fontFamily: theme.fonts.bold,
     textAlign: "justify",
   },
   heading2: {
     fontSize: 24,
-    lineHeight: 40,
+    lineHeight: 28,
+    color: theme.colors.blue,
     fontFamily: theme.fonts.bold,
     marginTop: 16,
     textAlign: "justify",
   },
   heading3: {
-    fontSize: 24,
-    lineHeight: 28,
+    fontSize: 22,
+    color: theme.colors.blue,
+    lineHeight: 24,
     fontFamily: theme.fonts.bold,
     marginTop: 16,
     textAlign: "justify",
@@ -60,6 +65,9 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     fontFamily: theme.fonts.regular,
     textAlign: "justify",
+  },
+  strong: {
+    color: theme.colors.blue,
   },
 });
 

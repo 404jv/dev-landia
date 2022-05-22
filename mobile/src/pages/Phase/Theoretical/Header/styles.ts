@@ -6,8 +6,20 @@ export const Container = styled.View`
   align-items: center;
 `;
 
+export const TitleContainer = styled.View`
+  align-items: center;
+  text-align: center;
+  width: 80%;
+`;
+
 export const Title = styled.Text`
-  margin-left: 12px;
   font-size: 24px;
-  color: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.white};
+  font-weight: bold;
+`;
+
+export const Border = styled.View`
+  border-bottom-color: ${({ theme }) => theme.colors.secondary};
+  border-bottom-width: 1px;
+  margin-top: 4px;
 `;

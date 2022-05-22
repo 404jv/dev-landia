@@ -5,9 +5,11 @@ export const ContainerScrollView = styled.ScrollView`
   background-color: ${({ theme }) => theme.colors.background};
   padding: 16px;
 `;
+
 export const Content = styled.ScrollView`
-  margin-bottom: 32px;
+  margin: 16px 0px 32px 0px;
 `;
+
 export const FinishButton = styled.TouchableOpacity`
   background-color: ${({ theme }) => theme.colors.blue};
   width: 100%;
