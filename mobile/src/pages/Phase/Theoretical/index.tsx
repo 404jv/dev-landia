@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
 });
 
-interface TeorychActivityProps {
+interface TheoreticalActivityProps {
   id: string;
   map_id: string;
   title: string;
@@ -75,7 +75,7 @@ export function Theoretical({
   map_id,
   title,
   markdown_text,
-}: TeorychActivityProps): JSX.Element {
+}: TheoreticalActivityProps): JSX.Element {
   const navigation = useNavigation();
 
   async function handleFinishClass(): Promise<void> {
