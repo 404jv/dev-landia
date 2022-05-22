@@ -65,9 +65,7 @@ export function Phase(): JSX.Element {
   const [currentPracticeActivity, setCurrentPracticeActivity] =
     useState<PracticeActivity>();
 
-  const [theoreticalActivity, setTheoreticalActivity] = useState(
-    {} as TheoreticalActivity
-  );
+  const [theoreticalActivity, setTheoreticalActivity] = useState<TheoreticalActivity>();
 
   const [isLoading, setIsLoading] = useState(true);
   const [load, setLoad] = useState(true);
@@ -118,7 +116,7 @@ export function Phase(): JSX.Element {
         setIsLoading(false);
       }
     }
-  }, [currentPracticeActivity]);
+  }, [currentPracticeActivity, load, phase.id, phase_type]);
 
   useEffect(() => {
     async function LoadTheoreticalActivity(): Promise<void> {
@@ -148,9 +146,7 @@ export function Phase(): JSX.Element {
         </Container>
       )}
 
-      {!isLoading &&
-        practiceActivities.length > 0 &&
-        phase_type === "practice" && (
+      {(!isLoading && phase_type === "practice") && (
         <Practical
           handleNextActivity={handleNextActivity}
           currentActivity={currentPracticeActivity}
