@@ -66,8 +66,9 @@
 			}
 		],
 		"react/jsx-one-expression-per-line": "off",
+    "react/jsx-no-useless-fragment": "off",
 		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "warn",
+		"react-hooks/exhaustive-deps": "off",
 		"react/require-default-props": "off",
 		"react/jsx-filename-extension": [
 			1,
