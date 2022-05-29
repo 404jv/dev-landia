@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Command } from "../Command";
 
 import {
@@ -19,11 +19,25 @@ interface IOption {
 }
 
 interface IBashProps {
-  options?: IOption[];
+  options?: IOption[] | string[];
   text?: string;
 }
 
 export function Bash({ options, text }: IBashProps): JSX.Element {
+  const [optionsArray, setOptionsArray] = useState<IOption[] | string[]>(
+    options
+  );
+  const [isCompilingCode, setIsCompilingCode] = useState(true);
+
+  useEffect(() => {
+    if (text.includes("compile: ")) {
+      const [, commandsArray] = text.split("compile: ");
+
+      setOptionsArray(commandsArray.split(" "));
+    }
+    setIsCompilingCode(false);
+  }, []);
+
   return (
     <BashContainer>
       <Header>
@@ -35,19 +49,21 @@ export function Bash({ options, text }: IBashProps): JSX.Element {
       <Body>
         <Arrow> $ </Arrow>
 
-        <BashContent>
-          {options ? (
-            options.map((line, index) => (
-              <Command
-                key={`${line.id}-${index + 1}`}
-                commandName={line.name}
-                color={line.hexadecimal_color}
-              />
-            ))
-          ) : (
-            <BashText>{text}</BashText>
-          )}
-        </BashContent>
+        {isCompilingCode === false && (
+          <BashContent>
+            {optionsArray ? (
+              optionsArray.map((line, index) => (
+                <Command
+                  key={`${line.id}-${index + 1}`}
+                  commandName={line.name || line}
+                  color={line.hexadecimal_color}
+                />
+              ))
+            ) : (
+              <BashText>{text}</BashText>
+            )}
+          </BashContent>
+        )}
       </Body>
     </BashContainer>
   );
