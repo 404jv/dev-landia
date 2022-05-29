@@ -5,7 +5,7 @@ import { Box, NewLine } from "./styles";
 
 interface ICommandProps {
   commandName: string;
-  color: string;
+  color?: string;
 }
 
 interface ICommands {
@@ -16,17 +16,18 @@ interface ICommands {
   drawPurpleBox: () => ReactNode;
   drawYellowBox: () => ReactNode;
   newLine: () => ReactNode;
-  // drawBox: () => ReactNode;
+  drawBox: () => ReactNode;
 }
 
 export function Command({ commandName, color }: ICommandProps): JSX.Element {
   const commands: ICommands = {
-    drawBlueBox: () => <Box bgColor={color} />,
-    drawRedBox: () => <Box bgColor={color} />,
-    drawWhiteBox: () => <Box bgColor={color} />,
-    drawGreenBox: () => <Box bgColor={color} />,
-    drawPurpleBox: () => <Box bgColor={color} />,
-    drawYellowBox: () => <Box bgColor={color} />,
+    drawBlueBox: () => <Box bgColor="#0000FF" />,
+    drawRedBox: () => <Box bgColor="#FF0000" />,
+    drawWhiteBox: () => <Box bgColor="#FFF" />,
+    drawGreenBox: () => <Box bgColor="#025105" />,
+    drawPurpleBox: () => <Box bgColor="#800080" />,
+    drawYellowBox: () => <Box bgColor="#FFFF00" />,
+    drawBox: () => <Box bgColor={color} />,
 
     newLine: () => <NewLine />,
   };
