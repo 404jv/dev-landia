@@ -1,4 +1,4 @@
-import Markdown, { ASTNode } from "react-native-markdown-display";
+import Markdown, { ASTNode, RenderRules } from "react-native-markdown-display";
 
 import React from "react";
 import { StyleSheet } from "react-native";
@@ -16,8 +16,9 @@ import {
   Content,
 } from "./styles";
 import { api } from "../../../services/api";
+import { markdownText } from "./class1";
 
-const rules = {
+const rules: RenderRules = {
   fence: (node: ASTNode) => {
     return node.markup !== "~~~" ? (
       <SyntaxHighlighter
@@ -29,7 +30,7 @@ const rules = {
         {node.content}
       </SyntaxHighlighter>
     ) : (
-      <Bash key={node.key} text={node.content} />
+      <Bash key={node.key} options={node.content} />
     );
   },
 };
@@ -97,7 +98,7 @@ export function Theoretical({
       <Header title={title} />
       <Content>
         <Markdown rules={rules} style={styles}>
-          {markdown_text}
+          {markdownText}
         </Markdown>
 
         <FinishButton onPress={handleFinishClass} activeOpacity={0.7}>
