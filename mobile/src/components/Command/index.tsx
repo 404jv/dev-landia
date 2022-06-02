@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { View } from "react-native";
 
-import { Box, NewLine } from "./styles";
+import { BashText, Box, NewLine } from "./styles";
 
 interface ICommandProps {
   commandName: string;
@@ -32,10 +32,12 @@ export function Command({ commandName, color }: ICommandProps): JSX.Element {
     newLine: () => <NewLine />,
   };
 
-  const command = commands[commandName];
+  let command = commands[commandName];
 
   if (command === undefined) {
-    return <View />;
+    command = function showTextOnBash() {
+      return <BashText>{`${commandName} `}</BashText>;
+    };
   }
 
   return <View>{command()}</View>;

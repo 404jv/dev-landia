@@ -13,3 +13,8 @@ export const Box = styled.View<BoxProps>`
 export const NewLine = styled.View`
   width: 995px;
 `;
+
+export const BashText = styled.Text`
+  color: ${({ theme }) => theme.colors.white};
+  font-size: 16px;
+`;
