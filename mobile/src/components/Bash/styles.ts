@@ -41,8 +41,3 @@ export const BashContent = styled.View`
   margin-left: 16px;
   flex-wrap: wrap;
 `;
-
-export const BashText = styled.Text`
-  color: ${({ theme }) => theme.colors.white};
-  font-size: 16px;
-`;
