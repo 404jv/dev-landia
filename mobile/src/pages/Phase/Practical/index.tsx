@@ -145,7 +145,7 @@ export function Practical({
         <Section>
           <Title>Dicas</Title>
           <Description>
-            {currentActivity.tips.map((tip, index) => (
+            {currentActivity.tips.map((tip) => (
               <Text key={tip.id}>{`▪︎ ${tip.name}`}</Text>
             ))}
           </Description>
