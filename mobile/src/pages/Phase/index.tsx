@@ -67,7 +67,7 @@ export function Phase(): JSX.Element {
   const [theoreticalActivity, setTheoreticalActivity] =
     useState<TheoreticalActivity>();
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingPhase, setIsLoadingPhase] = useState(true);
 
   const theme = useTheme();
   const route = useRoute();
@@ -105,7 +105,7 @@ export function Phase(): JSX.Element {
     } catch (error) {
       Alert.alert("Oops! Algo deu errado");
     } finally {
-      setIsLoading(false);
+      setIsLoadingPhase(false);
     }
   }
 
@@ -116,13 +116,13 @@ export function Phase(): JSX.Element {
     } catch (error) {
       Alert.alert("Oops! Algo deu errado");
     } finally {
-      setIsLoading(false);
+      setIsLoadingPhase(false);
     }
   }
 
   useEffect(() => {
-    setIsLoading(true);
-    async function loadActivity(): Promise<void> {
+    setIsLoadingPhase(true);
+    async function loadPhase(): Promise<void> {
       if (phase_type === "practice") {
         await loadPracticeActivity();
         return;
@@ -131,12 +131,12 @@ export function Phase(): JSX.Element {
       await loadTheoreticalPhase();
     }
 
-    loadActivity();
+    loadPhase();
   }, []);
 
   return (
     <>
-      {isLoading === true ? (
+      {isLoadingPhase === true ? (
         <Container>
           <ActivityIndicator size="large" color={theme.colors.blue} />
         </Container>
