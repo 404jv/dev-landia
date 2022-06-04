@@ -83,6 +83,7 @@ export function Phase(): JSX.Element {
         map_id: phase.map_id,
       });
       navigation.navigate("Home");
+      return;
     }
 
     if (isUserAnswer) {
