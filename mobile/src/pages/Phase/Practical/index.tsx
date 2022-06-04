@@ -126,7 +126,8 @@ export function Practical({
     setCompileCode(currentActivity.default_code);
     setIsCurrentActivityCorrect(false);
     setIsUserAnswer(true);
-  }, [currentActivity.default_code]);
+  }, [currentActivity]);
+
   return (
     <Container>
       <StatusBar
