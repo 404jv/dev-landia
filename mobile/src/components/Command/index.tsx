@@ -13,6 +13,7 @@ interface ICommands {
   drawRedBox: () => ReactNode;
   drawWhiteBox: () => ReactNode;
   drawGreenBox: () => ReactNode;
+  drawDarkGreenBox: () => ReactNode;
   drawPurpleBox: () => ReactNode;
   drawYellowBox: () => ReactNode;
   newLine: () => ReactNode;
@@ -24,7 +25,8 @@ export function Command({ commandName, color }: ICommandProps): JSX.Element {
     drawBlueBox: () => <Box bgColor="#0000FF" />,
     drawRedBox: () => <Box bgColor="#FF0000" />,
     drawWhiteBox: () => <Box bgColor="#FFF" />,
-    drawGreenBox: () => <Box bgColor="#025105" />,
+    drawGreenBox: () => <Box bgColor="#67E3BB" />,
+    drawDarkGreenBox: () => <Box bgColor="#025105" />,
     drawPurpleBox: () => <Box bgColor="#800080" />,
     drawYellowBox: () => <Box bgColor="#FFFF00" />,
     drawBox: () => <Box bgColor={color} />,
