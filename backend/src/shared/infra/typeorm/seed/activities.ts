@@ -89,7 +89,7 @@ async function createActivityWithOptions({
 
   await addDefaultCodeAndAnswer(activity.id, option1.id, option2.id);
   await createTip(
-    `Use a opção ${optionName} para desenha uma quadrado`,
+    `Use a opção ${optionName} para desenhar um quadrado`,
     activity.id
   );
 }
@@ -114,7 +114,7 @@ async function create() {
   await createActivityWithOptions({
     title: 'Atividade Roxa',
     order: 2,
-    optionName: 'drawBlueBox',
+    optionName: 'drawPurpleBox',
     hexadecimal_color: '#6A0DAD',
   });
 
@@ -128,7 +128,7 @@ async function create() {
   await createActivityWithOptions({
     title: 'Atividade Verde Escura',
     order: 4,
-    optionName: 'drawGreenBox',
+    optionName: 'drawDarkGreenBox',
     hexadecimal_color: '#025105',
   });
 
