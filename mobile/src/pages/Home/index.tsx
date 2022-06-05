@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Alert, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "react-native";
 import { useTheme } from "styled-components";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
+import { ScrollView } from "react-native-gesture-handler";
 import { Card } from "./Card";
 
 import goldCoin from "../../assets/gold.png";
@@ -150,24 +151,26 @@ export function Home(): JSX.Element {
         </Content>
       </Header>
 
-      {maps.map((map) => (
-        <View key={map.id}>
-          <MapTitle>{map.title}</MapTitle>
-          {map.phases.map((phase) => (
-            <CardWrapper key={phase.id}>
-              <Card
-                name={phase.title}
-                description={phase.description}
-                onPress={() => handleActivity(phase)}
-                percentage={calculateProgress(
-                  phase.current_level,
-                  phase.max_level
-                )}
-              />
-            </CardWrapper>
-          ))}
-        </View>
-      ))}
+      <ScrollView>
+        {maps.map((map) => (
+          <View key={map.id}>
+            <MapTitle>{map.title}</MapTitle>
+            {map.phases.map((phase) => (
+              <CardWrapper key={phase.id}>
+                <Card
+                  name={phase.title}
+                  description={phase.description}
+                  onPress={() => handleActivity(phase)}
+                  percentage={calculateProgress(
+                    phase.current_level,
+                    phase.max_level
+                  )}
+                />
+              </CardWrapper>
+            ))}
+          </View>
+        ))}
+      </ScrollView>
     </Container>
   );
 }
