@@ -10,6 +10,7 @@ export const Container = styled.View`
   border-color: ${({ theme }) => theme.colors.title};
   border-radius: 8px;
   margin-right: 20px;
+  margin-bottom: 32px;
 `;
 
 export const ContainerNumbers = styled.View`

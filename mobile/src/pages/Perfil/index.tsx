@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  StatusBar,
-  Image,
-  ImageSourcePropType,
-  View,
-  FlatList,
-} from "react-native";
+import { StatusBar, Image } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useTheme } from "styled-components/native";
 import {
@@ -31,12 +25,6 @@ import potion from "../../assets/xp.png";
 import { StatisticsCard } from "./StatisticsCard";
 import { api } from "../../services/api";
 import { useAuth } from "../../hooks/auth";
-
-interface StatisticItem {
-  name: string;
-  number: number;
-  image: ImageSourcePropType;
-}
 
 interface UserInfos {
   name: string;
@@ -102,18 +90,16 @@ export function Perfil(): JSX.Element {
 
       <ContainerStatisticsCards>
         <StatisticsCard
-          name="Coin"
+          name="Total de moedas"
           number={userInfos?.total_coins}
           image={coin}
         />
         <StatisticsCard
-          name="Experience"
+          name="Total de XP"
           number={userInfos?.total_xp}
           image={potion}
         />
-      </ContainerStatisticsCards>
-      <ContainerStatisticsCards>
-        <StatisticsCard name="Medals" number={0} image={medal} />
+        <StatisticsCard name="Medalhas" number={0} image={medal} />
       </ContainerStatisticsCards>
     </Container>
   );
