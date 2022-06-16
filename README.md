@@ -160,7 +160,7 @@ Abra o arquivo e preencha com suas informações.
 <br />
 
 <img src="https://avatars.githubusercontent.com/u/84464007?v=4" width="100px;" alt="Foto do Ruan Pablo"/>
-<a href="https://github.com/1SyuLi">Ruan Pablo</a> 🚀 
+<a href="https://github.com/fixRuan">Ruan Pablo</a> 🚀 
 
 <br />
 <br />
@@ -169,6 +169,10 @@ Abra o arquivo e preencha com suas informações.
   <a href="ruangoio01@gmail.com">
     <img src="https://img.shields.io/badge/ruangoio01@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
   </a>
+
+  <a href="https://www.linkedin.com/in/fixRuan/">
+    <img src="https://img.shields.io/badge/Ruan Pablo Gomes Rocha-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+  <a/>
 </div>
 
 <br />
