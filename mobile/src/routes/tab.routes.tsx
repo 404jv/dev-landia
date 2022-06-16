@@ -1,14 +1,19 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, Image } from "react-native";
 
-import { Feather } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Home } from "../pages/Home";
 import { Perfil } from "../pages/Perfil";
-import { CustomTabBarButton } from "./CustomTabBarButton";
+
+import profileActive from "../assets/sunglasses.png";
+import profileInactive from "../assets/sunglasses-black.png";
+import homeInactive from "../assets/pixel-black.png";
+import homeActive from "../assets/pixel.png";
+import trophyInactive from "../assets/menu-trophy-black.png";
+import trophyActive from "../assets/menu-trophy.png";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -35,9 +40,24 @@ export function TabRoutes(): JSX.Element {
         name="WIP"
         component={Home}
         options={{
-          tabBarIcon: ({ size, color }) => (
-            <Feather name="menu" color={color} size={size} />
-          ),
+          tabBarIcon: ({ size, color }) =>
+            color === "#FFFFFF" ? (
+              <Image
+                style={{
+                  width: size + 6,
+                  height: size + 6,
+                }}
+                source={trophyInactive}
+              />
+            ) : (
+              <Image
+                style={{
+                  width: size + 6,
+                  height: size + 6,
+                }}
+                source={trophyActive}
+              />
+            ),
         }}
       />
 
@@ -45,10 +65,24 @@ export function TabRoutes(): JSX.Element {
         name="HomeScreen"
         component={Home}
         options={{
-          tabBarIcon: ({ color }) => (
-            <CustomTabBarButton name="book-open" size={40} color={color} />
-          ),
-          tabBarActiveTintColor: "#fff",
+          tabBarIcon: ({ size, color }) =>
+            color === "#FFFFFF" ? (
+              <Image
+                style={{
+                  width: size + 8,
+                  height: size + 8,
+                }}
+                source={homeInactive}
+              />
+            ) : (
+              <Image
+                style={{
+                  width: size + 8,
+                  height: size + 8,
+                }}
+                source={homeActive}
+              />
+            ),
         }}
       />
 
@@ -56,9 +90,24 @@ export function TabRoutes(): JSX.Element {
         name="Perfil"
         component={Perfil}
         options={{
-          tabBarIcon: ({ size, color }) => (
-            <Feather name="user" color={color} size={size} />
-          ),
+          tabBarIcon: ({ size, color }) =>
+            color === "#FFFFFF" ? (
+              <Image
+                style={{
+                  width: size + 8,
+                  height: size + 8,
+                }}
+                source={profileInactive}
+              />
+            ) : (
+              <Image
+                style={{
+                  width: size + 8,
+                  height: size + 8,
+                }}
+                source={profileActive}
+              />
+            ),
         }}
       />
     </Navigator>
