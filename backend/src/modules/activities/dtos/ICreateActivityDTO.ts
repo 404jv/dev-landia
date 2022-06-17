@@ -19,6 +19,7 @@ interface ICreateActivityDTO {
   default_code?: Option[];
   phase_id: string;
   tips?: string[];
+  hexadecimal_color?: string;
 }
 
 export { ICreateActivityDTO };
