@@ -46,6 +46,7 @@ export function ActivityStatusModal({
         backgroundColor: theme.colors.secondary,
       }}
       enableHandlePanningGesture={false}
+      enablePanDownToClose={false}
     >
       <Title>Ótimo código!</Title>
 
