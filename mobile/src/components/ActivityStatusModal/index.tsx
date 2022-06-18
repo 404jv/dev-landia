@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
-
-import { Modalize } from "react-native-modalize";
+import BottomSheet from "@gorhom/bottom-sheet";
 import theme from "../../Global/styles/theme";
 
 import { ModalButton, ModalTextButton, Title } from "./styles";
@@ -16,14 +15,14 @@ export function ActivityStatusModal({
   handleNextActivity,
   isUserAnswer,
 }: Props): JSX.Element {
-  const modalizeRef = useRef<Modalize>(null);
+  const bottomSheetRef = useRef<BottomSheet>(null);
 
   function onOpen(): void {
-    modalizeRef.current?.open();
+    bottomSheetRef.current?.expand();
   }
 
   function onClose(): void {
-    modalizeRef.current?.close();
+    bottomSheetRef.current?.close();
   }
 
   useEffect(() => {
@@ -35,20 +34,25 @@ export function ActivityStatusModal({
   }, [isModalVisible]);
 
   return (
-    <Modalize
-      alwaysOpen={130}
-      ref={modalizeRef}
-      modalStyle={{
-        backgroundColor: theme.colors.secondary,
+    <BottomSheet
+      snapPoints={[0.1, 150]}
+      ref={bottomSheetRef}
+      style={{
         borderRadius: 16,
-        padding: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
       }}
+      backgroundStyle={{
+        backgroundColor: theme.colors.secondary,
+      }}
+      enableHandlePanningGesture={false}
+      enablePanDownToClose={false}
     >
       <Title>Ótimo código!</Title>
 
       <ModalButton onPress={() => handleNextActivity(isUserAnswer)}>
         <ModalTextButton>Continuar</ModalTextButton>
       </ModalButton>
-    </Modalize>
+    </BottomSheet>
   );
 }
