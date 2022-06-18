@@ -3,6 +3,11 @@
     "name": "devlandia",
     "slug": "devlandia",
     "version": "1.0.0",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/_splash.png",
+      "backgroundColor": "#1F6FEB"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
