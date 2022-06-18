@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Root, Popup } from "popup-ui";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { StatusBar, Alert, TouchableOpacity } from "react-native";
@@ -47,17 +47,38 @@ export function NextSignUp(): JSX.Element {
 
   async function handleFinishSignUp(): Promise<void> {
     if (!password || !confirmPassword) {
-      Alert.alert("Senha é obrigatória");
+      Popup.show({
+        type: "Danger",
+        title: "Senha",
+        button: true,
+        textBody: "A senha é obrigatória",
+        buttonText: "Ok",
+        callback: () => Popup.hide(),
+      });
       return;
     }
 
     if (password !== confirmPassword) {
-      Alert.alert("Senhas não conferem");
+      Popup.show({
+        type: "Danger",
+        title: "Senha",
+        button: true,
+        textBody: "Senhas não conferem",
+        buttonText: "Ok",
+        callback: () => Popup.hide(),
+      });
       return;
     }
 
     if (!termIsAccepted) {
-      Alert.alert("Aceite os termos de uso");
+      Popup.show({
+        type: "Danger",
+        title: "Termo de uso",
+        button: true,
+        textBody: "Por favor, aceite os termos de uso",
+        buttonText: "Ok",
+        callback: () => Popup.hide(),
+      });
       return;
     }
 
@@ -77,75 +98,101 @@ export function NextSignUp(): JSX.Element {
           errorMessage ===
           `The email '${userData.email}' is already registered!`
         ) {
-          return Alert.alert("Email já cadastrado");
+          return Popup.show({
+            type: "Warning",
+            title: "Email",
+            button: true,
+            textBody: "Email já cadastrado",
+            buttonText: "Ok",
+            callback: () => Popup.hide(),
+          });
         }
 
         if (
           errorMessage ===
           `The username '${userData.user}' is already registered!`
         ) {
-          return Alert.alert("Usuário já cadastrado");
+          return Popup.show({
+            type: "Warning",
+            title: "Usuário",
+            button: true,
+            textBody: "Usuário já cadastrado",
+            buttonText: "Ok",
+            callback: () => Popup.hide(),
+          });
         }
 
-        return Alert.alert("Erro ao realizar cadastro");
+        return Popup.show({
+          type: "Danger",
+          title: "Erro",
+          button: true,
+          textBody: "Erro ao realizar cadastro, :(",
+          buttonText: "Ok",
+          callback: () => Popup.hide(),
+        });
       });
   }
 
   return (
-    <Container>
-      <StatusBar backgroundColor={theme.colors.title} barStyle="dark-content" />
-      <Header>
-        <TouchableOpacity onPress={handleGoBack}>
-          <Feather name="arrow-left" size={21} color="#47474D" />
-        </TouchableOpacity>
-
-        <ContainerChangeScreen>
-          <ChangeScreen isActive={false} />
-          <ChangeScreen isActive />
-        </ContainerChangeScreen>
-      </Header>
-      <ContentContainer>
-        <Title>cadastre-se{"\n"}abaixo</Title>
-
-        <FormTitle>2. Senha</FormTitle>
-
-        <Form>
-          <PasswordInput
-            iconName="lock"
-            placeholder="Senha"
-            keyboardType="default"
-            autoCorrect={false}
-            autoCapitalize="none"
-            onChangeText={setPassword}
-            value={password}
-          />
-          <PasswordInput
-            iconName="lock"
-            placeholder="Confirmar senha"
-            keyboardType="default"
-            autoCorrect={false}
-            autoCapitalize="none"
-            onChangeText={setConfirmPassword}
-            value={confirmPassword}
-          />
-        </Form>
-
-        <ContainerTerms>
-          <CheckBox
-            activeOpacity={0.8}
-            isActive={termIsAccepted}
-            onPress={() => setTermIsAccepted(!termIsAccepted)}
-          />
-          <TextTerms>Termos de uso</TextTerms>
-        </ContainerTerms>
-
-        <Button
-          title="Cadastrar"
-          bgColor={theme.colors.blue}
-          textColor={theme.colors.white}
-          onPress={handleFinishSignUp}
+    <Root>
+      <Container>
+        <StatusBar
+          backgroundColor={theme.colors.title}
+          barStyle="dark-content"
         />
-      </ContentContainer>
-    </Container>
+        <Header>
+          <TouchableOpacity onPress={handleGoBack}>
+            <Feather name="arrow-left" size={21} color="#47474D" />
+          </TouchableOpacity>
+
+          <ContainerChangeScreen>
+            <ChangeScreen isActive={false} />
+            <ChangeScreen isActive />
+          </ContainerChangeScreen>
+        </Header>
+        <ContentContainer>
+          <Title>cadastre-se{"\n"}abaixo</Title>
+
+          <FormTitle>2. Senha</FormTitle>
+
+          <Form>
+            <PasswordInput
+              iconName="lock"
+              placeholder="Senha"
+              keyboardType="default"
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={setPassword}
+              value={password}
+            />
+            <PasswordInput
+              iconName="lock"
+              placeholder="Confirmar senha"
+              keyboardType="default"
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={setConfirmPassword}
+              value={confirmPassword}
+            />
+          </Form>
+
+          <ContainerTerms>
+            <CheckBox
+              activeOpacity={0.8}
+              isActive={termIsAccepted}
+              onPress={() => setTermIsAccepted(!termIsAccepted)}
+            />
+            <TextTerms>Termos de uso</TextTerms>
+          </ContainerTerms>
+
+          <Button
+            title="Cadastrar"
+            bgColor={theme.colors.blue}
+            textColor={theme.colors.white}
+            onPress={handleFinishSignUp}
+          />
+        </ContentContainer>
+      </Container>
+    </Root>
   );
 }
