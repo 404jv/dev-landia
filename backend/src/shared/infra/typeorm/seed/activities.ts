@@ -19,8 +19,9 @@ enum enOptionType {
 interface ICreateActivity {
   title: string;
   order: number;
+  activity_color: string;
   optionName: string;
-  hexadecimal_color: string;
+  option_color: string;
 }
 
 async function createTip(name: string, activity_id: string) {
@@ -57,10 +58,11 @@ async function addDefaultCodeAndAnswer(
 }
 
 async function createActivityWithOptions({
-  hexadecimal_color,
+  option_color,
   optionName,
   order,
   title,
+  activity_color,
 }: ICreateActivity) {
   const activitiesRepository = new ActivitiesRepository();
   const optionsRepository = new OptionsRepository();
@@ -70,19 +72,20 @@ async function createActivityWithOptions({
     description: 'Activity test',
     order,
     type: enActivityType.BLOCK_ACTIVITY,
+    hexadecimal_color: activity_color,
     phase_id: '2895a53e-b43f-43fb-8ae8-ef7bf4da1f00',
   });
 
   const option1 = await optionsRepository.create({
     activity_id: activity.id,
-    hexadecimal_color,
+    hexadecimal_color: option_color,
     name: optionName,
     type: enOptionType.JS_FUNCTION,
   });
 
   const option2 = await optionsRepository.create({
     activity_id: activity.id,
-    hexadecimal_color,
+    hexadecimal_color: option_color,
     name: optionName,
     type: enOptionType.JS_FUNCTION,
   });
@@ -101,42 +104,48 @@ async function create() {
     title: 'Atividade Vermelha',
     order: 0,
     optionName: 'drawRedBox',
-    hexadecimal_color: '#ff0000',
+    option_color: '#ff0000',
+    activity_color: '#EF4135',
   });
 
   await createActivityWithOptions({
     title: 'Atividade Azul',
     order: 1,
     optionName: 'drawBlueBox',
-    hexadecimal_color: '#0000FF',
+    option_color: '#0000FF',
+    activity_color: '#1F6FEB',
   });
 
   await createActivityWithOptions({
     title: 'Atividade Roxa',
     order: 2,
     optionName: 'drawPurpleBox',
-    hexadecimal_color: '#6A0DAD',
+    option_color: '#6A0DAD',
+    activity_color: '#6518F4',
   });
 
   await createActivityWithOptions({
     title: 'Atividade Verde',
     order: 3,
     optionName: 'drawGreenBox',
-    hexadecimal_color: '#67E3BB',
+    option_color: '#67E3BB',
+    activity_color: '#67E3BB',
   });
 
   await createActivityWithOptions({
     title: 'Atividade Verde Escura',
     order: 4,
     optionName: 'drawDarkGreenBox',
-    hexadecimal_color: '#025105',
+    option_color: '#025105',
+    activity_color: '#025105',
   });
 
   await createActivityWithOptions({
     title: 'Atividade Amarela',
     order: 5,
     optionName: 'drawYellowBox',
-    hexadecimal_color: '#FFFF00',
+    option_color: '#FFFF00',
+    activity_color: '#FFFF00',
   });
 }
 
