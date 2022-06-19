@@ -13,6 +13,7 @@ class CreatePhaseController {
       markdown_text,
       order,
       description,
+      hexadecimal_color,
     } = request.body;
 
     const createMapUseCase = container.resolve(CreatePhaseUseCase);
@@ -25,6 +26,7 @@ class CreatePhaseController {
       markdown_text,
       order,
       description,
+      hexadecimal_color,
     });
 
     return response.status(201).json(phase);
