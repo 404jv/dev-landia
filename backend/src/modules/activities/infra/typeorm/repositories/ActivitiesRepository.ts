@@ -20,7 +20,6 @@ class ActivitiesRepository implements IActivitiesRepository {
     is_needed_code,
     order,
     phase_id,
-    hexadecimal_color,
   }: ICreateActivityDTO): Promise<Activity> {
     const activity = this.repository.create({
       description,
@@ -29,7 +28,6 @@ class ActivitiesRepository implements IActivitiesRepository {
       is_needed_code,
       order,
       phase_id,
-      hexadecimal_color,
     });
 
     await this.repository.save(activity);
