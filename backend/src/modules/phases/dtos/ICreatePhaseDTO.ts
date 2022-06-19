@@ -15,6 +15,7 @@ interface ICreatePhaseDTO {
   activities?: Activity[];
   markdown_text?: string;
   order: number;
+  hexadecimal_color?: string;
 }
 
 export { ICreatePhaseDTO };

@@ -35,6 +35,9 @@ class Phase {
   @Column()
   title: string;
 
+  @Column()
+  hexadecimal_color: string;
+
   @Column({ type: 'enum', enum: enType })
   type: enType;
 
