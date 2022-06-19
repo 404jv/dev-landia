@@ -4,7 +4,12 @@ O aplicativo é composto por mapas, fases, atividades e aulas.
 - Os mapas são sessões de estudo com uma ou duas metas de estudo, por exemplo, manipular strings. 
 - As fases são composta por diversas atividades que serão usadas repetitivamente para cumprir a meta do mapa.
 - As atividades são problemas pequenos e especifico que vai ajudar o aluno a praticar o conteúdo do fase.
-- As aulas são um artigos escritos escritos em markdown que descrevem o conteúdo do mapa.
+- As aulas são artigos escritos escritos em markdown que descrevem o conteúdo do mapa.
+
+## MATERIAIS E MÉTODOS
+- Clean Architecture, DTO;
+- Testes, Factories;
+- Singleton, SOLID (O Princípio da Inversão de Dependência);
 
 ## Diagrama
 o diagrama pode ser encontrado [aqui](https://lucid.app/lucidchart/baa3fd86-d248-40fc-898b-3eaa7da3ac6d/edit?invitationId=inv_4310d971-d43b-46f6-85b5-1221de03e802).
