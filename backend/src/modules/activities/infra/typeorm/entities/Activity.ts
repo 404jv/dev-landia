@@ -33,9 +33,6 @@ class Activity {
   @Column()
   phase_id: string;
 
-  @Column()
-  hexadecimal_color: string;
-
   @ManyToOne(() => Phase, (phase) => phase.activities)
   @JoinColumn({ name: 'phase_id' })
   phase: Phase;

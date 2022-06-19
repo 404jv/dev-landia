@@ -29,7 +29,6 @@ class CreateActivityUseCase {
     order,
     phase_id,
     tips,
-    hexadecimal_color,
   }: ICreateActivityDTO): Promise<Activity> {
     const activity = await this.activityRepository.create({
       description,
@@ -38,7 +37,6 @@ class CreateActivityUseCase {
       is_needed_code,
       order,
       phase_id,
-      hexadecimal_color,
     });
 
     const optionsCreated = await this.createActivityOptions(
