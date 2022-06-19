@@ -43,6 +43,7 @@ describe('Create Phase Controller', () => {
       max_level: 3,
       type: 'practice',
       description: 'Descrição da fase 1',
+      hexadecimal_color: '#EF4135',
       order: 1,
     };
 
@@ -53,6 +54,7 @@ describe('Create Phase Controller', () => {
 
     expect(response.statusCode).toEqual(201);
     expect(response.body).toHaveProperty('id');
+    expect(response.body.hexadecimal_color).toEqual('#EF4135');
   });
 
   it('Should be able to create a theory phase', async () => {

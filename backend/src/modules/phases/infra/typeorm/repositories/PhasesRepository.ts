@@ -19,6 +19,7 @@ class PhasesRepository implements IPhasesRepository {
     description,
     markdown_text,
     order,
+    hexadecimal_color,
   }: ICreatePhaseDTO): Promise<Phase> {
     const phase = this.repository.create({
       max_level,
@@ -28,6 +29,7 @@ class PhasesRepository implements IPhasesRepository {
       description,
       markdown_text,
       order,
+      hexadecimal_color,
     });
 
     await this.repository.save(phase);

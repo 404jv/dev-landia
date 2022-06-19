@@ -29,6 +29,7 @@ class CreatePhaseUseCase {
     description,
     markdown_text,
     order,
+    hexadecimal_color,
   }: ICreatePhaseDTO): Promise<ICreatePhaseDTO> {
     if (type === enType.PRACTICE && max_level < 3) {
       throw new InvalidMaxLevelError();
@@ -52,6 +53,7 @@ class CreatePhaseUseCase {
       description,
       markdown_text,
       order,
+      hexadecimal_color,
     });
 
     return phase;
