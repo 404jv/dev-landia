@@ -1,84 +1,114 @@
 import styled from "styled-components/native";
-import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
-import globalTheme from "../../../Global/styles/theme";
+import { RFValue } from "react-native-responsive-fontsize";
 
 type Props = {
   percentage: number;
 };
 
+type ContainerIconProps = {
+  backgroundColor: string;
+};
+
+type PhaseTypeProps = {
+  type: string;
+};
+
 export const Container = styled(TouchableOpacity)`
   width: 100%;
+  background-color: ${({ theme }) => theme.colors.secondary};
+  padding: 12px 9px;
+
+  border-radius: 8px;
 `;
 
 export const ContainerInfos = styled.View`
   width: 100%;
-  height: 134px;
-  background-color: ${({ theme }) => theme.colors.secondary};
+
   border-radius: 8px;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Content = styled.View`
   flex-direction: row;
 `;
 
-export const CardInfo = styled.View`
-  flex-direction: column;
+export const ContainerIcon = styled.View<ContainerIconProps>`
+  width: 70px;
+  height: 57px;
+
   align-items: center;
-  margin-top: 8px;
-  margin-left: 14px;
+  justify-content: center;
+  margin-right: 13px;
+
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  border-radius: 4px;
 `;
 
-export const CardIcon = styled(Feather)<Props>`
-  font-size: 60px;
-  color: ${({ percentage }) =>
-    percentage === 100
-      ? globalTheme.colors.progressBar
-      : globalTheme.colors.title};
-  margin-bottom: 6px;
+export const ContainerTexts = styled.View``;
+
+export const PhaseType = styled.Text<PhaseTypeProps>`
+  font-family: ${({ theme }) => theme.fonts.regular};
+  font-size: ${RFValue(10)}px;
+  color: ${({ theme, type }) =>
+    type === "practice"
+      ? theme.colors.practiceActivity
+      : theme.colors.theoreticalActivity};
+
+  text-transform: uppercase;
 `;
 
-export const Percentage = styled.Text<Props>`
-  font-size: 18px;
-  font-family: ${({ theme }) => theme.fonts.medium};
-  color: ${({ percentage }) =>
-    percentage === 100
-      ? globalTheme.colors.progressBar
-      : globalTheme.colors.title};
-`;
-
-export const CardTexts = styled.View`
-  max-width: 230px;
-  width: 100%;
-  flex-direction: column;
-  margin-top: 6px;
-  margin-left: 30px;
-`;
+export const CardIcon = styled.Image``;
 
 export const Title = styled.Text`
-  font-size: 24px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${RFValue(16)}px;
   color: ${({ theme }) => theme.colors.white};
-  font-weight: bold;
 `;
 
 export const Description = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: 10px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${RFValue(11)}px;
   color: ${({ theme }) => theme.colors.description};
+
+  max-width: 160px;
+  width: 100%;
+`;
+
+export const ContainerProgress = styled.View`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 32px;
+`;
+
+export const ContainerLock = styled.View`
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const ProgressTitle = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.medium};
+  font-size: ${RFValue(11)}px;
+  color: ${({ theme }) => theme.colors.white};
+
+  width: 28%;
 `;
 
 export const ContainerProgressBar = styled.View`
-  margin-top: -14px;
-  width: 100%;
-  height: 14px;
+  width: 72%;
+  height: 5px;
   background-color: ${({ theme }) => theme.colors.stroke};
-  border-radius: 12px;
+  border-radius: 2px;
 `;
 
 export const ProgressBar = styled.View<Props>`
   width: ${({ percentage }) => percentage}%;
-  height: 14px;
-  background-color: ${({ percentage }) =>
-    percentage === 100
-      ? globalTheme.colors.progressBar
-      : globalTheme.colors.blue};
-  border-radius: 12px;
+  height: 5px;
+  background-color: ${({ theme }) => theme.colors.blue};
+  border-radius: 2px;
 `;
