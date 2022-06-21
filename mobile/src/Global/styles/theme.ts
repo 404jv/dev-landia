@@ -21,6 +21,9 @@ export default {
 
     progressBar: "#AF9156",
 
+    practiceActivity: "#3CC959",
+    theoreticalActivity: "#F2E85A",
+
     bash: {
       blue: "#0055A4",
       red: "#EF4135",

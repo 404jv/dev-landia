@@ -62,7 +62,6 @@ async function createActivityWithOptions({
   optionName,
   order,
   title,
-  activity_color,
 }: ICreateActivity) {
   const activitiesRepository = new ActivitiesRepository();
   const optionsRepository = new OptionsRepository();
@@ -72,7 +71,6 @@ async function createActivityWithOptions({
     description: 'Activity test',
     order,
     type: enActivityType.BLOCK_ACTIVITY,
-    hexadecimal_color: activity_color,
     phase_id: '2895a53e-b43f-43fb-8ae8-ef7bf4da1f00',
   });
 

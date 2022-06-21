@@ -47,18 +47,28 @@ export const Phases = styled.View`
 `;
 
 export const CardSeparator = styled.View`
-  height: 16px;
+  height: 12px;
+`;
+
+export const MapInfos = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const MapImage = styled.Image`
+  width: 69px;
+  height: 57px;
+  margin-top: 10px;
 `;
 
 export const MapTitle = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(20)}px;
   align-self: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 `;
 
 export const CardWrapper = styled.View`
   padding: 0px 16px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 `;

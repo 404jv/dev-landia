@@ -10,6 +10,7 @@ import { Card } from "./Card";
 import goldCoin from "../../assets/gold.png";
 import xpCoin from "../../assets/xp.png";
 import medalCoin from "../../assets/medal.png";
+import mapIcon from "../../assets/map_icon.png";
 
 import { useAuth } from "../../hooks/auth";
 import { api } from "../../services/api";
@@ -23,6 +24,8 @@ import {
   CoinValue,
   MapTitle,
   CardWrapper,
+  MapImage,
+  MapInfos,
 } from "./styles";
 
 type PhaseProps = {
@@ -36,6 +39,7 @@ type PhaseProps = {
   title: string;
   type: string;
   current_level: number;
+  hexadecimal_color: string;
 };
 
 interface MapProps {
@@ -154,17 +158,22 @@ export function Home(): JSX.Element {
       <ScrollView>
         {maps.map((map) => (
           <View key={map.id}>
-            <MapTitle>{map.title}</MapTitle>
+            <MapInfos>
+              <MapImage source={mapIcon} />
+              <MapTitle>{map.title}</MapTitle>
+            </MapInfos>
             {map.phases.map((phase) => (
               <CardWrapper key={phase.id}>
                 <Card
                   name={phase.title}
                   description={phase.description}
-                  onPress={() => handleActivity(phase)}
                   percentage={calculateProgress(
                     phase.current_level,
                     phase.max_level
                   )}
+                  type={phase.type}
+                  hexadecimal_color={phase.hexadecimal_color}
+                  onPress={() => handleActivity(phase)}
                 />
               </CardWrapper>
             ))}
