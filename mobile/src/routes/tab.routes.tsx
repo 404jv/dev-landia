@@ -14,6 +14,7 @@ import homeInactive from "../assets/pixel-black.png";
 import homeActive from "../assets/pixel.png";
 import trophyInactive from "../assets/menu-trophy-black.png";
 import trophyActive from "../assets/menu-trophy.png";
+import { Achievements } from "../pages/Achievements";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -38,7 +39,7 @@ export function TabRoutes(): JSX.Element {
     >
       <Screen
         name="WIP"
-        component={Home}
+        component={Achievements}
         options={{
           tabBarIcon: ({ size, color }) =>
             color === "#FFFFFF" ? (
