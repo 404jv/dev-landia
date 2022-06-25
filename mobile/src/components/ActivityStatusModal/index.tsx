@@ -47,6 +47,7 @@ export function ActivityStatusModal({
       }}
       enableHandlePanningGesture={false}
       enablePanDownToClose={false}
+      enableContentPanningGesture={false}
     >
       <Title>Ótimo código!</Title>
 
