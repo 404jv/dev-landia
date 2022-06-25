@@ -5,6 +5,7 @@ import { BashText, Box, NewLine } from "./styles";
 
 interface ICommandProps {
   commandName: string;
+  commandAbstractedName: string;
   color?: string;
 }
 
@@ -20,7 +21,11 @@ interface ICommands {
   drawBox: () => ReactNode;
 }
 
-export function Command({ commandName, color }: ICommandProps): JSX.Element {
+export function Command({
+  commandName,
+  color,
+  commandAbstractedName,
+}: ICommandProps): JSX.Element {
   const commands: ICommands = {
     drawBlueBox: () => <Box bgColor="#0000FF" />,
     drawRedBox: () => <Box bgColor="#FF0000" />,
@@ -34,7 +39,7 @@ export function Command({ commandName, color }: ICommandProps): JSX.Element {
     newLine: () => <NewLine />,
   };
 
-  let command = commands[commandName];
+  let command = commands[commandAbstractedName];
 
   if (command === undefined) {
     command = function showTextOnBash() {

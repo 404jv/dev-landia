@@ -52,6 +52,7 @@ export function Bash({ options }: IBashProps): JSX.Element {
                 <Command
                   key={`${line.id}-${index + 1}`}
                   commandName={line.name || line}
+                  commandAbstractedName={line.abstracted_name || line}
                   color={line.hexadecimal_color}
                 />
               ))}
