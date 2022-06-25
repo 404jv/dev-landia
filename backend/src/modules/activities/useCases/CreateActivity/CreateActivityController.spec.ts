@@ -46,6 +46,7 @@ describe('Create Activity Controller', () => {
           name: 'option 1',
           type: 'js_function',
           hexadecimal_color: '#AB7DE8',
+          abstracted_name: 'option 1 abstracted',
         },
         {
           name: 'option 2',
@@ -61,9 +62,14 @@ describe('Create Activity Controller', () => {
       .send(newActivity)
       .set('Authorization', `Bearer ${adminToken}`);
 
+    const responseBody = response.body;
+    const { options } = responseBody;
+
     expect(response.statusCode).toEqual(201);
-    expect(response.body.options).toHaveLength(2);
-    expect(response.body.tips).toHaveLength(2);
+    expect(responseBody.options).toHaveLength(2);
+    expect(responseBody.tips).toHaveLength(2);
+    expect(options[0].abstracted_name).toEqual('option 1 abstracted');
+    expect(options[1].abstracted_name).toEqual(options[1].name);
   });
 
   it('Should return 404 when a non admin try to create an activity', async () => {
