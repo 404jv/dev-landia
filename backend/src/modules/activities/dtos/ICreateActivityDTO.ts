@@ -1,7 +1,7 @@
 import { Option } from '../infra/typeorm/entities/Option';
 import { ICreateOptionDTO } from './ICreateOptionDTO';
 
-enum enActivityType {
+export enum enActivityType {
   BLOCK_ACTIVITY = 'block_activity',
   QUIZ = 'quiz',
 }
