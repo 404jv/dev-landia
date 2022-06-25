@@ -17,12 +17,14 @@ class OptionsRepository implements IOptionsRepository {
     hexadecimal_color,
     name,
     type,
+    abstracted_name,
   }: ICreateOptionDTO): Promise<Option> {
     const option = this.repository.create({
       activity_id,
       hexadecimal_color,
       name,
       type,
+      abstracted_name,
     });
 
     await this.repository.save(option);
