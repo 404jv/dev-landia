@@ -24,6 +24,9 @@ class Option {
   name: string;
 
   @Column()
+  abstracted_name?: string;
+
+  @Column()
   activity_id: string;
 
   @ManyToOne(() => Activity, (activity) => activity.options)

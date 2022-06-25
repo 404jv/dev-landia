@@ -60,12 +60,18 @@ class CreateActivityUseCase {
     const optionsCreated = await Promise.all(
       options.map(async (option) => {
         const { hexadecimal_color, name, type } = option;
+        let { abstracted_name } = option;
+
+        if (abstracted_name === undefined) {
+          abstracted_name = name;
+        }
 
         const optionCreated = await this.optionsRepository.create({
           activity_id,
           hexadecimal_color,
           name,
           type,
+          abstracted_name,
         });
 
         return optionCreated;

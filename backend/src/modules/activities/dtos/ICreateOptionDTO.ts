@@ -8,6 +8,7 @@ interface ICreateOptionDTO {
   name: string;
   activity_id?: string;
   type: enOptionType;
+  abstracted_name?: string;
   hexadecimal_color: string;
 }
 
