@@ -12,6 +12,8 @@ interface ICommandProps {
 interface ICommands {
   drawBlueBox: () => ReactNode;
   drawRedBox: () => ReactNode;
+  drawBlackBox: () => ReactNode;
+  drawOrangeBox: () => ReactNode;
   drawWhiteBox: () => ReactNode;
   drawGreenBox: () => ReactNode;
   drawDarkGreenBox: () => ReactNode;
@@ -29,6 +31,8 @@ export function Command({
   const commands: ICommands = {
     drawBlueBox: () => <Box bgColor="#0000FF" />,
     drawRedBox: () => <Box bgColor="#FF0000" />,
+    drawBlackBox: () => <Box bgColor="#1a1919" />,
+    drawOrangeBox: () => <Box bgColor="#ff5e00" />,
     drawWhiteBox: () => <Box bgColor="#FFF" />,
     drawGreenBox: () => <Box bgColor="#67E3BB" />,
     drawDarkGreenBox: () => <Box bgColor="#025105" />,
