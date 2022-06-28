@@ -1,31 +1,114 @@
 export const markdownText = `
 
-## 🕵️‍♀️ O que são?
-Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-
-## ❓ Por que usar?
-Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. It usually begins with:
-
-\`\`\`C
-
-async function printOi() {
-  console.log('oi');
-
-  const i = 23;
-
-  return i;
-}
-
-await printOi();
-
-let i = 0;
-const j = 10;
-var z = 'oi';
-\`\`\`
-
-Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
-
+1 Polónia
 ~~~
-Olá, Mundo!
+drawWhiteBox drawWhiteBox drawWhiteBox newLine
+drawRedBox drawRedBox drawRedBox
 ~~~
+
+2 Ucrânia
+~~~
+drawBlueBox drawBlueBox drawBlueBox newLine
+drawYellowBox drawYellowBox drawYellowBox
+~~~
+
+3 Países Baixos
+~~~
+drawRedBox drawRedBox drawRedBox newLine
+drawWhiteBox drawWhiteBox drawWhiteBox newLine
+drawBlueBox drawBlueBox drawBlueBox 
+~~~
+
+4 Hungria
+~~~
+drawRedBox drawRedBox drawRedBox newLine
+drawWhiteBox drawWhiteBox drawWhiteBox newLine
+drawGreenBox drawGreenBox drawGreenBox 
+~~~
+
+5 Nigeria
+~~~
+drawGreenBox drawWhiteBox drawGreenBox newLine
+drawGreenBox drawWhiteBox drawGreenBox newLine
+drawGreenBox drawWhiteBox drawGreenBox 
+~~~
+
+## Level 2
+
+1 França
+~~~
+drawBlueBox drawWhiteBox drawRedBox newLine
+drawBlueBox drawWhiteBox drawRedBox newLine
+drawBlueBox drawWhiteBox drawRedBox 
+~~~
+
+2 Italia 
+~~~
+drawGreenBox drawWhiteBox drawRedBox newLine
+drawGreenBox drawWhiteBox drawRedBox newLine
+drawGreenBox drawWhiteBox drawRedBox 
+~~~
+
+3 Roménia
+~~~
+drawBlueBox drawYellowBox drawRedBox newLine
+drawBlueBox drawYellowBox drawRedBox newLine
+drawBlueBox drawYellowBox drawRedBox newLine
+~~~
+
+4 Alemanha
+~~~
+drawBlackBox drawBlackBox drawBlackBox newLine
+drawRedBox drawRedBox drawRedBox newLine
+drawYellowBox drawYellowBox drawYellowBox 
+~~~
+
+5 Russia
+~~~
+drawWhiteBox drawWhiteBox drawWhiteBox newLine
+drawBlueBox drawBlueBox drawBlueBox newLine
+drawRedBox drawRedBox drawRedBox 
+~~~
+
+## Level 3
+
+1 Corrida
+~~~
+drawWhiteBox drawBlackBox drawWhiteBox drawBlackBox drawWhiteBox newLine
+drawBlackBox drawWhiteBox drawBlackBox drawWhiteBox drawBlackBox newLine
+drawWhiteBox drawBlackBox drawWhiteBox drawBlackBox drawWhiteBox 
+~~~
+
+2 Austria
+~~~
+drawRedBox drawRedBox drawRedBox newLine
+drawWhiteBox drawWhiteBox drawWhiteBox newLine
+drawRedBox drawRedBox drawRedBox 
+~~~
+
+3 LGBTQIA+
+~~~
+drawRedBox drawRedBox drawRedBox newLine
+drawOrangeBox drawOrangeBox drawOrangeBox newLine
+drawYellowBox drawYellowBox drawYellowBox newLine
+drawGreenBox drawGreenBox drawGreenBox newLine
+drawBlueBox drawBlueBox drawBlueBox newLine
+drawPurpleBox drawPurpleBox drawPurpleBox 
+~~~
+
+4 Irlanda
+~~~
+drawGreenBox drawWhiteBox drawOrangeBox newLine
+drawGreenBox drawWhiteBox drawOrangeBox newLine
+drawGreenBox drawWhiteBox drawOrangeBox 
+~~~
+
+5 Colombia
+~~~
+drawYellowBox drawYellowBox drawYellowBox newLine
+drawYellowBox drawYellowBox drawYellowBox newLine
+drawBlueBox drawBlueBox drawBlueBox newLine
+drawRedBox drawRedBox drawRedBox 
+~~~
+
 `;
