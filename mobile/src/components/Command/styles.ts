@@ -5,7 +5,7 @@ type BoxProps = {
 };
 
 export const Box = styled.View<BoxProps>`
-  width: 17px;
+  width: 12px;
   height: 12px;
   background-color: ${({ bgColor }) => bgColor};
 `;

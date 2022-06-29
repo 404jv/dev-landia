@@ -16,20 +16,13 @@ export const Header = styled.View`
   background-color: ${({ theme }) => theme.colors.primary};
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 10px;
 `;
 
 export const Icon = styled(Feather)`
   color: ${({ theme }) => theme.colors.blue};
   font-size: 30px;
-`;
-
-export const HeaderContent = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  padding-right: 10px;
 `;
 
 export const HeaderTitle = styled.Text`

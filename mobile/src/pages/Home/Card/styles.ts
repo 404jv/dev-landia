@@ -72,7 +72,7 @@ export const Description = styled.Text`
   font-size: ${RFValue(11)}px;
   color: ${({ theme }) => theme.colors.description};
 
-  max-width: 160px;
+  max-width: 220px;
   width: 100%;
 `;
 
