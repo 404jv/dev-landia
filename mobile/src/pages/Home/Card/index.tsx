@@ -20,6 +20,7 @@ import {
   ProgressTitle,
   ContainerProgress,
   ContainerLock,
+  ContainerTitleAndType,
 } from "./styles";
 
 interface CardProps extends TouchableOpacityProps {
@@ -49,14 +50,15 @@ export function Card({
           </ContainerIcon>
 
           <ContainerTexts>
-            <Title>{name}</Title>
+            <ContainerTitleAndType>
+              <Title>{name}</Title>
+              <PhaseType type={type}>
+                {type === "practice" ? "Prática" : "Teórica"}
+              </PhaseType>
+            </ContainerTitleAndType>
             <Description>{description}</Description>
           </ContainerTexts>
         </Content>
-
-        <PhaseType type={type}>
-          {type === "practice" ? "Prática" : "Teórica"}
-        </PhaseType>
       </ContainerInfos>
 
       <ContainerProgress>
