@@ -43,19 +43,19 @@ export function Card({
   return (
     <Container {...rest} activeOpacity={0.8}>
       <ContainerInfos>
-        <Content>
-          <ContainerIcon backgroundColor={hexadecimal_color}>
-            <CardIcon source={iconPhase} />
-          </ContainerIcon>
+        <ContainerIcon backgroundColor={hexadecimal_color}>
+          <CardIcon source={iconPhase} />
+        </ContainerIcon>
 
+        <Content>
           <ContainerTexts>
             <Title>{name}</Title>
-            <Description>{description}</Description>
+            <PhaseType type={type}>
+              {type === "practice" ? "Prática" : "Teórica"}
+            </PhaseType>
           </ContainerTexts>
 
-          <PhaseType type={type}>
-            {type === "practice" ? "Prática" : "Teórica"}
-          </PhaseType>
+          <Description>{description}</Description>
         </Content>
       </ContainerInfos>
 

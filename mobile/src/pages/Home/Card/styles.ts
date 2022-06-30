@@ -32,7 +32,8 @@ export const ContainerInfos = styled.View`
 
 export const Content = styled.View`
   width: 100%;
-  flex-direction: row;
+  max-width: 220px;
+  flex-direction: column;
 `;
 
 export const ContainerIcon = styled.View<ContainerIconProps>`
@@ -47,7 +48,10 @@ export const ContainerIcon = styled.View<ContainerIconProps>`
   border-radius: 4px;
 `;
 
-export const ContainerTexts = styled.View``;
+export const ContainerTexts = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 export const PhaseType = styled.Text<PhaseTypeProps>`
   font-family: ${({ theme }) => theme.fonts.regular};
