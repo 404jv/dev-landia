@@ -1,19 +1,13 @@
 import React from "react";
-import { StatusBar, TouchableNativeFeedback, FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { StatusBar, FlatList } from "react-native";
 import { useTheme } from "styled-components";
 
 import { ChallengeCards } from "./ChallengeCards";
 
-import { Container, Header, Icon, HeaderContent, HeaderTitle } from "./styles";
+import { Container, Header, HeaderTitle } from "./styles";
 
 export function Achievements(): JSX.Element {
   const theme = useTheme();
-  const navigation = useNavigation<any>();
-
-  function handleBackHome(): void {
-    navigation.navigate("Home");
-  }
 
   const cardData = [
     {
@@ -33,13 +27,7 @@ export function Achievements(): JSX.Element {
       />
 
       <Header>
-        <TouchableNativeFeedback onPress={handleBackHome}>
-          <Icon name="arrow-left" />
-        </TouchableNativeFeedback>
-
-        <HeaderContent>
-          <HeaderTitle>Medalhas</HeaderTitle>
-        </HeaderContent>
+        <HeaderTitle>Medalhas</HeaderTitle>
       </Header>
 
       <FlatList

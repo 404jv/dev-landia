@@ -32,6 +32,7 @@ export const ContainerInfos = styled.View`
 
 export const Content = styled.View`
   flex-direction: row;
+  align-items: center;
 `;
 
 export const ContainerIcon = styled.View<ContainerIconProps>`
@@ -47,6 +48,14 @@ export const ContainerIcon = styled.View<ContainerIconProps>`
 `;
 
 export const ContainerTexts = styled.View``;
+
+export const ContainerTitleAndType = styled.View`
+  width: 260px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 export const PhaseType = styled.Text<PhaseTypeProps>`
   font-family: ${({ theme }) => theme.fonts.regular};
@@ -72,7 +81,7 @@ export const Description = styled.Text`
   font-size: ${RFValue(11)}px;
   color: ${({ theme }) => theme.colors.description};
 
-  max-width: 160px;
+  max-width: 220px;
   width: 100%;
 `;
 

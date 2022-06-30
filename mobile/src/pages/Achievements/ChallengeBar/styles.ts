@@ -17,7 +17,7 @@ interface ProgressBarSizeProps {
 }
 
 export const ProgressBarSize = styled.View<ProgressBarSizeProps>`
-  height: 20px;
+  height: 10px;
   border-radius: 32px;
   background-color: ${({ theme }) => theme.colors.blue};
   width: ${({ size }) => size}%;
