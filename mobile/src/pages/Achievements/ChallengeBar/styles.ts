@@ -6,7 +6,7 @@ export const Container = styled.View`
 `;
 
 export const ProgressBar = styled.View`
-  width: 70%;
+  width: 68%;
   background-color: ${({ theme }) => theme.colors.stroke};
   margin-top: 12px;
   border-radius: 32px;

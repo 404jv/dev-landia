@@ -25,12 +25,6 @@ export const Container = styled(TouchableOpacity)`
 export const ContainerInfos = styled.View`
   width: 100%;
   flex-direction: row;
-  justify-content: space-between;
-`;
-
-export const Content = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
 `;
 
 export const ContainerIcon = styled.View<ContainerIconProps>`
@@ -43,6 +37,12 @@ export const ContainerIcon = styled.View<ContainerIconProps>`
 
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 4px;
+`;
+
+export const Content = styled.View`
+  width: 76%;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const ContainerTexts = styled.View``;

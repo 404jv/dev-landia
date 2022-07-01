@@ -30,5 +30,5 @@ export const ChallengeTitle = styled.Text`
 export const ChallengeDescription = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: 16px;
-  width: 80%;
+  width: 75%;
 `;

@@ -47,14 +47,16 @@ export function Card({
           <CardIcon source={iconPhase} />
         </ContainerIcon>
 
-        <ContainerTexts>
-          <Title>{name}</Title>
-          <Description>{description}</Description>
-        </ContainerTexts>
+        <Content>
+          <ContainerTexts>
+            <Title>{name}</Title>
+            <Description>{description}</Description>
+          </ContainerTexts>
 
-        <PhaseType type={type}>
-          {type === "practice" ? "Prática" : "Teórica"}
-        </PhaseType>
+          <PhaseType type={type}>
+            {type === "practice" ? "Prática" : "Teórica"}
+          </PhaseType>
+        </Content>
       </ContainerInfos>
 
       <ContainerProgress>
