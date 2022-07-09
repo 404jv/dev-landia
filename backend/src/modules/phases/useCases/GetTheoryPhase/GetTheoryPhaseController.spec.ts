@@ -1,22 +1,19 @@
 import request from 'supertest';
-import { Connection } from 'typeorm';
 
 import { app } from '@shared/infra/http/app';
-import createConnection from '@shared/infra/typeorm';
+import { postgresDatabaseSource } from '@shared/infra/typeorm';
 import { startUserPhase } from '@test/factories/GameFactory';
 import { createMap } from '@test/factories/MapFactory';
 import { createTheoryPhase } from '@test/factories/PhaseFactory';
 import { createUserAndAuthenticate } from '@test/factories/UserFactory';
-
-let connection: Connection;
 
 let phaseId: string;
 let userToken: string;
 
 describe('Get Theory Phase Controller', () => {
   beforeAll(async () => {
-    connection = await createConnection();
-    await connection.runMigrations();
+    await postgresDatabaseSource.initialize();
+    await postgresDatabaseSource.runMigrations();
 
     const map = await createMap();
 
@@ -30,8 +27,8 @@ describe('Get Theory Phase Controller', () => {
   });
 
   afterAll(async () => {
-    await connection.dropDatabase();
-    await connection.close();
+    await postgresDatabaseSource.dropDatabase();
+    await postgresDatabaseSource.destroy();
   });
 
   it('Should be abe to get a theory phase', async () => {

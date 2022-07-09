@@ -1,22 +1,19 @@
 import request from 'supertest';
-import { Connection } from 'typeorm';
 
 import { app } from '@shared/infra/http/app';
-import createConnection from '@shared/infra/typeorm';
+import { postgresDatabaseSource } from '@shared/infra/typeorm';
 import {
   createAdminAndAuthenticate,
   createUserAndAuthenticate,
 } from '@test/factories/UserFactory';
-
-let connection: Connection;
 
 let adminToken: string;
 let userToken: string;
 
 describe('Create map controller', () => {
   beforeAll(async () => {
-    connection = await createConnection();
-    await connection.runMigrations();
+    await postgresDatabaseSource.initialize();
+    await postgresDatabaseSource.runMigrations();
 
     const adminJwt = await createAdminAndAuthenticate();
     adminToken = adminJwt.token;
@@ -26,8 +23,8 @@ describe('Create map controller', () => {
   });
 
   afterAll(async () => {
-    await connection.dropDatabase();
-    await connection.close();
+    await postgresDatabaseSource.dropDatabase();
+    await postgresDatabaseSource.destroy();
   });
 
   it('Should be able to create map', async () => {

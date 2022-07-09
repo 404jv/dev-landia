@@ -1,16 +1,13 @@
 import request from 'supertest';
-import { Connection } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
 import { app } from '@shared/infra/http/app';
-import createConnection from '@shared/infra/typeorm';
+import { postgresDatabaseSource } from '@shared/infra/typeorm';
 import { createMap } from '@test/factories/MapFactory';
 import {
   createAdminAndAuthenticate,
   createUserAndAuthenticate,
 } from '@test/factories/UserFactory';
-
-let connection: Connection;
 
 let map_id: string;
 let adminToken: string;
@@ -18,8 +15,8 @@ let userToken: string;
 
 describe('Create Phase Controller', () => {
   beforeAll(async () => {
-    connection = await createConnection();
-    await connection.runMigrations();
+    await postgresDatabaseSource.initialize();
+    await postgresDatabaseSource.runMigrations();
 
     const map = await createMap();
     map_id = map.id;
@@ -32,8 +29,8 @@ describe('Create Phase Controller', () => {
   });
 
   afterAll(async () => {
-    await connection.dropDatabase();
-    await connection.close();
+    await postgresDatabaseSource.dropDatabase();
+    await postgresDatabaseSource.destroy();
   });
 
   it('Should be able to create a practice phase', async () => {

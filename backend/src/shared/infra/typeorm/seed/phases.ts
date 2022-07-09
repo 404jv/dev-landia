@@ -1,10 +1,10 @@
-import { createConnection } from 'typeorm';
+import { postgresDatabaseSource } from '../index';
 
 async function create() {
-  const connection = await createConnection();
+  await postgresDatabaseSource.initialize();
 
   // map 1
-  await connection.query(`
+  await postgresDatabaseSource.query(`
     INSERT INTO 
       phases(id, map_id, title, type, description, max_level, "order", hexadecimal_color)
     VALUES (
@@ -19,7 +19,7 @@ async function create() {
     );
   `);
 
-  await connection.query(`
+  await postgresDatabaseSource.query(`
     INSERT INTO 
       phases(id, map_id, title, type, description, max_level, "order", hexadecimal_color)
     VALUES (
@@ -34,7 +34,7 @@ async function create() {
     );
   `);
 
-  await connection.query(`
+  await postgresDatabaseSource.query(`
     INSERT INTO 
       phases(id, map_id, title, type, markdown_text, description, max_level, "order", hexadecimal_color)
     VALUES (
@@ -51,7 +51,7 @@ async function create() {
   `);
 
   // map 2
-  await connection.query(`
+  await postgresDatabaseSource.query(`
     INSERT INTO 
       phases(id, map_id, title, type, description, max_level, "order", hexadecimal_color)
     VALUES (
@@ -66,7 +66,7 @@ async function create() {
     );
   `);
 
-  await connection.close();
+  await postgresDatabaseSource.destroy();
 }
 
 create();

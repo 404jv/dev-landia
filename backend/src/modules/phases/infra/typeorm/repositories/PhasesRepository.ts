@@ -1,7 +1,8 @@
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { ICreatePhaseDTO } from '@modules/phases/dtos/ICreatePhaseDTO';
 import { IPhasesRepository } from '@modules/phases/repositories/IPhasesRepository';
+import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
 import { Phase } from '../entities/Phase';
 
@@ -9,7 +10,7 @@ class PhasesRepository implements IPhasesRepository {
   private repository: Repository<Phase>;
 
   constructor() {
-    this.repository = getRepository(Phase);
+    this.repository = postgresDatabaseSource.getRepository(Phase);
   }
   async create({
     map_id,
@@ -46,7 +47,9 @@ class PhasesRepository implements IPhasesRepository {
       where: {
         id,
       },
-      relations: ['activities'],
+      relations: {
+        activities: true,
+      },
     });
     return phase;
   }

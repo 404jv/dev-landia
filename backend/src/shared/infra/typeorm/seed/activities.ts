@@ -1,10 +1,10 @@
-import { createConnection } from 'typeorm';
-
 import { ActivitiesAnswersRepository } from '@modules/activities/infra/typeorm/repositories/ActivitiesAnswersRepository';
 import { ActivitiesDefaultCodeRepository } from '@modules/activities/infra/typeorm/repositories/ActivitiesDefaultCodeRepository';
 import { ActivitiesRepository } from '@modules/activities/infra/typeorm/repositories/ActivitiesRepository';
 import { OptionsRepository } from '@modules/activities/infra/typeorm/repositories/OptionsRepository';
 import { TipsRepository } from '@modules/activities/infra/typeorm/repositories/TipsRepository';
+
+import { postgresDatabaseSource } from '../index';
 
 enum enActivityType {
   BLOCK_ACTIVITY = 'block_activity',
@@ -96,7 +96,7 @@ async function createActivityWithOptions({
 }
 
 async function create() {
-  await createConnection();
+  await postgresDatabaseSource.initialize();
 
   await createActivityWithOptions({
     title: 'Atividade Vermelha',
@@ -145,6 +145,8 @@ async function create() {
     option_color: '#FFFF00',
     activity_color: '#FFFF00',
   });
+
+  postgresDatabaseSource.destroy();
 }
 
 create();
