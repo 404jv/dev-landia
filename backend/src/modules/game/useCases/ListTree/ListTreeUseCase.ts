@@ -27,7 +27,7 @@ class ListTreeUseCase {
           map.id
         );
 
-        if (userMap === undefined) return map;
+        if (!userMap) return map;
 
         Object.assign(map, {
           is_done: userMap.is_done,

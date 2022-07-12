@@ -6,14 +6,17 @@ import 'express-async-errors';
 
 import { IAppError } from '@core/domain/errors/IAppError';
 
-import createConnection from '../typeorm/index';
+import { postgresDatabaseSource } from '../typeorm';
 import { router } from './routes';
 
 import '@shared/container';
 
-createConnection().then(
-  () => process.env.NODE_ENV !== 'test' && console.log('📦 Database connected.')
-);
+postgresDatabaseSource
+  .initialize()
+  .then(
+    () =>
+      process.env.NODE_ENV !== 'test' && console.log('📦 Database connected')
+  );
 
 const app = express();
 app.use(express.json());

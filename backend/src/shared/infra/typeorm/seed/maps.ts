@@ -1,9 +1,9 @@
-import { createConnection } from 'typeorm';
+import { postgresDatabaseSource } from '../index';
 
 async function create() {
-  const connection = await createConnection();
+  await postgresDatabaseSource.initialize();
 
-  await connection.query(`
+  await postgresDatabaseSource.query(`
     INSERT INTO 
       maps(id, title, description, "order")
     VALUES (
@@ -14,7 +14,7 @@ async function create() {
     );
   `);
 
-  await connection.query(`
+  await postgresDatabaseSource.query(`
     INSERT INTO 
       maps(id, title, description, "order")
     VALUES (
@@ -25,7 +25,7 @@ async function create() {
     );
   `);
 
-  await connection.close();
+  await postgresDatabaseSource.destroy();
 }
 
 create();

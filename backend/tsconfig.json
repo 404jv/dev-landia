@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2020",
     "module": "commonjs",
     "lib": ["es2015"],
     "strict": false,
@@ -27,7 +27,8 @@
     },
     "types": [
       "reflect-metadata",
-      "jest"
+      "jest",
+      "node"
     ],
     "esModuleInterop": true,
     "skipLibCheck": true,

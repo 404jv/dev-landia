@@ -1,7 +1,8 @@
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { ICreateOptionActivityDTO } from '@modules/activities/dtos/ICreateOptionActivityDTO';
 import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
+import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
 import { ActivityDefaultCode } from '../entities/ActivityDefaultCode';
 import { Option } from '../entities/Option';
@@ -10,7 +11,7 @@ class ActivitiesDefaultCodeRepository implements IActivitiesOptionsRepository {
   private repository: Repository<ActivityDefaultCode>;
 
   constructor() {
-    this.repository = getRepository(ActivityDefaultCode);
+    this.repository = postgresDatabaseSource.getRepository(ActivityDefaultCode);
   }
 
   async create({

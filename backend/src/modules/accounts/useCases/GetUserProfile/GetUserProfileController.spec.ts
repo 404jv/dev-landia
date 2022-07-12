@@ -1,29 +1,26 @@
 import { sign } from 'jsonwebtoken';
 import request from 'supertest';
-import { Connection } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
 import auth from '@config/auth';
 import { app } from '@shared/infra/http/app';
-import createConnection from '@shared/infra/typeorm';
+import { postgresDatabaseSource } from '@shared/infra/typeorm';
 import { createUserAndAuthenticate } from '@test/factories/UserFactory';
-
-let connection: Connection;
 
 let userToken: string;
 
 describe('Create User Controller', () => {
   beforeAll(async () => {
-    connection = await createConnection();
-    await connection.runMigrations();
+    await postgresDatabaseSource.initialize();
+    await postgresDatabaseSource.runMigrations();
 
     const { token } = await createUserAndAuthenticate();
     userToken = token;
   });
 
   afterAll(async () => {
-    await connection.dropDatabase();
-    await connection.close();
+    await postgresDatabaseSource.dropDatabase();
+    await postgresDatabaseSource.destroy();
   });
 
   it('should be able to a user get their profile', async () => {

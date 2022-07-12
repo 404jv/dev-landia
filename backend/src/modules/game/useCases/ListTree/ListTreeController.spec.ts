@@ -1,21 +1,18 @@
 import request from 'supertest';
-import { Connection } from 'typeorm';
 
 import { app } from '@shared/infra/http/app';
-import createConnection from '@shared/infra/typeorm';
+import { postgresDatabaseSource } from '@shared/infra/typeorm';
 import { startUserMap, startUserPhase } from '@test/factories/GameFactory';
 import { createMap } from '@test/factories/MapFactory';
 import { createPhase } from '@test/factories/PhaseFactory';
 import { createUserAndAuthenticate } from '@test/factories/UserFactory';
 
-let connection: Connection;
-
 let userToken: string;
 
 describe('List Tree Controller', () => {
   beforeAll(async () => {
-    connection = await createConnection();
-    await connection.runMigrations();
+    await postgresDatabaseSource.initialize();
+    await postgresDatabaseSource.runMigrations();
 
     const userJwt = await createUserAndAuthenticate();
     userToken = userJwt.token;
@@ -31,8 +28,8 @@ describe('List Tree Controller', () => {
   });
 
   afterAll(async () => {
-    await connection.dropDatabase();
-    await connection.close();
+    await postgresDatabaseSource.dropDatabase();
+    await postgresDatabaseSource.destroy();
   });
 
   it('Should be able to a user list their tree', async () => {

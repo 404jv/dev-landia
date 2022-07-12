@@ -1,20 +1,17 @@
 import request from 'supertest';
-import { Connection } from 'typeorm';
 
 import { app } from '@shared/infra/http/app';
-import createConnection from '@shared/infra/typeorm';
-
-let connection: Connection;
+import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
 describe('Create User Controller', () => {
   beforeAll(async () => {
-    connection = await createConnection();
-    await connection.runMigrations();
+    await postgresDatabaseSource.initialize();
+    await postgresDatabaseSource.runMigrations();
   });
 
   afterAll(async () => {
-    await connection.dropDatabase();
-    await connection.close();
+    await postgresDatabaseSource.dropDatabase();
+    await postgresDatabaseSource.destroy();
   });
 
   it('Should be able to create an account', async () => {

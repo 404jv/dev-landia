@@ -1,21 +1,19 @@
 import request from 'supertest';
-import { Connection } from 'typeorm';
 
 import { app } from '@shared/infra/http/app';
-import createConnection from '@shared/infra/typeorm';
+import { postgresDatabaseSource } from '@shared/infra/typeorm';
 import { startUserPhase } from '@test/factories/GameFactory';
 import { createMap } from '@test/factories/MapFactory';
 import { createPhaseAndActivities } from '@test/factories/PhaseFactory';
 import { createUserAndAuthenticate } from '@test/factories/UserFactory';
 
-let connection: Connection;
 let practicePhaseId: string;
 let userToken: string;
 
 describe('Get Practice Phase Controller', () => {
   beforeAll(async () => {
-    connection = await createConnection();
-    await connection.runMigrations();
+    await postgresDatabaseSource.initialize();
+    await postgresDatabaseSource.runMigrations();
 
     const map = await createMap();
 
@@ -29,8 +27,8 @@ describe('Get Practice Phase Controller', () => {
   });
 
   afterAll(async () => {
-    await connection.dropDatabase();
-    await connection.close();
+    await postgresDatabaseSource.dropDatabase();
+    await postgresDatabaseSource.destroy();
   });
 
   it('Should be able to a user get their phase', async () => {

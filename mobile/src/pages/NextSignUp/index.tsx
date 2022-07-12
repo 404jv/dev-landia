@@ -94,6 +94,8 @@ export function NextSignUp(): JSX.Element {
       })
       .catch((error) => {
         const errorMessage = error.response.data.message;
+        console.log(errorMessage);
+
         if (
           errorMessage ===
           `The email '${userData.email}' is already registered!`
@@ -126,7 +128,7 @@ export function NextSignUp(): JSX.Element {
           type: "Danger",
           title: "Erro",
           button: true,
-          textBody: "Erro ao realizar cadastro, :(",
+          textBody: "Erro ao realizar cadastro :(",
           buttonText: "Ok",
           callback: () => Popup.hide(),
         });

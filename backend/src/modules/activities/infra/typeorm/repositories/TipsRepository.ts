@@ -1,6 +1,7 @@
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { ITipsRepository } from '@modules/activities/repositories/ITipsRepository';
+import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
 import { Tip } from '../entities/Tip';
 
@@ -8,7 +9,7 @@ class TipsRepository implements ITipsRepository {
   private repository: Repository<Tip>;
 
   constructor() {
-    this.repository = getRepository(Tip);
+    this.repository = postgresDatabaseSource.getRepository(Tip);
   }
 
   async create(name: string, activity_id: string): Promise<Tip> {
