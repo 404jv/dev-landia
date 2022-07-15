@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --ignore-watch node_modules --respawn --transpile-only src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "test": "NODE_ENV=test LOG_DISABLED=false && jest --runInBand --detectOpenHandles",
+    "test": "NODE_ENV=test && jest --runInBand --detectOpenHandles",
     "test:watch": "NODE_ENV=test jest --maxWorkers=1 --watch",
     "migration:run": "NODE_ENV=test ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli migration:run -d src/shared/infra/typeorm/index.ts",
     "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts",
