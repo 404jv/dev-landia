@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 
 import { ICreatePhaseDTO } from '@modules/phases/dtos/ICreatePhaseDTO';
 import { IPhasesRepository } from '@modules/phases/repositories/IPhasesRepository';
@@ -87,17 +87,25 @@ class PhasesRepository implements IPhasesRepository {
     start: number,
     end: number
   ): Promise<Phase> {
-    const phase = await this.repository
-      .createQueryBuilder('phase')
-      .where('phase.id = :id')
-      .innerJoinAndSelect('phase.activities', 'activities')
-      .where('activities.order >= :start')
-      .andWhere('activities.order <= :end')
-      .leftJoinAndSelect('activities.options', 'options')
-      .leftJoinAndSelect('activities.tips', 'tips')
-      .orderBy('activities.order', 'ASC')
-      .setParameters({ start, end, id })
-      .getOne();
+    const phase = await this.repository.findOne({
+      relations: {
+        activities: {
+          options: true,
+          tips: true,
+        },
+      },
+      where: {
+        id,
+        activities: {
+          order: Between(start, end),
+        },
+      },
+      order: {
+        activities: {
+          order: 'ASC',
+        },
+      },
+    });
 
     return phase;
   }

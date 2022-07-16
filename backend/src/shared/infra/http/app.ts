@@ -5,6 +5,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 
 import { IAppError } from '@core/domain/errors/IAppError';
+import logger from '@modules/utils/logger';
 
 import { postgresDatabaseSource } from '../typeorm';
 import { router } from './routes';
@@ -13,10 +14,7 @@ import '@shared/container';
 
 postgresDatabaseSource
   .initialize()
-  .then(
-    () =>
-      process.env.NODE_ENV !== 'test' && console.log('📦 Database connected')
-  );
+  .then(() => logger.info('📦 Database connected'));
 
 const app = express();
 app.use(express.json());
