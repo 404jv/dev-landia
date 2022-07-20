@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --ignore-watch node_modules --respawn --transpile-only src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "test": "NODE_ENV=test LOG_DISABLED=false && jest --runInBand --detectOpenHandles",
+    "test": "NODE_ENV=test && jest --runInBand --detectOpenHandles",
     "test:watch": "NODE_ENV=test jest --maxWorkers=1 --watch",
     "migration:run": "NODE_ENV=test ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli migration:run -d src/shared/infra/typeorm/index.ts",
     "seed:admin": "ts-node-dev -r tsconfig-paths/register src/shared/infra/typeorm/seed/admin.ts",
@@ -20,6 +20,7 @@
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
