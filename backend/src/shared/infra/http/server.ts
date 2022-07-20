@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import logger from '@modules/utils/logger';
 
 import { app } from './app';
