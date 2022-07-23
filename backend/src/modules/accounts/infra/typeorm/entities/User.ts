@@ -15,28 +15,28 @@ class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ default: false })
   is_admin: boolean;
 
   @Column()
   password: string;
 
-  @Column()
+  @Column({ nullable: true })
   avatar_name?: string;
 
-  @Column()
+  @Column({ nullable: true })
   biography?: string;
 
-  @Column()
+  @Column({ default: 0 })
   total_xp?: number;
 
-  @Column()
+  @Column({ default: 0 })
   total_coins?: number;
 
   @CreateDateColumn()

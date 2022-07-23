@@ -43,7 +43,7 @@ class Activity {
   @Column({ type: 'enum', enum: enActivityType })
   type: enActivityType;
 
-  @Column()
+  @Column({ default: false })
   is_needed_code: boolean;
 
   @Column()
