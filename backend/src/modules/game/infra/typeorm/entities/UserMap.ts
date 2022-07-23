@@ -25,7 +25,7 @@ class UserMap {
   @JoinColumn({ name: 'map_id' })
   map: Map;
 
-  @Column()
+  @Column({ default: false })
   is_done: boolean;
 
   @CreateDateColumn()
