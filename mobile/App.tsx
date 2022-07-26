@@ -3,8 +3,10 @@ import { LogBox } from "react-native";
 
 import { ThemeProvider } from "styled-components";
 import { NavigationContainer } from "@react-navigation/native";
-import { AuthProvider } from "./src/hooks/auth";
+import { TailwindProvider } from "tailwindcss-react-native";
 import theme from "./src/Global/styles/theme";
+
+import { AuthProvider } from "./src/hooks/auth";
 
 import { AppRoutes } from "./src/routes/app.routes";
 import useCachedResources from "./src/hooks/useCachedResources";
@@ -22,11 +24,13 @@ export default function App(): JSX.Element {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <AuthProvider>
-          <AppRoutes />
-        </AuthProvider>
-      </NavigationContainer>
+      <TailwindProvider>
+        <NavigationContainer>
+          <AuthProvider>
+            <AppRoutes />
+          </AuthProvider>
+        </NavigationContainer>
+      </TailwindProvider>
     </ThemeProvider>
   );
 }
