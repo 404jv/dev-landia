@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Alert, TouchableOpacity, View } from "react-native";
-import { StatusBar } from "react-native";
+import { Alert, TouchableOpacity, View, StatusBar } from "react-native";
 import { useTheme } from "styled-components";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
