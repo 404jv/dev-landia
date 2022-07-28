@@ -6,9 +6,9 @@ export const Container = styled.View`
 `;
 
 export const ProgressBar = styled.View`
-  width: 68%;
+  height: 10px;
+  flex: 1;
   background-color: ${({ theme }) => theme.colors.stroke};
-  margin-top: 12px;
   border-radius: 32px;
 `;
 
@@ -27,5 +27,4 @@ export const BarText = styled.Text`
   color: ${({ theme }) => theme.colors.subTitle};
   font-size: 16px;
   margin-left: 5px;
-  margin-top: 5px;
 `;
