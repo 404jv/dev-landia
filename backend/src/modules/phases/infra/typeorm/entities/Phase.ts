@@ -35,13 +35,13 @@ class Phase {
   @Column()
   title: string;
 
-  @Column()
+  @Column({ nullable: true })
   hexadecimal_color: string;
 
   @Column({ type: 'enum', enum: enType })
   type: enType;
 
-  @Column()
+  @Column({ nullable: true })
   markdown_text: string;
 
   @Column()

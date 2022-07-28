@@ -23,7 +23,7 @@ class Option {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   abstracted_name?: string;
 
   @Column()
