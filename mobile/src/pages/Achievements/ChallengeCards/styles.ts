@@ -2,7 +2,8 @@ import { RFValue } from "react-native-responsive-fontsize";
 import styled from "styled-components/native";
 
 export const ChallengeCard = styled.View`
-  width: 100%;
+  flex: 1;
+  justify-content: space-between;
   flex-direction: row;
 `;
 
@@ -20,6 +21,7 @@ export const Image = styled.Image``;
 
 export const ChallengeContent = styled.View`
   margin-left: 10px;
+  flex: 1;
 `;
 
 export const ChallengeTitle = styled.Text`
@@ -30,5 +32,4 @@ export const ChallengeTitle = styled.Text`
 export const ChallengeDescription = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: 16px;
-  width: 80%;
 `;

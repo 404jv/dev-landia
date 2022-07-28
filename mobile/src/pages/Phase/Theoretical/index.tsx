@@ -98,7 +98,7 @@ export function Theoretical({
       <Header title={title} />
       <Content>
         <Markdown rules={rules} style={styles}>
-          {markdownText}
+          {markdown_text}
         </Markdown>
 
         <FinishButton onPress={handleFinishClass} activeOpacity={0.7}>

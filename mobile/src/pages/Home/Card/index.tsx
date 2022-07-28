@@ -50,12 +50,12 @@ export function Card({
         <Content>
           <ContainerTexts>
             <Title>{name}</Title>
-            <PhaseType type={type}>
-              {type === "practice" ? "Prática" : "Teórica"}
-            </PhaseType>
+            <Description>{description}</Description>
           </ContainerTexts>
 
-          <Description>{description}</Description>
+          <PhaseType type={type}>
+            {type === "practice" ? "Prática" : "Teórica"}
+          </PhaseType>
         </Content>
       </ContainerInfos>
 
