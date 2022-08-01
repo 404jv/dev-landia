@@ -15,11 +15,12 @@ import {
   ProgressBar,
   ContainerProgressBar,
   ContainerIcon,
-  ContainerTexts,
   PhaseType,
   ProgressTitle,
   ContainerProgress,
   ContainerLock,
+  ContainerTitleAndPhase,
+  LockTitle,
 } from "./styles";
 
 interface CardProps extends TouchableOpacityProps {
@@ -48,36 +49,35 @@ export function Card({
         </ContainerIcon>
 
         <Content>
-          <ContainerTexts>
+          <ContainerTitleAndPhase>
             <Title>{name}</Title>
-            <Description>{description}</Description>
-          </ContainerTexts>
 
-          <PhaseType type={type}>
-            {type === "practice" ? "Prática" : "Teórica"}
-          </PhaseType>
+            <PhaseType type={type}>
+              {type === "practice" ? "Prática" : "Teórica"}
+            </PhaseType>
+          </ContainerTitleAndPhase>
+
+          <Description>{description}</Description>
         </Content>
       </ContainerInfos>
 
-      <ContainerProgress>
-        {Number.isNaN(percentage) ? (
-          <ContainerLock>
-            <Feather name="lock" size={18} color={theme.colors.white} />
-          </ContainerLock>
-        ) : (
-          <>
-            <ProgressTitle>
-              {Number.isNaN(percentage) ? 0 : percentage}% completo
-            </ProgressTitle>
+      {Number.isNaN(percentage) ? (
+        <ContainerLock>
+          <Feather name="lock" size={18} color={theme.colors.white} />
+        </ContainerLock>
+      ) : (
+        <ContainerProgress>
+          <ProgressTitle>
+            {Number.isNaN(percentage) ? 0 : percentage}% completo
+          </ProgressTitle>
 
-            <ContainerProgressBar>
-              <ProgressBar
-                percentage={Number.isNaN(percentage) ? 0 : percentage}
-              />
-            </ContainerProgressBar>
-          </>
-        )}
-      </ContainerProgress>
+          <ContainerProgressBar>
+            <ProgressBar
+              percentage={Number.isNaN(percentage) ? 0 : percentage}
+            />
+          </ContainerProgressBar>
+        </ContainerProgress>
+      )}
     </Container>
   );
 }
