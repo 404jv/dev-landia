@@ -4,18 +4,25 @@ import { useTheme } from "styled-components";
 
 import { ChallengeCards } from "./ChallengeCards";
 
-import { Container, Header, HeaderTitle } from "./styles";
+import { Container, Header, HeaderTitle, Separator } from "./styles";
 
 export function Achievements(): JSX.Element {
   const theme = useTheme();
 
   const cardData = [
     {
-      id: String(new Date()),
+      id: "4321",
       title: "Treinamento do cadete",
       description: "Complete  a primeira fase e alcance o nível 2.",
       maxChallenge: 2,
       currentChallenge: 1,
+    },
+    {
+      id: "1234",
+      title: "Treinamento do cadete",
+      description: "Complete  a primeira fase e alcance o nível 2.",
+      maxChallenge: 2,
+      currentChallenge: 2,
     },
   ];
 
@@ -35,9 +42,10 @@ export function Achievements(): JSX.Element {
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
-          padding: 10,
-          paddingBottom: 12,
+          paddingVertical: 20,
+          paddingHorizontal: 16,
         }}
+        ItemSeparatorComponent={() => <Separator />}
         renderItem={({ item }) => <ChallengeCards data={item} />}
       />
     </Container>
