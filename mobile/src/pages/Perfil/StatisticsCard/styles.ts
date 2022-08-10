@@ -2,15 +2,14 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   width: 144px;
-  height: 136px;
+  height: 126px;
   background-color: ${({ theme }) => theme.colors.primary};
   align-items: center;
   border-width: 2px;
   border-style: solid;
   border-color: ${({ theme }) => theme.colors.title};
   border-radius: 8px;
-  margin-right: 20px;
-  margin-bottom: 32px;
+  margin-bottom: 50px;
 `;
 
 export const ContainerNumbers = styled.View`

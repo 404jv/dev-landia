@@ -30,6 +30,8 @@ export const ChallengeTitle = styled.Text`
 `;
 
 export const ChallengeDescription = styled.Text`
+  min-height: 50px;
+  margin-top: 10px;
   color: ${({ theme }) => theme.colors.white};
   font-size: 16px;
 `;

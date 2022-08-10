@@ -22,6 +22,7 @@ export function StatisticsCard({
           fontSize: 18,
           fontWeight: "500",
           lineHeight: 21,
+          textAlign: "center",
         }}
       >
         {name}

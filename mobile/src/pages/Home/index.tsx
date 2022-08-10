@@ -111,6 +111,28 @@ export function Home(): JSX.Element {
               return 0;
             })
           );
+
+          setMaps((state) =>
+            state.map((map) => {
+              const phasesOrdered = map.phases.sort(function compare(a, b) {
+                if (a.order > b.order) return -1;
+                if (a.order < b.order) return 1;
+                return 0;
+              });
+
+              const newMap: MapProps = {
+                id: map.id,
+                created_at: map.created_at,
+                description: map.description,
+                is_done: map.is_done,
+                order: map.order,
+                phases: phasesOrdered,
+                title: map.title,
+              };
+
+              return newMap;
+            })
+          );
         } catch (error) {
           if (error.response.status === 401) {
             signOut();
@@ -118,33 +140,8 @@ export function Home(): JSX.Element {
         }
       };
 
-      const orderPhases = (): void => {
-        setMaps(
-          maps.map((map) => {
-            const phasesOrdered = map.phases.sort(function compare(a, b) {
-              if (a.order > b.order) return -1;
-              if (a.order < b.order) return 1;
-              return 0;
-            });
-
-            const newMap: MapProps = {
-              id: map.id,
-              created_at: map.created_at,
-              description: map.description,
-              is_done: map.is_done,
-              order: map.order,
-              phases: phasesOrdered,
-              title: map.title,
-            };
-
-            return newMap;
-          })
-        );
-      };
-
       getUserInfos();
       getTree();
-      orderPhases();
     }, [])
   );
 

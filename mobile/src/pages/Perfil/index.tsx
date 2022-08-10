@@ -90,12 +90,12 @@ export function Perfil(): JSX.Element {
 
       <ContainerStatisticsCards>
         <StatisticsCard
-          name="Total de moedas"
+          name="Moedas"
           number={userInfos?.total_coins}
           image={coin}
         />
         <StatisticsCard
-          name="Total de XP"
+          name="Experiência"
           number={userInfos?.total_xp}
           image={potion}
         />

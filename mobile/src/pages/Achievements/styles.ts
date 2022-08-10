@@ -30,3 +30,7 @@ export const HeaderTitle = styled.Text`
   color: ${({ theme }) => theme.colors.blue};
   font-family: ${({ theme }) => theme.fonts.medium};
 `;
+
+export const Separator = styled.View`
+  height: 20px;
+`;

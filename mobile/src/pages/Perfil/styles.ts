@@ -103,7 +103,7 @@ export const Bio = styled.Text`
 
 export const StatisticsTitle = styled.Text`
   margin-top: 38px;
-  margin-left: 20px;
+  margin-left: 18px;
   font-size: 24px;
   line-height: 28px;
   font-weight: 500;
@@ -112,9 +112,7 @@ export const StatisticsTitle = styled.Text`
 
 export const ContainerStatisticsCards = styled.View`
   flex-direction: row;
-  margin-top: 30px;
-  margin-left: 20px;
-  margin-bottom: 12px;
+  margin: 30px 22px 12px;
   justify-content: space-between;
   flex-wrap: wrap;
 `;
