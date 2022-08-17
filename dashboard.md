@@ -16,6 +16,16 @@ BODY: title, map_id, max_level, type, markdown_text, order, description, hexadec
 - POST `/activities/create` criar activity
 BODY: description, title, type, is_needed_code, options, order, phase_id, tips
 
+**options**: um array disso:
+```ts
+  id: string;
+  name: string;
+  abstracted_name: string; // opcional
+  activity_id: string;
+  type: string;
+  hexadecimal_color: string;
+```
+
 - POST `/activities/add-options` adicionar a resposta e código padrão em uma atividade
 BODY: activityAnswerOptionsIds, activityDefaultCodeOptionsIds, activity_id
 
