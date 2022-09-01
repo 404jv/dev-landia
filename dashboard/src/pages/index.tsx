@@ -21,8 +21,8 @@ export default function Home() {
       <Head>
         <title>Dashboard DevLândia | Login</title>
       </Head>
-      <div className="w-full h-screen flex">
-        <div className="w-[53%] h-full bg-gradient-to-br from-blue-350 via-blue-450 to-purple-750 flex flex-col justify-between">
+      <div className="w-full h-screen overflow-auto flex flex-col-reverse md:flex-row">
+        <div className="md:w-[53%] h-full p-2 bg-gradient-to-br from-blue-350 via-blue-450 to-purple-750 flex flex-col justify-between">
           <h1 className="text-5xl font-medium text-white ml-12 mt-32">
             Dashboard
           </h1>
@@ -30,8 +30,10 @@ export default function Home() {
             <Image src={homeImage} alt="" />
           </div>
         </div>
-        <div className="w-[47%] h-full bg-gray-950 flex flex-col items-center pt-24">
-          <Image src={logoWithLine} alt="" />
+        <div className="md:w-[47%] h-full p-2 bg-gray-950 flex flex-col items-center">
+          <div className="mt-24">
+            <Image src={logoWithLine} alt="" />
+          </div>
           <form 
             onSubmit={handleLogin}
             method="post"
@@ -55,7 +57,7 @@ export default function Home() {
             />
 
             <button
-              className="my-3 w-48 h-14 flex justify-center items-center rounded-md bg-gradient-to-r from-blue-350 to-purple-750 text-xl text-white hover:brightness-90 transition" 
+              className="mt-3 mb-10 w-48 h-14 flex justify-center items-center rounded-md bg-gradient-to-r from-blue-350 to-purple-750 text-xl text-white hover:brightness-90 transition" 
               type="submit"
             >
               Login
