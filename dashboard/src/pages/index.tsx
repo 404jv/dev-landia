@@ -1,19 +1,32 @@
 import Head from "next/head";
 import Image from "next/image";
+import Router from "next/router";
 import { Lock, User } from "phosphor-react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import homeImage from "../../public/homeImage.svg";
 import logoWithLine from "../../public/logoWithLine.svg";
 import { Input } from "../components/Input";
+import { AuthContext } from "../contexts/AuthContext";
 
-export default function Home() {
+export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const { signIn, isAuthenticated } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      Router.push('/home');
+    }
+  }, [isAuthenticated])
 
   async function handleLogin(evt: FormEvent) {
     evt.preventDefault();
 
-    console.log(email, password);
+    await signIn({
+      email,
+      password
+    });
   }
 
   return (
