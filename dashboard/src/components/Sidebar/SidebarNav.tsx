@@ -5,8 +5,11 @@ import { NavLink } from './NavLink';
 import { NavSection } from './NavSection';
 import createMaps from '../../../public/createMaps.svg';
 import listMaps from '../../../public/listMaps.svg';
+import Router from 'next/router';
 
 export function SidebarNav() {
+  const activeRoute = Router.pathname;
+
   return (
     <aside className="bg-gray-950 flex flex-col py-8 px-14">
       <div className="mb-9">
@@ -15,14 +18,15 @@ export function SidebarNav() {
       <NavSection title="Mapas">
         <NavLink 
           title="Criar mapas" 
-          icon={<Image src={createMaps} alt="" />} 
+          icon={<MapTrifold alt="" />} 
           link="/maps/create"
-          isActive 
+          isActive={activeRoute === "/maps/create"}
         />
         <NavLink 
           title="Listar mapas" 
-          icon={<Image src={listMaps} alt="" />}
+          icon={<MapTrifold alt="" />}
           link="/maps"
+          isActive={activeRoute === "/maps"}
         />
       </NavSection>
     </aside>
