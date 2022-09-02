@@ -5,7 +5,7 @@ import { Lock, User } from "phosphor-react";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import homeImage from "../../public/homeImage.svg";
 import logoWithLine from "../../public/logoWithLine.svg";
-import { Input } from "../components/Input";
+import { Input } from "../components/Form/Input";
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function SignIn() {
