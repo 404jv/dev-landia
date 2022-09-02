@@ -16,7 +16,7 @@ export default function SignIn() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      Router.push('/home');
+      Router.push('/maps/create');
     }
   }, [isAuthenticated])
 

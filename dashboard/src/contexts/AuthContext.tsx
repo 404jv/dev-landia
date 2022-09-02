@@ -69,7 +69,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-    Router.push('/home');
+    Router.push('/maps/create');
   }
 
   return (
