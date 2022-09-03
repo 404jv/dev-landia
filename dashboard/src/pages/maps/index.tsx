@@ -1,5 +1,7 @@
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { Sidebar } from "../../components/Sidebar";
+import { withSSRAuth } from "../../utils/withSSRAuth";
 
 export default function Maps() {
   return (
@@ -13,3 +15,9 @@ export default function Maps() {
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async (context) => {
+  return {
+    props: {}
+  }
+})

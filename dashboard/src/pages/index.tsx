@@ -1,32 +1,33 @@
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import Router from "next/router";
+import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 import { Lock, User } from "phosphor-react";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import homeImage from "../../public/homeImage.svg";
 import logoWithLine from "../../public/logoWithLine.svg";
 import { Input } from "../components/Form/Input";
 import { AuthContext } from "../contexts/AuthContext";
+import { withSSRGuest } from "../utils/withSSRGuest";
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signIn, isAuthenticated } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      Router.push('/maps/create');
-    }
-  }, [isAuthenticated])
+  const { signIn } = useContext(AuthContext);
 
   async function handleLogin(evt: FormEvent) {
     evt.preventDefault();
 
-    await signIn({
-      email,
-      password
-    });
+    try {
+      await signIn({
+        email,
+        password
+      });
+    } catch (error) {
+      alert('Email ou senha incorretos.');
+    }
   }
 
   return (
@@ -81,3 +82,9 @@ export default function SignIn() {
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRGuest(async (context) => {
+  return {
+    props: {}
+  }
+})
