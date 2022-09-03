@@ -14,7 +14,7 @@ export function SidebarNav() {
     <aside className="bg-gray-950 flex flex-col py-8 px-14">
       <div className="mb-9">
         <Image src={logo} alt="" />
-      </div>
+      </div> 
       <NavSection title="Mapas">
         <NavLink 
           title="Criar mapas" 
