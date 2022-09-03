@@ -37,7 +37,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     if(token) {
       api.get("users/profile").then(response => {
-        const { email, name } = response.data;
+        const { email, name, is_admin } = response.data;
+
+        if (!is_admin) {
+          signOut();
+        } 
+
         setUser({ email, name });
       }).catch((err) => {
         signOut();
@@ -59,6 +64,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     });
 
     const { user, token } = response.data;
+
+    if (user.is_admin === false) {
+      alert('Email ou senha incorretos.');
+      return;
+    }
 
     setUser(user);
 

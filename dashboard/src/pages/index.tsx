@@ -20,10 +20,14 @@ export default function SignIn() {
   async function handleLogin(evt: FormEvent) {
     evt.preventDefault();
 
-    await signIn({
-      email,
-      password
-    });
+    try {
+      await signIn({
+        email,
+        password
+      });
+    } catch (error) {
+      alert('Email ou senha incorretos.');
+    }
   }
 
   return (
