@@ -5,10 +5,12 @@ import { NavLink } from './NavLink';
 import { NavSection } from './NavSection';
 import createMaps from '../../../public/createMaps.svg';
 import listMaps from '../../../public/listMaps.svg';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 export function SidebarNav() {
-  const activeRoute = Router.pathname;
+  const router = useRouter();
+
+  const activeRoute = router.pathname;
 
   return (
     <aside className="bg-gray-950 flex flex-col py-8 px-14">

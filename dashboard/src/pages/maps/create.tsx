@@ -1,24 +1,18 @@
+import { GetServerSideProps } from "next";
 import Head from "next/head";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { FormEvent, useContext, useEffect, useState } from "react"
 import { Button } from "../../components/Form/Button";
 import { InputWithLabel } from "../../components/Form/InputWithLabel";
 import { Sidebar } from "../../components/Sidebar";
 import { AuthContext } from "../../contexts/AuthContext";
 import { api } from "../../services/api";
+import { withSSRAuth } from "../../utils/withSSRAuth";
 
 export default function CreateMaps() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [order, setOrder] = useState(0);
-
-  const { isAuthenticated } = useContext(AuthContext);
-  
-  useEffect(() => {
-    if (!isAuthenticated) {
-      Router.push('/');
-    }
-  }, [isAuthenticated])
 
   async function handleCreateMap(evt: FormEvent) {
     evt.preventDefault();
@@ -84,3 +78,9 @@ export default function CreateMaps() {
     </>
   )
 } 
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async (context) => {
+  return {
+    props: {}
+  }
+})
