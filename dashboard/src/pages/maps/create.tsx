@@ -1,11 +1,10 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { FormEvent, useContext, useEffect, useState } from "react"
+import { FormEvent, useState } from "react"
+import { toast, ToastContainer } from "react-toastify";
 import { Button } from "../../components/Form/Button";
 import { InputWithLabel } from "../../components/Form/InputWithLabel";
 import { Sidebar } from "../../components/Sidebar";
-import { AuthContext } from "../../contexts/AuthContext";
 import { api } from "../../services/api";
 import { withSSRAuth } from "../../utils/withSSRAuth";
 
@@ -24,13 +23,13 @@ export default function CreateMaps() {
         order
       });
 
-      alert('Mapa criado.');
+      toast.success("Mapa criado.");
 
       setTitle('');
       setDescription('');
       setOrder(0);
     } catch (error) {
-      alert('Erro ao criar mapa.')
+      toast.error("Erro ao criar mapa.");
     }
   }
 
@@ -40,6 +39,12 @@ export default function CreateMaps() {
         <title>Dashboard DevLândia | Criação de mapas</title>
       </Head>
       <div className="flex w-full h-screen overflow-auto">
+        <ToastContainer 
+          theme="colored" 
+          toastClassName="errorAlert"
+          autoClose={2000} 
+          pauseOnHover={false} 
+        />
         <Sidebar />
 
         <div className="flex flex-1 bg-gray-950">
