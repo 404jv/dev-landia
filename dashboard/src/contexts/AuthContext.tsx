@@ -1,6 +1,7 @@
 import Router from "next/router";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { api } from "../services/api";
 
 interface User {
@@ -66,7 +67,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { user, token } = response.data;
 
     if (user.is_admin === false) {
-      alert('Email ou senha incorretos.');
+      toast.error("Email ou senha incorretos.");
       return;
     }
 
