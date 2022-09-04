@@ -16,6 +16,10 @@ export default function CreateMaps() {
   async function handleCreateMap(evt: FormEvent) {
     evt.preventDefault();
 
+    if (title.trim() === "" || description.trim() === "") {
+      return toast.error("Todos os campos são obrigatórios.");
+    }
+
     try {
       await api.post('/maps/create', {
         title,
@@ -58,12 +62,14 @@ export default function CreateMaps() {
                     name="title" 
                     value={title}
                     onChange={(evt) => setTitle(evt.target.value)}
+                    required
                   />
                   <InputWithLabel 
                     label="Descrição" 
                     name="description" 
                     value={description}
                     onChange={(evt) => setDescription(evt.target.value)}
+                    required
                   />     
                 </div>
                 <InputWithLabel 
