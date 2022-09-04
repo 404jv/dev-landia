@@ -1,5 +1,4 @@
 import request from 'supertest';
-import { Connection } from 'typeorm';
 
 import { app } from '@shared/infra/http/app';
 import { postgresDatabaseSource } from '@shared/infra/typeorm';
