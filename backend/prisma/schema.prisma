@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model activities {
+  id                    String                  @id(map: "PK_7f4004429f731ffb9c88eb486a8") @db.Uuid
+  title                 String                  @db.VarChar
+  description           String                  @db.VarChar
+  type                  String                  @db.VarChar
+  is_needed_code        Boolean                 @default(false)
+  created_at            DateTime                @default(now()) @db.Timestamp(6)
+  order                 Int?
+  phase_id              String?                 @db.Uuid
+  phases                phases?                 @relation(fields: [phase_id], references: [id], onDelete: Cascade, map: "FKPhaseActivity")
+  activity_answer       activity_answer[]
+  activity_default_code activity_default_code[]
+  options               options[]
+  tips                  tips[]
+}
+
+model activity_answer {
+  id          String     @id(map: "PK_9a2c313b3d87a4eca50a94dfff1") @db.Uuid
+  activity_id String     @db.Uuid
+  option_id   String     @db.Uuid
+  order       Int
+  activities  activities @relation(fields: [activity_id], references: [id], onDelete: Cascade, map: "FKActivityOption")
+  options     options    @relation(fields: [option_id], references: [id], onDelete: Cascade, map: "FKOptionActivity")
+}
+
+model activity_default_code {
+  id          String     @id(map: "PK_3ce95f625a77f38ff590706d9d2") @db.Uuid
+  activity_id String     @db.Uuid
+  option_id   String     @db.Uuid
+  order       Int
+  activities  activities @relation(fields: [activity_id], references: [id], onDelete: Cascade, map: "FKActivityOption")
+  options     options    @relation(fields: [option_id], references: [id], onDelete: Cascade, map: "FKOptionActivity")
+}
+
+model maps {
+  id          String     @id(map: "PK_dddaabaf432b881f9f6e13bf9bd") @db.Uuid
+  title       String     @db.VarChar
+  description String     @db.VarChar
+  created_at  DateTime   @default(now()) @db.Timestamp(6)
+  order       Int?
+  phases      phases[]
+  user_map    user_map[]
+}
+
+model options {
+  id                    String                  @id(map: "PK_d232045bdb5c14d932fba18d957") @db.Uuid
+  name                  String                  @db.VarChar
+  activity_id           String                  @db.Uuid
+  type                  String                  @db.VarChar
+  hexadecimal_color     String                  @db.VarChar
+  created_at            DateTime                @default(now()) @db.Timestamp(6)
+  abstracted_name       String?                 @db.VarChar
+  activities            activities              @relation(fields: [activity_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FKActivityOption")
+  activity_answer       activity_answer[]
+  activity_default_code activity_default_code[]
+}
+
+model phases {
+  id                String         @id(map: "PK_e93bb53460b28d4daf72735d5d3") @db.Uuid
+  map_id            String         @db.Uuid
+  title             String         @db.VarChar
+  type              String         @db.VarChar
+  markdown_text     String?
+  max_level         Int
+  created_at        DateTime       @default(now()) @db.Timestamp(6)
+  order             Int?
+  description       String         @db.VarChar
+  hexadecimal_color String?        @db.VarChar
+  maps              maps           @relation(fields: [map_id], references: [id], onDelete: SetNull, onUpdate: NoAction, map: "FKMapPhase")
+  activities        activities[]
+  users_phases      users_phases[]
+}
+
+model tips {
+  id          String     @id(map: "PK_b63a628fdfd7517d8e58fe39199") @db.Uuid
+  name        String     @db.VarChar
+  activity_id String     @db.Uuid
+  created_at  DateTime   @default(now()) @db.Timestamp(6)
+  activities  activities @relation(fields: [activity_id], references: [id], onDelete: Cascade, map: "FKActivityTip")
+}
+
+model user_map {
+  id         String   @id(map: "PK_183d5ebc24aeb5fdb468003e7af") @db.Uuid
+  user_id    String   @db.Uuid
+  map_id     String   @db.Uuid
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  is_done    Boolean  @default(false)
+  maps       maps     @relation(fields: [map_id], references: [id], onDelete: Cascade, map: "FKMapUser")
+  users      users    @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "FKUserMap")
+}
+
+model users {
+  id           String         @id(map: "PK_a3ffb1c0c8416b9fc6f907b7433") @db.Uuid
+  name         String         @db.VarChar
+  username     String         @unique(map: "UQ_fe0bb3f6520ee0469504521e710") @db.VarChar
+  email        String         @unique(map: "UQ_97672ac88f789774dd47f7c8be3") @db.VarChar
+  is_admin     Boolean        @default(false)
+  password     String         @db.VarChar
+  avatar_name  String?        @db.VarChar
+  biography    String?        @db.VarChar
+  total_xp     Int            @default(0)
+  total_coins  Int            @default(0)
+  created_at   DateTime       @default(now()) @db.Timestamp(6)
+  updated_at   DateTime       @default(now()) @db.Timestamp(6)
+  user_map     user_map[]
+  users_phases users_phases[]
+}
+
+model users_phases {
+  id            String   @id(map: "PK_fbfd783f84950db0d1aa614ac64") @db.Uuid
+  user_id       String   @db.Uuid
+  phase_id      String   @db.Uuid
+  current_level Int      @default(0)
+  created_at    DateTime @default(now()) @db.Timestamp(6)
+  phases        phases   @relation(fields: [phase_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FKPhaseUser")
+  users         users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FKUserPhase")
+}
