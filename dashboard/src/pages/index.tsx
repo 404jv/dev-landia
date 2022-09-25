@@ -1,8 +1,6 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { parseCookies } from "nookies";
 import { Lock, User } from "phosphor-react";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import homeImage from "../../public/homeImage.svg";
@@ -10,6 +8,7 @@ import logoWithLine from "../../public/logoWithLine.svg";
 import { Input } from "../components/Form/Input";
 import { AuthContext } from "../contexts/AuthContext";
 import { withSSRGuest } from "../utils/withSSRGuest";
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
@@ -26,7 +25,7 @@ export default function SignIn() {
         password
       });
     } catch (error) {
-      alert('Email ou senha incorretos.');
+      toast.error("Email ou senha incorretos.");
     }
   }
 
@@ -36,6 +35,12 @@ export default function SignIn() {
         <title>Dashboard DevLândia | Login</title>
       </Head>
       <div className="w-full h-screen overflow-auto flex flex-col-reverse md:flex-row">
+        <ToastContainer 
+          theme="colored" 
+          toastClassName="errorAlert"
+          autoClose={2000} 
+          pauseOnHover={false} 
+        />
         <div className="md:w-[53%] h-full p-2 bg-gradient-to-br from-blue-350 via-blue-450 to-purple-750 flex flex-col justify-between">
           <h1 className="text-5xl font-medium text-white ml-12 mt-32">
             Dashboard

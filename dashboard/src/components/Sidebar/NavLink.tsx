@@ -10,7 +10,7 @@ interface NavLink {
 export function NavLink({ isActive = false, title, icon, link }: NavLink) {
   return (
     <Link href={link}>
-      <a className={`flex gap-2 ${isActive ? 'text-blue-350' : 'text-white'}`}>
+      <a className={`flex gap-2 ${isActive ? 'text-blue-350 fill-blue-350' : 'text-white fill-white'}`}>
         {icon}
         <span className="text-sm">
           {title}
