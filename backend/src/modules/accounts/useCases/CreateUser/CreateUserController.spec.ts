@@ -1,17 +1,11 @@
 import request from 'supertest';
 
 import { app } from '@shared/infra/http/app';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
+import { prisma } from '@shared/infra/prisma/client';
 
 describe('Create User Controller', () => {
-  beforeAll(async () => {
-    await postgresDatabaseSource.initialize();
-    await postgresDatabaseSource.runMigrations();
-  });
-
   afterAll(async () => {
-    await postgresDatabaseSource.dropDatabase();
-    await postgresDatabaseSource.destroy();
+    await prisma.$disconnect();
   });
 
   it('Should be able to create an account', async () => {
@@ -25,14 +19,16 @@ describe('Create User Controller', () => {
 
     const response = await request(app).post('/users/create').send(newUser);
 
+    console.log(response.body);
+
     expect(response.statusCode).toEqual(201);
   });
 
-  it('Should not be able to creat an account with a existent e-mail', async () => {
+  it('Should not be able to create an account with a existent e-mail', async () => {
     const userRepeatedEmail = {
       name: 'Loretta Chavez',
       username: 'loretta',
-      email: 'jhon@gmail.com',
+      email: 'loretta@gmail.com',
       password: '616162095239',
       biography: 'Test',
     };
@@ -47,7 +43,7 @@ describe('Create User Controller', () => {
     );
   });
 
-  it('Should not be able to creat an account with a existent username', async () => {
+  it('Should not be able to create an account with a existent username', async () => {
     const userRepeatedUsername = {
       name: 'Terry Roy',
       username: 'garrett',

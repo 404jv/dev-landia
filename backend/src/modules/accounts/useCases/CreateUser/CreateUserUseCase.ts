@@ -36,6 +36,8 @@ class CreateUserUseCase {
       email
     );
 
+    console.log(emailAlreadyRegistered);
+
     if (emailAlreadyRegistered) {
       throw new EmailAlreadyExistsError(email);
     }
