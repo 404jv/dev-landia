@@ -2,6 +2,8 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { PencilSimple, X } from "phosphor-react";
 import { useEffect, useRef, useState } from "react";
+import { Button } from "../../components/Form/Button";
+import { InputWithLabel } from "../../components/Form/InputWithLabel";
 import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
 import { withSSRAuth } from "../../utils/withSSRAuth";
@@ -16,10 +18,13 @@ interface Map {
 export default function Maps() {
   const [maps, setMaps] = useState<Map[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMap, setSelectedMap] = useState<Map>({} as Map);
   
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  function handleOpenModal() {
+  function handleOpenModal(id: string) {
+    handleSelectMap(id);
+
     dialogRef.current?.showModal();
     setIsModalOpen(true);
   }
@@ -27,6 +32,11 @@ export default function Maps() {
   function handleCloseModal() {
     dialogRef.current?.close();
     setIsModalOpen(false);
+  }
+
+  function handleSelectMap(id: string) {
+    const mapToSelect = maps.find(map => map.id === id) as Map;
+    setSelectedMap(mapToSelect);
   }
 
   useEffect(() => {
@@ -79,7 +89,7 @@ export default function Maps() {
                       </td>
                       <td className="bg-gray-900 rounded-tr-md rounded-br-md text-white pr-5 py-4">
                         <button 
-                          onClick={handleOpenModal}
+                          onClick={() => handleOpenModal(map.id)}
                           className="w-6 h-6 bg-gray-450 rounded-md flex items-center justify-center hover:opacity-90"
                         >
                           <PencilSimple weight="fill" size={12} />
@@ -94,7 +104,7 @@ export default function Maps() {
             <dialog 
               ref={dialogRef}
               onClose={handleCloseModal}
-              className={`${isModalOpen && 'backdrop:bg-black backdrop:opacity-60 rounded-xl max-w-2xl w-full max-h-96 h-full bg-gray-850 flex flex-col p-0 px-7 py-5'}`} 
+              className={`${isModalOpen && 'backdrop:bg-black backdrop:opacity-60 rounded-xl max-w-3xl w-full max-h-[28rem] h-full bg-gray-850 flex flex-col p-0 px-7 py-5 overflow-hidden'}`} 
             >
               <button 
                 onClick={handleCloseModal}
@@ -102,6 +112,36 @@ export default function Maps() {
               >
                 <X size={32} />
               </button>
+
+              <form className="w-full px-7">
+                <div className="flex flex-wrap gap-5 my-4">
+                  <InputWithLabel 
+                    label="Título"
+                    name="title"
+                    variant="dark"
+                    value={selectedMap.title}
+                  />
+                  <InputWithLabel
+                    label="Ordem"
+                    name="order"
+                    variant="dark"
+                    value={selectedMap.order}
+                    type="number"
+                  />
+                  <InputWithLabel
+                    label="Descrição"
+                    name="description"
+                    variant="dark"
+                    value={selectedMap.description}
+                  />
+                </div>
+
+                <div className="mt-7">
+                  <Button 
+                    title="Editar Mapa"
+                  />
+                </div>
+              </form>
             </dialog>
           </div>
         </div>

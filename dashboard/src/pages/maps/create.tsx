@@ -55,30 +55,30 @@ export default function CreateMaps() {
           <div className="mt-28 ml-3">
             <h1 className="text-gray-150 text-4xl font-medium">Criação de mapas</h1>
             <form method="post" onSubmit={handleCreateMap} className="mt-9 px-4">
-              <div className="flex gap-5 mb-7">
-                <div className="flex flex-col gap-4">
-                  <InputWithLabel 
-                    label="Título" 
-                    name="title" 
-                    value={title}
-                    onChange={(evt) => setTitle(evt.target.value)}
-                    required
-                  />
-                  <InputWithLabel 
-                    label="Descrição" 
-                    name="description" 
-                    value={description}
-                    onChange={(evt) => setDescription(evt.target.value)}
-                    required
-                  />     
-                </div>
+              <div className="max-w-2xl w-full flex flex-wrap gap-4 mb-7">
+                <InputWithLabel 
+                  label="Título" 
+                  name="title" 
+                  value={title}
+                  onChange={(evt) => setTitle(evt.target.value)}
+                  required
+                />
+
                 <InputWithLabel 
                   label="Ordem" 
                   name="order" 
                   type="number" 
                   value={order}
                   onChange={(evt) => setOrder(Number(evt.target.value))}
-                />
+                /> 
+
+                <InputWithLabel 
+                  label="Descrição" 
+                  name="description" 
+                  value={description}
+                  onChange={(evt) => setDescription(evt.target.value)}
+                  required
+                />    
               </div>
 
               <Button title="Criar Mapa" type="submit" />
