@@ -1,7 +1,8 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { PencilSimple, X } from "phosphor-react";
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 import { Button } from "../../components/Form/Button";
 import { InputWithLabel } from "../../components/Form/InputWithLabel";
 import { Sidebar } from "../../components/Sidebar";
@@ -19,7 +20,11 @@ export default function Maps() {
   const [maps, setMaps] = useState<Map[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMap, setSelectedMap] = useState<Map>({} as Map);
-  
+
+  const [title, setTitle] = useState(selectedMap.title);
+  const [description, setDescription] = useState(selectedMap.description);
+  const [order, setOrder] = useState(selectedMap.order);
+    
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   function handleOpenModal(id: string) {
@@ -37,15 +42,42 @@ export default function Maps() {
   function handleSelectMap(id: string) {
     const mapToSelect = maps.find(map => map.id === id) as Map;
     setSelectedMap(mapToSelect);
+    setTitle(mapToSelect.title);
+    setDescription(mapToSelect.description);
+    setOrder(mapToSelect.order);
+  }
+
+  async function handleUpdateMap(event: FormEvent) {
+    event.preventDefault();
+
+    if (title.trim() === "" || description.trim() === "") {
+      return toast.error("Não deixe os campos vazios se for atualizar.");
+    }
+
+    try {
+      await api.put(`/maps/update/${selectedMap.id}`, {
+        title,
+        description,
+        order
+      });
+
+      toast.success('Mapa atualizado.');
+
+      handleCloseModal();
+    } catch (error) {
+      toast.error('Erro ao atualizar mapa.');
+    }
+
+    loadData();
+  }
+
+  async function loadData() {
+    const response = await api.get("/maps");
+
+    setMaps(response.data);
   }
 
   useEffect(() => {
-    async function loadData() {
-      const response = await api.get("/maps");
-
-      setMaps(response.data);
-    }
-
     loadData();
   }, []);
 
@@ -58,6 +90,12 @@ export default function Maps() {
         <Sidebar />
 
         <div className="flex flex-1 bg-gray-950">
+          <ToastContainer 
+            theme="colored" 
+            toastClassName="errorAlert"
+            autoClose={2000} 
+            pauseOnHover={false} 
+          />
           <div className="mt-28 ml-3">
             <h1 className="text-gray-150 text-4xl font-medium">Listagem de mapas</h1>
 
@@ -113,26 +151,29 @@ export default function Maps() {
                 <X size={32} />
               </button>
 
-              <form className="w-full px-7">
+              <form method="post" onSubmit={handleUpdateMap} className="w-full px-7">
                 <div className="flex flex-wrap gap-5 my-4">
                   <InputWithLabel 
                     label="Título"
                     name="title"
                     variant="dark"
-                    value={selectedMap.title}
+                    value={title}
+                    onChange={(evt) => setTitle(evt.target.value)}
                   />
                   <InputWithLabel
                     label="Ordem"
                     name="order"
                     variant="dark"
-                    value={selectedMap.order}
+                    value={order}
                     type="number"
+                    onChange={(evt) => setOrder(Number(evt.target.value))}
                   />
                   <InputWithLabel
                     label="Descrição"
                     name="description"
                     variant="dark"
-                    value={selectedMap.description}
+                    value={description}
+                    onChange={(evt) => setDescription(evt.target.value)}
                   />
                 </div>
 

@@ -1,4 +1,5 @@
 import { ICreateMapDTO } from '@modules/maps/dtos/ICreateMapDTO';
+import { IUpdateMapDTO } from '@modules/maps/dtos/IUpdateMapDTO';
 import { Map } from '@modules/maps/infra/typeorm/entities/Map';
 
 import { IMapsRepository } from '../IMapsRepository';
@@ -17,6 +18,28 @@ class InMemoryMapsRepository implements IMapsRepository {
     this.repository.push(map);
 
     return map;
+  }
+
+  async update({ id, title, description, order }: IUpdateMapDTO): Promise<Map> {
+    const mapToBeUpdate = this.repository.find((map) => map.id === id);
+
+    const newMap = {
+      ...mapToBeUpdate,
+      title,
+      description,
+      order,
+    };
+
+    const repoUpdated = this.repository.map((map) => {
+      if (map.id === id) {
+        return newMap;
+      }
+      return map;
+    });
+
+    this.repository = repoUpdated;
+
+    return newMap;
   }
 
   async findById(id: string): Promise<Map> {
