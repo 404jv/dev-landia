@@ -1,5 +1,7 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup"
 import { PencilSimple, X } from "phosphor-react";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
@@ -8,6 +10,7 @@ import { InputWithLabel } from "../../components/Form/InputWithLabel";
 import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
 import { withSSRAuth } from "../../utils/withSSRAuth";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 interface Map {
   id: string;
@@ -16,15 +19,33 @@ interface Map {
   order: number;
 }
 
+interface UpdateMapFormData {
+  title: string;
+  description: string;
+  order: number;
+}
+
+const updateMapFormSchema = yup.object().shape({
+  title: yup.string().required("Título obrigatório."),
+  description: yup.string().required("Descrição obrigatória."),
+  order: yup.number().min(0, "A ordem deve ser maior ou igual a zero.").typeError("Digite um número válido."),
+})
+
 export default function Maps() {
   const [maps, setMaps] = useState<Map[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMap, setSelectedMap] = useState<Map>({} as Map);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [order, setOrder] = useState(0);
-    
+  const { register, handleSubmit, formState, reset } = useForm<UpdateMapFormData>({
+    resolver: yupResolver(updateMapFormSchema),
+    defaultValues: {
+      title: selectedMap.title,
+      description: selectedMap.description,
+      order: selectedMap.order
+    }
+  })
+  
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   function handleOpenModal(id: string) {
@@ -40,19 +61,12 @@ export default function Maps() {
   }
 
   function handleSelectMap(id: string) {
-    const mapToSelect = maps.find(map => map.id === id) as Map;
-    setSelectedMap(mapToSelect);
-    setTitle(mapToSelect.title);
-    setDescription(mapToSelect.description);
-    setOrder(mapToSelect.order);
+    const map = maps.find(map => map.id === id) as Map;
+    setSelectedMap(map);
   }
 
-  async function handleUpdateMap(event: FormEvent) {
-    event.preventDefault();
-
-    if (title.trim() === "" || description.trim() === "") {
-      return toast.error("Não deixe os campos vazios se for atualizar.");
-    }
+  const handleUpdateMap: SubmitHandler<UpdateMapFormData> = async({ title, order, description }) => {
+    setIsLoading(true);
 
     try {
       await api.put(`/maps/update/${selectedMap.id}`, {
@@ -64,11 +78,12 @@ export default function Maps() {
       toast.success('Mapa atualizado.');
 
       handleCloseModal();
+      loadData();
     } catch (error) {
       toast.error('Erro ao atualizar mapa.');
+    } finally {
+      setIsLoading(false);
     }
-
-    loadData();
   }
 
   async function loadData() {
@@ -80,6 +95,10 @@ export default function Maps() {
   useEffect(() => {
     loadData();
   }, []);
+
+  useEffect(() => {
+    reset(selectedMap)
+  }, [selectedMap, reset]);
 
   return (
     <>
@@ -151,35 +170,37 @@ export default function Maps() {
                 <X size={32} />
               </button>
 
-              <form method="post" onSubmit={handleUpdateMap} className="w-full px-7">
+              <form method="post" onSubmit={handleSubmit(handleUpdateMap)} className="w-full px-7">
                 <div className="flex flex-wrap gap-5 my-4">
                   <InputWithLabel 
                     label="Título"
-                    name="title"
                     variant="dark"
-                    value={title}
-                    onChange={(evt) => setTitle(evt.target.value)}
+                    defaultValue={selectedMap.title}
+                    error={formState.errors.title?.message as string}
+                    {...register("title")}
                   />
                   <InputWithLabel
                     label="Ordem"
-                    name="order"
-                    variant="dark"
-                    value={order}
-                    type="number"
-                    onChange={(evt) => setOrder(Number(evt.target.value))}
+                    variant="dark"      
+                    type="number"   
+                    defaultValue={selectedMap.order}
+                    error={formState.errors.order?.message as string}
+                    {...register("order")}         
                   />
                   <InputWithLabel
                     label="Descrição"
-                    name="description"
                     variant="dark"
-                    value={description}
-                    onChange={(evt) => setDescription(evt.target.value)}
+                    defaultValue={selectedMap.description}
+                    error={formState.errors.description?.message as string}
+                    {...register("description")}
                   />
                 </div>
 
                 <div className="mt-7">
                   <Button 
                     title="Editar Mapa"
+                    loading={isLoading}
+                    disabled={isLoading}
                   />
                 </div>
               </form>

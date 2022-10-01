@@ -1,24 +1,37 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { FormEvent, useState } from "react"
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup"
 import { toast, ToastContainer } from "react-toastify";
 import { Button } from "../../components/Form/Button";
 import { InputWithLabel } from "../../components/Form/InputWithLabel";
 import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
 import { withSSRAuth } from "../../utils/withSSRAuth";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useState } from "react";
+
+interface CreateMapFormData {
+  title: string;
+  description: string;
+  order: number;
+}
+
+const createMapFormSchema = yup.object().shape({
+  title: yup.string().required("Título obrigatório."),
+  description: yup.string().required("Descrição obrigatória."),
+  order: yup.number().min(0, "A ordem deve ser maior ou igual a zero.").typeError("Digite um número válido."),
+})
 
 export default function CreateMaps() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [order, setOrder] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  async function handleCreateMap(evt: FormEvent) {
-    evt.preventDefault();
+  const { register, handleSubmit, formState, reset } = useForm<CreateMapFormData>({
+    resolver: yupResolver(createMapFormSchema)
+  })
 
-    if (title.trim() === "" || description.trim() === "") {
-      return toast.error("Todos os campos são obrigatórios.");
-    }
+  const handleCreateMap: SubmitHandler<CreateMapFormData> = async ({ title, description, order }) => {
+    setIsLoading(true);
 
     try {
       await api.post('/maps/create', {
@@ -27,13 +40,13 @@ export default function CreateMaps() {
         order
       });
 
-      toast.success("Mapa criado.");
+      reset();
 
-      setTitle('');
-      setDescription('');
-      setOrder(0);
+      toast.success("Mapa criado.");
     } catch (error) {
       toast.error("Erro ao criar mapa.");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -54,34 +67,34 @@ export default function CreateMaps() {
         <div className="flex flex-1 bg-gray-950">
           <div className="mt-28 ml-3">
             <h1 className="text-gray-150 text-4xl font-medium">Criação de mapas</h1>
-            <form method="post" onSubmit={handleCreateMap} className="mt-9 px-4">
-              <div className="max-w-2xl w-full flex flex-wrap gap-4 mb-7">
+            <form onSubmit={handleSubmit(handleCreateMap)} className="mt-9 px-4">
+              <div className="max-w-3xl w-full flex flex-wrap gap-4 mb-7">
                 <InputWithLabel 
                   label="Título" 
-                  name="title" 
-                  value={title}
-                  onChange={(evt) => setTitle(evt.target.value)}
-                  required
+                  error={formState.errors.title?.message as string}
+                  {...register("title")} 
                 />
 
                 <InputWithLabel 
-                  label="Ordem" 
-                  name="order" 
+                  label="Ordem"             
                   type="number" 
-                  value={order}
-                  onChange={(evt) => setOrder(Number(evt.target.value))}
+                  error={formState.errors.order?.message as string}
+                  {...register("order")}
                 /> 
 
                 <InputWithLabel 
                   label="Descrição" 
-                  name="description" 
-                  value={description}
-                  onChange={(evt) => setDescription(evt.target.value)}
-                  required
+                  error={formState.errors.description?.message as string}
+                  {...register("description")}
                 />    
               </div>
 
-              <Button title="Criar Mapa" type="submit" />
+              <Button 
+                loading={isLoading} 
+                disabled={isLoading}
+                title="Criar Mapa" 
+                type="submit"            
+              />
             </form>
           </div>
         </div>
