@@ -1,26 +1,34 @@
-import { InputHTMLAttributes } from 'react'
+import { forwardRef, ForwardRefRenderFunction, InputHTMLAttributes } from 'react'
+import { FieldError } from 'react-hook-form';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
-  placeholder?: string;
+  variant?: 'default' | 'dark';
+  error?: string;
 }
 
-export function InputWithLabel({ name, label, placeholder, type = 'text', ...rest }: InputProps) {
+const InputWithLabelBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
+ = ({ name, label, variant = 'default', error = null, type = "text", ...rest }, ref) => {
   return (
     <div>
-      <label className="text-base text-blue-250 tracking-wider mb-2 block" htmlFor={name}>
-        {label}
-      </label>
-      <div className={`flex items-center ${type === 'number' ? 'w-3/5' : 'w-full'} px-5 py-4 bg-gray-850 rounded-md border-2 border-transparent focus-within:border-blue-450`}>
+      <div className="flex items-center gap-4 mb-2">
+        <label className="text-base text-blue-250 tracking-wider" htmlFor={name}>
+          {label}
+        </label>
+        { error && <span className="text-red">({error})</span> }
+      </div>
+      <div className={`flex items-center ${type === 'number' ? 'w-2/3' : 'w-full'} px-5 py-4 ${variant === 'default' ? 'bg-gray-850' : 'bg-gray-950'} rounded-md border-2 border-transparent focus-within:border-blue-450`}>
         <input
           name={name}
           className="bg-transparent w-full text-gray-350 text-xl outline-none"
-          placeholder={placeholder}
           type={type}
+          ref={ref}
           {...rest}
         />
       </div>
     </div>
   )
 }
+
+export const InputWithLabel = forwardRef(InputWithLabelBase)

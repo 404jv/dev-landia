@@ -1,6 +1,7 @@
 import { Repository } from 'typeorm';
 
 import { ICreateMapDTO } from '@modules/maps/dtos/ICreateMapDTO';
+import { IUpdateMapDTO } from '@modules/maps/dtos/IUpdateMapDTO';
 import { IMapsRepository } from '@modules/maps/repositories/IMapsRepository';
 import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
@@ -49,6 +50,12 @@ class MapsRepository implements IMapsRepository {
     await this.repository.save(map);
 
     return map;
+  }
+
+  async update(data: IUpdateMapDTO): Promise<Map> {
+    const newMap = await this.repository.save(data);
+
+    return newMap;
   }
 
   async list(): Promise<Map[]> {
