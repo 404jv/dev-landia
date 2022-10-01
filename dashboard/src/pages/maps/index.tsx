@@ -21,9 +21,9 @@ export default function Maps() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMap, setSelectedMap] = useState<Map>({} as Map);
 
-  const [title, setTitle] = useState(selectedMap.title);
-  const [description, setDescription] = useState(selectedMap.description);
-  const [order, setOrder] = useState(selectedMap.order);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [order, setOrder] = useState(0);
     
   const dialogRef = useRef<HTMLDialogElement>(null);
 
