@@ -52,8 +52,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   function signOut() {
-    console.log('out')
-    destroyCookie(undefined, 'dashboard-devlandia.token');
+    setCookie(undefined, 'dashboard-devlandia.token', '', {
+      maxAge: -1, 
+      path: '/'
+    });
     
     Router.push('/');
   }
