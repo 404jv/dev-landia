@@ -10,6 +10,7 @@ import { api } from "../../services/api";
 import { withSSRAuth } from "../../utils/withSSRAuth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
+import { Header } from "../../components/Header";
 
 interface CreateMapFormData {
   title: string;
@@ -55,47 +56,51 @@ export default function CreateMaps() {
       <Head>
         <title>Dashboard DevLândia | Criação de mapas</title>
       </Head>
-      <div className="flex w-full h-screen overflow-auto">
-        <ToastContainer 
-          theme="colored" 
-          toastClassName="errorAlert"
-          autoClose={2000} 
-          pauseOnHover={false} 
-        />
-        <Sidebar />
+      <div className="h-screen bg-gray-950 overflow-auto">
+        <Header />
 
-        <div className="flex flex-1 bg-gray-950">
-          <div className="mt-28 ml-3">
-            <h1 className="text-gray-150 text-4xl font-medium">Criação de mapas</h1>
-            <form onSubmit={handleSubmit(handleCreateMap)} className="mt-9 px-4">
-              <div className="max-w-3xl w-full flex flex-wrap gap-4 mb-7">
-                <InputWithLabel 
-                  label="Título" 
-                  error={formState.errors.title?.message as string}
-                  {...register("title")} 
+        <div className="flex w-full">
+          <ToastContainer 
+            theme="colored" 
+            toastClassName="errorAlert"
+            autoClose={2000} 
+            pauseOnHover={false} 
+          />
+          <Sidebar />
+
+          <div className="flex flex-1">
+            <div className="mt-28 ml-3">
+              <h1 className="text-gray-150 text-4xl font-medium">Criação de mapas</h1>
+              <form onSubmit={handleSubmit(handleCreateMap)} className="mt-9 px-4">
+                <div className="max-w-3xl w-full flex flex-wrap gap-4 mb-7">
+                  <InputWithLabel 
+                    label="Título" 
+                    error={formState.errors.title?.message as string}
+                    {...register("title")} 
+                  />
+
+                  <InputWithLabel 
+                    label="Ordem"             
+                    type="number" 
+                    error={formState.errors.order?.message as string}
+                    {...register("order")}
+                  /> 
+
+                  <InputWithLabel 
+                    label="Descrição" 
+                    error={formState.errors.description?.message as string}
+                    {...register("description")}
+                  />    
+                </div>
+
+                <Button 
+                  loading={isLoading} 
+                  disabled={isLoading}
+                  title="Criar Mapa" 
+                  type="submit"            
                 />
-
-                <InputWithLabel 
-                  label="Ordem"             
-                  type="number" 
-                  error={formState.errors.order?.message as string}
-                  {...register("order")}
-                /> 
-
-                <InputWithLabel 
-                  label="Descrição" 
-                  error={formState.errors.description?.message as string}
-                  {...register("description")}
-                />    
-              </div>
-
-              <Button 
-                loading={isLoading} 
-                disabled={isLoading}
-                title="Criar Mapa" 
-                type="submit"            
-              />
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
