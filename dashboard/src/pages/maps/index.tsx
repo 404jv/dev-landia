@@ -118,64 +118,64 @@ export default function Maps() {
           />
           <Sidebar />
 
-          <div className="flex flex-1">
-            <div className="mt-28 ml-3">
-              <h1 className="text-gray-150 text-4xl font-medium">Listagem de mapas</h1>
+          <div className="mt-10 ml-10 flex flex-col">
+            <h1 className="text-gray-150 text-4xl font-medium">Listagem de mapas</h1>
 
-              <table className="w-full mt-9 border-separate border-spacing-y-2"> 
-                <thead>
-                  <tr>
-                    <th className="font-normal text-base text-gray-450 text-left px-5">Título</th>
-                    <th className="font-normal text-base text-gray-450 text-left px-5">Descrição</th>
-                    <th className="font-normal text-base text-gray-450 text-center">Ordem</th>
-                    <th className="font-normal text-base text-gray-450 text-left px-5">id</th>
-                  </tr>
-                </thead>
+            <table className="w-full mt-9 border-separate border-spacing-y-2"> 
+              <thead>
+                <tr>
+                  <th className="font-normal text-base text-gray-450 text-left px-5">Título</th>
+                  <th className="font-normal text-base text-gray-450 text-left px-5">Descrição</th>
+                  <th className="font-normal text-base text-gray-450 text-center">Ordem</th>
+                  <th className="font-normal text-base text-gray-450 text-left px-5">id</th>
+                </tr>
+              </thead>
 
-                <tbody>
-                  {
-                    maps.map(map => (
-                      <tr key={map.id}>
-                        <td className="bg-gray-900 rounded-tl-md rounded-bl-md px-5 py-4 text-base font-normal text-gray-400">
-                          {map.title}
-                        </td>
-                        <td className="bg-gray-900 px-5 py-4 text-base font-normal text-gray-400">
-                          {map.description}
-                        </td>
-                        <td className="bg-gray-900 px-5 py-4 text-base font-normal text-gray-400">
-                          {map.order}
-                        </td>
-                        <td className="bg-gray-900 px-5 py-4 text-xs font-normal text-blue-350">
-                          {map.id}
-                        </td>
-                        <td className="bg-gray-900 rounded-tr-md rounded-br-md text-white pr-5 py-4">
-                          <button 
-                            onClick={() => handleOpenModal(map.id)}
-                            className="w-6 h-6 bg-gray-450 rounded-md flex items-center justify-center hover:opacity-90"
-                          >
-                            <PencilSimple weight="fill" size={12} />
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
+              <tbody>
+                {
+                  maps.map(map => (
+                    <tr key={map.id}>
+                      <td className="bg-gray-900 rounded-tl-md rounded-bl-md px-5 py-4 text-base font-normal text-gray-400">
+                        {map.title}
+                      </td>
+                      <td className="bg-gray-900 px-5 py-4 text-base font-normal text-gray-400">
+                        {map.description}
+                      </td>
+                      <td className="bg-gray-900 px-5 py-4 text-base font-normal text-gray-400">
+                        {map.order}
+                      </td>
+                      <td className="bg-gray-900 px-5 py-4 text-xs font-normal text-blue-350">
+                        {map.id}
+                      </td>
+                      <td className="bg-gray-900 rounded-tr-md rounded-br-md text-white pr-5 py-4">
+                        <button 
+                          onClick={() => handleOpenModal(map.id)}
+                          className="w-6 h-6 bg-gray-450 rounded-md flex items-center justify-center hover:opacity-90"
+                        >
+                          <PencilSimple weight="fill" size={12} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
 
-              <dialog 
-                ref={dialogRef}
-                onClose={handleCloseModal}
-                className={`${isModalOpen && 'backdrop:bg-black backdrop:opacity-60 rounded-xl max-w-3xl w-full max-h-[28rem] h-full bg-gray-850 flex flex-col p-0 px-7 py-5 overflow-hidden'}`} 
+            <dialog 
+              ref={dialogRef}
+              onClose={handleCloseModal}
+              className={`${isModalOpen && 'backdrop:bg-black backdrop:opacity-60 rounded-xl max-w-3xl w-full max-h-[28rem] h-full bg-gray-850 flex flex-col p-0 px-7 py-5 overflow-hidden'}`} 
+            >
+              <button 
+                onClick={handleCloseModal}
+                className="text-gray-450 self-end border-0 bg-transparent"
               >
-                <button 
-                  onClick={handleCloseModal}
-                  className="text-gray-450 self-end border-0 bg-transparent"
-                >
-                  <X size={32} />
-                </button>
+                <X size={32} />
+              </button>
 
-                <form method="post" onSubmit={handleSubmit(handleUpdateMap)} className="w-full px-7">
-                  <div className="flex flex-wrap gap-5 my-4">
+              <form method="post" onSubmit={handleSubmit(handleUpdateMap)} className="w-full px-7">
+                <div className="flex flex-col gap-5 my-4">
+                  <div className="flex gap-5">
                     <InputWithLabel 
                       label="Título"
                       variant="dark"
@@ -187,29 +187,31 @@ export default function Maps() {
                       label="Ordem"
                       variant="dark"      
                       type="number"   
+                      inputSize="small"
                       defaultValue={selectedMap.order}
                       error={formState.errors.order?.message as string}
                       {...register("order")}         
                     />
-                    <InputWithLabel
-                      label="Descrição"
-                      variant="dark"
-                      defaultValue={selectedMap.description}
-                      error={formState.errors.description?.message as string}
-                      {...register("description")}
-                    />
                   </div>
 
-                  <div className="mt-7">
-                    <Button 
-                      title="Editar Mapa"
-                      loading={isLoading}
-                      disabled={isLoading}
-                    />
-                  </div>
-                </form>
-              </dialog>
-            </div>
+                  <InputWithLabel
+                    label="Descrição"
+                    variant="dark"
+                    defaultValue={selectedMap.description}
+                    error={formState.errors.description?.message as string}
+                    {...register("description")}
+                  />
+                </div>
+
+                <div className="mt-7">
+                  <Button 
+                    title="Editar Mapa"
+                    loading={isLoading}
+                    disabled={isLoading}
+                  />
+                </div>
+              </form>
+            </dialog>
           </div>
         </div>
       </div>

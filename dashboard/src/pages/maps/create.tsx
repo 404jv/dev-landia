@@ -67,12 +67,12 @@ export default function CreateMaps() {
             pauseOnHover={false} 
           />
           <Sidebar />
-
-          <div className="flex flex-1">
-            <div className="mt-28 ml-3">
-              <h1 className="text-gray-150 text-4xl font-medium">Criação de mapas</h1>
-              <form onSubmit={handleSubmit(handleCreateMap)} className="mt-9 px-4">
-                <div className="max-w-3xl w-full flex flex-wrap gap-4 mb-7">
+  
+          <div className="mt-10 ml-10 flex flex-col">
+            <h1 className="text-gray-150 text-4xl font-medium">Criação de mapas</h1>
+            <form onSubmit={handleSubmit(handleCreateMap)} className="mt-9 px-4">
+              <div className="max-w-3xl w-full flex flex-col gap-4 mb-7">
+                <div className="flex gap-5">
                   <InputWithLabel 
                     label="Título" 
                     error={formState.errors.title?.message as string}
@@ -82,25 +82,26 @@ export default function CreateMaps() {
                   <InputWithLabel 
                     label="Ordem"             
                     type="number" 
+                    inputSize="small"
                     error={formState.errors.order?.message as string}
                     {...register("order")}
                   /> 
-
-                  <InputWithLabel 
-                    label="Descrição" 
-                    error={formState.errors.description?.message as string}
-                    {...register("description")}
-                  />    
                 </div>
 
-                <Button 
-                  loading={isLoading} 
-                  disabled={isLoading}
-                  title="Criar Mapa" 
-                  type="submit"            
-                />
-              </form>
-            </div>
+                <InputWithLabel 
+                  label="Descrição" 
+                  error={formState.errors.description?.message as string}
+                  {...register("description")}
+                />    
+              </div>
+
+              <Button 
+                loading={isLoading} 
+                disabled={isLoading}
+                title="Criar Mapa" 
+                type="submit"            
+              />
+            </form>
           </div>
         </div>
       </div>
