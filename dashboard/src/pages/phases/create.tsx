@@ -1,12 +1,21 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer } from "react-toastify";
 import { Button } from "../../components/Form/Button";
 import { InputWithLabel } from "../../components/Form/InputWithLabel";
+import { Select } from "../../components/Form/Select";
 import { TextArea } from "../../components/Form/TextArea";
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
+import { api } from "../../services/api";
+
+interface Map {
+  id: string;
+  title: string;
+  description: string;
+  order: number;
+}
 
 interface CreatePhaseFormData {
   title: string;
@@ -20,9 +29,31 @@ interface CreatePhaseFormData {
 }
 
 export default function CreatePhases() {
+  const [maps, setMaps] = useState<Map[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const { register, handleSubmit, formState } = useForm<CreatePhaseFormData>();
+
+  async function loadData() {
+    const response = await api.get("/maps");
+
+    setMaps(response.data);
+  }
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const phaseTypes = [
+    {
+      id: new Date().getTime().toString() + Math.random().toString(),
+      title: 'theory',
+    },
+    {
+      id: new Date().getTime().toString() + Math.random().toString(),
+      title: 'practice'
+    }
+  ]
 
   return (
     <>
@@ -60,9 +91,10 @@ export default function CreatePhases() {
                 </div>
 
                 <div className="flex gap-5">
-                  <InputWithLabel
+                  <Select
                     label="Tipo"
                     {...register("type")}
+                    options={phaseTypes}
                   />
 
                   <InputWithLabel
@@ -74,9 +106,10 @@ export default function CreatePhases() {
                 </div>
 
                 <div className="flex gap-5">
-                  <InputWithLabel
+                  <Select
                     label="Mapa"
                     {...register("map_id")}
+                    options={maps}
                   />
 
                   <InputWithLabel
