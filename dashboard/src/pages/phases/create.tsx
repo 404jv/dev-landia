@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { Button } from "../../components/Form/Button";
 import { InputWithLabel } from "../../components/Form/InputWithLabel";
 import { Select } from "../../components/Form/Select";
@@ -38,12 +38,12 @@ const createPhaseFormSchema = yup.object().shape({
   max_level: yup.number().required("O level máximo é obrigatório.").typeError("Número inválido.")
     .when(['type'], (type: 'theory' | 'practice') => {
       if (type === 'theory') {
-        return yup.number().oneOf([1], 'Level máximo deve ser 1').typeError("Número inválido.")
+        return yup.number().oneOf([1], 'Level máximo deve ser 1').typeError("Número inválido.").required("Level máximo é obrigatório.")
       }
        
-      return yup.number().min(3, 'Level máximo deve ser igual ou maior a 3').typeError("Número inválido.")
+      return yup.number().min(3, 'Level máximo deve ser igual ou maior a 3').typeError("Número inválido.").required("Level máximo é obrigatório.")
     }),
-  map_id: yup.string(),
+  map_id: yup.string().required("Id do mapa é obrigatório."),
   hexadecimal_color: yup.string(),
   description: yup.string().required("Descrição obrigatória."),
   markdown_text: yup.string(),
@@ -59,9 +59,29 @@ export default function CreatePhases() {
 
   const handleCreatePhase: SubmitHandler<CreatePhaseFormData> 
    = async ({ title, order, type, max_level, map_id, hexadecimal_color, description, markdown_text }) => {
-    alert('Loco de bão');
+    setIsLoading(true);
 
-    reset();
+    try {
+      await api.post('/phases/create', {
+        title,
+        map_id,
+        max_level,
+        type,
+        markdown_text,
+        order,
+        description,
+        hexadecimal_color,
+      });
+
+      reset();
+
+      toast.success("Fase criada.");
+    } catch (error) {
+      console.log(error);
+      toast.error("Erro ao criar fase.");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function loadData() {
