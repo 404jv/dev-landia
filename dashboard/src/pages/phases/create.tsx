@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { ToastContainer } from "react-toastify";
 import { Button } from "../../components/Form/Button";
 import { InputWithLabel } from "../../components/Form/InputWithLabel";
+import { TextArea } from "../../components/Form/TextArea";
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 
@@ -82,6 +83,7 @@ export default function CreatePhases() {
                     label="Cor hexadecimal"
                     inputSize="small"
                     {...register("hexadecimal_color")}
+                    optional={true}
                   />
                 </div>
 
@@ -90,18 +92,21 @@ export default function CreatePhases() {
                   {...register("description")}
                 />
 
-                <InputWithLabel
+                <TextArea
                   label="Markdown"
                   {...register("markdown_text")}
+                  optional
                 />  
               </div>
               
-              <Button 
-                loading={isLoading} 
-                disabled={isLoading}
-                title="Criar fase" 
-                type="submit"            
-              />
+              <div className="mb-10">
+                <Button 
+                  loading={isLoading} 
+                  disabled={isLoading}
+                  title="Criar fase" 
+                  type="submit"            
+                />
+              </div>
             </form>
           </div>
         </div>
