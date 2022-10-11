@@ -15,7 +15,7 @@ const TextAreaBase: ForwardRefRenderFunction<HTMLTextAreaElement, TextAreaProps>
         <label className="text-base text-blue-250 tracking-wider" htmlFor={name}>
           {label} {optional && <span className="text-gray-400">(opcional)</span>}
         </label>
-        { error && <span className="text-red">({error})</span> }
+        { error && <span className="text-red text-sm">({error})</span> }
       </div>
 
       <div className='flex items-center px-5 py-4 bg-gray-850 rounded-md border-2 border-transparent focus-within:border-blue-450'>
