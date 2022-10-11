@@ -43,7 +43,7 @@ const createPhaseFormSchema = yup.object().shape({
        
       return yup.number().min(3, 'Level máximo deve ser igual ou maior a 3').typeError("Número inválido.").required("Level máximo é obrigatório.")
     }),
-  map_id: yup.string().required("Id do mapa é obrigatório."),
+  map_id: yup.string().required("Id do mapa é obrigatório.").trim("Id do mapa é obrigatório."),
   hexadecimal_color: yup.string(),
   description: yup.string().required("Descrição obrigatória."),
   markdown_text: yup.string(),

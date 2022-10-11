@@ -32,10 +32,9 @@ const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps>
         className='flex items-center w-full px-5 py-4 text-gray-350 text-xl outline-none bg-gray-850 rounded-md border-2 border-transparent focus-within:border-blue-450'
         {...rest}
       >
-        <option disabled selected className="bg-gray-850">
+        <option value="" selected disabled className="bg-gray-850">
           Selecione uma opção
         </option>
-
         {
           options.map(option => (
             <option value={option.value} key={option.id} className="bg-gray-850">
