@@ -190,6 +190,7 @@ export default function Maps() {
                       inputSize="small"
                       defaultValue={selectedMap.order}
                       error={formState.errors.order?.message as string}
+                      min={0}
                       {...register("order")}         
                     />
                   </div>

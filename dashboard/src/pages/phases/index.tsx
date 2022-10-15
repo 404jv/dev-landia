@@ -210,7 +210,8 @@ export default function Phases() {
                       variant="dark"      
                       type="number"   
                       inputSize="small"
-                      defaultValue={selectedPhase.order}      
+                      defaultValue={selectedPhase.order}   
+                      min={0}   
                     />
                   </div>
 
@@ -227,7 +228,8 @@ export default function Phases() {
                       variant="dark"      
                       type="number"   
                       inputSize="small"
-                      defaultValue={selectedPhase.max_level}      
+                      defaultValue={selectedPhase.max_level} 
+                      min={1}     
                     />
                   </div>
          

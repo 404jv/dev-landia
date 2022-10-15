@@ -141,6 +141,7 @@ export default function CreatePhases() {
                     inputSize="small"
                     {...register("order")}
                     error={formState.errors.order?.message}
+                    min={0}
                   />
                 </div>
 
@@ -158,6 +159,7 @@ export default function CreatePhases() {
                     inputSize="small"
                     {...register("max_level")}
                     error={formState.errors.max_level?.message}
+                    min={1}
                   />
                 </div>
 
