@@ -121,7 +121,7 @@ export default function Maps() {
           <div className="mt-10 ml-10 flex flex-col">
             <h1 className="text-gray-150 text-4xl font-medium">Listagem de mapas</h1>
 
-            <table className="w-full mt-9 border-separate border-spacing-y-2"> 
+            <table className="max-w-5xl w-full mt-9 border-separate border-spacing-y-2"> 
               <thead>
                 <tr>
                   <th className="font-normal text-base text-gray-450 text-left px-5">Título</th>
