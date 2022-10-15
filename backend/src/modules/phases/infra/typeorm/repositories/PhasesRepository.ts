@@ -38,7 +38,11 @@ class PhasesRepository implements IPhasesRepository {
   }
 
   async list(): Promise<Phase[]> {
-    const phases = await this.repository.query('SELECT * FROM phases');
+    const phases = await this.repository.find({
+      relations: {
+        map: true,
+      },
+    });
     return phases;
   }
 

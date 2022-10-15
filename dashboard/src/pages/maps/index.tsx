@@ -164,7 +164,7 @@ export default function Maps() {
             <dialog 
               ref={dialogRef}
               onClose={handleCloseModal}
-              className={`${isModalOpen && 'backdrop:bg-black backdrop:opacity-60 rounded-xl max-w-3xl w-full max-h-[28rem] h-full bg-gray-850 flex flex-col p-0 px-7 py-5 overflow-hidden'}`} 
+              className={`${isModalOpen && 'backdrop:bg-black backdrop:opacity-60 rounded-xl max-w-3xl w-full bg-gray-850 flex flex-col p-0 px-7 py-5 overflow-hidden'}`} 
             >
               <button 
                 onClick={handleCloseModal}
@@ -203,7 +203,7 @@ export default function Maps() {
                   />
                 </div>
 
-                <div className="mt-7">
+                <div className="my-7">
                   <Button 
                     title="Editar Mapa"
                     loading={isLoading}

@@ -169,7 +169,7 @@ export default function CreatePhases() {
                       return {
                         id: map.id,
                         title: map.title,
-                        description: map.description,
+                        description: String(map.order),
                         value: map.id,
                       }
                     })}
