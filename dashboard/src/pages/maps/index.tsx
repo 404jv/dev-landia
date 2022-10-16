@@ -3,7 +3,7 @@ import Head from "next/head";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup"
 import { PencilSimple, X } from "phosphor-react";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { Button } from "../../components/Form/Button";
 import { InputWithLabel } from "../../components/Form/InputWithLabel";
