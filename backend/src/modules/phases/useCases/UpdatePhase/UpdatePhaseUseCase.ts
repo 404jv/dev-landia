@@ -8,7 +8,7 @@ import { PhaseDoesNotExistsError } from './errors/PhaseDoesNotExistsError';
 @injectable()
 class UpdatePhaseUseCase {
   constructor(
-    @inject('PhaseRepository')
+    @inject('PhasesRepository')
     private phasesRepository: IPhasesRepository
   ) {}
 
