@@ -354,8 +354,8 @@ export default function Phases() {
                 <div className="my-7">
                   <Button 
                     title="Editar Fase"
-                    loading={false}
-                    disabled={false}
+                    loading={isLoading}
+                    disabled={isLoading}
                   />
                 </div>
               </form>
