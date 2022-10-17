@@ -85,6 +85,7 @@ export default function CreateMaps() {
                     inputSize="small"
                     error={formState.errors.order?.message as string}
                     {...register("order")}
+                    min={0}
                   /> 
                 </div>
 

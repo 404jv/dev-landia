@@ -3,7 +3,7 @@ import Head from "next/head";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup"
 import { PencilSimple, X } from "phosphor-react";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { Button } from "../../components/Form/Button";
 import { InputWithLabel } from "../../components/Form/InputWithLabel";
@@ -164,7 +164,7 @@ export default function Maps() {
             <dialog 
               ref={dialogRef}
               onClose={handleCloseModal}
-              className={`${isModalOpen && 'backdrop:bg-black backdrop:opacity-60 rounded-xl max-w-3xl w-full max-h-[28rem] h-full bg-gray-850 flex flex-col p-0 px-7 py-5 overflow-hidden'}`} 
+              className={`${isModalOpen && 'backdrop:bg-black backdrop:opacity-60 rounded-xl max-w-3xl w-full bg-gray-850 flex flex-col p-0 px-7 py-5 overflow-hidden'}`} 
             >
               <button 
                 onClick={handleCloseModal}
@@ -190,6 +190,7 @@ export default function Maps() {
                       inputSize="small"
                       defaultValue={selectedMap.order}
                       error={formState.errors.order?.message as string}
+                      min={0}
                       {...register("order")}         
                     />
                   </div>
@@ -203,7 +204,7 @@ export default function Maps() {
                   />
                 </div>
 
-                <div className="mt-7">
+                <div className="my-7">
                   <Button 
                     title="Editar Mapa"
                     loading={isLoading}

@@ -10,13 +10,15 @@ interface Option {
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   label: string;
+  variant?: 'default' | 'dark';
   options: Option[];
   error?: string;
   optional?: boolean;
+  defaultSelected?: string;
 }
 
 const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps>
- = ({ name, label, options, error = null, optional = false, ...rest }, ref) => {
+ = ({ name, label, variant = 'default', options, error = null, optional = false, defaultSelected = null, ...rest }, ref) => {
   return (
     <div className="w-full">
       <div className="flex items-center gap-4 mb-2">
@@ -29,15 +31,20 @@ const SelectBase: ForwardRefRenderFunction<HTMLSelectElement, SelectProps>
       <select 
         ref={ref} 
         name={name}
-        className='flex items-center w-full px-5 py-4 text-gray-350 text-xl outline-none bg-gray-850 rounded-md border-2 border-transparent focus-within:border-blue-450'
+        className={`flex items-center w-full px-5 py-4 text-gray-350 text-xl outline-none ${variant === 'default' ? 'bg-gray-850' : 'bg-gray-950'} rounded-md border-2 border-transparent focus-within:border-blue-450`}
         {...rest}
       >
-        <option value="" selected disabled className="bg-gray-850">
-          Selecione uma opção
-        </option>
+        {
+          defaultSelected === null && (
+            <option value="" selected disabled className="bg-gray-850">
+              Selecione uma opção
+            </option>
+          )
+        }
+
         {
           options.map(option => (
-            <option value={option.value} key={option.id} className="bg-gray-850">
+            <option value={option.value} selected={option.value === defaultSelected} key={option.id} className="bg-gray-850">
               {option.title}{option.description && (`, ${option.description}`)}
             </option>
           ))
