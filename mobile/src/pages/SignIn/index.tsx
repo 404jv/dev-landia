@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StatusBar, TouchableOpacity } from "react-native";
+import React, { useRef, useState } from "react";
+import { StatusBar, TouchableOpacity, Keyboard } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { useTheme } from "styled-components";
@@ -24,12 +24,14 @@ import {
 } from "./styles";
 
 export function SignIn(): JSX.Element {
-  const navigation = useNavigation();
-  const { signIn } = useAuth();
-
-  const theme = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const passWordRef = useRef(null);
+
+  const navigation = useNavigation();
+  const theme = useTheme();
+
+  const { signIn } = useAuth();
 
   async function handleSignIn(): Promise<void> {
     try {
@@ -88,6 +90,8 @@ export function SignIn(): JSX.Element {
             autoCapitalize="none"
             onChangeText={setEmail}
             value={email}
+            onSubmitEditing={() => passWordRef.current.focus()}
+            blurOnSubmit={false}
           />
 
           <PasswordInput
@@ -95,6 +99,9 @@ export function SignIn(): JSX.Element {
             placeholder="Senha"
             onChangeText={setPassword}
             value={password}
+            ref={passWordRef}
+            onSubmitEditing={() => Keyboard.dismiss()}
+            blurOnSubmit={false}
           />
         </Form>
 
