@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { ScrollView, StatusBar } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Modal, Portal, Provider } from "react-native-paper";
-import { ScrollView } from "react-native";
 import { useTheme } from "styled-components";
-import { StatusBar } from "react-native";
+
+import { Modal, Portal, Provider } from "react-native-paper";
 import { playSound } from "../../../utils/playSound";
+
+import { Menu } from "../../../components/Menu";
+import { Bash } from "../../../components/Bash";
+import { Editor } from "../../../components/Editor";
+import { ActivityStatusModal } from "../../../components/ActivityStatusModal";
+
+import { Activity, IOption } from "./IPractical";
 
 import {
   Description,
@@ -25,36 +32,6 @@ import {
   ModalButton,
   ModalButtonText,
 } from "./styles";
-
-import { Menu } from "../../../components/Menu";
-import { Bash } from "../../../components/Bash";
-import { Editor } from "../../../components/Editor";
-import { ActivityStatusModal } from "../../../components/ActivityStatusModal";
-
-interface IOption {
-  id: string;
-  name: string;
-  type: string;
-  hexadecimal_color: string;
-}
-
-interface TipsProps {
-  id: string;
-  name: string;
-}
-
-type Activity = {
-  id: string;
-  title: string;
-  description: string;
-  type: string;
-  default_code: IOption[];
-  activity_answer: IOption[];
-  is_needed_tests: boolean;
-  tips: TipsProps[];
-  options: IOption[];
-  order: number;
-};
 
 interface Props {
   currentActivity: Activity;

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { StatusBar, TouchableOpacity } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 import { Root, Popup } from "popup-ui";
 import { Feather } from "@expo/vector-icons";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { StatusBar, Alert, TouchableOpacity } from "react-native";
 import { useTheme } from "styled-components";
+
 import { Button } from "../../components/Form/Button";
 import { PasswordInput } from "../../components/Form/PasswordInput";
+
 import { api } from "../../services/api";
+
+import { UserDataInfos } from "./INextSignUp";
 
 import {
   ChangeScreen,
@@ -21,14 +26,6 @@ import {
   Title,
   CheckBox,
 } from "./styles";
-
-interface UserDataInfos {
-  userData: {
-    name: string;
-    email: string;
-    user: string;
-  };
-}
 
 export function NextSignUp(): JSX.Element {
   const route = useRoute().params as UserDataInfos;
@@ -94,7 +91,6 @@ export function NextSignUp(): JSX.Element {
       })
       .catch((error) => {
         const errorMessage = error.response.data.message;
-        console.log(errorMessage);
 
         if (
           errorMessage ===

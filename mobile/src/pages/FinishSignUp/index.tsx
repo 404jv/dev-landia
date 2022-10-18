@@ -1,13 +1,11 @@
 import React from "react";
-
 import { StatusBar, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { useTheme } from "styled-components";
-
-import { useNavigation } from "@react-navigation/native";
-import { Container, Logo, Title, Button } from "./styles";
-
 import LogoPng from "../../assets/logo.png";
+
+import { Container, Logo, Title, Button } from "./styles";
 
 export function FinishSignUp(): JSX.Element {
   const navigation = useNavigation();

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { Root, Popup } from "popup-ui";
-import * as Yup from "yup";
-
-import { Alert, StatusBar, TouchableOpacity } from "react-native";
+import { StatusBar, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { useTheme } from "styled-components";
 
-import { useNavigation } from "@react-navigation/native";
-import LogoPng from "../../assets/BlueLogo.png";
-import { Button } from "../../components/Form/Button";
+import { Root, Popup } from "popup-ui";
+import * as Yup from "yup";
+import { useAuth } from "../../hooks/auth";
 
 import { Input } from "../../components/Form/Input";
+import { Button } from "../../components/Form/Button";
 import { PasswordInput } from "../../components/Form/PasswordInput";
+import LogoPng from "../../assets/BlueLogo.png";
 
 import {
   Container,
@@ -22,7 +22,6 @@ import {
   SignUp,
   SignUpText,
 } from "./styles";
-import { useAuth } from "../../hooks/auth";
 
 export function SignIn(): JSX.Element {
   const navigation = useNavigation();

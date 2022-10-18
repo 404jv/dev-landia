@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import * as Yup from "yup";
+import { Alert, StatusBar, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { Feather } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
-import { Alert, StatusBar, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+
+import * as Yup from "yup";
+import { Input } from "../../components/Form/Input";
+import { Button } from "../../components/Form/Button";
 
 import {
   Title,
@@ -16,8 +19,6 @@ import {
   ContainerChangeScreen,
   ChangeScreen,
 } from "./styles";
-import { Input } from "../../components/Form/Input";
-import { Button } from "../../components/Form/Button";
 
 export function SignUp(): JSX.Element {
   const theme = useTheme();
@@ -42,13 +43,7 @@ export function SignUp(): JSX.Element {
         email: email.trim(),
         user: user.trim(),
       });
-      navigation.navigate("NextSignUp", {
-        userData: {
-          name: name.trim(),
-          email: email.trim(),
-          user: user.trim(),
-        },
-      });
+      navigation.navigate("NextSignUp", { userData });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert(error.message);

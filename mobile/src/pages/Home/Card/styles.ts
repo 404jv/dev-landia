@@ -17,7 +17,6 @@ type PhaseTypeProps = {
 export const Container = styled(TouchableOpacity)`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.secondary};
-  padding: 12px 9px;
 
   border-radius: 8px;
 `;
