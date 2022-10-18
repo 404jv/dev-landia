@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StatusBar, TouchableOpacity } from "react-native";
+import React, { useRef, useState } from "react";
+import { StatusBar, TouchableOpacity, Keyboard } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { Root, Popup } from "popup-ui";
@@ -34,6 +34,7 @@ export function NextSignUp(): JSX.Element {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [termIsAccepted, setTermIsAccepted] = useState(false);
+  const confirmPasswordRef = useRef(null);
 
   const theme = useTheme();
   const navigation = useNavigation();
@@ -162,7 +163,10 @@ export function NextSignUp(): JSX.Element {
               autoCapitalize="none"
               onChangeText={setPassword}
               value={password}
+              onSubmitEditing={() => confirmPasswordRef.current.focus()}
+              blurOnSubmit={false}
             />
+
             <PasswordInput
               iconName="lock"
               placeholder="Confirmar senha"
@@ -171,6 +175,9 @@ export function NextSignUp(): JSX.Element {
               autoCapitalize="none"
               onChangeText={setConfirmPassword}
               value={confirmPassword}
+              ref={confirmPasswordRef}
+              onSubmitEditing={() => Keyboard.dismiss()}
+              blurOnSubmit={false}
             />
           </Form>
 
