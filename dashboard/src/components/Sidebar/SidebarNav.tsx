@@ -40,6 +40,20 @@ export function SidebarNav() {
             isActive={activeRoute === "/phases"}
           />
         </NavSection>
+        <NavSection title="Atividades">
+          <NavLink
+            title="Criar atividades"
+            icon={<svg width="21" height="19" xmlns="http://www.w3.org/2000/svg"><path d="M0 0v5.7h2.95l2 5.7H4v5.7h6v-4.36l5.41-5.14H20V1.9h-6v4.341L8.59 11.4H7.06l-2-5.7H6V0H0Zm2 1.9h2v1.9H2V1.9Zm14 1.9h2v1.9h-2V3.8Zm0 7.6v2.85h-3v1.9h3V19h2v-2.85h3v-1.9h-3V11.4h-2ZM6 13.3h2v1.9H6v-1.9Z"/></svg>}
+            link="/activities/create"
+            isActive={activeRoute === "/activities/create"}
+          />
+          <NavLink
+            title="Listar atividades"
+            icon={<svg width="19" height="17" xmlns="http://www.w3.org/2000/svg"><path d="M0 0v5.667h2.803l1.9 5.666H3.8V17h5.7v-4.335l5.14-5.11H19V1.89h-5.7v4.316l-5.14 5.128H6.708l-1.9-5.666H5.7V0M1.9 1.889h1.9v1.889H1.9m13.3 0h1.9v1.889h-1.9m-9.5 7.555h1.9v1.89H5.7v-1.89Z"/></svg>}
+            link="/activities"
+            isActive={activeRoute === "/activities"}
+          />
+        </NavSection>
       </div>
     </aside>
   )
