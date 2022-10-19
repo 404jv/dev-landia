@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { StatusBar, TouchableOpacity, Keyboard } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 import { Root, Popup } from "popup-ui";
 import { Feather } from "@expo/vector-icons";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { StatusBar, Alert, TouchableOpacity } from "react-native";
 import { useTheme } from "styled-components";
+
 import { Button } from "../../components/Form/Button";
 import { PasswordInput } from "../../components/Form/PasswordInput";
+
 import { api } from "../../services/api";
+
+import { UserDataInfos } from "./INextSignUp";
 
 import {
   ChangeScreen,
@@ -22,14 +27,6 @@ import {
   CheckBox,
 } from "./styles";
 
-interface UserDataInfos {
-  userData: {
-    name: string;
-    email: string;
-    user: string;
-  };
-}
-
 export function NextSignUp(): JSX.Element {
   const route = useRoute().params as UserDataInfos;
   const { userData } = route;
@@ -37,6 +34,7 @@ export function NextSignUp(): JSX.Element {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [termIsAccepted, setTermIsAccepted] = useState(false);
+  const confirmPasswordRef = useRef(null);
 
   const theme = useTheme();
   const navigation = useNavigation();
@@ -94,7 +92,6 @@ export function NextSignUp(): JSX.Element {
       })
       .catch((error) => {
         const errorMessage = error.response.data.message;
-        console.log(errorMessage);
 
         if (
           errorMessage ===
@@ -166,7 +163,10 @@ export function NextSignUp(): JSX.Element {
               autoCapitalize="none"
               onChangeText={setPassword}
               value={password}
+              onSubmitEditing={() => confirmPasswordRef.current.focus()}
+              blurOnSubmit={false}
             />
+
             <PasswordInput
               iconName="lock"
               placeholder="Confirmar senha"
@@ -175,6 +175,9 @@ export function NextSignUp(): JSX.Element {
               autoCapitalize="none"
               onChangeText={setConfirmPassword}
               value={confirmPassword}
+              ref={confirmPasswordRef}
+              onSubmitEditing={() => Keyboard.dismiss()}
+              blurOnSubmit={false}
             />
           </Form>
 

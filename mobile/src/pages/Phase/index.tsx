@@ -1,61 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import { ActivityIndicator, Alert, StatusBar } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { useTheme } from "styled-components";
 import { api } from "../../services/api";
 
-import { Container } from "./styles";
-
 import { Practical } from "./Practical";
 import { Theoretical } from "./Theoretical";
 
-interface IOption {
-  id: string;
-  name: string;
-  type: string;
-  hexadecimal_color: string;
-}
+import { Container } from "./styles";
 
-interface TipsProps {
-  id: string;
-  name: string;
-}
-
-type PracticeActivity = {
-  id: string;
-  title: string;
-  description: string;
-  type: string;
-  default_code: IOption[];
-  activity_answer: IOption[];
-  is_needed_tests: boolean;
-  tips: TipsProps[];
-  options: IOption[];
-  order: number;
-};
-
-type TheoreticalActivity = {
-  id: string;
-  map_id: string;
-  title: string;
-  markdown_text: string;
-};
-
-type PhaseParams = {
-  phase: {
-    created_at: string;
-    id: string;
-    map_id: string;
-    description: string;
-    markdown_text?: string | null;
-    max_level?: number | null;
-    order: number;
-    title: string;
-    type: string;
-    current_level: number;
-  };
-};
+import { PhaseParams, PracticeActivity, TheoreticalActivity } from "./IPhase";
 
 export function Phase(): JSX.Element {
   const [practiceActivities, setPracticeActivities] = useState<

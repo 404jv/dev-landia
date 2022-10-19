@@ -1,17 +1,17 @@
+import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
 
 import { TouchableOpacity } from "react-native";
 import { useTheme } from "styled-components";
 
 import { Border, Container, Title, TitleContainer } from "./styles";
 
-type Props = {
+type HeaderProps = {
   title: string;
 };
 
-export function Header({ title }: Props): JSX.Element {
+export function Header({ title }: HeaderProps): JSX.Element {
   const theme = useTheme();
   const navigation = useNavigation();
 

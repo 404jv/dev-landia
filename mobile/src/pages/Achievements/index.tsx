@@ -1,7 +1,7 @@
 import React from "react";
 import { StatusBar, FlatList } from "react-native";
-import { useTheme } from "styled-components";
 
+import { useTheme } from "styled-components";
 import { ChallengeCards } from "./ChallengeCards";
 
 import { Container, Header, HeaderTitle, Separator } from "./styles";
