@@ -6,7 +6,7 @@ import { Header } from "../../components/Header";
 import { ToastContainer, toast } from "react-toastify";
 import { Sidebar } from "../../components/Sidebar";
 import { InputWithLabel } from "../../components/Form/InputWithLabel";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Select } from "../../components/Form/Select";
 import { Button } from "../../components/Form/Button";
 import { useEffect, useState } from "react";
@@ -30,7 +30,12 @@ interface CreateActivityFormData {
 }
 
 const createActivityFormSchema = yup.object().shape({
-
+  title: yup.string().required("Título obrigatório."),
+  order: yup.number().min(0, "A ordem deve ser maior ou igual a zero.").typeError("Número inválido."),
+  type: yup.string().oneOf(['quiz', 'block_activity'], 'A atividade só pode ser do tipo quiz ou block_activity.').required("Escolha o tipo da atividade"),
+  is_needed_code: yup.string().oneOf(['true', 'false'], 'Escolha sim ou não.').required("Escolha sim ou não."),
+  phase_id: yup.string().required("Id da fase é obrigatório.").trim("Id da fase é obrigatório."),
+  description: yup.string().required("Descrição obrigatória."),
 });
 
 export default function CreateActivities() {
@@ -40,6 +45,25 @@ export default function CreateActivities() {
   const { register, handleSubmit, formState, reset, control } = useForm<CreateActivityFormData>({
     resolver: yupResolver(createActivityFormSchema)
   });
+
+  const handleCreateActivity: SubmitHandler<CreateActivityFormData>
+   = async ({ title, order, type, is_needed_code, phase_id, description, tips }) => {
+    setIsLoading(true);
+
+    const is_needed_code_formatted = Boolean(is_needed_code);
+
+    console.log(is_needed_code_formatted);
+
+    try {
+      reset();
+
+      toast.success("Atividade criada.");
+    } catch (error) {
+      toast.error("Erro ao criar atividade.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   async function loadData() {
     const response = await api.get("/phases");
@@ -96,7 +120,7 @@ export default function CreateActivities() {
 
           <div className="mt-10 ml-10 flex flex-col">
             <h1 className="text-gray-150 text-4xl font-medium">Criação de atividades</h1>
-            <form className="mt-9 px-4">
+            <form onSubmit={handleSubmit(handleCreateActivity)} className="mt-9 px-4">
               <div className="max-w-3xl w-full flex flex-col gap-4 mb-7">
               <div className="flex gap-5">
                   <InputWithLabel
