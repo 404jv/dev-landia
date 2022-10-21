@@ -34,7 +34,7 @@ interface CreatePhaseFormData {
 const createPhaseFormSchema = yup.object().shape({
   title: yup.string().required("Título obrigatório."),
   order: yup.number().min(0, "A ordem deve ser maior ou igual a zero.").typeError("Número inválido."),
-  type: yup.string().oneOf(['theory', 'practice'], 'A atividade só pode ser teórica ou prática.').required("Escolha o tipo da fase"),
+  type: yup.string().oneOf(['theory', 'practice'], 'A fase só pode ser teórica ou prática.').required("Escolha o tipo da fase"),
   max_level: yup.number().required("O level máximo é obrigatório.").typeError("Número inválido.")
     .when(['type'], (type: 'theory' | 'practice') => {
       if (type === 'theory') {
@@ -77,7 +77,6 @@ export default function CreatePhases() {
 
       toast.success("Fase criada.");
     } catch (error) {
-      console.log(error);
       toast.error("Erro ao criar fase.");
     } finally {
       setIsLoading(false);

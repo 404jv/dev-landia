@@ -211,7 +211,7 @@ export default function Phases() {
               <tbody>
                 {
                   phases.map(phase => (
-                    <tr key={phase.id}>
+                    <tr className="relative" key={phase.id}>
                       <td className="bg-gray-900 rounded-tl-md rounded-bl-md px-5 py-4 text-base font-normal text-gray-400">
                         {phase.title}
                       </td>
@@ -239,7 +239,7 @@ export default function Phases() {
                       <td className="bg-gray-900 px-5 py-4 text-xs font-normal text-blue-350">
                         {phase.id}
                       </td>
-                      <td className="bg-gray-900 rounded-tr-md rounded-br-md text-white pr-5 py-4">
+                      <td className="sticky right-0 bg-gray-900 rounded-tr-md rounded-br-md text-white pr-5 py-4">
                         <button 
                           onClick={() => handleOpenModal(phase.id)}
                           className="w-6 h-6 bg-gray-450 rounded-md flex items-center justify-center hover:opacity-90"
