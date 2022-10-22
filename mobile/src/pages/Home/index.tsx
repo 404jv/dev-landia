@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { Alert, TouchableOpacity, View, StatusBar } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  TouchableOpacity,
+  View,
+  StatusBar,
+  BackHandler,
+} from "react-native";
+
 import { useTheme } from "styled-components";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
@@ -117,6 +124,14 @@ export function Home(): JSX.Element {
       getTree();
     }, [])
   );
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => true
+    );
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <Container>
