@@ -11,6 +11,7 @@ import { Select } from "../../components/Form/Select";
 import { Button } from "../../components/Form/Button";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
+import { Input } from "../../components/Form/Input";
 
 interface Phase {
   id: string;
@@ -26,7 +27,6 @@ interface CreateActivityFormData {
   is_needed_code: boolean;
   phase_id: string;
   description: string;
-  tips: string[];
 }
 
 const createActivityFormSchema = yup.object().shape({
@@ -41,21 +41,22 @@ const createActivityFormSchema = yup.object().shape({
 export default function CreateActivities() {
   const [phases, setPhases] = useState<Phase[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [tips, setTips] = useState<string[]>(['']);
 
   const { register, handleSubmit, formState, reset, control } = useForm<CreateActivityFormData>({
     resolver: yupResolver(createActivityFormSchema)
   });
 
   const handleCreateActivity: SubmitHandler<CreateActivityFormData>
-   = async ({ title, order, type, is_needed_code, phase_id, description, tips }) => {
+   = async ({ title, order, type, is_needed_code, phase_id, description }) => {
     setIsLoading(true);
 
     const is_needed_code_formatted = Boolean(is_needed_code);
 
-    console.log(is_needed_code_formatted);
-
     try {
       reset();
+
+      setTips(['']);
 
       toast.success("Atividade criada.");
     } catch (error) {
@@ -63,6 +64,16 @@ export default function CreateActivities() {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  function handleAddTip() {
+    setTips(oldState => [...oldState, ''])
+  }
+
+  function handleChangeTip(index: number, text: string) {
+    const editTips = tips;
+    editTips[index] = text;
+    setTips(editTips);
   }
 
   async function loadData() {
@@ -122,7 +133,7 @@ export default function CreateActivities() {
             <h1 className="text-gray-150 text-4xl font-medium">Criação de atividades</h1>
             <form onSubmit={handleSubmit(handleCreateActivity)} className="mt-9 px-4">
               <div className="max-w-3xl w-full flex flex-col gap-4 mb-7">
-              <div className="flex gap-5">
+                <div className="flex gap-5">
                   <InputWithLabel
                     label="Título"
                     {...register("title")}
@@ -175,6 +186,26 @@ export default function CreateActivities() {
                     {...register("description")}
                     error={formState.errors.description?.message}
                   />
+                </div>
+
+                <div className="w-full flex items-center justify-between">
+                  <h3 className="text-base text-blue-250 tracking-wider">Dicas</h3>
+                  <Button 
+                    type="button" 
+                    onClick={handleAddTip}
+                    title="+ Adicionar Dica"
+                    variant="small"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-5">
+                  {tips.map((tip, index) => (
+                    <Input
+                      key={index}
+                      placeholder={`Dica ${index + 1}`}
+                      onChange={(evt) => handleChangeTip(index, evt.target.value)}
+                    />
+                  ))}
                 </div>
               </div>
 
