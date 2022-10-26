@@ -51,15 +51,34 @@ export default function CreateActivities() {
    = async ({ title, order, type, is_needed_code, phase_id, description }) => {
     setIsLoading(true);
 
-    const is_needed_code_formatted = Boolean(is_needed_code);
-
     try {
+      tips.forEach(tip => {
+        if (tip === "") {
+          throw new Error("Preencha o campo das dicas criadas.");
+        }
+      });
+
+      await api.post("/activities/create", {
+        title,
+        order,
+        type,
+        is_needed_code: Boolean(is_needed_code),
+        phase_id,
+        description,
+        tips
+      })
+
       reset();
 
       setTips(['']);
 
       toast.success("Atividade criada.");
-    } catch (error) {
+    } catch (error: any) {
+      if (error.message === "Preencha o campo das dicas criadas.") {
+        toast.error(error.message);
+        return;
+      }
+
       toast.error("Erro ao criar atividade.");
     } finally {
       setIsLoading(false);
