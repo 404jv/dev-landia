@@ -37,7 +37,12 @@ class ActivitiesRepository implements IActivitiesRepository {
   }
 
   async list() {
-    const activities = await this.repository.find();
+    const activities = await this.repository.find({
+      relations: {
+        phase: true,
+        tips: true,
+      },
+    });
 
     return activities;
   }
