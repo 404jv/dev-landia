@@ -54,6 +54,7 @@ class ActivitiesRepository implements IActivitiesRepository {
       },
       relations: {
         options: true,
+        tips: true,
       },
     });
     return activity;
