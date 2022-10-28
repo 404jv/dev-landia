@@ -105,7 +105,7 @@ export default function Phases() {
     setSelectedPhase(phase);
   }
 
-  const handleUpdateMap: SubmitHandler<UpdatePhaseFormData> = async({
+  const handleUpdateMap: SubmitHandler<UpdatePhaseFormData> = async ({
     title,
     description,
     hexadecimal_color,
@@ -134,7 +134,6 @@ export default function Phases() {
       handleCloseModal();
       loadData();
     } catch (error) {
-      console.log(error);
       toast.error('Erro ao atualizar fase.');
     } finally {
       setIsLoading(false);
