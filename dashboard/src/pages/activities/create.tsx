@@ -12,6 +12,7 @@ import { Button } from "../../components/Form/Button";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { Input } from "../../components/Form/Input";
+import { order } from "../../utils/orderArrayByCreatedAt";
 
 interface Phase {
   id: string;
@@ -24,7 +25,7 @@ interface CreateActivityFormData {
   title: string;
   order: number;
   type: 'quiz' | 'block_activity';
-  is_needed_code: boolean;
+  is_needed_code: string;
   phase_id: string;
   description: string;
 }
@@ -62,7 +63,7 @@ export default function CreateActivities() {
         title,
         order,
         type,
-        is_needed_code: Boolean(is_needed_code),
+        is_needed_code: is_needed_code == 'true' ? true : false,
         phase_id,
         description,
         tips
@@ -98,7 +99,9 @@ export default function CreateActivities() {
   async function loadData() {
     const response = await api.get("/phases");
 
-    setPhases(response.data);
+    const orderedPhases = order(response.data)
+
+    setPhases(orderedPhases);
   }
 
   useEffect(() => {

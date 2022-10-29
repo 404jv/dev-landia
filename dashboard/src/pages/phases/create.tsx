@@ -12,6 +12,7 @@ import { api } from "../../services/api";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup"
+import { order } from "../../utils/orderArrayByCreatedAt";
 
 interface Map {
   id: string;
@@ -86,7 +87,9 @@ export default function CreatePhases() {
   async function loadData() {
     const response = await api.get("/maps");
 
-    setMaps(response.data);
+    const orderedMaps = order(response.data);
+
+    setMaps(orderedMaps);
   }
 
   useEffect(() => {

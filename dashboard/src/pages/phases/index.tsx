@@ -12,6 +12,7 @@ import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { order } from "../../utils/orderArrayByCreatedAt";
 
 interface Map {
   id: string;
@@ -60,9 +61,9 @@ const updatePhaseFormSchema = yup.object().shape({
       return yup.number().min(3, 'Level máximo deve ser igual ou maior a 3').typeError("Número inválido.").required("Level máximo é obrigatório.")
     }),
   map_id: yup.string().required("Id do mapa é obrigatório.").trim("Id do mapa é obrigatório."),
-  hexadecimal_color: yup.string(),
+  hexadecimal_color: yup.string().typeError("Hexadecimal inválido.").max(7, "O hexadecimal só pode ter no máximo 6 caracteres, # + 6 caracteres"),
   description: yup.string().required("Descrição obrigatória."),
-  markdown_text: yup.string(),
+  markdown_text: yup.string().typeError("Markdown inválido."),
 });
 
 export default function Phases() {
@@ -143,11 +144,15 @@ export default function Phases() {
   async function loadData() {
     const responsePhases = await api.get("/phases");
 
-    setPhases(responsePhases.data);
+    const orderedPhases = order(responsePhases.data);
+
+    setPhases(orderedPhases);
 
     const responseMaps = await api.get("/maps");
 
-    setMaps(responseMaps.data);
+    const orderedMaps = order(responseMaps.data);
+
+    setMaps(orderedMaps);
   }
 
   useEffect(() => {

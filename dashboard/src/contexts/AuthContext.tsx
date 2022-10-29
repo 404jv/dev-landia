@@ -32,8 +32,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const isAuthenticated = user.email ? true : false;
 
   useEffect(() => {
-    console.log("Auth Context")
-
     const { 'dashboard-devlandia.token': token } = parseCookies();
     
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;

@@ -12,6 +12,7 @@ import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../../components/Form/Input";
+import { order } from "../../utils/orderArrayByCreatedAt";
 
 interface Phase {
   id: string;
@@ -25,6 +26,7 @@ interface Activity {
   order: number;
   type: 'quiz' | 'block_activity';
   is_needed_code: string;
+  created_at: Date;
   phase: {
     id: string;
     title: string;
@@ -114,7 +116,7 @@ export default function Activities() {
       await api.put(`/activities/update/${selectedActivity.id}`, {
         title,
         description,
-        is_needed_code,
+        is_needed_code: is_needed_code == 'true' ? true : false,
         order,
         phase_id,
         type,
@@ -143,13 +145,17 @@ export default function Activities() {
   }
 
   async function loadData() {
-    const responseActivities = await api.get("/activities");
+    const responseActivities = await api.get("/activities"); 
 
-    setActivities(responseActivities.data);
+    const orderedActivites = order(responseActivities.data);
+
+    setActivities(orderedActivites);
 
     const responsePhases = await api.get("/phases");
 
-    setPhases(responsePhases.data);
+    const orderedPhases = order(responsePhases.data);
+
+    setPhases(orderedPhases);
   }
 
   useEffect(() => {
