@@ -111,6 +111,16 @@ export default function Activities() {
     setIsLoading(true);
 
     try {
+      await api.put(`/activities/update/${selectedActivity.id}`, {
+        title,
+        description,
+        is_needed_code,
+        order,
+        phase_id,
+        type,
+        tips
+      });
+
       toast.success('Fase atualizada.');
 
       handleCloseModal();
