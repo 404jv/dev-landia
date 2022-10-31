@@ -20,6 +20,12 @@ interface Phase {
   order: number;
 }
 
+interface Option {
+  name: string;
+  abstracted_name?: string;
+  type: 'js_function' | 'command';
+  hexadecimal_color: string;
+}
 
 interface CreateActivityFormData {
   title: string;
@@ -42,9 +48,10 @@ const createActivityFormSchema = yup.object().shape({
 export default function CreateActivities() {
   const [phases, setPhases] = useState<Phase[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [tips, setTips] = useState<string[]>(['']);
+  const [tips, setTips] = useState<string[]>([]);
+  const [options, setOptions] = useState<Option[]>([]);
 
-  const { register, handleSubmit, formState, reset, control } = useForm<CreateActivityFormData>({
+  const { register, handleSubmit, formState, reset } = useForm<CreateActivityFormData>({
     resolver: yupResolver(createActivityFormSchema)
   });
 
@@ -59,6 +66,12 @@ export default function CreateActivities() {
         }
       });
 
+      options.forEach(option => {
+        if (option.name === undefined || option.hexadecimal_color === undefined || option.type === undefined) {
+          throw new Error("Preencha o campo das opções criadas.");
+        }
+      })
+
       await api.post("/activities/create", {
         title,
         order,
@@ -66,24 +79,52 @@ export default function CreateActivities() {
         is_needed_code: is_needed_code == 'true' ? true : false,
         phase_id,
         description,
-        tips
+        tips,
+        options
       })
 
       reset();
 
-      setTips(['']);
+      setOptions([]);
+      setTips([]);
 
       toast.success("Atividade criada.");
     } catch (error: any) {
       if (error.message === "Preencha o campo das dicas criadas.") {
         toast.error(error.message);
         return;
+      } else if (error.message === "Preencha o campo das opções criadas.") {
+        toast.error(error.message);
+      } else {
+        toast.error("Erro ao criar atividade.");
       }
-
-      toast.error("Erro ao criar atividade.");
     } finally {
       setIsLoading(false);
     }
+  }
+
+  function handleAddOption() {
+    setOptions(oldState => [...oldState, {} as Option])
+  }
+
+  function handleChangeOption(
+    index: number, 
+    text: string, 
+    field: 'name' | 'abstracted_name' | 'hexadecimal_color' | 'type'
+  ) {
+    const editOptions = options;
+    
+    if (field === 'name') {
+      editOptions[index].name = text;
+    } else if (field === 'abstracted_name') {
+      editOptions[index].abstracted_name = text;
+    } else if (field === 'hexadecimal_color') {
+      editOptions[index].hexadecimal_color = text;
+    } else {
+      editOptions[index].type = text as 'js_function' | 'command'
+    }
+
+    setOptions(editOptions)
   }
 
   function handleAddTip() {
@@ -133,6 +174,19 @@ export default function CreateActivities() {
       value: 'false'
     }
   ];
+
+  const optionsTypes = [
+    {
+      id: '123',
+      title: 'Js_Function',
+      value: 'js_function'
+    },
+    {
+      id: '321',
+      title: 'Command',
+      value: 'command'
+    }
+  ]
 
   return (
     <>
@@ -208,6 +262,51 @@ export default function CreateActivities() {
                     {...register("description")}
                     error={formState.errors.description?.message}
                   />
+                </div>
+
+                <div className="w-full flex items-center justify-between mt-6">
+                  <h3 className="text-base text-blue-250 tracking-wider">Opções</h3>
+                  <Button 
+                    type="button" 
+                    onClick={handleAddOption}
+                    title="+ Adicionar Opção"
+                    variant="small"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-6 mb-6">
+                  {options.map((option, index) => (
+                    <div key={index}>
+                      <h4 className="text-lg text-white">
+                        Opção {index + 1}
+                      </h4>
+
+                      <div className="mt-3 grid grid-cols-2 gap-5">
+                        <InputWithLabel
+                          name="name"
+                          label="Name"
+                          onChange={(evt) => handleChangeOption(index, evt.target.value, "name")}
+                        />
+                        <InputWithLabel
+                          name="hexadecimal_color"
+                          label="Cor hexadecimal"
+                          onChange={(evt) => handleChangeOption(index, evt.target.value, "hexadecimal_color")}
+                        />
+                        <InputWithLabel
+                          name="abstracted_name"
+                          label="Nome abstrato"
+                          optional={true}
+                          onChange={(evt) => handleChangeOption(index, evt.target.value, "abstracted_name")}
+                        />
+                        <Select
+                          name="options_types"
+                          label="Tipo"
+                          options={optionsTypes}
+                          onChange={(evt) => handleChangeOption(index, evt.target.value, "type")}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
 
                 <div className="w-full flex items-center justify-between">
