@@ -10,6 +10,7 @@ interface IUpdateActivityDTO {
   title: string;
   description: string;
   type: enActivityType;
+  phase_id: string;
   is_needed_code?: boolean;
   options: Option[];
   order: number;

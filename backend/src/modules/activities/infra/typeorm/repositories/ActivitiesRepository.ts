@@ -36,6 +36,17 @@ class ActivitiesRepository implements IActivitiesRepository {
     return activity;
   }
 
+  async list() {
+    const activities = await this.repository.find({
+      relations: {
+        phase: true,
+        tips: true,
+      },
+    });
+
+    return activities;
+  }
+
   async findById(id: string): Promise<Activity> {
     const activity = await this.repository.findOne({
       where: {
@@ -43,6 +54,7 @@ class ActivitiesRepository implements IActivitiesRepository {
       },
       relations: {
         options: true,
+        tips: true,
       },
     });
     return activity;

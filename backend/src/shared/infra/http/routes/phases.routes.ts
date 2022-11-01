@@ -17,8 +17,8 @@ phasesRoutes.use(ensureAuthenticated);
 
 phasesRoutes.post('/create', ensureAdmin, createPhaseController.handle);
 
-phasesRoutes.put('/update/:id', updatePhaseController.handle);
+phasesRoutes.put('/update/:id', ensureAdmin, updatePhaseController.handle);
 
-phasesRoutes.get('/', listPhasesController.handle);
+phasesRoutes.get('/', ensureAdmin, listPhasesController.handle);
 
 export { phasesRoutes };

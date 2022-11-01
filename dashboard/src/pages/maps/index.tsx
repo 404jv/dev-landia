@@ -12,6 +12,7 @@ import { api } from "../../services/api";
 import { withSSRAuth } from "../../utils/withSSRAuth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Header } from "../../components/Header";
+import { order } from "../../utils/orderArrayByCreatedAt";
 
 interface Map {
   id: string;
@@ -90,7 +91,9 @@ export default function Maps() {
   async function loadData() {
     const response = await api.get("/maps");
 
-    setMaps(response.data);
+    const orderedMaps = order(response.data);
+
+    setMaps(orderedMaps);
   }
 
   useEffect(() => {
