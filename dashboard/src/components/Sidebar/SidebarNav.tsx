@@ -53,6 +53,12 @@ export function SidebarNav() {
             link="/activities"
             isActive={activeRoute === "/activities"}
           />
+          <NavLink
+            title="Adicionar opções"
+            icon={<svg width="21" height="19" xmlns="http://www.w3.org/2000/svg"><path d="M0 0v5.7h2.95l2 5.7H4v5.7h6v-4.36l5.41-5.14H20V1.9h-6v4.341L8.59 11.4H7.06l-2-5.7H6V0H0Zm2 1.9h2v1.9H2V1.9Zm14 1.9h2v1.9h-2V3.8Zm0 7.6v2.85h-3v1.9h3V19h2v-2.85h3v-1.9h-3V11.4h-2ZM6 13.3h2v1.9H6v-1.9Z"/></svg>}
+            link="/activities/addOptions"
+            isActive={activeRoute === "/activities/addOptions"}
+          />
         </NavSection>
       </div>
     </aside>

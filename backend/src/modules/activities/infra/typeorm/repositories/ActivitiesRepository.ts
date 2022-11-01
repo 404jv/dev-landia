@@ -41,6 +41,7 @@ class ActivitiesRepository implements IActivitiesRepository {
       relations: {
         phase: true,
         tips: true,
+        options: true,
       },
     });
 
