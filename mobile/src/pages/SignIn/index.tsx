@@ -1,17 +1,22 @@
-import React, { useState } from "react";
-import { Root, Popup } from "popup-ui";
-import * as Yup from "yup";
-
-import { Alert, StatusBar, TouchableOpacity } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  StatusBar,
+  TouchableOpacity,
+  Keyboard,
+  BackHandler,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { useTheme } from "styled-components";
 
-import { useNavigation } from "@react-navigation/native";
-import LogoPng from "../../assets/BlueLogo.png";
-import { Button } from "../../components/Form/Button";
+import { Root, Popup } from "popup-ui";
+import * as Yup from "yup";
+import { useAuth } from "../../hooks/auth";
 
 import { Input } from "../../components/Form/Input";
+import { Button } from "../../components/Form/Button";
 import { PasswordInput } from "../../components/Form/PasswordInput";
+import LogoPng from "../../assets/BlueLogo.png";
 
 import {
   Container,
@@ -22,15 +27,16 @@ import {
   SignUp,
   SignUpText,
 } from "./styles";
-import { useAuth } from "../../hooks/auth";
 
 export function SignIn(): JSX.Element {
-  const navigation = useNavigation();
-  const { signIn } = useAuth();
-
-  const theme = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const passWordRef = useRef(null);
+
+  const navigation = useNavigation();
+  const theme = useTheme();
+
+  const { signIn } = useAuth();
 
   async function handleSignIn(): Promise<void> {
     try {
@@ -61,6 +67,14 @@ export function SignIn(): JSX.Element {
     navigation.navigate("SignUp");
   }
 
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => true
+    );
+    return () => backHandler.remove();
+  }, []);
+
   return (
     <Root>
       <Container>
@@ -89,6 +103,8 @@ export function SignIn(): JSX.Element {
             autoCapitalize="none"
             onChangeText={setEmail}
             value={email}
+            onSubmitEditing={() => passWordRef.current.focus()}
+            blurOnSubmit={false}
           />
 
           <PasswordInput
@@ -96,6 +112,9 @@ export function SignIn(): JSX.Element {
             placeholder="Senha"
             onChangeText={setPassword}
             value={password}
+            ref={passWordRef}
+            onSubmitEditing={() => Keyboard.dismiss()}
+            blurOnSubmit={false}
           />
         </Form>
 

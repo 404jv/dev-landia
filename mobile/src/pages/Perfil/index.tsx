@@ -2,6 +2,18 @@ import React, { useEffect, useState } from "react";
 import { StatusBar, Image } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useTheme } from "styled-components/native";
+
+import wizard from "../../assets/wizard.png";
+import coin from "../../assets/gold.png";
+import medal from "../../assets/medal.png";
+import potion from "../../assets/xp.png";
+
+import { StatisticsCard } from "./StatisticsCard";
+import { api } from "../../services/api";
+import { useAuth } from "../../hooks/auth";
+
+import { UserInfos } from "./IPerfil";
+
 import {
   Container,
   ContainerPerfil,
@@ -18,21 +30,6 @@ import {
   ContainerStatisticsCards,
   ContainerEditImage,
 } from "./styles";
-import wizard from "../../assets/wizard.png";
-import coin from "../../assets/gold.png";
-import medal from "../../assets/medal.png";
-import potion from "../../assets/xp.png";
-import { StatisticsCard } from "./StatisticsCard";
-import { api } from "../../services/api";
-import { useAuth } from "../../hooks/auth";
-
-interface UserInfos {
-  name: string;
-  username: string;
-  biography: string;
-  total_coins: number;
-  total_xp: number;
-}
 
 export function Perfil(): JSX.Element {
   const [userInfos, setUserInfos] = useState<UserInfos>();

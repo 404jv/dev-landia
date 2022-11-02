@@ -22,6 +22,12 @@ class TipsRepository implements ITipsRepository {
 
     return tip;
   }
+
+  async deleteByActivityId(id: string): Promise<void> {
+    await this.repository.delete({
+      activity_id: id,
+    });
+  }
 }
 
 export { TipsRepository };

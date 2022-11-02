@@ -1,4 +1,6 @@
 import styled from "styled-components/native";
+import { StyleSheet } from "react-native";
+import globalTheme from "../../../Global/styles/theme";
 
 export const ContainerScrollView = styled.ScrollView`
   flex: 1;
@@ -26,3 +28,39 @@ export const TextButton = styled.Text`
   font-weight: bold;
   letter-spacing: 2px;
 `;
+
+export const styles = StyleSheet.create({
+  heading1: {
+    fontSize: 32,
+    lineHeight: 40,
+    color: globalTheme.colors.blue,
+    fontFamily: globalTheme.fonts.bold,
+    textAlign: "justify",
+  },
+  heading2: {
+    fontSize: 24,
+    lineHeight: 28,
+    color: globalTheme.colors.blue,
+    fontFamily: globalTheme.fonts.bold,
+    marginTop: 16,
+    textAlign: "justify",
+  },
+  heading3: {
+    fontSize: 22,
+    color: globalTheme.colors.blue,
+    lineHeight: 24,
+    fontFamily: globalTheme.fonts.bold,
+    marginTop: 16,
+    textAlign: "justify",
+  },
+  body: {
+    color: "#FFF",
+    fontSize: 16,
+    lineHeight: 20,
+    fontFamily: globalTheme.fonts.regular,
+    textAlign: "justify",
+  },
+  strong: {
+    color: globalTheme.colors.blue,
+  },
+});

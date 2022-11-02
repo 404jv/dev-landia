@@ -1,22 +1,22 @@
-import Markdown, { ASTNode, RenderRules } from "react-native-markdown-display";
-
 import React from "react";
-import { StyleSheet } from "react-native";
+
+import { useNavigation } from "@react-navigation/native";
+
+import Markdown, { ASTNode, RenderRules } from "react-native-markdown-display";
 import SyntaxHighlighter from "react-native-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useNavigation } from "@react-navigation/native";
-import { Header } from "./Header";
-import theme from "../../../Global/styles/theme";
 import { Bash } from "../../../components/Bash";
+import { Header } from "./Header";
+
+import { api } from "../../../services/api";
 
 import {
   FinishButton,
   TextButton,
   ContainerScrollView,
   Content,
+  styles,
 } from "./styles";
-import { api } from "../../../services/api";
-import { markdownText } from "./class1";
 
 const rules: RenderRules = {
   fence: (node: ASTNode) => {
@@ -34,42 +34,6 @@ const rules: RenderRules = {
     );
   },
 };
-
-const styles = StyleSheet.create({
-  heading1: {
-    fontSize: 32,
-    lineHeight: 40,
-    color: theme.colors.blue,
-    fontFamily: theme.fonts.bold,
-    textAlign: "justify",
-  },
-  heading2: {
-    fontSize: 24,
-    lineHeight: 28,
-    color: theme.colors.blue,
-    fontFamily: theme.fonts.bold,
-    marginTop: 16,
-    textAlign: "justify",
-  },
-  heading3: {
-    fontSize: 22,
-    color: theme.colors.blue,
-    lineHeight: 24,
-    fontFamily: theme.fonts.bold,
-    marginTop: 16,
-    textAlign: "justify",
-  },
-  body: {
-    color: "#FFF",
-    fontSize: 16,
-    lineHeight: 20,
-    fontFamily: theme.fonts.regular,
-    textAlign: "justify",
-  },
-  strong: {
-    color: theme.colors.blue,
-  },
-});
 
 interface TheoreticalActivityProps {
   id: string;

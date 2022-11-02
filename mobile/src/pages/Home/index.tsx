@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { Alert, TouchableOpacity, View, StatusBar } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  TouchableOpacity,
+  View,
+  StatusBar,
+  BackHandler,
+} from "react-native";
+
 import { useTheme } from "styled-components";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
@@ -14,6 +21,8 @@ import mapIcon from "../../assets/map_icon.png";
 import { useAuth } from "../../hooks/auth";
 import { api } from "../../services/api";
 
+import { MapProps, PhaseProps, UserInfos } from "./IHome";
+
 import {
   Container,
   Header,
@@ -26,35 +35,6 @@ import {
   MapImage,
   MapInfos,
 } from "./styles";
-
-type PhaseProps = {
-  created_at: string;
-  id: string;
-  map_id: string;
-  description: string;
-  markdown_text?: string | null;
-  max_level?: number | null;
-  order: number;
-  title: string;
-  type: string;
-  current_level: number;
-  hexadecimal_color: string;
-};
-
-interface MapProps {
-  created_at: string;
-  id: string;
-  description: string;
-  is_done: boolean;
-  order: number;
-  title: string;
-  phases: PhaseProps[];
-}
-
-interface UserInfos {
-  total_coins: number;
-  total_xp: number;
-}
 
 export function Home(): JSX.Element {
   const theme = useTheme();
@@ -144,6 +124,14 @@ export function Home(): JSX.Element {
       getTree();
     }, [])
   );
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => true
+    );
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <Container>

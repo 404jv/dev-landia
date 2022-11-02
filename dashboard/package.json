@@ -9,14 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.8",
     "axios": "^0.27.2",
     "next": "12.2.5",
     "nookies": "^2.5.2",
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.36.1",
     "react-toastify": "^9.0.8",
-    "toastify": "^2.0.1"
+    "tailwind-scrollbar": "^2.1.0-preview.0",
+    "toastify": "^2.0.1",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "18.7.14",

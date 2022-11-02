@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import * as Yup from "yup";
+import React, { useState, useRef } from "react";
+import { Alert, StatusBar, TouchableOpacity, Keyboard } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { Feather } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
-import { Alert, StatusBar, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+
+import * as Yup from "yup";
+import { Input } from "../../components/Form/Input";
+import { Button } from "../../components/Form/Button";
 
 import {
   Title,
@@ -16,8 +19,6 @@ import {
   ContainerChangeScreen,
   ChangeScreen,
 } from "./styles";
-import { Input } from "../../components/Form/Input";
-import { Button } from "../../components/Form/Button";
 
 export function SignUp(): JSX.Element {
   const theme = useTheme();
@@ -26,6 +27,9 @@ export function SignUp(): JSX.Element {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [user, setUser] = useState("");
+
+  const emailRef = useRef(null);
+  const usernameRef = useRef(null);
 
   async function handleSignUp(): Promise<void> {
     try {
@@ -42,13 +46,7 @@ export function SignUp(): JSX.Element {
         email: email.trim(),
         user: user.trim(),
       });
-      navigation.navigate("NextSignUp", {
-        userData: {
-          name: name.trim(),
-          email: email.trim(),
-          user: user.trim(),
-        },
-      });
+      navigation.navigate("NextSignUp", { userData });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert(error.message);
@@ -87,6 +85,8 @@ export function SignUp(): JSX.Element {
             autoCapitalize="none"
             onChangeText={setName}
             value={name}
+            onSubmitEditing={() => emailRef.current.focus()}
+            blurOnSubmit={false}
           />
           <Input
             iconName="mail"
@@ -96,6 +96,9 @@ export function SignUp(): JSX.Element {
             autoCapitalize="none"
             onChangeText={setEmail}
             value={email}
+            ref={emailRef}
+            onSubmitEditing={() => usernameRef.current.focus()}
+            blurOnSubmit={false}
           />
           <Input
             iconName="users"
@@ -105,6 +108,9 @@ export function SignUp(): JSX.Element {
             autoCapitalize="none"
             onChangeText={setUser}
             value={user}
+            ref={usernameRef}
+            onSubmitEditing={() => Keyboard.dismiss()}
+            blurOnSubmit={false}
           />
         </Form>
 
