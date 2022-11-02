@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { Select } from "../../components/Form/Select";
 import { Header } from "../../components/Header";
@@ -7,10 +7,6 @@ import { Sidebar } from "../../components/Sidebar";
 import { api } from "../../services/api";
 import { order } from "../../utils/orderArrayByCreatedAt";
 
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup"
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Checkbox } from "../../components/Form/Checkbox";
 import { Button } from "../../components/Form/Button";
 
 interface Option {
@@ -26,39 +22,53 @@ interface Activity {
   options: Option[]
 }
 
-interface AddOptionsFormData {
-  activityAnswerOptionsIds: string[];
-  activityDefaultCodeOptionsIds: string[];
-}
-
-const addOptionsFormSchema = yup.object().shape({
-  activityAnswerOptionsIds: yup.array().min(1, 'Pelo menos uma opção como resposta'),
-  activityDefaultCodeOptionsIds: yup.array()
-})
-
 export default function AddOptions() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<Activity>({} as Activity);
+  const [defaultCodeOptions, setDefaultCodeOptions] = useState<string[]>([]);
+  const [answerOptions, setAnswerOptions] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { register, handleSubmit, formState, reset } = useForm<AddOptionsFormData>({
-    resolver: yupResolver(addOptionsFormSchema)
-  });
+  function handleAddOptions(evt: FormEvent) {
+    evt.preventDefault();
 
-  const handleAddOptions: SubmitHandler<AddOptionsFormData>
-   = async ({ activityAnswerOptionsIds, activityDefaultCodeOptionsIds }) => {
     setIsLoading(true);
 
     const activity_id = selectedActivity.id;
 
     try {
-      reset();
+      if (activity_id === undefined) {
+        throw new Error("Preencha os campos");
+      }
+
+      answerOptions.forEach(option => {
+        if (option === "") {
+          throw new Error("Preencha todos os campos das respostas criadas.")
+        }
+      });
+
+      defaultCodeOptions.forEach(option => {
+        if (option === "") {
+          throw new Error("Preencha todos os campos das opções defaults criadas.")
+        }
+      });
+
+      const selectActivityId = document.getElementById("activity_id") as HTMLSelectElement;
+      selectActivityId.selectedIndex = 0;
 
       setSelectedActivity({} as Activity)
+      setAnswerOptions([]);
+      setDefaultCodeOptions([]);
 
       toast.success("Opções adicionadas.");
-    } catch (error) {
-      toast.error("Erro ao adicionar opções.");
+    } catch (error: any) {
+      if (error.message === "Preencha todos os campos das respostas criadas.") {
+        toast.error(error.message);
+      } else if (error.message === "Preencha todos os campos das opções defaults criadas.") {
+        toast.error(error.message);
+      } else {
+        toast.error("Erro ao adicionar opções.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -67,6 +77,29 @@ export default function AddOptions() {
   function handleSelectActivity(id: string) {
     const activity = activities.find(activity => activity.id === id) as Activity;
     setSelectedActivity(activity);
+
+    setAnswerOptions([]);
+    setDefaultCodeOptions([]);
+  }
+
+  function handleAddDefaultOption() {
+    setDefaultCodeOptions(oldState => [...oldState, ''])
+  }
+
+  function handleChangeDefaultOption(index: number, id: string) {
+    const editDefaultCodeOptions = defaultCodeOptions;
+    editDefaultCodeOptions[index] = id;
+    setDefaultCodeOptions(editDefaultCodeOptions);
+  }
+
+  function handleAddAnswerOption() {
+    setAnswerOptions(oldState => [...oldState, ''])
+  }
+
+  function handleChangeAnswerOption(index: number, id: string) {
+    const editAnswerOptions = answerOptions;
+    editAnswerOptions[index] = id;
+    setAnswerOptions(editAnswerOptions);
   }
 
   async function loadData() {
@@ -101,9 +134,10 @@ export default function AddOptions() {
 
           <div className="mt-10 ml-10 flex flex-col">
             <h1 className="text-gray-150 text-4xl font-medium">Adicionar opções</h1>
-            <form onSubmit={handleSubmit(handleAddOptions)} className="mt-9 px-4">
+            <form onSubmit={handleAddOptions} className="mt-9 px-4">
               <div className="max-w-3xl w-full flex flex-col gap-4 mb-7">
                 <Select
+                  id="activity_id"
                   name="activity_id"
                   label="Id da atividade"
                   options={activities.map(activity => {
@@ -120,26 +154,58 @@ export default function AddOptions() {
                 {
                   selectedActivity.id !== undefined && (
                     <>
-                      <h3 className="text-base text-blue-250 tracking-wider">Ids das respostas</h3>
-                      <div className="grid grid-cols-4 gap-6">
-                        {selectedActivity.options.map(option => (
-                          <Checkbox
-                            key={option.id}
-                            label={option.name}
-                            value={option.id}
-                            {...register("activityAnswerOptionsIds")}
+                      <div className="w-full flex items-center gap-6 justify-between">
+                        <h3 className="text-base text-white tracking-wider">Opções default</h3>
+                        <Button 
+                          type="button" 
+                          onClick={handleAddDefaultOption}
+                          title="+ Adicionar opção default"
+                          variant="small"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-5">
+                        {defaultCodeOptions.map((option, index) => (
+                          <Select
+                            key={index}
+                            name="defaultCodeOptions"
+                            label={`Opção default ${index + 1}`}
+                            options={selectedActivity.options.map(option => {
+                              return {
+                                id: option.id,
+                                title: option.name,
+                                value: option.id
+                              }
+                            })}
+                            onChange={(evt) => handleChangeDefaultOption(index, evt.target.value)}
                           />
                         ))}
                       </div>
 
-                      <h3 className="text-base text-blue-250 tracking-wider">Ids das opções default</h3>
-                      <div className="grid grid-cols-4 gap-6">
-                        {selectedActivity.options.map(option => (
-                          <Checkbox
-                            key={option.id}
-                            label={option.name}
-                            value={option.id}
-                            {...register("activityDefaultCodeOptionsIds")}
+                      <div className="w-full flex items-center gap-6 justify-between">
+                        <h3 className="text-base text-white tracking-wider">Opções de resposta</h3>
+                        <Button 
+                          type="button" 
+                          onClick={handleAddAnswerOption}
+                          title="+ Adicionar opção de resposta"
+                          variant="small"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-5">
+                        {answerOptions.map((option, index) => (
+                          <Select
+                            key={index}
+                            name="answerOptions"
+                            label={`Opção de resposta ${index + 1}`}
+                            options={selectedActivity.options.map(option => {
+                              return {
+                                id: option.id,
+                                title: option.name,
+                                value: option.id
+                              }
+                            })}
+                            onChange={(evt) => handleChangeAnswerOption(index, evt.target.value)}
                           />
                         ))}
                       </div>
