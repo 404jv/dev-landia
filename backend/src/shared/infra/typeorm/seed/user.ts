@@ -1,15 +1,14 @@
 import { hash } from 'bcrypt';
+import { createConnection } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
-import { postgresDatabaseSource } from '..';
-
 async function create() {
-  await postgresDatabaseSource.initialize();
+  const connection = await createConnection();
 
   const id = uuidV4();
   const passwordHash = await hash('senha123', 8);
 
-  await postgresDatabaseSource.query(`
+  await connection.query(`
     INSERT INTO 
       users(id, name, username, email, is_admin, password, biography)
     VALUES (
@@ -23,7 +22,7 @@ async function create() {
     );
   `);
 
-  await postgresDatabaseSource.destroy();
+  await connection.close();
 }
 
 create();

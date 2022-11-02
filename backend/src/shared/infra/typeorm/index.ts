@@ -1,12 +1,15 @@
-import { DataSource } from 'typeorm';
+import { createConnection, getConnectionOptions, Connection } from 'typeorm';
 
-export const postgresDatabaseSource = new DataSource({
-  type: 'postgres',
-  database: process.env.NODE_ENV === 'test' ? 'devlandia_test' : 'devlandia',
-  port: 5432,
-  username: 'docker',
-  password: 'devlandia',
-  host: process.env.DATABASE_HOST || 'localhost',
-  migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
-  entities: ['./src/modules/**/infra/typeorm/entities/*.ts'],
-});
+export default async (): Promise<Connection> => {
+  const defaultOption = await getConnectionOptions();
+
+  return createConnection(
+    Object.assign(defaultOption, {
+      host: process.env.NODE_ENV === 'test' ? 'localhost' : 'database',
+      database:
+        process.env.NODE_ENV === 'test'
+          ? 'devlandia_test'
+          : defaultOption.database,
+    })
+  );
+};
