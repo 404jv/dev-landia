@@ -29,7 +29,7 @@ export default function AddOptions() {
   const [answerOptions, setAnswerOptions] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleAddOptions(evt: FormEvent) {
+  async function handleAddOptions(evt: FormEvent) {
     evt.preventDefault();
 
     setIsLoading(true);
@@ -39,6 +39,10 @@ export default function AddOptions() {
     try {
       if (activity_id === undefined) {
         throw new Error("Preencha os campos");
+      }
+
+      if (answerOptions.length === 0) {
+        throw new Error("Escolha ao menos uma opção com resposta");
       }
 
       answerOptions.forEach(option => {
@@ -53,6 +57,12 @@ export default function AddOptions() {
         }
       });
 
+      await api.post("/activities/add-options", {
+        activity_id,
+        activityAnswerOptionsIds: answerOptions,
+        activityDefaultCodeOptionsIds: defaultCodeOptions
+      });
+
       const selectActivityId = document.getElementById("activity_id") as HTMLSelectElement;
       selectActivityId.selectedIndex = 0;
 
@@ -65,6 +75,8 @@ export default function AddOptions() {
       if (error.message === "Preencha todos os campos das respostas criadas.") {
         toast.error(error.message);
       } else if (error.message === "Preencha todos os campos das opções defaults criadas.") {
+        toast.error(error.message);
+      } else if (error.message === "Escolha ao menos uma opção com resposta") {
         toast.error(error.message);
       } else {
         toast.error("Erro ao adicionar opções.");
