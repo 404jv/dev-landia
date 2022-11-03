@@ -1,5 +1,10 @@
-import React, { useRef, useState } from "react";
-import { StatusBar, TouchableOpacity, Keyboard } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  StatusBar,
+  TouchableOpacity,
+  Keyboard,
+  BackHandler,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { useTheme } from "styled-components";
@@ -61,6 +66,14 @@ export function SignIn(): JSX.Element {
   function handleSignUpScreen(): void {
     navigation.navigate("SignUp");
   }
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => true
+    );
+    return () => backHandler.remove();
+  }, []);
 
   return (
     <Root>
