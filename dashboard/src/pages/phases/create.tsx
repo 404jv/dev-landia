@@ -54,7 +54,7 @@ export default function CreatePhases() {
   const [maps, setMaps] = useState<Map[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { register, handleSubmit, formState, reset, control } = useForm<CreatePhaseFormData>({
+  const { register, handleSubmit, formState, reset } = useForm<CreatePhaseFormData>({
     resolver: yupResolver(createPhaseFormSchema)
   });
 

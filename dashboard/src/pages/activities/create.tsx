@@ -137,6 +137,17 @@ export default function CreateActivities() {
     setTips(editTips);
   }
 
+  function handleDeleteTip(index: number) {
+    const newTips = tips.filter((tip, i) => index !== i);
+    
+    newTips.forEach((tip, index) => {
+      const field = document.getElementById(`tip${index}`) as HTMLInputElement;
+      field.value = tip
+    });
+
+    setTips(newTips)
+  }
+
   async function loadData() {
     const response = await api.get("/phases");
 
@@ -319,13 +330,18 @@ export default function CreateActivities() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-5">
+                <div className="grid items-center grid-cols-2 gap-5">
                   {tips.map((tip, index) => (
-                    <Input
-                      key={index}
-                      placeholder={`Dica ${index + 1}`}
-                      onChange={(evt) => handleChangeTip(index, evt.target.value)}
-                    />
+                    <>
+                      <Input
+                        id={`tip${index}`}
+                        key={index}
+                        placeholder={`Dica ${index + 1}`}
+                        onChange={(evt) => handleChangeTip(index, evt.target.value)}
+                        hasDeleteButton={true}
+                        deleteFunction={() => handleDeleteTip(index)}
+                      />
+                    </>
                   ))}
                 </div>
               </div>
