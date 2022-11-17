@@ -1,9 +1,8 @@
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 
 import { ICreateMapDTO } from '@modules/maps/dtos/ICreateMapDTO';
 import { IUpdateMapDTO } from '@modules/maps/dtos/IUpdateMapDTO';
 import { IMapsRepository } from '@modules/maps/repositories/IMapsRepository';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
 import { Map } from '../entities/Map';
 
@@ -11,7 +10,7 @@ class MapsRepository implements IMapsRepository {
   private repository: Repository<Map>;
 
   constructor() {
-    this.repository = postgresDatabaseSource.getRepository(Map);
+    this.repository = getRepository(Map);
   }
 
   async findById(id: string): Promise<Map> {
@@ -19,10 +18,9 @@ class MapsRepository implements IMapsRepository {
       where: {
         id,
       },
-      relations: {
-        phases: true,
-      },
+      relations: ['phases'],
     });
+
     return map;
   }
 
@@ -31,10 +29,7 @@ class MapsRepository implements IMapsRepository {
       where: {
         id,
       },
-      relations: {
-        userMap: true,
-        phases: true,
-      },
+      relations: ['userMap', 'phases'],
     });
 
     return map;
@@ -74,10 +69,7 @@ class MapsRepository implements IMapsRepository {
       where: {
         order,
       },
-      relations: {
-        userMap: true,
-        phases: true,
-      },
+      relations: ['userMap', 'phases'],
     });
 
     return map;

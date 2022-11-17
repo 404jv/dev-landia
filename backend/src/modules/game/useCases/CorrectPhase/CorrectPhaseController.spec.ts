@@ -1,7 +1,8 @@
 import request from 'supertest';
+import { Connection } from 'typeorm';
 
 import { app } from '@shared/infra/http/app';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
+import createConnection from '@shared/infra/typeorm';
 import {
   startUserPhase,
   startUserPhaseAtLevel2,
@@ -11,6 +12,8 @@ import { createMap } from '@test/factories/MapFactory';
 import { createPhaseAndActivities } from '@test/factories/PhaseFactory';
 import { createUserAndAuthenticate } from '@test/factories/UserFactory';
 
+let connection: Connection;
+
 let userToken: string;
 let phase1Id: string;
 let phase2Id: string;
@@ -19,8 +22,8 @@ let map2Id: string;
 
 describe('Correct Phase Controller', () => {
   beforeAll(async () => {
-    await postgresDatabaseSource.initialize();
-    await postgresDatabaseSource.runMigrations();
+    connection = await createConnection();
+    await connection.runMigrations();
 
     const map1 = await createMap();
     map1Id = map1.id;
@@ -50,8 +53,8 @@ describe('Correct Phase Controller', () => {
   });
 
   afterAll(async () => {
-    await postgresDatabaseSource.dropDatabase();
-    await postgresDatabaseSource.destroy();
+    await connection.dropDatabase();
+    await connection.close();
   });
 
   it('Should be able to a user correct their phase', async () => {

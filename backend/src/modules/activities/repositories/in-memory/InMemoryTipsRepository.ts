@@ -17,6 +17,10 @@ class InMemoryTipsRepository implements ITipsRepository {
 
     return tip;
   }
+
+  deleteByActivityId(id: string): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 }
 
 export { InMemoryTipsRepository };

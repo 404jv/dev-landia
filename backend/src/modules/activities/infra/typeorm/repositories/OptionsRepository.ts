@@ -1,8 +1,7 @@
-import { In, Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 
 import { ICreateOptionDTO } from '@modules/activities/dtos/ICreateOptionDTO';
 import { IOptionsRepository } from '@modules/activities/repositories/IOptionsRepository';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
 import { Option } from '../entities/Option';
 
@@ -10,7 +9,7 @@ class OptionsRepository implements IOptionsRepository {
   private repository: Repository<Option>;
 
   constructor() {
-    this.repository = postgresDatabaseSource.getRepository(Option);
+    this.repository = getRepository(Option);
   }
 
   async create({
@@ -34,7 +33,7 @@ class OptionsRepository implements IOptionsRepository {
   }
 
   async findByIds(ids: string[]): Promise<Option[]> {
-    const options = await this.repository.findBy({ id: In(ids) });
+    const options = await this.repository.findByIds(ids);
     return options;
   }
 

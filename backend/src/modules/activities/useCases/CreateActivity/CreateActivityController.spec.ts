@@ -1,7 +1,8 @@
 import request from 'supertest';
+import { Connection } from 'typeorm';
 
 import { app } from '@shared/infra/http/app';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
+import createConnection from '@shared/infra/typeorm';
 import { createMap } from '@test/factories/MapFactory';
 import { createPhase } from '@test/factories/PhaseFactory';
 import {
@@ -9,13 +10,15 @@ import {
   createUserAndAuthenticate,
 } from '@test/factories/UserFactory';
 
+let connection: Connection;
+
 let adminToken: string;
 let phase_id: string;
 
 describe('Create Activity Controller', () => {
   beforeAll(async () => {
-    await postgresDatabaseSource.initialize();
-    await postgresDatabaseSource.runMigrations();
+    connection = await createConnection();
+    await connection.runMigrations();
 
     const adminJwt = await createAdminAndAuthenticate();
     adminToken = adminJwt.token;
@@ -27,8 +30,8 @@ describe('Create Activity Controller', () => {
   });
 
   afterAll(async () => {
-    await postgresDatabaseSource.dropDatabase();
-    await postgresDatabaseSource.destroy();
+    await connection.dropDatabase();
+    await connection.close();
   });
 
   it('Should be able to create an activity', async () => {

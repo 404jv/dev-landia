@@ -36,11 +36,11 @@ class CreateUserUseCase {
       email
     );
 
-    console.log(emailAlreadyRegistered);
-
     if (emailAlreadyRegistered) {
       throw new EmailAlreadyExistsError(email);
     }
+
+    console.log('oi', emailAlreadyRegistered);
 
     const usernameAlreadyRegistered = await this.usersRepository.findByUsername(
       username

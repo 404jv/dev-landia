@@ -1,8 +1,7 @@
-import { Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 import { ICreateOptionActivityDTO } from '@modules/activities/dtos/ICreateOptionActivityDTO';
 import { IActivitiesOptionsRepository } from '@modules/activities/repositories/IActivitiesOptionsRepository';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
 import { ActivityAnswer } from '../entities/ActivityAnswer';
 import { Option } from '../entities/Option';
@@ -11,7 +10,7 @@ class ActivitiesAnswersRepository implements IActivitiesOptionsRepository {
   private repository: Repository<ActivityAnswer>;
 
   constructor() {
-    this.repository = postgresDatabaseSource.getRepository(ActivityAnswer);
+    this.repository = getRepository(ActivityAnswer);
   }
 
   async create({

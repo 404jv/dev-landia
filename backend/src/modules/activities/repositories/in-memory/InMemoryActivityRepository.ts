@@ -31,6 +31,10 @@ class InMemoryActivityRepository implements IActivitiesRepository {
     return activity;
   }
 
+  list(): Promise<Activity[]> {
+    throw new Error('Method not implemented.');
+  }
+
   async findById(id: string): Promise<Activity> {
     return this.repositories.find((activity) => activity.id === id);
   }

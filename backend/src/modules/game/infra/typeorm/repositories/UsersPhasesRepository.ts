@@ -1,7 +1,6 @@
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 
 import { IUsersPhasesRepository } from '@modules/game/repositories/IUsersPhasesRepository';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
 import { UserPhase } from '../entities/UserPhase';
 
@@ -9,7 +8,7 @@ class UsersPhasesRepository implements IUsersPhasesRepository {
   private repository: Repository<UserPhase>;
 
   constructor() {
-    this.repository = postgresDatabaseSource.getRepository(UserPhase);
+    this.repository = getRepository(UserPhase);
   }
 
   async create(user_id: string, phase_id: string): Promise<UserPhase> {

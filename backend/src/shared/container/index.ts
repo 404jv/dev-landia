@@ -1,6 +1,6 @@
 import { container } from 'tsyringe';
 
-import { UsersRepository } from '@modules/accounts/infra/prisma/repositories/UsersRepository';
+import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { ActivitiesAnswersRepository } from '@modules/activities/infra/typeorm/repositories/ActivitiesAnswersRepository';
 import { ActivitiesDefaultCodeRepository } from '@modules/activities/infra/typeorm/repositories/ActivitiesDefaultCodeRepository';

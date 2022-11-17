@@ -1,7 +1,6 @@
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 
 import { IUsersMapsRepository } from '@modules/game/repositories/IUsersMapsRepository';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
 import { UserMap } from '../entities/UserMap';
 
@@ -9,7 +8,7 @@ class UsersMapsRepository implements IUsersMapsRepository {
   private repository: Repository<UserMap>;
 
   constructor() {
-    this.repository = postgresDatabaseSource.getRepository(UserMap);
+    this.repository = getRepository(UserMap);
   }
 
   async create(user_id: string, map_id: string): Promise<void> {

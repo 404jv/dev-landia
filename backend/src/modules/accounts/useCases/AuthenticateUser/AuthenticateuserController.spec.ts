@@ -1,9 +1,12 @@
 import { hash } from 'bcrypt';
 import request from 'supertest';
+import { Connection } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
 import { app } from '@shared/infra/http/app';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
+import createConnection from '@shared/infra/typeorm';
+
+let connection: Connection;
 
 describe('Create User Controller', () => {
   const userTest = {
@@ -15,13 +18,13 @@ describe('Create User Controller', () => {
   };
 
   beforeAll(async () => {
-    await postgresDatabaseSource.initialize();
-    await postgresDatabaseSource.runMigrations();
+    connection = await createConnection();
+    await connection.runMigrations();
 
     const id = uuidV4();
     const passwordHash = await hash(userTest.password, 8);
 
-    await postgresDatabaseSource.query(`
+    await connection.query(`
       INSERT INTO
         users(id, name, username, email, is_admin, password, biography)
       VALUES (
@@ -37,8 +40,8 @@ describe('Create User Controller', () => {
   });
 
   afterAll(async () => {
-    await postgresDatabaseSource.dropDatabase();
-    await postgresDatabaseSource.destroy();
+    await connection.dropDatabase();
+    await connection.close();
   });
 
   it('Should be able to authenticate', async () => {

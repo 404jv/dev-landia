@@ -1,9 +1,8 @@
-import { In, Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 
 import { ICreateActivityDTO } from '@modules/activities/dtos/ICreateActivityDTO';
 import { IUpdateActivityDTO } from '@modules/activities/dtos/IUpdateActivityDTO';
 import { IActivitiesRepository } from '@modules/activities/repositories/IActivitiesRepository';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
 
 import { Activity } from '../entities/Activity';
 
@@ -11,7 +10,7 @@ class ActivitiesRepository implements IActivitiesRepository {
   private repository: Repository<Activity>;
 
   constructor() {
-    this.repository = postgresDatabaseSource.getRepository(Activity);
+    this.repository = getRepository(Activity);
   }
 
   async create({
@@ -38,10 +37,7 @@ class ActivitiesRepository implements IActivitiesRepository {
 
   async list() {
     const activities = await this.repository.find({
-      relations: {
-        phase: true,
-        tips: true,
-      },
+      relations: ['phases', 'tips'],
     });
 
     return activities;
@@ -49,19 +45,15 @@ class ActivitiesRepository implements IActivitiesRepository {
 
   async findById(id: string): Promise<Activity> {
     const activity = await this.repository.findOne({
-      where: {
-        id,
-      },
-      relations: {
-        options: true,
-        tips: true,
-      },
+      where: { id },
+      relations: ['options', 'tips'],
     });
+
     return activity;
   }
 
   async findByIds(ids: string[]): Promise<Activity[]> {
-    const activities = await this.repository.findBy({ id: In(ids) });
+    const activities = await this.repository.findByIds(ids);
     return activities;
   }
 

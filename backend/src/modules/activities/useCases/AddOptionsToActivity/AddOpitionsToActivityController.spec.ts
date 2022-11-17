@@ -1,9 +1,10 @@
 import request from 'supertest';
+import { Connection } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 
 import { Activity } from '@modules/activities/infra/typeorm/entities/Activity';
 import { app } from '@shared/infra/http/app';
-import { postgresDatabaseSource } from '@shared/infra/typeorm';
+import createConnection from '@shared/infra/typeorm';
 import { createActivity } from '@test/factories/ActivityFactory';
 import { createMap } from '@test/factories/MapFactory';
 import { createPhase } from '@test/factories/PhaseFactory';
@@ -12,6 +13,7 @@ import {
   createUserAndAuthenticate,
 } from '@test/factories/UserFactory';
 
+let connection: Connection;
 let adminToken: string;
 let activity: Activity;
 let optionId1: string;
@@ -20,8 +22,8 @@ let optionId3: string;
 
 describe('Add Options to Activity', () => {
   beforeAll(async () => {
-    await postgresDatabaseSource.initialize();
-    await postgresDatabaseSource.runMigrations();
+    connection = await createConnection();
+    await connection.runMigrations();
 
     const adminJwt = await createAdminAndAuthenticate();
     adminToken = adminJwt.token;
@@ -36,8 +38,8 @@ describe('Add Options to Activity', () => {
   });
 
   afterAll(async () => {
-    await postgresDatabaseSource.dropDatabase();
-    await postgresDatabaseSource.destroy();
+    await connection.dropDatabase();
+    await connection.close();
   });
 
   it('Should be able to add default code and answer to activity', async () => {
