@@ -1,11 +1,47 @@
+import { hash } from 'bcrypt';
 import request from 'supertest';
+import { Connection } from 'typeorm';
+import { v4 as uuidV4 } from 'uuid';
 
 import { app } from '@shared/infra/http/app';
-import { prisma } from '@shared/infra/prisma/client';
+import createConnection from '@shared/infra/typeorm';
+
+let connection: Connection;
 
 describe('Create User Controller', () => {
+  beforeAll(async () => {
+    connection = await createConnection();
+    await connection.runMigrations();
+
+    const userTest = {
+      name: 'Loretta Gutierrez',
+      username: 'fanny_05',
+      email: 'loretta@gmail.com',
+      password: 'superSecreta123',
+      biography: 'User Test',
+    };
+
+    const id = uuidV4();
+    const passwordHash = await hash(userTest.password, 8);
+
+    await connection.query(`
+    INSERT INTO
+      users(id, name, username, email, is_admin, password, biography)
+    VALUES (
+      '${id}',
+      '${userTest.name}',
+      '${userTest.username}',
+      '${userTest.email}',
+      false,
+      '${passwordHash}',
+      '${userTest.biography}'
+    );
+  `);
+  });
+
   afterAll(async () => {
-    await prisma.$disconnect();
+    await connection.dropDatabase();
+    await connection.close();
   });
 
   it('Should be able to create an account', async () => {
@@ -18,8 +54,6 @@ describe('Create User Controller', () => {
     };
 
     const response = await request(app).post('/users/create').send(newUser);
-
-    console.log(response.body);
 
     expect(response.statusCode).toEqual(201);
   });
