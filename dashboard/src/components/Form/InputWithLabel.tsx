@@ -21,6 +21,7 @@ const InputWithLabelBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
       </div>
       <div className={`flex items-center px-5 py-4 ${variant === 'default' ? 'bg-gray-850' : 'bg-gray-950'} rounded-md border-2 border-transparent focus-within:border-blue-450`}>
         <input
+          id={name}
           name={name}
           className="bg-transparent w-full text-gray-350 text-xl outline-none placeholder:text-gray-700"
           type={type}

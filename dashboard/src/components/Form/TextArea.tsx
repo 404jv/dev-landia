@@ -21,6 +21,7 @@ const TextAreaBase: ForwardRefRenderFunction<HTMLTextAreaElement, TextAreaProps>
 
       <div className={`flex items-center px-5 py-4 ${variant === 'default' ? 'bg-gray-850' : 'bg-gray-950'} rounded-md border-2 border-transparent focus-within:border-blue-450`}>
         <textarea
+          id={name}
           name={name}
           ref={ref}
           {...rest}
