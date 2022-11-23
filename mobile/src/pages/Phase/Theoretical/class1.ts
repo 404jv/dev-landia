@@ -1,10 +1,23 @@
 export const markdownText = `
  
+drawWhiteBox: () => <Box bgColor="#FFF" />,
+newLine: () => <NewLine  #/>, #fff
+drawRedBox: () => <Box bgColor="#FF0000" />,
+
+
+
 1 Polónia x
 ~~~ 
 drawWhiteBox drawWhiteBox drawWhiteBox newLine
 drawRedBox drawRedBox drawRedBox
 ~~~
+
+#FFF
+
+Vamos desenhar a bandeira da Polónia.
+
+Use o newLine para quebrar a linha.
+Use o drawRedBox e drawWhiteBox para desenhar quadrados.
 
 2 Ucrânia  x
 ~~~
